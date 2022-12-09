@@ -1,0 +1,109 @@
+<app-top-bar [numberstep]=0></app-top-bar>
+<div class="register-form">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="container col-sm-4 border border-2 rounded p-6">
+            <div class="row">
+                <div class="col-11">
+                    <div class="row">
+                        <div class="py-1">
+                            <label class="ft13">Tipo de persona</label>
+                            <select class="form-select ft13g" formControlName="tipoPersona">
+                                <option value="1" [defaultSelected]="1">Persona Natural</option>
+                                <option value="2">Persona Juridica</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="f['tipoPersona'].value=='2'">
+                        <div class="py-1">
+                            <label class="ft13">Grupo empresarial</label>
+                            <input type="text" class="form-control ft13g" formControlName="grupoEmpresarial"
+                                placeholder="Escribe el grupo empresarial">
+                            <div *ngIf="submitted && f['grupoEmpresarial'].errors"
+                                class="ft12 invalid-feedback d-block">
+                                <div *ngIf="f['grupoEmpresarial'].errors['required']">Grupo empresarial requerido</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="py-1">
+                            <label class="ft13">Tipo de documento</label>
+                            <select formControlName="tipoDocumento"
+                                [ngClass]="submitted && f['tipoDocumento'].errors ? 'form-select ft13g is-invalid' : 'form-select ft13g ft13g'">
+                                <option value="">Seleccione Tipo de documento</option>
+                                <option value="1">Cedula de Ciudadanía</option>
+                                <option value="2">Nit</option>
+                                <option value="3">Cédula de Extranjería</option>
+                                <option value="4">Tarjeta de Identidad</option>
+                                <option value="5">Pasaporte</option>
+                                <option value="6">Carnet Diplomatico</option>
+                            </select>
+                            <div *ngIf="submitted && f['tipoDocumento'].errors" class="ft12 invalid-feedback d-block">
+                                <div *ngIf="f['tipoDocumento'].errors['required']">Tipo de documento requerido</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="py-1">
+                            <label class="ft13">Numero de documento</label>
+                            <input type="text" formControlName="numeroDocumento"
+                                placeholder="Escribe el numero de documento"
+                                [ngClass]="submitted && f['numeroDocumento'].errors ? 'form-control ft13g is-invalid' : 'form-control ft13g'">
+                            <div *ngIf="submitted && f['numeroDocumento'].errors" class="ft12 invalid-feedback d-block">
+                                <div *ngIf="f['numeroDocumento'].errors['required']">Numero de documento requerido</div>
+                                <div *ngIf="f['numeroDocumento'].errors['maxlength']">Numero de documento no puede
+                                    exceder 15 caracteres</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="py-1">
+                            <label class="ft13">Clave Internet</label>
+                            <input type="password" formControlName="claveInternet" placeholder="Escribe tu multiclave"
+                                [ngClass]="submitted && f['claveInternet'].errors ? 'form-control ft13g is-invalid' : 'form-control ft13g'">
+                            <div *ngIf="submitted && f['claveInternet'].errors" class="ft12 invalid-feedback d-block">
+                                <div *ngIf="f['claveInternet'].errors['required']">Clave Internet requerida</div>
+                                <div *ngIf="f['claveInternet'].errors['maxlength']">Clave Internet no puede exceder 6
+                                    caracteres</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" *ngIf="f['tipoPersona'].value=='2'">
+                        <div class="py-1">
+                            <label class="ft13">Ingresa tu token</label>
+                            <input type="password" formControlName="token" placeholder="Ingresa tu código token"
+                                [ngClass]="submitted && f['token'].errors ? 'form-control ft13g is-invalid' : 'form-control ft13g'">
+                            <div *ngIf="submitted && f['token'].errors" class="ft12 invalid-feedback d-block">
+                                <div *ngIf="f['token'].errors['required']">Token requerido</div>
+                                <div *ngIf="f['token'].errors['maxlength']">Token no puede exceder 6 caracteres</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row my-2">
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <button type="button" class="btn col-12 btnCancel">Cancelar</button>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 col-md-6">
+                            <button type="submit" class="btn col-12 btnContinue">Continuar</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-1">
+                    <div class="row">
+                        <div class="py-3">
+                            <img class="logo" src="assets/logos/LogoSuperFin.jpg" style="width:25px">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <span class="ft14">Ayuda</span><br />
+                    <ul>
+                        <li><span class="ft13">Genera tu clave de Internet</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<app-bottom-bar [numberstep]=0></app-bottom-bar>

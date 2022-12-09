@@ -1,0 +1,110 @@
+
+.ft11{	
+    font-size:11px;	
+	font-family: 'Roboto', sans-serif;
+}
+.ft12{	
+    font-size:12px;	    
+	font-family: 'Roboto', sans-serif;
+}
+
+.ft13{	
+    font-family: 'Roboto', sans-serif;
+    font-size: 13px;
+}
+
+.ft13g{
+    font-size:13px;
+    color:#4a4a4a;	
+	font-family: 'Roboto', sans-serif;
+}
+.ft14{
+	font-size:14px;	 
+    color:#b6b6b6;       
+	font-family: 'Roboto', sans-serif;
+}
+.ft14w{
+	font-size:14px;	
+    color:#ffffff;
+	font-family: 'Roboto', sans-serif;
+}
+.ft14b{
+	font-size:14px;	
+    color:#000000;
+	font-family: 'Roboto', sans-serif;
+}
+.ft15{
+	font-size:15px;	
+	font-family: 'Roboto', sans-serif;
+}
+.ft16{
+	font-size:16px;	
+    color:#6B7072;
+	font-family: 'Roboto', sans-serif;
+}
+.ft16w
+{
+	font-size:16px;
+	color:#ffffff;
+	font-family: 'Roboto', sans-serif;
+}
+
+.ft18{
+    font-size:18px;    
+    /* color:#9b9b9b; */
+    font-family: 'Roboto', sans-serif;
+}
+
+.ft32{		
+	font-family: 'Roboto', sans-serif;
+}
+
+/* Botons */
+.btnContinue{
+	background-color:#008441;
+	color:#fff;	
+}
+
+.btnContinue:hover {
+	background-color:#00a151;
+    color:#fff;	
+}	
+
+.btnCancel{
+	background-color:#e5e5e5;
+	color:#000;	
+}
+
+/* Step bar*/
+.stepsbar
+{
+    background-color:#545759;
+    color:#fff;
+   
+}
+.numberCircle {
+    border-radius: 50%;
+    width: 36px;
+    height: 36px;
+    padding: 8px;
+
+    background: #fff;
+    border: 2px solid #666;
+    color: #666;
+    text-align: center;
+
+    font: 32px Arial, sans-serif;
+}
+
+.gSteps {
+    background-color:#008441;
+	color:#fff;
+}
+
+.complete{
+    color: #00a151;
+}
+
+.white{
+    color:#fff
+}

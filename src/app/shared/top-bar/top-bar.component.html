@@ -1,0 +1,17 @@
+
+<div [ngClass]="numberstep == 0 ? 'container col-sm-4 py-2' : 'container col-sm-9 py-2'"> 
+    <div class="row">
+        <img class="main-logo" alt="Banco Falabella" src="assets/logos/logo-bf.svg" style="width:200px">
+    </div>
+    <div class="row" style="height:15px;">
+    </div>
+    <div class="row">
+        <span class="text-muted ft32">Pagos PSE - Pagos en linea</span>
+    </div>
+    <div class="row">
+        <small class="ft11">Fecha y hora actual: {{ rxTime | date:'EEEE d MMMM y h:mm:ss a'}}</small>
+    </div>
+</div>
+
+
+
