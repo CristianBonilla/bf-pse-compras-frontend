@@ -1,4 +1,6 @@
 export interface EnvConfig {
-    urlApi: string;    
+    urlApi:string;  
+    version:string; 
+    paymentRecurring:boolean; 
   }
   

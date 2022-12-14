@@ -1,3 +1,6 @@
+.ft {
+    font-family: 'Roboto', sans-serif;
+}
 
 .ft11{	
     font-size:11px;	
@@ -14,7 +17,7 @@
 }
 
 .ft13g{
-    font-size:13px;
+    font-size:13px !important;
     color:#4a4a4a;	
 	font-family: 'Roboto', sans-serif;
 }
@@ -23,6 +26,13 @@
     color:#b6b6b6;       
 	font-family: 'Roboto', sans-serif;
 }
+
+.ft14dy{
+    font-size:14px;	 
+    color:#545759;       
+	font-family: 'Roboto', sans-serif;
+}
+
 .ft14w{
 	font-size:14px;	
     color:#ffffff;
@@ -49,6 +59,12 @@
 	font-family: 'Roboto', sans-serif;
 }
 
+.ftg
+{	
+        color: #007833;
+	font-family: 'Roboto', sans-serif;
+}
+
 .ft18{
     font-size:18px;    
     /* color:#9b9b9b; */
@@ -59,10 +75,12 @@
 	font-family: 'Roboto', sans-serif;
 }
 
+
+
 /* Botons */
 .btnContinue{
-	background-color:#008441;
-	color:#fff;	
+	background-color:#008441 !important;
+	color:#fff !important;
 }
 
 .btnContinue:hover {
@@ -71,8 +89,15 @@
 }	
 
 .btnCancel{
-	background-color:#e5e5e5;
-	color:#000;	
+	background-color:#e5e5e5 !important;
+	color:#000 !important;;	
+}
+
+.btnHelp{
+    border: none;
+    background-color: transparent;
+    background-position : center center;
+    background-repeat:no-repeat;
 }
 
 /* Step bar*/
@@ -108,3 +133,19 @@
 .white{
     color:#fff
 }
+
+.border-10{    
+    border-bottom:solid #007833 3px;
+}
+
+.custom-control-input-green {
+    border-color: #28a745 !important;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25) !important;    
+  }
+
+  .custom-control-input-green:checked {
+    border-color: #28a745 !important;
+    background-color: #28a745 !important;
+  }
+ 
+

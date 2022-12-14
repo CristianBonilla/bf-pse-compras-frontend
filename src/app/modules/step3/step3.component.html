@@ -1,3 +1,34 @@
 <app-top-bar [numberstep]=3></app-top-bar>
-<p>step3 works!</p>
+
+<div class="container col-sm-9">
+    <app-steps-bar [numberstep]=2 [nameEntity]="paymentData.nameEntity"></app-steps-bar>
+    <div class="container m-3"> 
+            <div class="row">
+                <div class="alert alert-warning" role="alert">
+                    Realizamos el pago de tu cuenta y está pendiente la aprobación de PSE, <b>en caso de ser rechazado se reversara a tu cuenta</b>
+                  </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="row my-2">
+                    <p class="ft18">Confirmación del pago</p>
+                    </div>
+                    <div class="row my-2">                
+                        <div class="col-6 ft16">Estado</div>
+                        <div class="col-6 ft16"><b>{{paymentData.paymetDescription}}</b></div>
+                    </div>                
+                    <div class="row my-2">                
+                        <div class="col-6 ft16">Costo</div>
+                        <div class="col-6 ft16"><b>$ {{paymentData.transactionCost|number:'1.2-2'}}{{paymentData.money_code}}</b></div>
+                    </div>
+                    <div class="row my-2">                
+                        <div class="col-6 ft16">Entidad</div>
+                        <div class="col-6 ft16"><b>{{paymentData.nameEntity}}</b></div>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>
+
+
 <app-bottom-bar [numberstep]=3></app-bottom-bar>
