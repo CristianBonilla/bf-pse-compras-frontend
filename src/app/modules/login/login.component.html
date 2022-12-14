@@ -28,7 +28,7 @@
                         <div class="py-1">
                             <label class="ft13">Tipo de documento</label>
                             <select formControlName="tipoDocumento"
-                                [ngClass]="submitted && f['tipoDocumento'].errors ? 'form-select ft13g is-invalid' : 'form-select ft13g ft13g'">
+                                [ngClass]="submitted && f['tipoDocumento'].errors ? 'form-select ft13g is-invalid' : 'form-select ft13g'">
                                 <option value="">Seleccione Tipo de documento</option>
                                 <option value="1">Cedula de Ciudadanía</option>
                                 <option value="2">Nit</option>
@@ -84,6 +84,9 @@
                         </div>
                         <div class="col-xs-12 col-sm-6 col-md-6">
                             <button type="submit" class="btn col-12 btnContinue">Continuar</button>
+                        </div>
+                        <div *ngIf="messageLogin!=''"  class="m-3 ft12 alert alert-danger">
+                            <div>{{messageLogin}}</div>                            
                         </div>
                     </div>
                 </div>

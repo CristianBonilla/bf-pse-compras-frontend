@@ -1,57 +1,64 @@
 <app-top-bar [numberstep]=1></app-top-bar>
 <div class="container col-sm-9">
-    <app-steps-bar [numberstep]=1></app-steps-bar>
-    <div class="container m-3">
-        <div class="row">
-            <div class="col-xs-12 col-sm-6 col-md-6">
-                <div class="row my-4">
-                   <p class="ft18"> Detalles de la transaccion</p>
-                </div>
-                <div class="row my-3">                
-                    <div class="col-6 ft16">Concepto Pago</div>
-                    <div class="col-6 ft16"><b>Materiales de la oficina</b></div>
-                    <!-- <div class="col-xs-0 col-1"></div> -->
-                </div>                
-                <div class="row my-3">                
-                    <div class="col-6 ft16">Costo</div>
-                    <div class="col-6 ft16"><b>$ 0</b></div>                    
-                </div>                
-            </div>
-            <div class="col-xs-12 col-sm-6 col-md-6">
-                <div class="row my-4">
-                    <p class="ft18">Detalles del pago</p>
-                </div>
-                <div class="row my-2">                
-                    <div class="col-6 ft16">Selecciona una cuenta</div>
-                    <div class="col-6">
-                        <select id="cuentaSelect" class="form-select ft13g" >            
-                            <option value="1">Cuenta de ahorro ****-5246</option>            
-                        </select>
+    <app-steps-bar [numberstep]=1 [nameEntity]="nameEntity"></app-steps-bar>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="container m-3">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="row my-4">
+                    <p class="ft18"> Detalles de la transaccion</p>
                     </div>
-                </div>                
-                <div class="row my-3">                
-                    <div class="col-6 ft16">Disponible en cuenta</div>
-                    <div class="col-6 ft16"><b>$23.743.788,86</b></div>
-                </div>                
-                <div class="row my-3">                
-                    <div class="col-6 ft16">Valor a pagar</div>
-                    <div class="col-6 ft16"><b>$1.500,00</b></div>
-                </div>                
+                    <div class="row my-3">                
+                        <div class="col-6 ft16">Concepto Pago</div>
+                        <div class="col-6 ft16"><b>{{paymentData.paymetDescription}}</b></div>
+                        <!-- <div class="col-xs-0 col-1"></div> -->
+                    </div>                
+                    <div class="row my-3">                
+                        <div class="col-6 ft16">Costo</div>
+                        <div class="col-6 ft16"><b>$ {{ transactionCost|number:'1.2-2'}}{{money_code}}</b></div>                    
+                    </div>                
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="row my-4">
+                        <p class="ft18">Detalles del pago</p>
+                    </div>
+                    <div class="row my-2">                
+                        <div class="col-6 ft16">Selecciona una cuenta</div>
+                        <div class="col-6">
+                            <select formControlName="product"  [ngClass]="submitted && f['product'].errors ? 'form-select ft13g is-invalid' : 'form-select ft13g'"
+                             (change)="changeProduct()"> 
+                                <option value="">Seleccione una Cuenta</option>           
+                                <option *ngFor="let itProduct of ltProducts" [ngValue]="itProduct"> {{ getAccountName(itProduct.product_code)+' '+itProduct.product_mask_id}} </option>          
+                            </select>
+                            <div *ngIf="submitted && f['product'].errors" class="ft12 invalid-feedback d-block">
+                                <div *ngIf="f['product'].errors['required']">Cuenta requerida</div>
+                            </div>
+                        </div>                       
+                    </div>                
+                    <div class="row my-3" *ngIf="!f['product'].errors">                
+                        <div class="col-6 ft16">Disponible en cuenta</div>
+                        <div class="col-6 ft16"><b>$ {{available_balance|number:'1.2-2'}}{{money_code}}</b></div>
+                    </div>                
+                    <div class="row my-3">                
+                        <div class="col-6 ft16">Valor a pagar</div>
+                        <div class="col-6 ft16"><b>$ {{operationValue|number:'1.2-2'}}{{money_code}}</b></div>
+                    </div>                
+                </div>
+            </div>
+            <div class="row m-4">
+                <div class="col-xs-0 col-sm-3 col-md-3">
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">                
+                    <button type="button" class="btn col-12 btnCancel">Cancelar</button>                                
+                </div>
+                <div class="col-xs-12 col-sm-3 col-md-3">                
+                    <button type="submit" class="btn col-12 btnContinue" >Continuar</button>                
+                </div>
+                <div class="col-xs-0 col-sm-3 col-md-3">
+                </div>
             </div>
         </div>
-        <div class="row m-4">
-            <div class="col-xs-0 col-sm-3 col-md-3">
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-3">                
-                <button type="button" class="btn col-12 btnCancel">Cancelar</button>                                
-            </div>
-            <div class="col-xs-12 col-sm-3 col-md-3">                
-                <button type="button" class="btn col-12 btnContinue">Continuar</button>                
-            </div>
-            <div class="col-xs-0 col-sm-3 col-md-3">
-            </div>
-        </div>
-    </div>
+    </form>
 </div>
 
 <app-bottom-bar [numberstep]=1></app-bottom-bar>

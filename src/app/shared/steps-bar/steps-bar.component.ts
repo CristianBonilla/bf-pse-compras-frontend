@@ -7,6 +7,7 @@ import { Component,Input } from '@angular/core';
 })
 export class StepsBarComponent {
   @Input() numberstep = 1;
+  @Input() nameEntity = '';
 
    getClass(classStep : number){
   

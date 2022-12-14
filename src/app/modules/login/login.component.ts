@@ -1,14 +1,12 @@
 import { Component,OnInit } from '@angular/core';
 import {  FormGroup,  FormBuilder, Validators, AbstractControl} from '@angular/forms';
-import { EnvConfig } from 'src/app/core/config/env-config';
 import { EnvironmentLoaderService } from 'src/app/core/config/environment-loader.service';
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { ActivatedRoute, Params, Router } from '@angular/router';
-import { Observable } from "rxjs";
-import { map } from "rxjs/operators";
-import { HttpParams } from "@angular/common/http";
-import { switchMap } from 'rxjs/operators';
+import { ActivatedRoute,  } from '@angular/router';;
 import { PaymentData } from 'src/app/shared/paymentData';
+import { Router } from '@angular/router';
+import { DataService } from "src/app/core/services/dataservice";
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,25 +15,29 @@ import { PaymentData } from 'src/app/shared/paymentData';
 export class LoginComponent implements OnInit {
   form!: FormGroup;
   submitted = false;
-   
-  private urlApi: String="";
-  private itx:String="";
+  messageLogin:string ="";
+  message:string=""
+  private urlApi: string="";
+  private itx:string="";
   private paymentData!: PaymentData;
   
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient,private readonly envService: EnvironmentLoaderService, private route: ActivatedRoute ) {  
+  constructor(private formBuilder: FormBuilder, private http: HttpClient,
+    private readonly envService: EnvironmentLoaderService, private activatedRoute: ActivatedRoute , 
+    private router: Router,private data: DataService) {  
   }
 
   ngOnInit(): void {
+    this.data.currentMessage.subscribe(message => this.message = message);
     this.urlApi = this.envService.getEnvConfig().urlApi;
-    this.route.queryParams.subscribe(params => {this.itx = params['itx'];});
+    this.activatedRoute.queryParams.subscribe(params => {this.itx = params['itx'];});
 
     this.form = this.formBuilder.group(
       {      
         tipoPersona: [''],           
-        tipoDocumento: ['', Validators.required],    
-        numeroDocumento: ['',Validators.required],    
-        claveInternet: ['', Validators.required],
+        tipoDocumento: ['1', Validators.required],    
+        numeroDocumento: ['52628130',Validators.required],    
+        claveInternet: ['000111', Validators.required],
         grupoEmpresarial:[''],
         token:[''],
     });
@@ -61,6 +63,7 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.messageLogin="";
     this.submitted = true;
     if (this.form.invalid) {
       return;
@@ -82,16 +85,25 @@ export class LoginComponent implements OnInit {
       captcha:null
     };    
 
-    this.http.post<any>(this.urlApi + "auth/" + "?param=" + strDate, json, httpOptions).subscribe(response => {
-        if (response.resultCode != 200) {
-            this.paymentData= new PaymentData();
-            this.paymentData.customer_name = response.customer_name;
-            this.paymentData.token= response.token;
-            this.paymentData.documentNumber = json.id_number;
-            this.paymentData.documentType =json.id_type;
-        }
+    this.http.post<any>(this.urlApi + "auth/" + "?param=" + strDate, json, httpOptions).subscribe(response => {        
+        this.paymentData= new PaymentData();
+        this.paymentData.customer_name = response.customer_name;
+        this.paymentData.token= response.token;
+        this.paymentData.itx = json.transaction_id;        
+        this.message= JSON.stringify(this.paymentData);
+        sessionStorage.setItem("payment", this.message)
+        this.data.changeMessage( JSON.stringify(this.paymentData));
+         this.router.navigate(['definition']);
       }
-      );
+      , (error: any) => {
+        if (error.status==401)
+        {
+          this.messageLogin="La información ingresada es incorrecta. Si no recuerdas tu Clave Internet puedes volver a generarla";
+        }
+        console.log(error);
+
+      }
+    );
       
   }
 }

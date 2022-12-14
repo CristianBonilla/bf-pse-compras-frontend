@@ -18,6 +18,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ErrordetailComponent } from './shared/errordetail/errordetail.component';
 import { HttpClientModule } from '@angular/common/http';
 import { EnvironmentLoaderService } from './core/config/environment-loader.service';
+import { DataService } from './core/services/dataservice';
+
+
 registerLocaleData(localeEs, 'es');
 
 const initAppFn = (envService: EnvironmentLoaderService) => {
@@ -41,10 +44,11 @@ const initAppFn = (envService: EnvironmentLoaderService) => {
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule    
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'es'},
+    DataService,
     EnvironmentLoaderService,
     {
       provide: APP_INITIALIZER,
