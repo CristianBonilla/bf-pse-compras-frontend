@@ -6,7 +6,7 @@ import { AnimationFrameScheduler } from 'rxjs/internal/scheduler/AnimationFrameS
 import { EnvironmentLoaderService } from 'src/app/core/config/environment-loader.service';
 import { DataService } from 'src/app/core/services/dataservice';
 import { PaymentData } from 'src/app/shared/paymentData';
-
+import {  NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
 @Component({
@@ -25,7 +25,8 @@ export class Step2Component implements OnInit {
   paymentRecurring=false;
   formModal: any;
   private urlApi="";
-  constructor(private http: HttpClient, private readonly envService: EnvironmentLoaderService, private router: Router,private data: DataService,private formBuilder: FormBuilder ){}
+  constructor(private http: HttpClient, private readonly envService: EnvironmentLoaderService, private router: Router,private data: DataService,private formBuilder: FormBuilder
+    ,private modalService: NgbModal ){}
 
   ngOnInit() {
 
@@ -65,6 +66,7 @@ export class Step2Component implements OnInit {
              {      
                otp: ['', Validators.required]       
            });
+           this.form.controls["otp"].setValidators([Validators.required,Validators.minLength(6)]);
          }
          else if (this.otp_type=='TIMESOFTTOKEN')
          {
@@ -72,6 +74,7 @@ export class Step2Component implements OnInit {
              {      
                sofToken: ['', Validators.required]       
            });
+           this.form.controls["sofToken"].setValidators([Validators.required,Validators.minLength(6)]);
          }
          else
          {
@@ -118,12 +121,15 @@ export class Step2Component implements OnInit {
             target_product_type:this.paymentData.account_type
           };  
 
-          this.http.post<any>(this.urlApi + "confirmTransaction/" + "?param=" + strDate, json, httpOptions).subscribe(responseConfirm => {              
-              
-
-
-
-        
+          this.http.post<any>(this.urlApi + "confirmTransaction/" + "?param=" + strDate, jsonConfirm, httpOptions).subscribe(responseConfirm => {
+            if (responseConfirm.state=='OK')
+            {
+              this.paymentData.dateTransacion=new Date();
+              this.message= JSON.stringify(this.paymentData);
+              sessionStorage.setItem("payment", this.message)
+              this.data.changeMessage( JSON.stringify(this.paymentData));
+              this.router.navigate(['voucher']);
+            }
           }
           , (error: any) => {       
             console.log(error);
@@ -139,10 +145,7 @@ export class Step2Component implements OnInit {
     );
 
 
-     this.message= JSON.stringify(this.paymentData);
-     sessionStorage.setItem("payment", this.message)
-     this.data.changeMessage( JSON.stringify(this.paymentData));
-     this.router.navigate(['confirmation']);
+  
      return true;
 
   }
@@ -166,10 +169,9 @@ export class Step2Component implements OnInit {
     return date.getFullYear()+this.padTo2Digits(date.getMonth() + 1)+this.padTo2Digits(date.getDate());
   }
 
-  changePaymentRecurring(e:any) {
-    if(e.currentTarget.checked){        
-    
+  changePaymentRecurring(e:any, content:any) {
+    if(e.currentTarget.checked){            
+        this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });     
     }
  }
-
 }
