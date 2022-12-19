@@ -1,4 +1,4 @@
-<app-top-bar [numberstep]=1></app-top-bar>
+<app-top-bar [numberstep]=1 [customer_name]="paymentData.customer_name"></app-top-bar>
 <div class="container col-sm-9">
     <app-steps-bar [numberstep]=1 [nameEntity]="nameEntity"></app-steps-bar>
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
@@ -15,7 +15,7 @@
                     </div>                
                     <div class="row my-3">                
                         <div class="col-6 ft16">Costo</div>
-                        <div class="col-6 ft16"><b>$ {{ transactionCost|number:'1.2-2'}}{{money_code}}</b></div>                    
+                        <div class="col-6 ft16"><b>$ {{ transactionCost|number:'1.2-2'}}</b></div>                    
                     </div>                
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6">
@@ -37,11 +37,11 @@
                     </div>                
                     <div class="row my-3" *ngIf="!f['product'].errors">                
                         <div class="col-6 ft16">Disponible en cuenta</div>
-                        <div class="col-6 ft16"><b>$ {{available_balance|number:'1.2-2'}}{{money_code}}</b></div>
+                        <div class="col-6 ft16"><b>$ {{available_balance|number:'1.2-2'}}</b></div>
                     </div>                
                     <div class="row my-3">                
                         <div class="col-6 ft16">Valor a pagar</div>
-                        <div class="col-6 ft16"><b>$ {{operationValue|number:'1.2-2'}}{{money_code}}</b></div>
+                        <div class="col-6 ft16"><b>$ {{operationValue|number:'1.2-2'}}</b></div>
                     </div>                
                 </div>
             </div>

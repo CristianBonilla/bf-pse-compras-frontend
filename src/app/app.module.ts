@@ -19,7 +19,7 @@ import { ErrordetailComponent } from './shared/errordetail/errordetail.component
 import { HttpClientModule } from '@angular/common/http';
 import { EnvironmentLoaderService } from './core/config/environment-loader.service';
 import { DataService } from './core/services/dataservice';
-
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 registerLocaleData(localeEs, 'es');
 
@@ -44,7 +44,8 @@ const initAppFn = (envService: EnvironmentLoaderService) => {
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule    
+    HttpClientModule ,
+    NgbModule   
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'es'},

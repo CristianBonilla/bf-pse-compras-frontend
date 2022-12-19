@@ -36,18 +36,20 @@ export class LoginComponent implements OnInit {
       {      
         tipoPersona: [''],           
         tipoDocumento: ['1', Validators.required],    
-        numeroDocumento: ['52628130',Validators.required],    
-        claveInternet: ['000111', Validators.required],
+        // numeroDocumento: ['52628130',Validators.required],    
+        // claveInternet: ['000111', Validators.required],
+        numeroDocumento: ['',Validators.required],    
+        claveInternet: ['', Validators.required],
         grupoEmpresarial:[''],
         token:[''],
     });
     this.form.controls["numeroDocumento"].addValidators(Validators.maxLength(15));
-    this.form.controls["claveInternet"].addValidators(Validators.maxLength(6));
+    this.form.controls["claveInternet"].addValidators(Validators.minLength(6));
 
     this.form.controls["tipoPersona"].valueChanges.subscribe(tipopersonalValue => {
       if (tipopersonalValue==2) {
         this.form.controls["grupoEmpresarial"].setValidators([Validators.required]);
-        this.form.controls["token"].setValidators([Validators.required,Validators.maxLength(6)]);
+        this.form.controls["token"].setValidators([Validators.required,Validators.minLength(6)]);
       } else {
         this.form.controls["grupoEmpresarial"].setValidators(null);
         this.form.controls["token"].setValidators(null);
@@ -89,7 +91,8 @@ export class LoginComponent implements OnInit {
         this.paymentData= new PaymentData();
         this.paymentData.customer_name = response.customer_name;
         this.paymentData.token= response.token;
-        this.paymentData.itx = json.transaction_id;        
+        this.paymentData.itx = json.transaction_id; 
+        this.paymentData.timeLife = response.timeLife;
         this.message= JSON.stringify(this.paymentData);
         sessionStorage.setItem("payment", this.message)
         this.data.changeMessage( JSON.stringify(this.paymentData));

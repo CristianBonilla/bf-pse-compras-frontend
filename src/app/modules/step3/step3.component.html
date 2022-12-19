@@ -1,7 +1,7 @@
 <app-top-bar [numberstep]=3></app-top-bar>
 
 <div class="container col-sm-9">
-    <app-steps-bar [numberstep]=2 [nameEntity]="paymentData.nameEntity"></app-steps-bar>
+    <app-steps-bar [numberstep]=3 [nameEntity]="paymentData.nameEntity"></app-steps-bar>
     <div class="container m-3"> 
             <div class="row">
                 <div class="alert alert-warning" role="alert">
@@ -11,21 +11,125 @@
             <div class="row">
                 <div class="col-xs-12 col-sm-6 col-md-6">
                     <div class="row my-2">
-                    <p class="ft18">Confirmación del pago</p>
+                        <p class="ft18">Confirmación del pago</p>
                     </div>
                     <div class="row my-2">                
                         <div class="col-6 ft16">Estado</div>
-                        <div class="col-6 ft16"><b>{{paymentData.paymetDescription}}</b></div>
+                        <div class="col-6 ft16"><b>{{transactionStateBFDesc}}</b></div>
                     </div>                
                     <div class="row my-2">                
-                        <div class="col-6 ft16">Costo</div>
-                        <div class="col-6 ft16"><b>$ {{paymentData.transactionCost|number:'1.2-2'}}{{paymentData.money_code}}</b></div>
+                        <div class="col-6 ft16">Fecha Transaccion</div>
+                        <div class="col-6 ft16"><b>{{dateTransacion}}</b></div>
                     </div>
                     <div class="row my-2">                
-                        <div class="col-6 ft16">Entidad</div>
-                        <div class="col-6 ft16"><b>{{paymentData.nameEntity}}</b></div>
+                        <div class="col-6 ft16">Direccion IP</div>
+                        <div class="col-6 ft16"><b>{{ipAddress}}</b></div>
+                    </div>
+                   
+                    
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="row my-2">
+                        <p class="ft18">Detalles del pago</p>
+                    </div>
+                    <div class="row my-2">                
+                        <div class="col-6 ft16">Debitado de la cuenta</div>
+                        <div class="col-6 ft16"><b>{{paymentData.product_mask_id}}</b></div>
+                    </div>                
+                    <div class="row my-2">                
+                        <div class="col-6 ft16">Valor compra</div>
+                        <div class="col-6 ft16"><b>$ {{operationValue}}</b></div>
+                    </div>
+                    <div class="row my-2">                
+                        <div class="col-6 ft16">Costo Transaccion</div>
+                        <div class="col-6 ft16"><b>$ {{transactionCost}}</b></div>
+                    </div>
+                    <div class="row my-2">
+
+                    </div>
+                    <div class="row my-2">
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="row">
+                        <p class="ft18">Detalles de la transaccion</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="row my-2">                
+                        <div class="col-6 ft16">Concepto Pago</div>
+                        <div class="col-6 ft16"><b>{{paymetDescription}}</b></div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="row my-2">                
+                        <div class="col-6 ft16">Autorizacion (CUS)</div>
+                        <div class="col-6 ft16"><b>{{approvalNumberACH}}</b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="row my-2">                
+                        <div class="col-6 ft16">Numero Factura</div>
+                        <div class="col-6 ft16"><b>{{ticketId}}</b></div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="row my-2">                
+                        <div class="col-6 ft16">Numero Comprobante</div>
+                        <div class="col-6 ft16"><b>{{approvalNumberBF}}</b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="row my-2">                
+                        <div class="col-6 ft16">Referencia1</div>
+                        <div class="col-6 ft16"><b>{{referenceNumber1}}</b></div>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="row my-2">                
+                        <div class="col-6 ft16">Referencia2</div>
+                        <div class="col-6 ft16"><b>{{referenceNumber2}}</b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="row my-2">                
+                        <div class="col-6 ft16">Referencia3</div>
+                        <div class="col-6 ft16"><b>{{referenceNumber3}}</b></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-6">
+                    <div class="row">
+                        <div class="col-xs-6 col-sm-7 col-md-7">
+                                <input type="text" class="form-control ft13" placeholder="Ingresa tu email para enviar comprobante">
+                        </div>  
+                        <div class="col-xs-1 col-sm-1 col-md-1">
+                            <button type="button" class="btn btnContinue"><i class="bi bi-send"></i></button>               
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row m-4">
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <button type="button" class="btn col-12 btnCancel">Imprimir</button>         
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <button type="button" class="btn col-12 btnCancel">Descargar</button>                             
+                </div>
+                <div class="col-xs-12 col-sm-4 col-md-4">
+                    <button type="submit" class="btn col-12 btnContinue" (click)="onSubmit()" [disabled]="isDisabledContinue" >Finalizar</button>                
+                </div>                
             </div>
     </div>
 </div>

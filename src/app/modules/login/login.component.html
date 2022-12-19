@@ -1,6 +1,6 @@
 <app-top-bar [numberstep]=0></app-top-bar>
 <div class="register-form">
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" autocomplete="off">
         <div class="container col-sm-4 border border-2 rounded p-6">
             <div class="row">
                 <div class="col-11">
@@ -45,7 +45,7 @@
                     <div class="row">
                         <div class="py-1">
                             <label class="ft13">Numero de documento</label>
-                            <input type="text" formControlName="numeroDocumento"
+                            <input type="text" formControlName="numeroDocumento" autocomplete="off"
                                 placeholder="Escribe el numero de documento"
                                 [ngClass]="submitted && f['numeroDocumento'].errors ? 'form-control ft13g is-invalid' : 'form-control ft13g'">
                             <div *ngIf="submitted && f['numeroDocumento'].errors" class="ft12 invalid-feedback d-block">
@@ -58,23 +58,22 @@
                     <div class="row">
                         <div class="py-1">
                             <label class="ft13">Clave Internet</label>
-                            <input type="password" formControlName="claveInternet" placeholder="Escribe tu multiclave"
+                            <input type="password" formControlName="claveInternet" placeholder="Escribe tu multiclave" maxlength="6" autocomplete="off"
                                 [ngClass]="submitted && f['claveInternet'].errors ? 'form-control ft13g is-invalid' : 'form-control ft13g'">
                             <div *ngIf="submitted && f['claveInternet'].errors" class="ft12 invalid-feedback d-block">
                                 <div *ngIf="f['claveInternet'].errors['required']">Clave Internet requerida</div>
-                                <div *ngIf="f['claveInternet'].errors['maxlength']">Clave Internet no puede exceder 6
-                                    caracteres</div>
+                                <div *ngIf="f['claveInternet'].errors['minlength']">Clave Internet debe ser de 6 caracteres</div>
                             </div>
                         </div>
                     </div>
                     <div class="row" *ngIf="f['tipoPersona'].value=='2'">
                         <div class="py-1">
                             <label class="ft13">Ingresa tu token</label>
-                            <input type="password" formControlName="token" placeholder="Ingresa tu código token"
+                            <input type="password" formControlName="token" maxlength="6" placeholder="Ingresa tu código token"
                                 [ngClass]="submitted && f['token'].errors ? 'form-control ft13g is-invalid' : 'form-control ft13g'">
                             <div *ngIf="submitted && f['token'].errors" class="ft12 invalid-feedback d-block">
                                 <div *ngIf="f['token'].errors['required']">Token requerido</div>
-                                <div *ngIf="f['token'].errors['maxlength']">Token no puede exceder 6 caracteres</div>
+                                <div *ngIf="f['token'].errors['minlength']">Token debe ser de 6 caracteres</div>
                             </div>
                         </div>
                     </div>

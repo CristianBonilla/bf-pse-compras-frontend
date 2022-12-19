@@ -22,9 +22,9 @@ export class Step1Component implements OnInit {
   responseProducts:any;
   products:{id:string,value:string}[]=[];  
   nameEntity="";
-  ltProducts:any;
-  money_code=" COP";
+  ltProducts:any;  
   paymetDescription="";
+  customer_name='';
   accounts: Array<{ id: string, name: string }> = [
     { id: '2', name: "Cuenta de ahorro-" },
     { id: '7', name: "Cuenta PAC-" },
@@ -52,12 +52,14 @@ export class Step1Component implements OnInit {
        
     }
     this.paymentData=JSON.parse(this.message);
+    this.customer_name=this.paymentData.customer_name;
 
     let httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': 'Token ' + this.paymentData.token
       })
-    };
+    };;
     let currentDate = new Date();
     let strDate = currentDate.getFullYear().toString() + currentDate.getMonth().toString() + currentDate.getDay().toString() + currentDate.getHours().toString() + currentDate.getMinutes().toString() + currentDate.getSeconds().toString() + currentDate.getMilliseconds().toString();
     let json = {
@@ -120,13 +122,11 @@ export class Step1Component implements OnInit {
     let productSelect: any = this.form.controls["product"].value;
     if (productSelect)
     {     
-       this.available_balance = productSelect.available_balance;
-       this.money_code=" " + productSelect.money_code;
+       this.available_balance = productSelect.available_balance;       
        this.paymentData.product_id=productSelect.product_id;
        this.paymentData.product_mask_id=productSelect.product_mask_id;
        this.paymentData.account_type = productSelect.account_type;
-       this.paymentData.available_balance=this.available_balance;
-       this.paymentData.money_code=this.money_code;
+       this.paymentData.available_balance=this.available_balance;       
     }
   }
 

@@ -11,10 +11,10 @@ import { map, share } from "rxjs/operators";
 
 export class TopBarComponent implements OnInit, OnDestroy {
   @Input() numberstep = 0;
+  @Input() customer_name='';
   time = new Date();
   rxTime = new Date();  
-  subscription!: Subscription ;
- 
+  subscription!: Subscription ;  
   ngOnInit() {   
     
     this.subscription = timer(0, 1000)
