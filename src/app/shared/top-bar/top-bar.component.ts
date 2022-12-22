@@ -1,6 +1,7 @@
 import { Component,OnInit, OnDestroy,Input } from '@angular/core';
 import { Subscription, timer } from "rxjs";
 import { map, share } from "rxjs/operators";
+import { StepService } from 'src/app/core/services/StepService';
 
 @Component({
   selector: 'app-top-bar',
@@ -10,25 +11,26 @@ import { map, share } from "rxjs/operators";
 
 
 export class TopBarComponent implements OnInit, OnDestroy {
-  @Input() numberstep = 0;
-  @Input() customer_name='';
+  numberstep = 0;
+  customer_name='';
   time = new Date();
   rxTime = new Date();  
   subscription!: Subscription ;  
+
+  constructor(private stepService: StepService, ){
+
+  }
+
   ngOnInit() {   
-    
+    this.stepService.currentStep.subscribe((value)=> this.numberstep = value);
+    this.stepService.currentCustomer_Name.subscribe((value)=> this.customer_name = value);
+
     this.subscription = timer(0, 1000)
       .pipe(
         map(() => new Date()),
         share()
       )
-      .subscribe(time => {
-        // let hour = this.rxTime.getHours();
-        // let minuts = this.rxTime.getMinutes();
-        // let seconds = this.rxTime.getSeconds();
-        // //let a = time.toLocaleString('en-US', { hour: 'numeric', hour12: true });
-        // let NewTime = hour + ":" + minuts + ":" + seconds
-        // console.log(NewTime);
+      .subscribe(time => {      
         this.rxTime = time;
       });
   }

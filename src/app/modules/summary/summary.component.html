@@ -1,9 +1,6 @@
-<app-top-bar [numberstep]=4></app-top-bar>
 <div class="container col-sm-9">
-
-        <div class="container m-3">
-         
-      
+    <app-steps-bar [numberstep]=4 [nameEntity]="paymentData.nameEntity"></app-steps-bar>
+        <div class="container">
             <div class="row">
                 <div class="col">
                     <div class="row">
@@ -18,35 +15,35 @@
                     </div>
                     <div class="row my-2">                
                         <div class="col-6 ft16">Estado de la transaccion</div>
-                        <div class="col-6 ft16"><b>{{transactionStateBFDesc}}</b></div>
+                        <div class="col-6 ft16"><b>{{state}}</b></div>
                     </div>                
                     <div class="row my-2">                
                         <div class="col-6 ft16">Autorizacion (CUS)</div>
-                        <div class="col-6 ft16"><b></b>{{approvalNumberACH}}</div>
+                        <div class="col-6 ft16"><b>{{approvalNumberACH}}</b></div>
                     </div>
                     <div class="row my-2">                
                         <div class="col-6 ft16">Número de la factura</div>
-                        <div class="col-6 ft16"><b></b>{{ticketId}}</div>
+                        <div class="col-6 ft16"><b>{{ticketId}}</b></div>
                     </div>
                     <div class="row my-2">                
                         <div class="col-6 ft16">Empresa</div>
-                        <div class="col-6 ft16"><b></b>{{nameEntity}}</div>
+                        <div class="col-6 ft16"><b>{{nameEntity}}</b></div>
                     </div>
                     <div class="row my-2">                
                         <div class="col-6 ft16">Descripción</div>
-                        <div class="col-6 ft16"><b></b>{{paymetDescription}}</div>
+                        <div class="col-6 ft16"><b>{{paymetDescription}}</b></div>
                     </div>
                     <div class="row my-2">                
                         <div class="col-6 ft16">Referencia 1</div>
-                        <div class="col-6 ft16"><b></b>{{referenceNumber1}}</div>
+                        <div class="col-6 ft16"><b>{{referenceNumber1}}</b></div>
                     </div>
                     <div class="row my-2">                
                         <div class="col-6 ft16">Referencia 2</div>
-                        <div class="col-6 ft16"><b></b>{{referenceNumber2}}</div>
+                        <div class="col-6 ft16"><b>{{referenceNumber2}}</b></div>
                     </div>
                     <div class="row my-2">                
                         <div class="col-6 ft16">Referencia 3</div>
-                        <div class="col-6 ft16"><b></b>{{referenceNumber3}}</div>
+                        <div class="col-6 ft16"><b>{{referenceNumber3}}</b></div>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-6 col-md-6">
@@ -55,11 +52,11 @@
                     </div>
                     <div class="row my-2">                
                         <div class="col-6 ft16">Valor Compra</div>
-                        <div class="col-6 ft16"><b>{{operationValue}}</b></div>
+                        <div class="col-6 ft16"><b>$ {{operationValue|number:'1.2-2'}}</b></div>
                     </div>                
                     <div class="row my-2">                
                         <div class="col-6 ft16">Valor IVA</div>
-                        <div class="col-6 ft16"><b>{{ivaValue}}</b></div>
+                        <div class="col-6 ft16"><b>$ {{ivaValue|number:'1.2-2'}} </b></div>
                     </div>                
                     <div class="row my-2">                
                         <div class="col-6 ft16">Número de comprobante</div>
@@ -73,9 +70,10 @@
             </div>
            
             <div class="row m-4">
-              
+                <div class="col-xs-0 col-sm-3 col-md-3">
+                </div>
                 <div class="col-xs-12 col-sm-3 col-md-3">                
-                    <button type="submit" class="btn col-12 btnContinue">Imprimir</button>                
+                    <button type="submit" class="btn col-12 btnContinue" (click)="onPrintPage()">Imprimir</button>                
                 </div>
                  
                 <div class="col-xs-12 col-sm-3 col-md-3">                
@@ -85,9 +83,26 @@
                 </div>
             </div>
         </div>
-
-
-   
 </div> 
+
+<ng-template #contentError let-modal>
+	<div class="modal-header">
+		<i class="bi bi-x-circle text-danger" style="font-size:30px"></i><span class="text-danger mx-2">{{titleMessageModal}}</span>
+		<button type="button" class="btn-close" aria-label="Close" (click)="onModalClose()"></button>
+	</div>
+	<div class="modal-body">
+		<form>
+			<div class="mb-3">
+				
+				<div class="input-group">
+					<span class="ft14">{{messageModal}}</span>
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="modal-footer">        
+		<button type="button" class="btn btnContinue" (click)="onModalClose()">Aceptar</button>
+	</div>
+</ng-template>
  
-<app-bottom-bar [numberstep]=4></app-bottom-bar> -->
+

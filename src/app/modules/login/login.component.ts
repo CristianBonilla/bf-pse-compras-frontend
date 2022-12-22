@@ -5,8 +5,9 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { ActivatedRoute,  } from '@angular/router';;
 import { PaymentData } from 'src/app/shared/paymentData';
 import { Router } from '@angular/router';
-import { DataService } from "src/app/core/services/dataservice";
-
+import { DataService } from "src/app/core/services/DataService";
+import { AuthService } from 'src/app/core/services/AuthService';
+import { StepService } from 'src/app/core/services/StepService';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,17 +18,16 @@ export class LoginComponent implements OnInit {
   submitted = false;
   messageLogin:string ="";
   message:string=""
+ 
   private urlApi: string="";
   private itx:string="";
   private paymentData!: PaymentData;
   
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient,
-    private readonly envService: EnvironmentLoaderService, private activatedRoute: ActivatedRoute , 
-    private router: Router,private data: DataService) {  
-  }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private readonly envService: EnvironmentLoaderService, private activatedRoute: ActivatedRoute ,private router: Router,private data: DataService, private authService: AuthService, private stepService: StepService) { }
 
   ngOnInit(): void {
+    this.stepService.changeStep(0);
     this.data.currentMessage.subscribe(message => this.message = message);
     this.urlApi = this.envService.getEnvConfig().urlApi;
     this.activatedRoute.queryParams.subscribe(params => {this.itx = params['itx'];});
@@ -36,10 +36,10 @@ export class LoginComponent implements OnInit {
       {      
         tipoPersona: [''],           
         tipoDocumento: ['1', Validators.required],    
-        // numeroDocumento: ['52628130',Validators.required],    
-        // claveInternet: ['000111', Validators.required],
-        numeroDocumento: ['',Validators.required],    
-        claveInternet: ['', Validators.required],
+        numeroDocumento: ['52628130',Validators.required],    
+        claveInternet: ['000111', Validators.required],
+        // numeroDocumento: ['',Validators.required],    
+        // claveInternet: ['', Validators.required],
         grupoEmpresarial:[''],
         token:[''],
     });
@@ -69,44 +69,41 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     if (this.form.invalid) {
       return;
-    }
-
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json'
-      })
-    };
-    let currentDate = new Date();
-    let strDate = currentDate.getFullYear().toString() + currentDate.getMonth().toString() + currentDate.getDay().toString() + currentDate.getHours().toString() + currentDate.getMinutes().toString() + currentDate.getSeconds().toString() + currentDate.getMilliseconds().toString();
-    let json = {
-      id_customer_type: this.form.controls["tipoPersona"].value==1 || this.form.controls["tipoPersona"].value==""?"N":"J",
-      id_number: this.form.controls["numeroDocumento"].value,
-      id_type: Number(this.form.controls["tipoDocumento"].value),
-      reference: this.form.controls["claveInternet"].value,
-      transaction_id: this.itx,
-      captcha:null
-    };    
-
-    this.http.post<any>(this.urlApi + "auth/" + "?param=" + strDate, json, httpOptions).subscribe(response => {        
-        this.paymentData= new PaymentData();
-        this.paymentData.customer_name = response.customer_name;
-        this.paymentData.token= response.token;
-        this.paymentData.itx = json.transaction_id; 
-        this.paymentData.timeLife = response.timeLife;
-        this.message= JSON.stringify(this.paymentData);
-        sessionStorage.setItem("payment", this.message)
-        this.data.changeMessage( JSON.stringify(this.paymentData));
-         this.router.navigate(['definition']);
-      }
-      , (error: any) => {
-        if (error.status==401)
+    }    
+    this.authService.auth(this.form,this.itx).subscribe({
+      next: (response:any) =>  {  
+        if (response.transactionStateIdBF && response.transactionStateIdBF!='')
         {
-          this.messageLogin="La información ingresada es incorrecta. Si no recuerdas tu Clave Internet puedes volver a generarla";
+          this.messageLogin=this.envService.getResourceConfig().auth_IncorrectState;
         }
-        console.log(error);
+        else
+        {
+          this.paymentData= new PaymentData();
+          this.stepService.changeCustomer_Name(response.customer_name);
+          this.paymentData.customer_name = response.customer_name;
+          this.paymentData.token= response.token;
+          this.paymentData.itx = this.itx; 
+          this.paymentData.timeLife = response.timeLife;          
+          this.data.changeMessageLogin(this.paymentData);
+          this.router.navigate(['definition']);
+        }       
+      },
+      error: (error:any) => {         
+          if (error.status==401)
+          {
+            this.submitted = false;
+            this.form.controls["numeroDocumento"].reset();
+            this.form.controls["claveInternet"].reset();
+            this.messageLogin=this.envService.getResourceConfig().auth_HTTP_401_UNAUTHORIZED;
+          }
+          else
+          {
+            this.messageLogin=this.envService.getResourceConfig().auth_HTTP_500_SERVER_ERROR;
+            console.log(error);
+          }
+        }       
 
-      }
-    );
-      
+      }      
+    );      
   }
 }

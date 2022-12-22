@@ -1,0 +1,16 @@
+{
+    "auth_HTTP_500_SERVER_ERROR": "Por favor intenta de nuevo",
+    "auth_HTTP_401_UNAUTHORIZED": "La información ingresada es incorrecta. Si no recuerdas tu Clave Internet puedes volver a generarla",
+    "auth_IncorrectState":"Transaccion invalida",
+    "stp1_ModalErrorTitle":"Algo a ido mal",
+    "stp1_Transaction_500":"Al cargar información de tu transacción, por favor intenta de nuevo",
+    "stp1_Products_500":"Al cargar información de tus productos, por favor intenta de nuevo",
+    "stp1_Products_204":"No posee cuentas asociadas",
+    "cancel_500":"Algo a ido mal al cancelar. Por favor intenta de nuevo",
+    "stp2_ModalErrorTitle":"Algo a ido mal",
+    "stp2_Transaction_500":"Al cargar información de tus productos, por favor intenta de nuevo",
+    "stp2_GenerateOtp_500":"Al generar la clave. Por favor intenta de nuevo",
+    "stp2_ValidateOtp_Invalid":"Clave Invalida, por favor verifique e intente de nuevo",    
+    "stp2_ValidatekeyInvalid":"Clave Invalida",
+    "stp2_ValidateOtp_500":"Al validar la clave. Por favor intenta de nuevo"
+}

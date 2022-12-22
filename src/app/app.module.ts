@@ -16,15 +16,17 @@ import { registerLocaleData } from '@angular/common';
 import { StepsBarComponent } from './shared/steps-bar/steps-bar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ErrordetailComponent } from './shared/errordetail/errordetail.component';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EnvironmentLoaderService } from './core/config/environment-loader.service';
-import { DataService } from './core/services/dataservice';
+import { DataService } from './core/services/DataService';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-
+import { SpinnerComponent } from './shared/spinner/spinner.component';
+import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
+import { CancelComponent } from './shared/cancel/cancel.component';
 registerLocaleData(localeEs, 'es');
 
 const initAppFn = (envService: EnvironmentLoaderService) => {
-  return () => envService.loadEnvConfig('/assets/config/app-config.json');
+  return () => envService.loadEnvConfig('/assets/config/app-config.json','/assets/resources/es.json');
 };
 
 @NgModule({
@@ -38,7 +40,8 @@ const initAppFn = (envService: EnvironmentLoaderService) => {
     SummaryComponent,
     LoginComponent,
     StepsBarComponent,
-    ErrordetailComponent
+    ErrordetailComponent,    
+    SpinnerComponent, CancelComponent
   ],
   imports: [
     BrowserModule,
@@ -49,13 +52,16 @@ const initAppFn = (envService: EnvironmentLoaderService) => {
   ],
   providers: [
     {provide: LOCALE_ID, useValue: 'es'},
-    DataService,
+    DataService,    
     EnvironmentLoaderService,
     {
       provide: APP_INITIALIZER,
       useFactory: initAppFn,
       multi: true,
       deps: [EnvironmentLoaderService],
+    },
+    {
+      provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true
     }
   ],
   bootstrap: [AppComponent]
