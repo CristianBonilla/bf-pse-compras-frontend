@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component,Input } from '@angular/core';
 import { EnvironmentLoaderService } from 'src/app/core/config/environment-loader.service';
+import { StepService } from 'src/app/core/services/StepService';
 
 @Component({
   selector: 'app-bottom-bar',
@@ -8,12 +9,13 @@ import { EnvironmentLoaderService } from 'src/app/core/config/environment-loader
   styleUrls: ['./bottom-bar.component.css']
 })
 export class BottomBarComponent {
-  @Input() numberstep = 0;
+  numberstep = 0;
   ipAddress='';
   version='';
-  constructor(private http: HttpClient,private readonly envService: EnvironmentLoaderService,){}
+  constructor(private http: HttpClient,private readonly envService: EnvironmentLoaderService, private stepService: StepService){}
 
   ngOnInit() {
+      this.stepService.currentStep.subscribe((value)=> this.numberstep = value);
       try
       {
         this.version= this.envService.getEnvConfig().version + ' Copyright © ' + new Date().getFullYear() +' Banco Falabella';

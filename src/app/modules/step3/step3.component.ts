@@ -2,11 +2,10 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { EnvironmentLoaderService } from 'src/app/core/config/environment-loader.service';
-import { DataService } from 'src/app/core/services/dataservice';
+import { DataService } from 'src/app/core/services/DataService';
 import { PaymentData } from 'src/app/shared/paymentData';
 import {formatDate} from '@angular/common';
-
-
+import { StepService } from 'src/app/core/services/StepService';
 @Component({
   selector: 'app-step3',
   templateUrl: './step3.component.html',
@@ -29,9 +28,9 @@ export class Step3Component implements OnInit {
   paymetDescription='';
   operationValue='';
   transactionCost='';
-  constructor(private router: Router,private data: DataService,private readonly envService: EnvironmentLoaderService,private http: HttpClient, @Inject(LOCALE_ID) private locale: string){}
+  constructor(private router: Router,private data: DataService,private readonly envService: EnvironmentLoaderService,private http: HttpClient, @Inject(LOCALE_ID) private locale: string,private stepService: StepService){}
   ngOnInit() {
-    
+    this.stepService.changeStep(3);
     this.data.currentMessage.subscribe(message => this.message = message);    
     this.paymentData=JSON.parse(this.message);
 
@@ -99,5 +98,9 @@ export class Step3Component implements OnInit {
     this.isDisabledContinue=false;
   }
 
+  onPrintPage()
+  {
+    window.print();
+  }
 
 }

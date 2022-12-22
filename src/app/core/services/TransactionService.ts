@@ -7,25 +7,24 @@ import { EnvironmentLoaderService } from '../config/environment-loader.service';
 @Injectable({
   providedIn: 'root',
 })
-export class CancelTransactionService {
+export class TransactionService {
   
   private urlApi ='';
   constructor(private http: HttpClient,private readonly envService: EnvironmentLoaderService) { }
 
-  cancelTransaction(token:string,itx:string): Observable<any> { 
+  transaction(paymentData: PaymentData): Observable<any> { 
     this.urlApi = this.envService.getEnvConfig().urlApi;
     let httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          'Authorization': 'Token ' + token
+          'Authorization': 'Token ' + paymentData.token
         })
-      };      
-      let jsonConfirm = { 
-        transaction_id:itx
-      };  
+      };
       let currentDate = new Date();
       let strDate = currentDate.getFullYear().toString() + currentDate.getMonth().toString() + currentDate.getDay().toString() + currentDate.getHours().toString() + currentDate.getMinutes().toString() + currentDate.getSeconds().toString() + currentDate.getMilliseconds().toString();
-      return this.http.post<any>(this.urlApi + "cancelTransaction/" + "?param=" + strDate, jsonConfirm, httpOptions);
+      let json = {
+        DefaultString: paymentData.itx     
+      };      
+      return this.http.post<any>(this.urlApi + "transaction/?param=" + strDate, json, httpOptions);
   }
-
 }

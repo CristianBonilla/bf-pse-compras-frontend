@@ -15,16 +15,16 @@ export class StepsBarComponent {
     { 
        if (classStep==1)     
        {
-        return "col-xs-3 col-sm-3 col-md-3 gSteps g-2 my-2 rounded";
+        return "col-md-auto gSteps rounded";
        }
        else
        {
-        return "col-xs-3 col-sm-3 col-md-3 gSteps g-2 m-2 rounded";
+        return "col-md-auto gSteps  rounded";
        }        
     } 
     else
     {
-        return "col-xs-3 col-sm-3 col-md-3 g-2 m-2 border rounded";
+        return "col-md-auto";
     }
   }
 

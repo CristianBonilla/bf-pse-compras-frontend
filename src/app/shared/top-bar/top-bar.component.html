@@ -4,7 +4,7 @@
         <img class="main-logo" alt="Banco Falabella" src="assets/logos/logo-bf.svg" style="width:200px">
     </div>    
     <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-6">
+        <div [ngClass]="numberstep == 0 ? 'col-xs-12 col-sm-12 col-md-12' : 'col-xs-12 col-sm-6 col-md-6'">
             <div class="row">
                 <span class="text-muted ft32">Pagos PSE - Pagos en linea</span>
             </div>
@@ -12,7 +12,7 @@
                 <small class="ft11">Fecha y hora actual: {{ rxTime | date:'EEEE d MMMM y h:mm:ss a'}}</small>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-6 col-md-6"> 
+        <div *ngIf="numberstep>0" class="col-xs-12 col-sm-6 col-md-6"> 
             <div class="row mt-2" >
                 <span class="text-end ft18">{{customer_name}}</span>
             </div>
