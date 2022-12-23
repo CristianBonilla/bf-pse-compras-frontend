@@ -1,13 +1,12 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, ElementRef, Inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { EnvironmentLoaderService } from 'src/app/core/config/environment-loader.service';
-import { DataService } from 'src/app/core/services/DataService';
-import { PaymentData } from 'src/app/shared/paymentData';
-import {formatDate} from '@angular/common';
-import { StepService } from 'src/app/core/services/StepService';
-// import jsPDF from 'jspdf'; 
-import { TransactionService } from 'src/app/core/services/TransactionService';
+import { formatDate } from "@angular/common";
+import { HttpClient } from "@angular/common/http";
+import { Component, OnInit, ViewChild, ElementRef, Inject, LOCALE_ID } from "@angular/core";
+import { Router } from "@angular/router";
+import { EnvironmentLoaderService } from "src/app/core/config/environment-loader.service";
+import { DataService } from "src/app/core/services/Dataservice";
+import { StepService } from "src/app/core/services/StepService";
+import { TransactionService } from "src/app/core/services/TransactionService";
+import { PaymentData } from "src/app/shared/paymentData";
 
 @Component({
   selector: 'app-step3',

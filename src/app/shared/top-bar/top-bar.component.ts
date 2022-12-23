@@ -1,7 +1,6 @@
-import { Component,OnInit, OnDestroy,Input } from '@angular/core';
-import { Subscription, timer } from "rxjs";
-import { map, share } from "rxjs/operators";
-import { StepService } from 'src/app/core/services/StepService';
+import { Component, OnInit, OnDestroy } from "@angular/core";
+import { Subscription, timer, map, share } from "rxjs";
+import { StepService } from "src/app/core/services/StepService";
 
 @Component({
   selector: 'app-top-bar',

@@ -1,13 +1,13 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormGroup } from '@angular/forms';
-import { Router } from '@angular/router';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { EnvironmentLoaderService } from 'src/app/core/config/environment-loader.service';
-import { DataService } from 'src/app/core/services/DataService';
-import { StepService } from 'src/app/core/services/StepService';
-import { TransactionService } from 'src/app/core/services/TransactionService';
-import { PaymentData } from 'src/app/shared/paymentData';
+import { HttpClient } from "@angular/common/http";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { FormGroup } from "@angular/forms";
+import { Router } from "@angular/router";
+import { NgbModalRef, NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { EnvironmentLoaderService } from "src/app/core/config/environment-loader.service";
+import { DataService } from "src/app/core/services/Dataservice";
+import { StepService } from "src/app/core/services/StepService";
+import { TransactionService } from "src/app/core/services/TransactionService";
+import { PaymentData } from "src/app/shared/paymentData";
 
 @Component({
   selector: 'app-summary',

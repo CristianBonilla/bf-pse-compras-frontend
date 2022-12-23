@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
-import { Component,Input } from '@angular/core';
-import { EnvironmentLoaderService } from 'src/app/core/config/environment-loader.service';
-import { StepService } from 'src/app/core/services/StepService';
+import { HttpClient } from "@angular/common/http";
+import { Component } from "@angular/core";
+import { EnvironmentLoaderService } from "src/app/core/config/environment-loader.service";
+import { StepService } from "src/app/core/services/StepService";
 
 @Component({
   selector: 'app-bottom-bar',
