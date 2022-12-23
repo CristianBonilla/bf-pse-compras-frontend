@@ -1,5 +1,5 @@
-<div class="container col-sm-9">
-    <app-steps-bar [numberstep]=3 [nameEntity]="paymentData.nameEntity"></app-steps-bar>
+<div class="container col-sm-9" id="content" #content>
+    <app-steps-bar [numberstep]=3 [nameEntity]="nameEntity"></app-steps-bar>
     <div class="container m-3"> 
             <div class="row">
                 <div class="alert alert-warning" role="alert">
@@ -123,7 +123,7 @@
                     <button type="button" class="btn col-12 btnCancel" (click)="onPrintPage()">Imprimir</button>         
                 </div>
                 <div class="col-xs-12 col-sm-4 col-md-4">
-                    <button type="button" class="btn col-12 btnCancel">Descargar</button>                             
+                    <button type="button" class="btn col-12 btnCancel" (click)="onDownload()">Descargar</button>                             
                 </div>
                 <div class="col-xs-12 col-sm-4 col-md-4">
                     <button type="submit" class="btn col-12 btnContinue" (click)="onSubmit()" [disabled]="isDisabledContinue" >Finalizar</button>                

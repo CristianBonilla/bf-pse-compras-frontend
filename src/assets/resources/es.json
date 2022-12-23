@@ -12,5 +12,7 @@
     "stp2_GenerateOtp_500":"Al generar la clave. Por favor intenta de nuevo",
     "stp2_ValidateOtp_Invalid":"Clave Invalida, por favor verifique e intente de nuevo",    
     "stp2_ValidatekeyInvalid":"Clave Invalida",
-    "stp2_ValidateOtp_500":"Al validar la clave. Por favor intenta de nuevo"
+    "stp2_ValidateOtp_500":"Al validar la clave. Por favor intenta de nuevo",
+    "stp_Cancel_401_InvalidState":"Estado invalido transaccion, para cancelar",
+    "stp12_InvalidState_MsgLogin":"Estado invalido transacción"
 }

@@ -1,5 +1,5 @@
 <div class="container col-sm-9">
-    <app-steps-bar [numberstep]=4 [nameEntity]="paymentData.nameEntity"></app-steps-bar>
+    <app-steps-bar [numberstep]=4 [nameEntity]="nameEntity"></app-steps-bar>
         <div class="container">
             <div class="row">
                 <div class="col">
@@ -77,7 +77,7 @@
                 </div>
                  
                 <div class="col-xs-12 col-sm-3 col-md-3">                
-                    <button type="button" class="btn col-12 btnContinue">Volver al comercio</button>                                
+                    <button type="button" class="btn col-12 btnContinue" (click)="onSubmit()">Volver al comercio</button>                                
                 </div>
                 <div class="col-xs-0 col-sm-3 col-md-3">
                 </div>

@@ -12,5 +12,5 @@ export class PaymentData
     public transactionCost!:number;     
     public available_balance!:number;
     public operationValue!:number;
-    public dateTransacion!:Date;
+    public dateTransacion!:Date;   
 }
