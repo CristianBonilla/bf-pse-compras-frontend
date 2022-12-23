@@ -1,9 +1,11 @@
-FROM node:latest as build
-WORKDIR /usr/local/app
-COPY ./ /usr/local/app/
+FROM node:latest AS build
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY package.json /usr/src/app/
 RUN npm install
+COPY . /usr/src/app
 RUN npm run build
 
 FROM nginx:latest
-COPY --from=build /usr/local/app/dist/cogpt-gateway-compras-frontend /usr/share/nginx/html
+COPY --from=build /usr/src/app/dist/cogpt-gateway-compras-frontend /usr/share/nginx/html
 EXPOSE 80

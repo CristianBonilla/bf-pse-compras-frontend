@@ -44,7 +44,7 @@ export class Step2Component implements OnInit {
       {
         otp: ['', Validators.required]
       });
-    this.data.currentMessage.subscribe(message => this.message = message);
+    this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});
     this.paymentData = this.data.getPaymentDataStep2(this.message);
     this.loadTransaction();
     this.generateOtp();
@@ -61,7 +61,7 @@ export class Step2Component implements OnInit {
         this.paymentData.operationValue = response.getTransactions.operationValue;
         this.paymentData.nameEntity = response.getTransactions.nameEntity;
       },
-      error: (e) => {
+      error: (e:any) => {
         console.error(e);
         switch (e.status) {
           case 500:
