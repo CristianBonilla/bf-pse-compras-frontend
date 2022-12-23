@@ -1,15 +1,14 @@
- import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component,ElementRef,OnInit, TemplateRef, ViewChild  } from '@angular/core';
-import { EnvironmentLoaderService } from 'src/app/core/config/environment-loader.service';
-import { DataService } from "src/app/core/services/DataService";
-import { PaymentData } from 'src/app/shared/paymentData';
-import { Router } from '@angular/router';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { CancelTransactionService } from 'src/app/core/services/CancelTransactionService';
-import { TransactionService } from 'src/app/core/services/TransactionService';
-import { ProductsService } from 'src/app/core/services/ProductsService';
-import { StepService } from 'src/app/core/services/StepService';
-import { NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { FormGroup, FormBuilder, Validators, AbstractControl } from "@angular/forms";
+import { Router } from "@angular/router";
+import { NgbModalRef, NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { EnvironmentLoaderService } from "src/app/core/config/environment-loader.service";
+import { DataService } from "src/app/core/services/Dataservice";
+import { ProductsService } from "src/app/core/services/ProductsService";
+import { StepService } from "src/app/core/services/StepService";
+import { TransactionService } from "src/app/core/services/TransactionService";
+import { PaymentData } from "src/app/shared/paymentData";
+
 @Component({
   selector: 'app-step1',
   templateUrl: './step1.component.html',

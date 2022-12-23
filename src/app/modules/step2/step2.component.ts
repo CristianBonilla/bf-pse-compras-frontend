@@ -1,18 +1,16 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { AnimationFrameScheduler } from 'rxjs/internal/scheduler/AnimationFrameScheduler';
-import { EnvironmentLoaderService } from 'src/app/core/config/environment-loader.service';
-import { DataService } from 'src/app/core/services/DataService';
-import { PaymentData } from 'src/app/shared/paymentData';
-import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
-import { StepService } from 'src/app/core/services/StepService';
-import { GenerateOtpService } from 'src/app/core/services/GenerateOTPService';
-import { TransactionService } from 'src/app/core/services/TransactionService';
-import { ConfirmTransactionService } from 'src/app/core/services/ConfirmTransactionService';
-import { ValidateOtpService } from 'src/app/core/services/ValidateOtpService';
-
+import { HttpClient } from "@angular/common/http";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
+import { FormGroup, FormBuilder, Validators, AbstractControl } from "@angular/forms";
+import { Router } from "@angular/router";
+import { NgbModalRef, NgbModal } from "@ng-bootstrap/ng-bootstrap";
+import { EnvironmentLoaderService } from "src/app/core/config/environment-loader.service";
+import { ConfirmTransactionService } from "src/app/core/services/ConfirmTransactionService";
+import { DataService } from "src/app/core/services/Dataservice";
+import { GenerateOtpService } from "src/app/core/services/GenerateOtpService";
+import { StepService } from "src/app/core/services/StepService";
+import { TransactionService } from "src/app/core/services/TransactionService";
+import { ValidateOtpService } from "src/app/core/services/ValidateOtpService";
+import { PaymentData } from "src/app/shared/paymentData";
 
 @Component({
   selector: 'app-step2',

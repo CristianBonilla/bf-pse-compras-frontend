@@ -18,7 +18,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ErrordetailComponent } from './shared/errordetail/errordetail.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EnvironmentLoaderService } from './core/config/environment-loader.service';
-import { DataService } from './core/services/DataService';
+import { DataService } from './core/services/Dataservice';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
@@ -41,7 +41,8 @@ const initAppFn = (envService: EnvironmentLoaderService) => {
     LoginComponent,
     StepsBarComponent,
     ErrordetailComponent,    
-    SpinnerComponent, CancelComponent
+    SpinnerComponent,
+    CancelComponent
   ],
   imports: [
     BrowserModule,
