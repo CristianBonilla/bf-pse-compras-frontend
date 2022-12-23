@@ -37,7 +37,7 @@ export class Step3Component implements OnInit {
   constructor(private router: Router,private data: DataService,private readonly envService: EnvironmentLoaderService,private http: HttpClient, @Inject(LOCALE_ID) private locale: string,private stepService: StepService, private transactionService:TransactionService){}
   ngOnInit() {
     this.stepService.changeStep(3);    
-    this.data.currentMessage.subscribe(message => this.message = message); 
+    this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});
     
     // TODO Temporal cargar de Sesion
     this.paymentData=this.data.getPaymentDataStep2(this.message);
@@ -92,7 +92,7 @@ export class Step3Component implements OnInit {
           this.nameEntity=response.getTransactions.nameEntity;
         }
       },
-        error: (e) => { 
+        error: (e:any) => { 
           console.log(e);
         }
 

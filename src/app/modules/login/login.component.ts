@@ -28,9 +28,9 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.stepService.changeStep(0);
-    this.data.currentMessage.subscribe(message => this.message = message);
+    this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});
     this.urlApi = this.envService.getEnvConfig().urlApi;
-    this.activatedRoute.queryParams.subscribe(params => {this.itx = params['itx'];});
+    this.activatedRoute.queryParams.subscribe({next:(params:any)=>{this.itx=params['itx'];}});    
 
     this.form = this.formBuilder.group(
       {      
@@ -46,7 +46,11 @@ export class LoginComponent implements OnInit {
     this.form.controls["numeroDocumento"].addValidators(Validators.maxLength(15));
     this.form.controls["claveInternet"].addValidators(Validators.minLength(6));
 
-    this.form.controls["tipoPersona"].valueChanges.subscribe(tipopersonalValue => {
+
+    this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});
+
+
+    this.form.controls["tipoPersona"].valueChanges.subscribe({next:(tipopersonalValue:any)=>{
       if (tipopersonalValue==2) {
         this.form.controls["grupoEmpresarial"].setValidators([Validators.required]);
         this.form.controls["token"].setValidators([Validators.required,Validators.minLength(6)]);
@@ -56,7 +60,7 @@ export class LoginComponent implements OnInit {
       }
       this.form.controls["grupoEmpresarial"].updateValueAndValidity();
       this.form.controls["token"].updateValueAndValidity();
-    });
+    }});
 
   }
 

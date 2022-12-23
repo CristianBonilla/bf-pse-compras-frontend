@@ -44,7 +44,7 @@ export class SummaryComponent implements OnInit {
 
   ngOnInit() {
     this.stepService.changeStep(4);
-    this.data.currentMessage.subscribe(message => this.message = message);
+    this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});
     this.paymentData = this.data.getPaymentDataStep2(this.message);
     this.loadTransaction();
   }
@@ -100,7 +100,7 @@ export class SummaryComponent implements OnInit {
         this.transactionDate = response.getTransactions.responseDateBF.replace('T',' ');
         this.urlEntity=response.getTransactions.urlEntity;
       },
-      error: (e) => {
+      error: (e:any) => {
         console.error(e);
         switch (e.status) {
           case 500:

@@ -54,7 +54,7 @@ export class Step1Component implements OnInit {
     });
 
 
-    this.data.currentMessage.subscribe(message => this.message = message);        
+    this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});
     this.paymentData=this.data.getPaymentData(this.message);
     this.loadTransaction();
     this.loadProducts();
@@ -63,7 +63,7 @@ export class Step1Component implements OnInit {
   loadTransaction()
   {
     this.transactionService.transaction(this.paymentData).subscribe({
-      next: (response) =>  {
+      next: (response:any) =>  {
         //Si el estado ya es 7=Rechazado,8=Aplicado,9=error Rediriga a la pantalla resumen. Solo El estado 4=Autenticado es valido. En los demas estados rediriga a Login.
         //Mensaje estado invalido
         if (response.getTransactions.transactionStateIdBF!=4)
@@ -92,7 +92,7 @@ export class Step1Component implements OnInit {
         this.paymentData.operationValue = this.operationValue;
         this.paymentData.nameEntity=this.nameEntity;        
       },
-      error: (e) => {
+      error: (e:any) => {
         console.error(e);
         switch (e.status)
           {
@@ -114,7 +114,7 @@ export class Step1Component implements OnInit {
   loadProducts()
   {
     this.productsService.products(this.paymentData.token).subscribe({
-      next: (response) =>  { 
+      next: (response:any) =>  { 
           if(response=='No Content')
           {
             this.messageError=this.envService.getResourceConfig().stp1_Products_204;
@@ -123,7 +123,7 @@ export class Step1Component implements OnInit {
             this.ltProducts=response.products;
           }
         },
-        error: (e) => {
+        error: (e:any) => {
           console.error(e);
           switch (e.status)
           {

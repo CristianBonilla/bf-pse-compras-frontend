@@ -20,11 +20,11 @@ export class CancelComponent {
   {
      this.messageChange.emit('');   
      this.cancelTransactionService.cancelTransaction(this.paymentData.token, this.paymentData.itx).subscribe({
-        next: (resp) =>  {
+        next: (resp:any) =>  {
           
           this.router.navigate(['summary']);
         },
-        error: (e) => {
+        error: (e:any) => {
           console.error(e);
           switch (e.status)
             {
