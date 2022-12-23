@@ -64,7 +64,23 @@ export class Step1Component implements OnInit {
   {
     this.transactionService.transaction(this.paymentData).subscribe({
       next: (response) =>  {
-        //Si el estado ya es confirmado rediriga a la pantalla resumen.. Transaccion no valida  Boton volver 
+        //Si el estado ya es 7=Rechazado,8=Aplicado,9=error Rediriga a la pantalla resumen. Solo El estado 4=Autenticado es valido. En los demas estados rediriga a Login.
+        //Mensaje estado invalido
+        if (response.getTransactions.transactionStateIdBF!=4)
+        {
+          switch(response.getTransactions.transactionStateIdBF)
+          {
+            case 7:
+            case 8:
+            case 9:
+              this.router.navigate(['summary'],{ queryParams: {itx: this.paymentData.itx}});
+              break;
+            default:
+              this.redirectLogin(this.envService.getResourceConfig().stp12_InvalidState_MsgLogin);
+              break;
+          }
+        }
+
 
         this.paymetDescription = response.getTransactions.paymetDescription;        
         this.transactionCost = response.getTransactions.transactionCost;        
@@ -88,7 +104,7 @@ export class Step1Component implements OnInit {
               this.modalReference =this.modalService.open(this.content, { ariaLabelledBy: 'modal-basic-title',backdrop:'static', keyboard : false });
             break;
             case 401:
-              this.redirectLogin();
+              this.redirectLogin(this.envService.getResourceConfig().auth_IncorrectState);
             break;          
           }
       }
@@ -118,7 +134,7 @@ export class Step1Component implements OnInit {
               this.modalReference = this.modalService.open(this.content, { ariaLabelledBy: 'modal-basic-title',backdrop:'static', keyboard : false });
             break;           
             case 401:
-              this.redirectLogin();
+              this.redirectLogin(this.envService.getResourceConfig().auth_IncorrectState);
             break;
           }
         }
@@ -129,9 +145,9 @@ export class Step1Component implements OnInit {
     return this.form.controls;
   }
 
-  redirectLogin()
+  redirectLogin(msg:string)
   {
-    this.router.navigate(['login'],{ queryParams: {itx: this.paymentData.itx}});
+    this.router.navigate(['login'],{queryParams:{itx:this.paymentData.itx,msg:msg}});
   }
 
   getAccountName(product_code:string)
@@ -177,6 +193,11 @@ export class Step1Component implements OnInit {
   }
 
   onMessageChange(message:string) {
+    if (message='Invalid State')
+    {
+      this.loadTransaction();
+      message=this.envService.getResourceConfig().stp_Cancel_401_InvalidState;
+    }
     this.messageError=message;
  }
 

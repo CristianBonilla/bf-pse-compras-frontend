@@ -1,17 +1,21 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Component, Inject, LOCALE_ID, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, LOCALE_ID, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { EnvironmentLoaderService } from 'src/app/core/config/environment-loader.service';
 import { DataService } from 'src/app/core/services/DataService';
 import { PaymentData } from 'src/app/shared/paymentData';
 import {formatDate} from '@angular/common';
 import { StepService } from 'src/app/core/services/StepService';
+// import jsPDF from 'jspdf'; 
+import { TransactionService } from 'src/app/core/services/TransactionService';
+
 @Component({
   selector: 'app-step3',
   templateUrl: './step3.component.html',
   styleUrls: ['./step3.component.css']
 })
 export class Step3Component implements OnInit {
+  @ViewChild('content', {static: false}) content!:ElementRef; 
   paymentData!: PaymentData; 
   message='';
   isDisabledContinue=false;
@@ -28,29 +32,39 @@ export class Step3Component implements OnInit {
   paymetDescription='';
   operationValue='';
   transactionCost='';
-  constructor(private router: Router,private data: DataService,private readonly envService: EnvironmentLoaderService,private http: HttpClient, @Inject(LOCALE_ID) private locale: string,private stepService: StepService){}
+  urlEntity='';
+  nameEntity='';
+  constructor(private router: Router,private data: DataService,private readonly envService: EnvironmentLoaderService,private http: HttpClient, @Inject(LOCALE_ID) private locale: string,private stepService: StepService, private transactionService:TransactionService){}
   ngOnInit() {
-    this.stepService.changeStep(3);
-    this.data.currentMessage.subscribe(message => this.message = message);    
-    this.paymentData=JSON.parse(this.message);
-
-    let httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        'Authorization': 'Token ' + this.paymentData.token
-      })
-    };
-    let currentDate = new Date();
-    let strDate = currentDate.getFullYear().toString() + currentDate.getMonth().toString() + currentDate.getDay().toString() + currentDate.getHours().toString() + currentDate.getMinutes().toString() + currentDate.getSeconds().toString() + currentDate.getMilliseconds().toString();
-    let json = {
-      DefaultString: this.paymentData.itx     
-    };    
-    this.urlApi = this.envService.getEnvConfig().urlApi;
+    this.stepService.changeStep(3);    
+    this.data.currentMessage.subscribe(message => this.message = message); 
     
-    this.http.post<any>(this.urlApi + "transaction/" + "?param=" + strDate, json, httpOptions).subscribe(response => {                      
-        
-      
-        // summaryTransaction='';
+    // TODO Temporal cargar de Sesion
+    this.paymentData=this.data.getPaymentDataStep2(this.message);
+
+    this.loadTransaction();
+    this.loadIp();
+  }
+
+  loadIp()
+  {
+    try
+    {   
+      this.http.get("http://api.ipify.org/?format=json").subscribe((res:any)=>{
+        this.ipAddress =res.ip;
+      });        
+    }
+    catch(error)     
+    {
+      console.log(error);
+    }
+  }
+
+
+  loadTransaction()
+  {
+    this.transactionService.transaction(this.paymentData).subscribe({
+      next: (response: any) => {          
         if(response && response.getTransactions)
         { 
           if (response.getTransactions.transactionStateIdBF==8)
@@ -73,34 +87,35 @@ export class Step3Component implements OnInit {
           this.referenceNumber2=response.getTransactions.referenceNumber2;
           this.referenceNumber3=response.getTransactions.referenceNumber3;
           this.operationValue=response.getTransactions.operationValue;          
-          this.approvalNumberBF=response.getTransactions.approvalNumberBF;          
+          this.approvalNumberBF=response.getTransactions.approvalNumberBF;
+          this.urlEntity=response.getTransactions.urlEntity;
+          this.nameEntity=response.getTransactions.nameEntity;
+        }
+      },
+        error: (e) => { 
+          console.log(e);
         }
 
       }
-      , (error: any) => {       
-        console.log(error);
-
-      }
     );
-
-    this.http.get("http://api.ipify.org/?format=json").subscribe((res:any)=>{
-          this.ipAddress =res.ip;
-        });    
-
-
   }
 
   onSubmit()
   {
     this.isDisabledContinue=true;
-    this.data.changeMessage( JSON.stringify(this.paymentData));
-    this.router.navigate(['summary']);
+    window.location.href =this.urlEntity;
     this.isDisabledContinue=false;
   }
 
   onPrintPage()
   {
     window.print();
+  }
+  onDownload()
+  {
+    
+    
+    
   }
 
 }

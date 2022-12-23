@@ -13,5 +13,7 @@ export interface ResourcesConfig {
   stp2_ValidateOtp_Invalid:string;
   stp2_ValidatekeyInvalid:string;
   stp2_ValidateOtp_500:string;
+  stp_Cancel_401_InvalidState:string;
+  stp12_InvalidState_MsgLogin:string;
   }
   

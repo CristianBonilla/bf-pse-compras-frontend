@@ -38,6 +38,7 @@ export class SummaryComponent implements OnInit {
   titleMessageModal = '';
   messageModal = '';
   modalReference!: NgbModalRef;
+  urlEntity='';
   private urlApi = ''
   constructor(private http: HttpClient, private router: Router, private data: DataService, private readonly envService: EnvironmentLoaderService, private stepService: StepService, private transactionService: TransactionService, private modalService: NgbModal) { }
 
@@ -86,7 +87,7 @@ export class SummaryComponent implements OnInit {
             }
             break;
         }
-        this.approvalNumberACH = response.getTransactions.approvalNumberACH;
+        this.approvalNumberACH = response.getTransactions.approvalNumberACH=='None'?'':response.getTransactions.approvalNumberACH;;
         this.ticketId = response.getTransactions.ticketId;
         this.nameEntity = response.getTransactions.nameEntity;
         this.paymetDescription = response.getTransactions.paymetDescription;
@@ -95,8 +96,9 @@ export class SummaryComponent implements OnInit {
         this.referenceNumber3 = response.getTransactions.referenceNumber3;
         this.operationValue = response.getTransactions.operationValue;
         this.ivaValue = response.getTransactions.ivaValue;
-        this.approvalNumberBF = response.getTransactions.approvalNumberBF=='None'?'':response.getTransactions.approvalNumberBF;
-        this.transactionDate = response.getTransactions.transactionDate;
+        this.approvalNumberBF = response.getTransactions.approvalNumberBF;
+        this.transactionDate = response.getTransactions.responseDateBF.replace('T',' ');
+        this.urlEntity=response.getTransactions.urlEntity;
       },
       error: (e) => {
         console.error(e);
@@ -127,5 +129,9 @@ export class SummaryComponent implements OnInit {
   onPrintPage()
   {
     window.print();
+  }
+  onSubmit()
+  {
+    window.location.href =this.urlEntity;
   }
 }
