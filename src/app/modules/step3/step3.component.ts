@@ -6,6 +6,7 @@ import { EnvironmentLoaderService } from "src/app/core/config/environment-loader
 import { DataService } from "src/app/core/services/Dataservice";
 import { StepService } from "src/app/core/services/StepService";
 import { TransactionService } from "src/app/core/services/TransactionService";
+import { TransactionVoucherService } from "src/app/core/services/TransactionVoucherService";
 import { PaymentData } from "src/app/shared/paymentData";
 
 @Component({
@@ -33,7 +34,8 @@ export class Step3Component implements OnInit {
   transactionCost='';
   urlEntity='';
   nameEntity='';
-  constructor(private router: Router,private data: DataService,private readonly envService: EnvironmentLoaderService,private http: HttpClient, @Inject(LOCALE_ID) private locale: string,private stepService: StepService, private transactionService:TransactionService){}
+  nameFile='';
+  constructor(private router: Router,private data: DataService,private readonly envService: EnvironmentLoaderService,private http: HttpClient, @Inject(LOCALE_ID) private locale: string,private stepService: StepService, private transactionService:TransactionService, private transactionVoucherService:TransactionVoucherService){}
   ngOnInit() {
     this.stepService.changeStep(3);    
     this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});
@@ -74,7 +76,8 @@ export class Step3Component implements OnInit {
           {
             this.transactionStateBFDesc ="Rechazada";
           }
-          this.dateTransacion = formatDate(response.getTransactions.responseDateBF,'yyyy-MM-dd HH:mm:ss',this.locale);  
+          this.dateTransacion = formatDate(response.getTransactions.responseDateBF,'yyyy-MM-dd HH:mm:ss',this.locale);
+          this.nameFile = formatDate(response.getTransactions.responseDateBF,'ddMMyyyy_HHmmss',this.locale);
           if (response.getTransactions.approvalNumberACH!='None')
           {
             this.approvalNumberACH=response.getTransactions.approvalNumberACH;
@@ -112,7 +115,38 @@ export class Step3Component implements OnInit {
   }
   onDownload()
   {
-    
+    this.transactionVoucherService.transactionVoucher(this.paymentData).subscribe({
+      next: (x: any) => {  
+        console.log("x", x);        
+        var newBlob = new Blob([x], { type: "application/pdf" });
+        // IE doesn't allow using a blob object directly as link href
+        // instead it is necessary to use msSaveOrOpenBlob
+        // if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+        //   window.navigator.msSaveOrOpenBlob(newBlob);
+        //   return;
+        // }
+        const data = window.URL.createObjectURL(newBlob);
+        var link = document.createElement("a");
+        link.href = data;
+        link.download = "Comprobante_"+this.nameFile+".pdf";        
+        link.dispatchEvent(
+          new MouseEvent("click", {
+            bubbles: true,
+            cancelable: true,
+            view: window
+          })
+        );
+        setTimeout(function() {          
+          window.URL.revokeObjectURL(data);
+          link.remove();
+        }, 100);
+      },
+        error: (e:any) => { 
+          console.log(e);
+        }
+
+      }
+    );
     
     
   }
