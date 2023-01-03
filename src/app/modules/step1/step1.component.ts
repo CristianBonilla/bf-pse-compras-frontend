@@ -3,11 +3,12 @@ import { FormGroup, FormBuilder, Validators, AbstractControl } from "@angular/fo
 import { Router } from "@angular/router";
 import { NgbModalRef, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { EnvironmentLoaderService } from "src/app/core/config/environment-loader.service";
-import { DataService } from "src/app/core/services/Dataservice";
+import { DataService } from "src/app/core/services/data-service.service";
+
 import { ProductsService } from "src/app/core/services/ProductsService";
 import { StepService } from "src/app/core/services/StepService";
 import { TransactionService } from "src/app/core/services/TransactionService";
-import { PaymentData } from "src/app/shared/paymentData";
+import { PaymentData } from "src/app/shared/PaymentData";
 
 @Component({
   selector: 'app-step1',

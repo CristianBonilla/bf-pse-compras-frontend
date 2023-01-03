@@ -1,14 +1,15 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { PaymentData } from 'src/app/shared/paymentData';
+import { PaymentData } from 'src/app/shared/PaymentData';
 import { EnvironmentLoaderService } from '../config/environment-loader.service';
 
 @Injectable({
-  providedIn: "root"
+  providedIn: 'root'
 })
+
 export class DataService  {
 
-  
+	
   private messageSource = new BehaviorSubject('');
   currentMessage = this.messageSource.asObservable();
 

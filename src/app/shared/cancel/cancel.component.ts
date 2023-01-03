@@ -2,7 +2,7 @@ import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { Router } from "@angular/router";
 import { EnvironmentLoaderService } from "src/app/core/config/environment-loader.service";
 import { CancelTransactionService } from "src/app/core/services/CancelTransactionService";
-import { PaymentData } from "../paymentData";
+import { PaymentData } from "../PaymentData";
 
 
 @Component({

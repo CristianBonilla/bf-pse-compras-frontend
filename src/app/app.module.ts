@@ -1,6 +1,5 @@
 import {APP_INITIALIZER,NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TopBarComponent } from './shared/top-bar/top-bar.component';
@@ -18,11 +17,14 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ErrordetailComponent } from './shared/errordetail/errordetail.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EnvironmentLoaderService } from './core/config/environment-loader.service';
-import { DataService } from './core/services/Dataservice';
+
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { CancelComponent } from './shared/cancel/cancel.component';
+import { DataService } from './core/services/data-service.service';
+
+
 registerLocaleData(localeEs, 'es');
 
 const initAppFn = (envService: EnvironmentLoaderService) => {
