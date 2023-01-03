@@ -5,9 +5,11 @@ import { ActivatedRoute,  } from '@angular/router';;
 import { Router } from '@angular/router';
 import { EnvironmentLoaderService } from 'src/app/core/config/environment-loader.service';
 import { AuthService } from 'src/app/core/services/AuthService';
-import { DataService } from 'src/app/core/services/Dataservice';
+
 import { StepService } from 'src/app/core/services/StepService';
-import { PaymentData } from 'src/app/shared/paymentData';
+import { PaymentData } from 'src/app/shared/PaymentData';
+import { DataService } from 'src/app/core/services/data-service.service';
+
 
 @Component({
   selector: 'app-login',

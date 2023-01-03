@@ -5,12 +5,14 @@ import { Router } from "@angular/router";
 import { NgbModalRef, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { EnvironmentLoaderService } from "src/app/core/config/environment-loader.service";
 import { ConfirmTransactionService } from "src/app/core/services/ConfirmTransactionService";
-import { DataService } from "src/app/core/services/Dataservice";
+import { DataService } from "src/app/core/services/data-service.service";
+
 import { GenerateOtpService } from "src/app/core/services/GenerateOtpService";
 import { StepService } from "src/app/core/services/StepService";
 import { TransactionService } from "src/app/core/services/TransactionService";
 import { ValidateOtpService } from "src/app/core/services/ValidateOtpService";
-import { PaymentData } from "src/app/shared/paymentData";
+import { PaymentData } from "src/app/shared/PaymentData";
+
 
 @Component({
   selector: 'app-step2',
