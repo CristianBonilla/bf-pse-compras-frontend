@@ -8,4 +8,5 @@ RUN npm run build --prod
 
 FROM nginx:latest
 COPY --from=build /usr/src/app/dist/cogpt-gateway-compras-frontend /usr/share/nginx/html
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 EXPOSE 80
