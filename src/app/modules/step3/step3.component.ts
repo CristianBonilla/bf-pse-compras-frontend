@@ -3,11 +3,12 @@ import { HttpClient } from "@angular/common/http";
 import { Component, OnInit, ViewChild, ElementRef, Inject, LOCALE_ID } from "@angular/core";
 import { Router } from "@angular/router";
 import { EnvironmentLoaderService } from "src/app/core/config/environment-loader.service";
-import { DataService } from "src/app/core/services/Dataservice";
+import { DataService } from "src/app/core/services/data-service.service";
+
 import { StepService } from "src/app/core/services/StepService";
 import { TransactionService } from "src/app/core/services/TransactionService";
 import { TransactionVoucherService } from "src/app/core/services/TransactionVoucherService";
-import { PaymentData } from "src/app/shared/paymentData";
+import { PaymentData } from "src/app/shared/PaymentData";
 
 @Component({
   selector: 'app-step3',
