@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { PaymentData } from 'src/app/shared/PaymentData';
+import { PaymentData } from 'src/app/shared/entities/PaymentData';
 import { EnvironmentLoaderService } from '../config/environment-loader.service';
 
 @Injectable({providedIn: 'root'})

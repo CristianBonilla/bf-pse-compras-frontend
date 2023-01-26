@@ -1,12 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PaymentData } from 'src/app/shared/PaymentData';
 import { EnvironmentLoaderService } from '../config/environment-loader.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({providedIn: 'root'})
 export class ProductsService {
   
   private urlApi ='';

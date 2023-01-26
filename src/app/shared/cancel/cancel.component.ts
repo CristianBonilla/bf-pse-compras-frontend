@@ -1,8 +1,8 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { Router } from "@angular/router";
 import { EnvironmentLoaderService } from "src/app/core/config/environment-loader.service";
-import { CancelTransactionService } from "src/app/core/services/CancelTransactionService";
-import { PaymentData } from "../PaymentData";
+import { cancelTransactionService } from "src/app/core/services/CancelTranService";
+import { PaymentData } from "../entities/PaymentData";
 
 
 @Component({
@@ -12,7 +12,7 @@ import { PaymentData } from "../PaymentData";
 })
 export class CancelComponent {
 
-  constructor(private cancelTransactionService :CancelTransactionService,private router: Router,private readonly envService: EnvironmentLoaderService){}
+  constructor(private cancelTransactionService :cancelTransactionService,private router: Router,private readonly envService: EnvironmentLoaderService){}
 
   @Input() paymentData!: PaymentData;
   @Output() messageChange = new EventEmitter<string>();
