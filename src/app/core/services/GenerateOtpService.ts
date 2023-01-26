@@ -1,12 +1,10 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { PaymentData } from 'src/app/shared/PaymentData';
+import { PaymentData } from 'src/app/shared/entities/PaymentData';
 import { EnvironmentLoaderService } from '../config/environment-loader.service';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable({providedIn: 'root'})
 export class GenerateOtpService {
   
   private urlApi ='';

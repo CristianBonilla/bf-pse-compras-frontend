@@ -7,7 +7,7 @@ import { EnvironmentLoaderService } from 'src/app/core/config/environment-loader
 import { AuthService } from 'src/app/core/services/AuthService';
 
 import { StepService } from 'src/app/core/services/StepService';
-import { PaymentData } from 'src/app/shared/PaymentData';
+import { PaymentData } from 'src/app/shared/entities/PaymentData';
 import { DataService } from 'src/app/core/services/data-service.service';
 
 
