@@ -1,5 +1,4 @@
 import { TestBed } from '@angular/core/testing';
-
 import { LoadingInterceptor } from './loading.interceptor';
 
 describe('LoadingInterceptor', () => {

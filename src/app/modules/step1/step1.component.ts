@@ -8,7 +8,7 @@ import { DataService } from "src/app/core/services/data-service.service";
 import { ProductsService } from "src/app/core/services/ProductsService";
 import { StepService } from "src/app/core/services/StepService";
 import { TransactionService } from "src/app/core/services/TransactionService";
-import { PaymentData } from "src/app/shared/PaymentData";
+import { PaymentData } from "src/app/shared/entities/PaymentData";
 
 @Component({
   selector: 'app-step1',
