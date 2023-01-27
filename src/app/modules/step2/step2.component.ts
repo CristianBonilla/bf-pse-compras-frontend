@@ -11,7 +11,7 @@ import { GenerateOtpService } from "src/app/core/services/GenerateOtpService";
 import { StepService } from "src/app/core/services/StepService";
 import { TransactionService } from "src/app/core/services/TransactionService";
 import { ValidateOtpService } from "src/app/core/services/ValidateOtpService";
-import { PaymentData } from "src/app/shared/PaymentData";
+import { PaymentData } from "src/app/shared/entities/PaymentData";
 
 
 @Component({
