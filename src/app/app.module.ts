@@ -28,7 +28,7 @@ import { DataService } from './core/services/data-service.service';
 registerLocaleData(localeEs, 'es');
 
 const initAppFn = (envService: EnvironmentLoaderService) => {
-  return () => envService.loadEnvConfig('/assets/config/app-config.json','/assets/resources/es.json');
+  return () => envService.loadEnvConfig('/assets/resources/es.json');
 };
 
 @NgModule({

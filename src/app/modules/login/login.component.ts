@@ -31,8 +31,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.stepService.changeStep(0);
-    this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});
-    this.urlApi = this.envService.getEnvConfig().urlApi;
+    this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});    
     this.activatedRoute.queryParams.subscribe({next:(params:any)=>{this.itx=params['itx'];}});    
 
     this.form = this.formBuilder.group(

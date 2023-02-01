@@ -1,16 +1,16 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { EnvironmentLoaderService } from '../config/environment-loader.service';
+import { environment } from 'src/environments/environment';
 
 @Injectable({providedIn: 'root'})
 export class ProductsService {
   
   private urlApi ='';
-  constructor(private http: HttpClient,private readonly envService: EnvironmentLoaderService) { }
+  constructor(private http: HttpClient) { }
 
   products(token: string): Observable<any> { 
-    this.urlApi = this.envService.getEnvConfig().urlApi;
+    this.urlApi =  environment.urlApi;
     let httpOptions = {
         headers: new HttpHeaders({         
           'Authorization': 'Token ' + token

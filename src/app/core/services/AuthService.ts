@@ -3,16 +3,17 @@ import { Injectable } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { PaymentData } from 'src/app/shared/entities/PaymentData';
+import { environment } from 'src/environments/environment';
 import { EnvironmentLoaderService } from '../config/environment-loader.service';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
   
   private urlApi ='';
-  constructor(private http: HttpClient,private readonly envService: EnvironmentLoaderService) { }
+  constructor(private http: HttpClient) { }
 
   auth(form: FormGroup,itx: string): Observable<any> { 
-    this.urlApi = this.envService.getEnvConfig().urlApi;
+    this.urlApi = environment.urlApi;
     let httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',          

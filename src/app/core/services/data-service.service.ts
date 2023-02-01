@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { PaymentData } from 'src/app/shared/entities/PaymentData';
-import { EnvironmentLoaderService } from '../config/environment-loader.service';
 
 @Injectable({providedIn: 'root'})
 
@@ -11,8 +10,6 @@ export class DataService  {
   private messageSource = new BehaviorSubject('');
   currentMessage = this.messageSource.asObservable();
 
-  constructor(private readonly envService: EnvironmentLoaderService) { 
-  }
 
   changeMessageLogin(paymentData: PaymentData) {  
     sessionStorage.clear();    
