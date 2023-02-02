@@ -1,0 +1,99 @@
+version: '3.1'
+services:
+    api:
+      image: hub.fif.tech/$CLUSTER/$IMAGE_NAME:$ENVIRONMENT
+      restart: always
+      environment:
+        - SERVICE=1
+        - RUNNING_ON_DOCKER=1
+        - ENVIRONMENT=${ENVIRONMENT}
+        - DEBUG=${DEBUG}
+      deploy:
+          replicas: ${API_REPLICAS}
+          update_config:
+            delay: 30s
+            parallelism: 1
+          resources:
+            limits:
+              cpus: '0.5'
+              memory: 400M
+            reservations:
+              cpus: '0.1'
+              memory: 200M
+      ports:
+        - "6020:80"
+      volumes:
+      - "/logs-pool/node:/logs-pool/node"
+      secrets:
+        - secret-gateway-purchases.sh
+      logging:
+        driver: json-file
+        options:
+          max-size: 10m
+          max-file: 10
+
+    celery:
+      image: hub.fif.tech/$CLUSTER/$IMAGE_NAME:$ENVIRONMENT
+      restart: always
+      environment:
+        - SERVICE=2
+        - RUNNING_ON_DOCKER=1
+        - ENVIRONMENT=${ENVIRONMENT}
+        - DEBUG=${DEBUG}        
+      deploy:
+        replicas: ${WORKER_REPLICAS}
+        update_config:
+          delay: 30s
+          parallelism: 1
+        resources:
+          limits:
+            cpus: '0.5'
+            memory: 400M
+          reservations:
+            cpus: '0.1'
+            memory: 200M
+      depends_on:
+      - api
+      volumes:
+      - "/logs-pool/node:/logs-pool/node"
+      secrets:
+      - secret-gateway-purchases.sh
+      logging:
+        driver: json-file
+        options:
+          max-size: 10m
+          max-file: 10
+
+    scheduler:
+      image: hub.fif.tech/$CLUSTER/$IMAGE_NAME:$ENVIRONMENT
+      restart: always
+      environment:
+        - SERVICE=scheduler
+        - RUNNING_ON_DOCKER=1
+        - ENVIRONMENT=${ENVIRONMENT}
+        - DEBUG=${DEBUG}
+      deploy:
+        replicas: 1
+        update_config:
+          delay: 30s
+          parallelism: 1
+        resources:
+          limits:
+            cpus: '0.8'
+            memory: 1000M
+          reservations:
+            cpus: '0.1'
+            memory: 200M
+      volumes:
+      - "/logs-pool/node:/logs-pool/node"
+      secrets:
+      - secret-gateway-purchases.sh
+      logging:
+        driver: json-file
+        options:
+          max-size: 10m
+          max-file: 10
+
+secrets:
+  secret-gateway-purchases.sh:
+    external: true
