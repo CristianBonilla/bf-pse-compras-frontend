@@ -6,7 +6,8 @@ try {
     env.VAULT_ADDR = 'https://vault.fif.tech:8200'
     env.IMAGE_NAME = 'gateway-compras-front'
     env.CLUSTER = 'banco-co-gateway-pagos'
-    env.ENVIRONMENT = 'production'
+    env.ENVIRONMENT = 'prd'
+    env.ENVIRONMENT2 = 'production'
     stage('Docker pull') {
       docker.image('$DOCKER_IMAGE').pull()
       docker.image('$DOCKER_TERRAFORM_IMAGE').pull()
@@ -56,7 +57,7 @@ try {
 
     stage('Building Docker Image'){
       sh '''
-        docker build --rm=true -t "$IMAGE_NAME:$ENVIRONMENT" -f ${WORKSPACE}/Dockerfile . --build-arg BUILDNUMBER=$ENVIRONMENT --label version=$ENVIRONMENT
+        docker build --rm=true -t "$IMAGE_NAME:$ENVIRONMENT" -f ${WORKSPACE}/Dockerfile . --build-arg BUILDNUMBER=$ENVIRONMENT2 --label version=$ENVIRONMENT
       '''
     }
 

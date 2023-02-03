@@ -5,6 +5,7 @@ COPY package.json /usr/src/app/
 RUN npm install
 COPY . /usr/src/app
 ARG BUILDNUMBER=production
+RUN echo "--configuration= $BUILDNUMBER"
 RUN npm run build --configuration=$BUILDNUMBER
 
 FROM nginx:latest
