@@ -7,7 +7,6 @@ try {
     env.IMAGE_NAME = 'gateway-compras-frontend'
     env.CLUSTER = 'banco-co-gateway-pagos'
     env.ENVIRONMENT = 'prd'
-    env.ENVIRONMENT2 = 'production'
     stage('Docker pull') {
       docker.image('$DOCKER_IMAGE').pull()
       docker.image('$DOCKER_TERRAFORM_IMAGE').pull()
@@ -57,7 +56,7 @@ try {
 
     stage('Building Docker Image'){
       sh '''
-        docker build --rm=true -t "$IMAGE_NAME:$ENVIRONMENT" -f ${WORKSPACE}/Dockerfile . --build-arg BUILDNUMBER=$ENVIRONMENT2 --label version=$ENVIRONMENT
+        docker build --rm=true -t "$IMAGE_NAME:$ENVIRONMENT" -f ${WORKSPACE}/Dockerfile . --build-arg BUILDNUMBER=$ENVIRONMENT --label version=$ENVIRONMENT
       '''
     }
 
@@ -86,18 +85,18 @@ try {
     //     ], name: 'images.txt'
     // }
 
-    // stage('Vault get Credentials') {
-    //   docker.image('$DOCKER_TERRAFORM_IMAGE').inside('-u root --entrypoint="" -e VAULT_ADDR=$VAULT_ADDR') {
-    //     withCredentials([usernamePassword(credentialsId: 'banco-co-gateway-pagos-prod-pipeline', passwordVariable: 'SECRET_ID', usernameVariable: 'ROLE_ID')]) {
-    //       script {
-    //         env.VAULT_TOKEN = sh(returnStdout: true, script: 'vault write -field=token auth/approle/login role_id=${ROLE_ID} secret_id=${SECRET_ID}').trim()
-    //         sh '''
-    //           vault read -field=auth_config kv/clusters/banco-co-gateway-pagos-prod-cluster/shared/automated/harbor-banco-co-gateway-pagos > config.json
-    //         '''
-    //       }
-    //     }
-    //   }
-    // }
+    stage('Vault get Credentials') {
+      docker.image('$DOCKER_TERRAFORM_IMAGE').inside('-u root --entrypoint="" -e VAULT_ADDR=$VAULT_ADDR') {
+        withCredentials([usernamePassword(credentialsId: 'banco-co-gateway-pagos-prod-pipeline', passwordVariable: 'SECRET_ID', usernameVariable: 'ROLE_ID')]) {
+          script {
+            env.VAULT_TOKEN = sh(returnStdout: true, script: 'vault write -field=token auth/approle/login role_id=${ROLE_ID} secret_id=${SECRET_ID}').trim()
+            sh '''
+              vault read -field=auth_config kv/clusters/banco-co-gateway-pagos-prod-cluster/shared/automated/harbor-banco-co-gateway-pagos > config.json
+            '''
+          }
+        }
+      }
+    }
     stage('Publish Docker Image'){
       sh '''
         export DOCKER_CONFIG=$WORKSPACE
