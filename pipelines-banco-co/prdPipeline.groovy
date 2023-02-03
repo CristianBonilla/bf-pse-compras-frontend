@@ -4,7 +4,7 @@ try {
     env.DOCKER_IMAGE ='hub.fif.tech/base/fif-common-pm2:11.12.0-3.2.9-1'
     env.DOCKER_TERRAFORM_IMAGE ='hub.fif.tech/base/fif-terraform:3.0.0'
     env.VAULT_ADDR = 'https://vault.fif.tech:8200'
-    env.IMAGE_NAME = 'gateway-compras-front'
+    env.IMAGE_NAME = 'gateway-compras-frontend'
     env.CLUSTER = 'banco-co-gateway-pagos'
     env.ENVIRONMENT = 'prd'
     env.ENVIRONMENT2 = 'production'
