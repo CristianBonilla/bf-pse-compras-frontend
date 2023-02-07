@@ -4,6 +4,7 @@ import { Component, OnInit, ViewChild, ElementRef, Inject, LOCALE_ID } from "@an
 import { Router } from "@angular/router";
 import { EnvironmentLoaderService } from "src/app/core/config/environment-loader.service";
 import { DataService } from "src/app/core/services/data-service.service";
+import { GetIpService } from "src/app/core/services/GetIpService";
 
 import { StepService } from "src/app/core/services/StepService";
 import { TransactionService } from "src/app/core/services/TransactionService";
@@ -36,7 +37,7 @@ export class Step3Component implements OnInit {
   urlEntity='';
   nameEntity='';
   nameFile='';
-  constructor(private router: Router,private data: DataService,private readonly envService: EnvironmentLoaderService,private http: HttpClient, @Inject(LOCALE_ID) private locale: string,private stepService: StepService, private transactionService:TransactionService, private transactionVoucherService:TransactionVoucherService){}
+  constructor(private router: Router,private data: DataService,private readonly envService: EnvironmentLoaderService,private http: HttpClient, @Inject(LOCALE_ID) private locale: string,private stepService: StepService, private transactionService:TransactionService, private transactionVoucherService:TransactionVoucherService, private getIpService:GetIpService){}
   ngOnInit() {
     this.stepService.changeStep(3);    
     this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});
@@ -51,10 +52,10 @@ export class Step3Component implements OnInit {
   loadIp()
   {
     try
-    {   
-      this.http.get("http://api.ipify.org/?format=json").subscribe((res:any)=>{
-        this.ipAddress =res.ip;
-      });        
+    {  
+      this.getIpService.getIp().subscribe((res:any)=>{
+        this.ipAddress = res.ip;
+      });            
     }
     catch(error)     
     {
