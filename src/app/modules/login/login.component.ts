@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit {
 
     this.form = this.formBuilder.group(
       {      
-        tipoPersona: [''],           
+        tipoPersona: ['1'],           
         tipoDocumento: ['1', Validators.required],    
         numeroDocumento: ['52628130',Validators.required],    
         claveInternet: ['000111', Validators.required],

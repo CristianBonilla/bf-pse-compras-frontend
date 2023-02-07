@@ -6,7 +6,7 @@ RUN npm install
 COPY . /usr/src/app
 ARG BUILDNUMBER=production
 RUN echo "--configuration= $BUILDNUMBER"
-RUN npm run build --configuration=$BUILDNUMBER
+RUN npm run build -- --configuration=$BUILDNUMBER
 
 FROM nginx:latest
 COPY --from=build /usr/src/app/dist/cogpt-gateway-compras-frontend /usr/share/nginx/html
