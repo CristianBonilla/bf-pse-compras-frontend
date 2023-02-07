@@ -36,7 +36,7 @@
                 "bundleName": "bootstrap"
               } ,
               {
-                "input": "bootstrap-icons/font/bootstrap-icons.css",
+                "input": "node_modules/bootstrap-icons/font/bootstrap-icons.css",
                 "bundleName": "bootstrapicons"
               }         
             ],
@@ -47,6 +47,7 @@
           },
           "configurations": {
             "production": {
+              "baseHref": "/gateway-purchases/",
               "budgets": [
                 {
                   "type": "initial",
@@ -62,6 +63,7 @@
               "outputHashing": "all"
             },
             "staging": {
+              "baseHref": "/gateway-purchases/",
               "budgets": [
                 {
                   "type": "initial",

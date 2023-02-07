@@ -2,6 +2,8 @@ export interface ResourcesConfig {
   auth_HTTP_500_SERVER_ERROR:string;  
   auth_HTTP_401_UNAUTHORIZED:string; 
   auth_IncorrectState:string; 
+  auth_415:string,
+  auth_515:string,
   stp1_ModalErrorTitle:string;
   stp1_Transaction_500:string;
   stp1_Products_500:string;

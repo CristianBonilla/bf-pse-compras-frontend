@@ -2,6 +2,9 @@
     "auth_HTTP_500_SERVER_ERROR": "Por favor intenta de nuevo",
     "auth_HTTP_401_UNAUTHORIZED": "La información ingresada es incorrecta. Si no recuerdas tu Clave Internet puedes volver a generarla",
     "auth_IncorrectState":"Transaccion invalida",
+    "auth_415":"Contraseña bloqueada por reintentos fallidos",
+    "auth_515":"Token de usuario se encuentra bloqueado",
+
     "stp1_ModalErrorTitle":"Algo a ido mal",
     "stp1_Transaction_500":"Al cargar información de tu transacción, por favor intenta de nuevo",
     "stp1_Products_500":"Al cargar información de tus productos, por favor intenta de nuevo",

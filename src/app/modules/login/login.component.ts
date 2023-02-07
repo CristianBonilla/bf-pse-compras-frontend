@@ -101,6 +101,10 @@ export class LoginComponent implements OnInit {
             this.form.controls["numeroDocumento"].reset();
             this.form.controls["claveInternet"].reset();
             this.messageLogin=this.envService.getResourceConfig().auth_HTTP_401_UNAUTHORIZED;
+            if (error.message=="415")
+              this.messageLogin=this.envService.getResourceConfig().auth_415;
+            else if (error.message=="515")
+              this.messageLogin=this.envService.getResourceConfig().auth_515;
           }
           else
           {
