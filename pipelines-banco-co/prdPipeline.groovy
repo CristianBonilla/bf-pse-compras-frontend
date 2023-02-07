@@ -7,6 +7,7 @@ try {
     env.IMAGE_NAME = 'gateway-compras-frontend'
     env.CLUSTER = 'banco-co-gateway-pagos'
     env.ENVIRONMENT = 'prd'
+    env.ENVIRONMENT2 = 'production'
     stage('Docker pull') {
       docker.image('$DOCKER_IMAGE').pull()
       docker.image('$DOCKER_TERRAFORM_IMAGE').pull()
@@ -56,7 +57,7 @@ try {
 
     stage('Building Docker Image'){
       sh '''
-        docker build --rm=true -t "$IMAGE_NAME:$ENVIRONMENT" -f ${WORKSPACE}/Dockerfile . --build-arg BUILDNUMBER=$ENVIRONMENT --label version=$ENVIRONMENT
+        docker build --rm=true -t "$IMAGE_NAME:$ENVIRONMENT" -f ${WORKSPACE}/Dockerfile . --build-arg BUILDNUMBER=$ENVIRONMENT2 --label version=$ENVIRONMENT
       '''
     }
 
