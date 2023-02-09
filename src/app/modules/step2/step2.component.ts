@@ -8,6 +8,7 @@ import { ConfirmTransactionService } from "src/app/core/services/ConfirmTransact
 import { DataService } from "src/app/core/services/data-service.service";
 
 import { GenerateOtpService } from "src/app/core/services/GenerateOtpService";
+import { LoginService } from "src/app/core/services/LoginService";
 import { StepService } from "src/app/core/services/StepService";
 import { TransactionService } from "src/app/core/services/TransactionService";
 import { ValidateOtpService } from "src/app/core/services/ValidateOtpService";
@@ -20,7 +21,7 @@ import { PaymentData } from "src/app/shared/entities/PaymentData";
   styleUrls: ['./step2.component.css']
 })
 export class Step2Component implements OnInit {
-  @ViewChild("contentError", { static: true }) contentError!: ElementRef;
+  @ViewChild("contentError2", { static: true }) contentError!: ElementRef;
   paymentData!: PaymentData;
   submitted = false;
   form!: FormGroup;
@@ -36,8 +37,9 @@ export class Step2Component implements OnInit {
   loadFailed = 0;
   messageError = '';
   keyInvalid='';
+  showWhatsappLink=false;
   private urlApi = "";
-  constructor(private http: HttpClient, private readonly envService: EnvironmentLoaderService, private router: Router, private data: DataService, private formBuilder: FormBuilder, private modalService: NgbModal, private stepService: StepService, private generateOtpService: GenerateOtpService, private transactionService: TransactionService, private validateOtpService: ValidateOtpService, private confirmTransactionService: ConfirmTransactionService) { }
+  constructor(private http: HttpClient, private readonly envService: EnvironmentLoaderService, private router: Router, private data: DataService, private formBuilder: FormBuilder, private modalService: NgbModal, private stepService: StepService, private generateOtpService: GenerateOtpService, private transactionService: TransactionService, private validateOtpService: ValidateOtpService, private confirmTransactionService: ConfirmTransactionService, private loginService:LoginService) { }
   ngOnInit() {
     this.stepService.changeStep(2);
     this.form = this.formBuilder.group(
@@ -52,7 +54,7 @@ export class Step2Component implements OnInit {
   }
 
   loadTransaction() {
-    this.transactionService.transaction(this.paymentData).subscribe({
+    this.transactionService.transaction(this.paymentData,'2').subscribe({
       next: (response: any) => {
         //Si el estado ya es confirmado rediriga a la pantalla resumen.. Transaccion no valida  Boton volver 
 
@@ -71,8 +73,14 @@ export class Step2Component implements OnInit {
             this.messageModal = this.envService.getResourceConfig().stp2_Transaction_500;
             this.modalReference = this.modalService.open(this.contentError, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
             break;
-          case 401:
-            this.redirectLogin();
+            case 401:
+              switch (e.error)
+              {
+                case "TranExpire":
+                  this.redirectSummary();break;
+                default:  
+                  this.redirectLogin(this.envService.getResourceConfig().auth_TransactionInvalid);break;
+              }
             break;
         }
       }
@@ -80,7 +88,7 @@ export class Step2Component implements OnInit {
   }
 
   generateOtp() {
-    this.generateOtpService.generateOtp(this.paymentData.token).subscribe({
+    this.generateOtpService.generateOtp(this.paymentData.token, this.paymentData.available_balance).subscribe({
       next: (response: any) => {
         this.cellPhone = response.phone;
         this.responseCode = response.response;
@@ -104,8 +112,30 @@ export class Step2Component implements OnInit {
         }
       },
       error: (e: any) => {
+        this.showWhatsappLink=false;
         console.error(e);
         switch (e.status) {
+          case 401:
+            switch (e.error)
+            {
+              case "TranExpire":
+              case "NoFunds":
+                this.redirectSummary();break;
+              case "No Content":
+                this.redirectLogin(this.envService.getResourceConfig().auth_TransactionInvalid);break;
+              
+              default:  
+                this.loadFailed = 1;
+                this.titleMessageModal = this.envService.getResourceConfig().stp2_ModalErrorTitle;
+                this.messageModal = this.envService.getResourceConfig().stp2_GenerateOtp_401;
+                if (e.error && e.error.response && e.error.response=='LOCK')
+                {
+                  this.messageModal = this.envService.getResourceConfig().stp2_GenerateOtp_401Lock;
+                  this.showWhatsappLink=true;
+                }              
+                this.modalReference = this.modalService.open(this.contentError, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
+            }           
+            break;
           case 500:
             this.loadFailed = 1;
             this.titleMessageModal = this.envService.getResourceConfig().stp2_ModalErrorTitle;
@@ -117,8 +147,15 @@ export class Step2Component implements OnInit {
     });
   }
 
-  redirectLogin() {
-    this.router.navigate(['login'], { queryParams: { itx: this.paymentData.itx } });
+  redirectSummary()
+  {
+    this.router.navigate(['summary']);
+  }
+
+  redirectLogin(msg:string)
+  {
+    this.loginService.changeMessage(msg);
+    this.router.navigate(['login'],{queryParams:{itx:this.paymentData.itx}});
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -148,7 +185,15 @@ export class Step2Component implements OnInit {
         console.error(e);
         switch (e.status)
           {
-            case 401:              
+            case 401:
+              
+              switch (e.error)
+              {
+                case "TranExpire":
+                  this.redirectSummary();break;
+                case "No Content":
+                  this.redirectLogin(this.envService.getResourceConfig().auth_TransactionInvalid);break;
+                default:
                   this.keyInvalid =this.envService.getResourceConfig().stp2_ValidatekeyInvalid;
                   this.messageError=this.envService.getResourceConfig().stp2_ValidateOtp_Invalid;
                   this.submitted = false;
@@ -160,7 +205,7 @@ export class Step2Component implements OnInit {
                   {
                     this.form.controls["sofToken"].reset();
                   }
-              break;
+                break;
             case 500:  
               this.loadFailed=2; 
               this.titleMessageModal=this.envService.getResourceConfig().stp2_ModalErrorTitle;
@@ -168,6 +213,7 @@ export class Step2Component implements OnInit {
               this.modalReference =this.modalService.open(this.contentError, { ariaLabelledBy: 'modal-basic-title',backdrop:'static', keyboard : false });         
             break;             
           }
+        }
       }
     });
   }
@@ -185,15 +231,17 @@ export class Step2Component implements OnInit {
       },
       error: (e: any) => {
         console.error(e);
-        // switch (e.status)
-        //   {
-        //     case 500:  
-        //       this.loadFailed=1; 
-        //       this.titleMessageModal=this.envService.getResourceConfig().stp2_ModalErrorTitle;
-        //       this.messageModal=this.envService.getResourceConfig().stp2_GenerateOtp_500;
-        //       this.modalReference =this.modalService.open(this.contentError, { ariaLabelledBy: 'modal-basic-title',backdrop:'static', keyboard : false });         
-        //     break;             
-        //   }
+        switch (e.status)
+          {
+            case 401:
+              switch (e.error)
+              {
+                case "TranExpire":
+                  this.redirectSummary();break;
+                default:  
+                  this.redirectLogin(this.envService.getResourceConfig().auth_TransactionInvalid);break;
+              }
+          }
       }
     }
     );
@@ -229,8 +277,8 @@ export class Step2Component implements OnInit {
     this.modalReference.close();
     switch(this.loadFailed)
     {
-      case 0:this.loadTransaction();break;
-      case 1:this.generateOtp();break;      
+      case 0:this.onBack();break;
+      case 1:this.onBack();break;      
     }    
   }
 

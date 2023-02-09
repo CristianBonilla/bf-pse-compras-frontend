@@ -9,6 +9,8 @@ import { AuthService } from 'src/app/core/services/AuthService';
 import { StepService } from 'src/app/core/services/StepService';
 import { PaymentData } from 'src/app/shared/entities/PaymentData';
 import { DataService } from 'src/app/core/services/data-service.service';
+import { SessionService } from 'src/app/core/services/SessionService';
+import { LoginService } from 'src/app/core/services/LoginService';
 
 
 @Component({
@@ -19,39 +21,42 @@ import { DataService } from 'src/app/core/services/data-service.service';
 export class LoginComponent implements OnInit {
   form!: FormGroup;
   submitted = false;
+  messageTopLogin:string ="";
   messageLogin:string ="";
   message:string=""
- 
-  private urlApi: string="";
+  paymentData!: PaymentData; 
   private itx:string="";
-  private paymentData!: PaymentData;
-  
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private readonly envService: EnvironmentLoaderService, private activatedRoute: ActivatedRoute ,private router: Router,private data: DataService, private authService: AuthService, private stepService: StepService) { }
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private readonly envService: EnvironmentLoaderService, private activatedRoute: ActivatedRoute ,private router: Router,private data: DataService, private authService: AuthService, private stepService: StepService,private sessionService: SessionService, private loginService:LoginService) { }
 
   ngOnInit(): void {
     this.stepService.changeStep(0);
     this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});    
-    this.activatedRoute.queryParams.subscribe({next:(params:any)=>{this.itx=params['itx'];}});    
+    this.activatedRoute.queryParams.subscribe({next:(params:any)=>{this.itx=params['itx'];}}); 
+    this.loginService.currentMessageLogin.subscribe({next:(messageTopLogin:any)=>{this.messageTopLogin=messageTopLogin}});
+
+    this.paymentData=this.data.getPaymentData(this.message);
+    if (!this.paymentData)
+    {
+      this.paymentData= new PaymentData();
+      this.paymentData.itx = this.itx; 
+    }      
+    this.data.changeMessageLogin(this.paymentData);
 
     this.form = this.formBuilder.group(
       {      
         tipoPersona: ['1'],           
         tipoDocumento: ['1', Validators.required],    
-        numeroDocumento: ['52628130',Validators.required],    
-        claveInternet: ['000111', Validators.required],
-        // numeroDocumento: ['',Validators.required],    
-        // claveInternet: ['', Validators.required],
+        // numeroDocumento: ['52628130',Validators.required],    
+        // claveInternet: ['000111', Validators.required],
+        numeroDocumento: ['',Validators.required],
+        claveInternet: ['', Validators.required],
         grupoEmpresarial:[''],
         token:[''],
     });
+   
     this.form.controls["numeroDocumento"].addValidators(Validators.maxLength(15));
     this.form.controls["claveInternet"].addValidators(Validators.minLength(6));
-
-
-    this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});
-
-
     this.form.controls["tipoPersona"].valueChanges.subscribe({next:(tipopersonalValue:any)=>{
       if (tipopersonalValue==2) {
         this.form.controls["grupoEmpresarial"].setValidators([Validators.required]);
@@ -71,7 +76,9 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit(): void {
+    this.messageTopLogin="";
     this.messageLogin="";
+    this.loginService.changeMessage("");
     this.submitted = true;
     if (this.form.invalid) {
       return;
@@ -80,7 +87,7 @@ export class LoginComponent implements OnInit {
       next: (response:any) =>  {  
         if (response.transactionStateIdBF && response.transactionStateIdBF!='')
         {
-          this.messageLogin=this.envService.getResourceConfig().auth_IncorrectState;
+          this.messageLogin=this.envService.getResourceConfig().auth_TransactionInvalid;
         }
         else
         {
@@ -89,31 +96,53 @@ export class LoginComponent implements OnInit {
           this.paymentData.customer_name = response.customer_name;
           this.paymentData.token= response.token;
           this.paymentData.itx = this.itx; 
-          this.paymentData.timeLife = response.timeLife;          
+          this.paymentData.timeLife = response.timeLife;
           this.data.changeMessageLogin(this.paymentData);
+          this.sessionService.changeTimeLife(response.timeLife);
+          this.sessionService.changeDateStart(this.addMinutes(new Date(), response.timeLife));
           this.router.navigate(['definition']);
         }       
       },
-      error: (error:any) => {         
-          if (error.status==401)
+      error: (error:any) => {
+          console.log(error);
+          switch (error.status)
           {
-            this.submitted = false;
-            this.form.controls["numeroDocumento"].reset();
-            this.form.controls["claveInternet"].reset();
-            this.messageLogin=this.envService.getResourceConfig().auth_HTTP_401_UNAUTHORIZED;
-            if (error.message=="415")
-              this.messageLogin=this.envService.getResourceConfig().auth_415;
-            else if (error.message=="515")
-              this.messageLogin=this.envService.getResourceConfig().auth_515;
+            case 401:          
+              this.submitted = false;
+              this.form.controls["numeroDocumento"].reset();
+              this.form.controls["claveInternet"].reset();
+              this.messageLogin=this.envService.getResourceConfig().auth_HTTP_401_UNAUTHORIZED;
+              switch (error.error)
+              {
+                case "415":               
+                  this.messageLogin=this.envService.getResourceConfig().auth_415PasswordBlock;break;
+                case "515":
+                  this.messageLogin=this.envService.getResourceConfig().auth_515TokenBlock;break;
+                case "TranExpire":
+                  this.messageLogin=this.envService.getResourceConfig().auth_SessionExpire;break;
+              }
+            break;
+            case 500:          
+              this.messageLogin=this.envService.getResourceConfig().auth_HTTP_500_SERVER_ERROR;
+            break;
           }
-          else
-          {
-            this.messageLogin=this.envService.getResourceConfig().auth_HTTP_500_SERVER_ERROR;
-            console.log(error);
-          }
-        }       
-
+        }
       }      
     );      
   }
+
+  addMinutes(date: Date, minutes:number) {
+    date.setMinutes(date.getMinutes() + minutes);  
+    return date;
+  }
+
+  onMessageChange(message:string) {
+    this.messageTopLogin="";
+    if (message='Invalid State')
+    {      
+      message=this.envService.getResourceConfig().stp_Cancel_401_InvalidState;
+    }
+    this.messageLogin=message;
+ }
+
 }
