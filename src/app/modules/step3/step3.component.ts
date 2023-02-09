@@ -2,9 +2,11 @@ import { formatDate } from "@angular/common";
 import { HttpClient } from "@angular/common/http";
 import { Component, OnInit, ViewChild, ElementRef, Inject, LOCALE_ID } from "@angular/core";
 import { Router } from "@angular/router";
+import { NgbModal, NgbModalRef } from "@ng-bootstrap/ng-bootstrap";
 import { EnvironmentLoaderService } from "src/app/core/config/environment-loader.service";
 import { DataService } from "src/app/core/services/data-service.service";
 import { GetIpService } from "src/app/core/services/GetIpService";
+import { LoginService } from "src/app/core/services/LoginService";
 
 import { StepService } from "src/app/core/services/StepService";
 import { TransactionService } from "src/app/core/services/TransactionService";
@@ -17,7 +19,7 @@ import { PaymentData } from "src/app/shared/entities/PaymentData";
   styleUrls: ['./step3.component.css']
 })
 export class Step3Component implements OnInit {
-  @ViewChild('content', {static: false}) content!:ElementRef; 
+  @ViewChild("contentError3", { static: true }) contentError!: ElementRef;
   paymentData!: PaymentData; 
   message='';
   isDisabledContinue=false;
@@ -37,7 +39,10 @@ export class Step3Component implements OnInit {
   urlEntity='';
   nameEntity='';
   nameFile='';
-  constructor(private router: Router,private data: DataService,private readonly envService: EnvironmentLoaderService,private http: HttpClient, @Inject(LOCALE_ID) private locale: string,private stepService: StepService, private transactionService:TransactionService, private transactionVoucherService:TransactionVoucherService, private getIpService:GetIpService){}
+  titleMessageModal='';
+  messageModal = '';
+  modalReference!: NgbModalRef;
+  constructor(private router: Router,private data: DataService,private readonly envService: EnvironmentLoaderService,private http: HttpClient, @Inject(LOCALE_ID) private locale: string,private stepService: StepService, private transactionService:TransactionService, private transactionVoucherService:TransactionVoucherService, private getIpService:GetIpService, private loginService:LoginService,private modalService: NgbModal){}
   ngOnInit() {
     this.stepService.changeStep(3);    
     this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});
@@ -66,7 +71,7 @@ export class Step3Component implements OnInit {
 
   loadTransaction()
   {
-    this.transactionService.transaction(this.paymentData).subscribe({
+    this.transactionService.transaction(this.paymentData,'S').subscribe({
       next: (response: any) => {          
         if(response && response.getTransactions)
         { 
@@ -98,8 +103,24 @@ export class Step3Component implements OnInit {
       },
         error: (e:any) => { 
           console.log(e);
+          switch (e.status)
+          {
+            case 500:            
+              this.titleMessageModal = this.envService.getResourceConfig().stp2_ModalErrorTitle;
+              this.messageModal = this.envService.getResourceConfig().stp2_Transaction_500;
+              this.modalReference = this.modalService.open(this.contentError, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
+            break;
+            case 401:
+              switch (e.error)
+              {
+                case "TranExpire":
+                  this.redirectSummary();break;
+                default:  
+                  this.redirectLogin(this.envService.getResourceConfig().auth_TransactionInvalid);break;
+              }
+            break;
+          }
         }
-
       }
     );
   }
@@ -149,8 +170,22 @@ export class Step3Component implements OnInit {
 
       }
     );
-    
-    
   }
+
+  redirectLogin(msg:string)
+  {
+    this.loginService.changeMessage(msg);
+    this.router.navigate(['login'],{queryParams:{itx:this.paymentData.itx}});
+  }
+
+  redirectSummary()
+  {
+    this.router.navigate(['summary']);
+  }
+    
+  onModalClose() {
+    this.modalReference.close();
+    this.loadTransaction();      
+  }    
 
 }

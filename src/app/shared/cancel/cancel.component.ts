@@ -20,7 +20,7 @@ export class CancelComponent {
   onClickCancel()
   {
      this.messageChange.emit('');   
-     this.cancelTransactionService.cancelTransaction(this.paymentData.token, this.paymentData.itx).subscribe({
+     this.cancelTransactionService.cancelTransaction(this.paymentData.itx).subscribe({
         next: (resp:any) =>  {
           
           this.router.navigate(['summary']);

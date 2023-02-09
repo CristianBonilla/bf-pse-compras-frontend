@@ -48,7 +48,7 @@
             <div class="row my-3">
                 <div class=" col-6 mx-1">
                     <div class="form-check custom-control custom-checkbox custom-checkbox-green"  *ngIf="paymentRecurring">
-                        <input class="form-check-input custom-control-input custom-control-input-green" type="checkbox" (change)="changePaymentRecurring($event,content)">
+                        <input class="form-check-input custom-control-input custom-control-input-green" type="checkbox" (change)="changePaymentRecurring($event,content2)">
                         <button type="button" class="btnHelp text-left ft16" placement="top" tooltipClass="my-custom-class" ngbTooltip="Al marcar pago recurrente la {{paymentData.nameEntity}} se establece como un comercio de confianza y en las proximas pagos se solicitara unicamente el SMS o Clave dinamica">        
                             Pago Recurrente        
                         </button>                                               
@@ -126,7 +126,7 @@
 </div>
 
 
-<ng-template #content let-modal>
+<ng-template #content2 let-modal>
 	<div class="modal-header">
 		<h1 class="modal-title fs-5 ft16" id="exampleModalLabel">Pago Recurrente</h1>
 		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
@@ -146,7 +146,7 @@
 	</div>
 </ng-template>
 
-<ng-template #contentError let-modal>
+<ng-template #contentError2 let-modal>
 	<div class="modal-header">
 		<i class="bi bi-x-circle text-danger" style="font-size:30px"></i><span class="text-danger mx-2">{{titleMessageModal}}</span>
 		<button type="button" class="btn-close" aria-label="Close" (click)="onModalCloseTop()"></button>
@@ -156,7 +156,7 @@
 			<div class="mb-3">
 				
 				<div class="input-group">
-					<span class="ft14">{{messageModal}}</span>
+					<span class="ft14">{{messageModal}}</span><a *ngIf="showWhatsappLink" class="ft14a" href="https://api.whatsapp.com/send?phone=5715878000&text=Hola" target="_blank">+57 1 5878000</a>
 				</div>
 			</div>
 		</form>
