@@ -3,7 +3,7 @@ export class PaymentData
     public customer_name!:string;   
     public token!:string;
     public itx!:string;  
-    public timeLife!:string;    
+    public timeLife!:number;    
     public product_id!:string;
     public product_mask_id!:string;
     public account_type!:string;
