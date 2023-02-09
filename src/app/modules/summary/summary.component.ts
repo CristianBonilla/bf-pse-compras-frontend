@@ -5,6 +5,8 @@ import { Router } from "@angular/router";
 import { NgbModalRef, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { EnvironmentLoaderService } from "src/app/core/config/environment-loader.service";
 import { DataService } from "src/app/core/services/data-service.service";
+import { LoginService } from "src/app/core/services/LoginService";
+import { SessionService } from "src/app/core/services/SessionService";
 
 import { StepService } from "src/app/core/services/StepService";
 import { TransactionService } from "src/app/core/services/TransactionService";
@@ -16,7 +18,7 @@ import { PaymentData } from "src/app/shared/entities/PaymentData";
   styleUrls: ['./summary.component.css']
 })
 export class SummaryComponent implements OnInit {
-  @ViewChild("contentError", { static: true }) contentError!: ElementRef;
+  @ViewChild("contentError4", { static: true }) contentError!: ElementRef;
   form!: FormGroup;
   submitted = false;
   closeResult = '';
@@ -41,7 +43,7 @@ export class SummaryComponent implements OnInit {
   modalReference!: NgbModalRef;
   urlEntity='';
   private urlApi = ''
-  constructor(private http: HttpClient, private router: Router, private data: DataService, private readonly envService: EnvironmentLoaderService, private stepService: StepService, private transactionService: TransactionService, private modalService: NgbModal) { }
+  constructor(private http: HttpClient, private router: Router, private data: DataService, private readonly envService: EnvironmentLoaderService, private stepService: StepService, private transactionService: TransactionService, private modalService: NgbModal,private loginService:LoginService,private sessionService:SessionService) { }
 
   ngOnInit() {
     this.stepService.changeStep(4);
@@ -51,42 +53,48 @@ export class SummaryComponent implements OnInit {
   }
 
   loadTransaction() {
-    this.transactionService.transaction(this.paymentData).subscribe({
+    this.transactionService.transaction(this.paymentData,"S").subscribe({
       next: (response: any) => {
         //Si el estado ya es confirmado rediriga a la pantalla resumen.. Transaccion no valida  Boton volver 
 
         // summaryTransaction='';
-        switch (response.getTransactions.transactionStateIdBF) {
-          case 3:
-            this.state = "Aprobada";
-            if (response.getTransactions.transactionStateIdACH == 3) {
-              this.state = "Realizamos el pago de tu cuenta y está pendiente la aprobación de PSE, en caso de ser rechazado se reversara a tu cuenta";
-            }
-            break;
-          case 7:
+        switch (response.getTransactions.transactionStateIdBF) {          
+          case 7: // Rechazado:TRX05
 
-            this.state = "Rechazada";
-            switch (response.getTransactions.approvalNumberBF) {
-              case "00001":
-                this.state = 'Rechazada Usuario Abandono Transacción';
+            this.state = this.envService.getResourceConfig().summary_7_TRX05_Rejected;
+            switch (response.getTransactions.transactionStateIdACH) {
+              case "1":
+                this.state =this.envService.getResourceConfig().summary_7_TRX05_00001_Abandon;
                 break;
-              case "00008":
-                this.state = 'Rechazada Usuario Excede el Limite Transaccional Autorizado por el Banco';
+              case "8":
+                this.state = this.envService.getResourceConfig().summary_7_TRX05_00008_Limit;
                 break;
-              case "00010":
-                this.state = 'Rechazada Fallas Técnicas';
+              case "10":
+                this.state = this.envService.getResourceConfig().summary_7_TRX05_00010_Fail;
                 break;
-              case "00011":
-                this.state = 'Rechazada Fondos Insuficientes';
+              case "11":
+                this.state = this.envService.getResourceConfig().summary_7_TRX05_00011_Founds;
                 break;
-              case "00015":
-                this.state = 'Rechazada Transacción no Concluida en el Banco';
+              case "15":
+                this.state = this.envService.getResourceConfig().summary_7_TRX05_00015_Incomplete;
+                //Esperar dos minutos para visualizar el mensaje, no se rediriga a login por tiempo session del front
+                this.sessionService.changeTimeLife(2);
+                this.sessionService.changeDateStart(this.addMinutes(new Date(), response.timeLife))
                 break;
-              case "00016":
-                this.state = 'Rechazada Datos de Acceso Inválidos';
+              case "16":
+                this.state = this.envService.getResourceConfig().summary_7_TRX05_00016_NotAccess;
                 break;
             }
             break;
+            case 8:  // Aplicado:TRX06
+            this.state = this.envService.getResourceConfig().summary_8_TRX06_Approved;
+              // if (response.getTransactions.transactionStateIdACH == 3) {
+                this.state = this.envService.getResourceConfig().summary_8_TRX06_ApprovedPending;
+              // }
+            break;
+            case 9:  // Error: TRX07
+              this.state =  this.envService.getResourceConfig().summary_9_TRX07_Error;
+              break;
         }
         this.approvalNumberACH = response.getTransactions.approvalNumberACH=='None'?'':response.getTransactions.approvalNumberACH;;
         this.ticketId = response.getTransactions.ticketId;
@@ -111,15 +119,22 @@ export class SummaryComponent implements OnInit {
             this.modalReference = this.modalService.open(this.contentError, { ariaLabelledBy: 'modal-basic-title', backdrop: 'static', keyboard: false });
             break;
           case 401:
-            this.redirectLogin();
+            switch (e.error)
+              {
+                case "TranExpire":break;                
+                default:  
+                  this.redirectLogin(this.envService.getResourceConfig().auth_TransactionInvalid);break;
+              } 
             break;
         }
       }
     });
   }
 
-  redirectLogin() {
-    this.router.navigate(['login'], { queryParams: { itx: this.paymentData.itx } });
+  redirectLogin(msg:string)
+  {
+    this.loginService.changeMessage(msg);
+    this.router.navigate(['login'],{queryParams:{itx:this.paymentData.itx}});
   }
 
   onModalClose() {
@@ -135,4 +150,9 @@ export class SummaryComponent implements OnInit {
   {
     window.location.href =this.urlEntity;
   }
+  addMinutes(date: Date, minutes:number) {
+    date.setMinutes(date.getMinutes() + minutes);  
+    return date;
+  }
+
 }

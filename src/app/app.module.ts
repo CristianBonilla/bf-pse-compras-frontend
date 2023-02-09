@@ -23,6 +23,7 @@ import { SpinnerComponent } from './shared/spinner/spinner.component';
 import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { CancelComponent } from './shared/cancel/cancel.component';
 import { DataService } from './core/services/data-service.service';
+import { SessionComponent } from './shared/session/session.component';
 
 
 registerLocaleData(localeEs, 'es');
@@ -44,7 +45,8 @@ const initAppFn = (envService: EnvironmentLoaderService) => {
     StepsBarComponent,
     ErrordetailComponent,    
     SpinnerComponent,
-    CancelComponent
+    CancelComponent,
+    SessionComponent
   ],
   imports: [
     BrowserModule,

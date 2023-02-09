@@ -9,7 +9,7 @@ export class GenerateOtpService {
   private urlApi ='';
   constructor(private http: HttpClient) { }
 
-  generateOtp(token: string): Observable<any> { 
+  generateOtp(token: string,availableBalance:number): Observable<any> { 
     this.urlApi = environment.urlApi;
     let httpOptions = {
         headers: new HttpHeaders({
@@ -17,8 +17,11 @@ export class GenerateOtpService {
           'Authorization': 'Token ' + token
         })
       };
+      let json = { 
+        availableBalance:availableBalance       
+      };  
       let currentDate = new Date();
       let strDate = currentDate.getFullYear().toString() + currentDate.getMonth().toString() + currentDate.getDay().toString() + currentDate.getHours().toString() + currentDate.getMinutes().toString() + currentDate.getSeconds().toString() + currentDate.getMilliseconds().toString();      
-      return this.http.post<any>(this.urlApi + "generateOTP/?param=" + strDate, {}, httpOptions);
+      return this.http.post<any>(this.urlApi + "generateOTP/?param=" + strDate,json,httpOptions);
   }
 }

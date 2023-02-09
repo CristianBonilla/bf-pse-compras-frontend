@@ -10,7 +10,7 @@ export class TransactionService {
   private urlApi ='';
   constructor(private http: HttpClient) { }
 
-  transaction(paymentData: PaymentData): Observable<any> { 
+  transaction(paymentData: PaymentData,origin:string): Observable<any> { 
     this.urlApi = environment.urlApi;
     let httpOptions = {
         headers: new HttpHeaders({
@@ -21,7 +21,7 @@ export class TransactionService {
       let currentDate = new Date();
       let strDate = currentDate.getFullYear().toString() + currentDate.getMonth().toString() + currentDate.getDay().toString() + currentDate.getHours().toString() + currentDate.getMinutes().toString() + currentDate.getSeconds().toString() + currentDate.getMilliseconds().toString();
       let json = {
-        DefaultString: paymentData.itx     
+        DefaultString: paymentData.itx,origin:origin 
       };      
       return this.http.post<any>(this.urlApi + "transaction/?param=" + strDate, json, httpOptions);
   }

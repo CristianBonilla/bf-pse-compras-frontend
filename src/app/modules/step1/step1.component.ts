@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { NgbModalRef, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { EnvironmentLoaderService } from "src/app/core/config/environment-loader.service";
 import { DataService } from "src/app/core/services/data-service.service";
+import { LoginService } from "src/app/core/services/LoginService";
 
 import { ProductsService } from "src/app/core/services/ProductsService";
 import { StepService } from "src/app/core/services/StepService";
@@ -16,13 +17,13 @@ import { PaymentData } from "src/app/shared/entities/PaymentData";
   styleUrls: ['./step1.component.css']
 })
 export class Step1Component implements OnInit {
-  @ViewChild("content",{static:true}) content!:ElementRef;
+  @ViewChild("content1",{static:true}) content!:ElementRef;
   
   submitted = false;
   form!: FormGroup;
   message="";
   messageError="";
-  paymentData!: PaymentData;  
+  paymentData!: PaymentData;
   transactionCost:number=0;  
   operationValue!:number;  
   available_balance!:number;
@@ -42,9 +43,8 @@ export class Step1Component implements OnInit {
   selectedBook : any;  
   modalReference!:NgbModalRef;
   loadFailed=0;
-
-  private urlApi="";
-  constructor(private readonly envService: EnvironmentLoaderService, private router: Router,private data: DataService,private modalService: NgbModal,private formBuilder: FormBuilder, private transactionService:TransactionService, private productsService:ProductsService, private stepService: StepService) { }
+  isInsufficientFunds=false;
+  constructor(private readonly envService: EnvironmentLoaderService, private router: Router,private data: DataService,private modalService: NgbModal,private formBuilder: FormBuilder, private transactionService:TransactionService, private productsService:ProductsService, private stepService: StepService, private loginService:LoginService) { }
 
   ngOnInit() {
     this.stepService.changeStep(1);
@@ -62,7 +62,7 @@ export class Step1Component implements OnInit {
 
   loadTransaction()
   {
-    this.transactionService.transaction(this.paymentData).subscribe({
+    this.transactionService.transaction(this.paymentData,'1').subscribe({
       next: (response:any) =>  {
         //Si el estado ya es 7=Rechazado,8=Aplicado,9=error Rediriga a la pantalla resumen. Solo El estado 4=Autenticado es valido. En los demas estados rediriga a Login.
         //Mensaje estado invalido
@@ -80,8 +80,6 @@ export class Step1Component implements OnInit {
               break;
           }
         }
-
-
         this.paymetDescription = response.getTransactions.paymetDescription;        
         this.transactionCost = response.getTransactions.transactionCost;        
         this.operationValue = response.getTransactions.operationValue;
@@ -104,8 +102,14 @@ export class Step1Component implements OnInit {
               this.modalReference =this.modalService.open(this.content, { ariaLabelledBy: 'modal-basic-title',backdrop:'static', keyboard : false });
             break;
             case 401:
-              this.redirectLogin(this.envService.getResourceConfig().auth_IncorrectState);
-            break;          
+              switch (e.error)
+              {
+                case "TranExpire":
+                  this.redirectSummary();break;
+                default:  
+                  this.redirectLogin(this.envService.getResourceConfig().auth_TransactionInvalid);break;
+              }
+            break;
           }
       }
    });
@@ -121,6 +125,11 @@ export class Step1Component implements OnInit {
           }else
           {
             this.ltProducts=response.products;
+            if (this.ltProducts.length==1)
+            {
+              this.form.controls["product"].setValue(this.ltProducts[0], {onlySelf: true});
+              this.changeProduct();
+            }
           }
         },
         error: (e:any) => {
@@ -134,7 +143,13 @@ export class Step1Component implements OnInit {
               this.modalReference = this.modalService.open(this.content, { ariaLabelledBy: 'modal-basic-title',backdrop:'static', keyboard : false });
             break;           
             case 401:
-              this.redirectLogin(this.envService.getResourceConfig().auth_IncorrectState);
+              switch (e.error)
+              {
+                case "TranExpire":
+                  this.redirectSummary();break;
+                default:  
+                  this.redirectLogin(this.envService.getResourceConfig().auth_TransactionInvalid);break;
+              }
             break;
           }
         }
@@ -147,7 +162,13 @@ export class Step1Component implements OnInit {
 
   redirectLogin(msg:string)
   {
-    this.router.navigate(['login'],{queryParams:{itx:this.paymentData.itx,msg:msg}});
+    this.loginService.changeMessage(msg);
+    this.router.navigate(['login'],{queryParams:{itx:this.paymentData.itx}});
+  }
+
+  redirectSummary()
+  {
+    this.router.navigate(['summary']);
   }
 
   getAccountName(product_code:string)
@@ -155,8 +176,8 @@ export class Step1Component implements OnInit {
     return this.accounts.find(p => p.id == product_code)?.name;   
   }
 
-  changeProduct () {
-    
+  changeProduct() {
+    this.isInsufficientFunds=false;
     let productSelect: any = this.form.controls["product"].value;
     if (productSelect)
     {     
@@ -164,7 +185,9 @@ export class Step1Component implements OnInit {
        this.paymentData.product_id=productSelect.product_id;
        this.paymentData.product_mask_id=productSelect.product_mask_id;
        this.paymentData.account_type = productSelect.account_type;
-       this.paymentData.available_balance=this.available_balance;       
+       this.paymentData.available_balance=this.available_balance;
+       if (this.available_balance<this.operationValue)
+          this.isInsufficientFunds=true;
     }
   }
 
@@ -172,7 +195,7 @@ export class Step1Component implements OnInit {
   {
     this.messageStep1='';
     this.submitted = true;
-    if (this.form.invalid) {
+    if (this.form.invalid && this.f['product'].errors) {
       return;
     }
     this.data.changeMessageStep1(this.paymentData);
@@ -192,6 +215,12 @@ export class Step1Component implements OnInit {
     }
   }
 
+  onModalCloseTop()
+  {    
+    this.modalReference.close();
+    this.redirectLogin("");
+
+  }
   onMessageChange(message:string) {
     if (message='Invalid State')
     {

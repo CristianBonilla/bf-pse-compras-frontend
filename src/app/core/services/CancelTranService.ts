@@ -9,12 +9,11 @@ export class cancelTransactionService {
   private urlApi ='';
   constructor(private http: HttpClient) { }
 
-  cancelTransaction(token:string,itx:string): Observable<any> { 
+  cancelTransaction(itx:string): Observable<any> { 
     this.urlApi = environment.urlApi;
     let httpOptions = {
         headers: new HttpHeaders({
-          'Content-Type': 'application/json',
-          'Authorization': 'Token ' + token
+          'Content-Type': 'application/json'
         })
       };      
       let jsonConfirm = { 

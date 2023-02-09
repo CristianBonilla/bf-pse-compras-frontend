@@ -20,7 +20,7 @@ export class AuthService {
         })
       };      
       let json = {
-        id_customer_type: form.controls["tipoPersona"].value,
+        id_customer_type: Number(form.controls["tipoPersona"].value),
         id_number: form.controls["numeroDocumento"].value,
         id_type: Number(form.controls["tipoDocumento"].value),
         reference: form.controls["claveInternet"].value,
