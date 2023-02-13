@@ -46,10 +46,16 @@ export class SummaryComponent implements OnInit {
   constructor(private http: HttpClient, private router: Router, private data: DataService, private readonly envService: EnvironmentLoaderService, private stepService: StepService, private transactionService: TransactionService, private modalService: NgbModal,private loginService:LoginService,private sessionService:SessionService) { }
 
   ngOnInit() {
-    this.stepService.changeStep(4);
-    this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});
-    this.paymentData = this.data.getPaymentDataStep2(this.message);
-    this.loadTransaction();
+    try
+    {
+      this.stepService.changeStep(4);
+      this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});
+      this.paymentData = this.data.getPaymentDataStep2(this.message);
+      this.loadTransaction();
+    }catch(error)
+    {
+      console.log(error);
+    }
   }
 
   loadTransaction() {
@@ -138,17 +144,35 @@ export class SummaryComponent implements OnInit {
   }
 
   onModalClose() {
-    this.modalReference.close();
-    this.loadTransaction();
+    try
+    {
+      this.modalReference.close();
+      this.loadTransaction();
+    }catch(error)
+    {
+      console.log(error);
+    }
   }
 
   onPrintPage()
   {
-    window.print();
+    try
+    {
+      window.print();
+    }catch(error)
+    {
+      console.log(error);
+    }
   }
   onSubmit()
   {
-    window.location.href =this.urlEntity;
+    try
+    {
+      window.location.href =this.urlEntity;
+    }catch(error)
+    {
+      console.log(error);
+    }
   }
   addMinutes(date: Date, minutes:number) {
     date.setMinutes(date.getMinutes() + minutes);  

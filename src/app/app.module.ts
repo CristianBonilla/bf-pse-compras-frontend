@@ -14,7 +14,6 @@ import localeEs from '@angular/common/locales/es';
 import { registerLocaleData } from '@angular/common';
 import { StepsBarComponent } from './shared/steps-bar/steps-bar.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { ErrordetailComponent } from './shared/errordetail/errordetail.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { EnvironmentLoaderService } from './core/config/environment-loader.service';
 
@@ -24,6 +23,7 @@ import { LoadingInterceptor } from './core/interceptors/loading.interceptor';
 import { CancelComponent } from './shared/cancel/cancel.component';
 import { DataService } from './core/services/data-service.service';
 import { SessionComponent } from './shared/session/session.component';
+import { BlockCopyPasteDirective } from './core/directive/blockCopyPasteDirective';
 
 
 registerLocaleData(localeEs, 'es');
@@ -42,11 +42,10 @@ const initAppFn = (envService: EnvironmentLoaderService) => {
     Step3Component,
     SummaryComponent,
     LoginComponent,
-    StepsBarComponent,
-    ErrordetailComponent,    
+    StepsBarComponent,    
     SpinnerComponent,
     CancelComponent,
-    SessionComponent
+    SessionComponent,BlockCopyPasteDirective
   ],
   imports: [
     BrowserModule,
