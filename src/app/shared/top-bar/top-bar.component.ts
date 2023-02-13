@@ -20,25 +20,35 @@ export class TopBarComponent implements OnInit, OnDestroy {
 
   }
 
-  ngOnInit() {   
-    this.stepService.currentStep.subscribe((value)=> this.numberstep = value);
-    this.stepService.currentCustomer_Name.subscribe((value)=> this.customer_name = value);
+  ngOnInit() {
+    try
+    {  
+      this.stepService.currentStep.subscribe((value)=> this.numberstep = value);
+      this.stepService.currentCustomer_Name.subscribe((value)=> this.customer_name = value);
 
-    this.subscription = timer(0, 1000)
-      .pipe(
-        map(() => new Date()),
-        share()
-      )
-      .subscribe(time => {      
-        this.rxTime = time;
-      });
+      this.subscription = timer(0, 1000)
+        .pipe(
+          map(() => new Date()),
+          share()
+        )
+        .subscribe(time => {      
+          this.rxTime = time;
+        });
+    }catch(error)     
+    {
+      console.log(error);      
+    }    
   }
 
-  ngOnDestroy() {   
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+  ngOnDestroy() {
+    try
+    { 
+      if (this.subscription) {
+        this.subscription.unsubscribe();
+      }
+    }catch(error)     
+    {
+      console.log(error);      
+    } 
   }
-
-
 }

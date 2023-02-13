@@ -26,37 +26,43 @@ export class SessionComponent implements OnInit, OnDestroy {
   modalReference!:NgbModalRef;
   constructor(public sessionService: SessionService, private router: Router,private data: DataService,private readonly envService: EnvironmentLoaderService,private modalService: NgbModal,private loginService:LoginService) { }
 
-  ngOnInit() {   
-    this.sessionService.currentTimeLife.subscribe((value)=> this.timeLeft = value);
-    this.sessionService.currentDateEnd.subscribe((value)=> this.dateEnd = value);
+  ngOnInit() {
+    try
+    {   
+      this.sessionService.currentTimeLife.subscribe((value)=> this.timeLeft = value);
+      this.sessionService.currentDateEnd.subscribe((value)=> this.dateEnd = value);
 
-    this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});    
-    this.paymentData=this.data.getPaymentData(this.message);
-    const source = timer(60000,60000);
-    this.subscription = source.subscribe(val => {
-        if (this.dateEnd.getFullYear()!=2000 && this.timeLeft>0)
-        {
-           let difference=  Math.floor((this.dateEnd.getTime() - new Date().getTime()) /60000);
-           if (difference<=0)
-           {
-              try
-              {
-                this.modalReference.close();
-              }catch{}
-              this.sessionService.changeTimeLife(0);
-              this.redirectLogin(this.envService.getResourceConfig().auth_SessionExpire);
-           }
-           else
-           {  
-              if (difference==1)
-              {
-                this.titleMessageModal=this.envService.getResourceConfig().session_title;                
-                this.messageModal=this.envService.getResourceConfig().session_MessageOneMinute;              
-                this.modalReference = this.modalService.open(this.content, { ariaLabelledBy: 'modal-basic-title'});
-              }              
-           }
-        }
-    });
+      this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});    
+      this.paymentData=this.data.getPaymentData(this.message);
+      const source = timer(60000,60000);
+      this.subscription = source.subscribe(val => {
+          if (this.dateEnd.getFullYear()!=2000 && this.timeLeft>0)
+          {
+            let difference=  Math.floor((this.dateEnd.getTime() - new Date().getTime()) /60000);
+            if (difference<=0)
+            {
+                try
+                {
+                  this.modalReference.close();
+                }catch{}
+                this.sessionService.changeTimeLife(0);
+                this.redirectLogin(this.envService.getResourceConfig().auth_SessionExpire);
+            }
+            else
+            {  
+                if (difference==1)
+                {
+                  this.titleMessageModal=this.envService.getResourceConfig().session_title;                
+                  this.messageModal=this.envService.getResourceConfig().session_MessageOneMinute;              
+                  this.modalReference = this.modalService.open(this.content, { ariaLabelledBy: 'modal-basic-title'});
+                }              
+            }
+          }
+      });
+    }catch(error)     
+    {
+      console.log(error);
+    }
   }
 
   redirectLogin(msg:string)
@@ -65,15 +71,27 @@ export class SessionComponent implements OnInit, OnDestroy {
     this.router.navigate(['login'],{queryParams:{itx:this.paymentData.itx}});
   }
 
-  ngOnDestroy() {   
-    if (this.subscription) {
-      this.subscription.unsubscribe();
+  ngOnDestroy() {  
+    try
+    { 
+      if (this.subscription) {
+        this.subscription.unsubscribe();
+      }
+    }catch(error)     
+    {
+      console.log(error);
     }
   }
 
   onModalClose()
-  {    
-    this.modalReference.close();
+  {  
+    try
+    {  
+      this.modalReference.close();
+    }catch(error)     
+    {
+      console.log(error);
+    }
   }
 
 }

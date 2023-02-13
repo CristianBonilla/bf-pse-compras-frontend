@@ -47,17 +47,23 @@ export class Step1Component implements OnInit {
   constructor(private readonly envService: EnvironmentLoaderService, private router: Router,private data: DataService,private modalService: NgbModal,private formBuilder: FormBuilder, private transactionService:TransactionService, private productsService:ProductsService, private stepService: StepService, private loginService:LoginService) { }
 
   ngOnInit() {
-    this.stepService.changeStep(1);
-    this.form = this.formBuilder.group(
-      {      
-        product: ['', Validators.required]       
-    });
+    try
+    {
+      this.stepService.changeStep(1);
+      this.form = this.formBuilder.group(
+        {      
+          product: ['', Validators.required]       
+      });
 
 
-    this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});
-    this.paymentData=this.data.getPaymentData(this.message);
-    this.loadTransaction();
-    this.loadProducts();
+      this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});
+      this.paymentData=this.data.getPaymentData(this.message);
+      this.loadTransaction();
+      this.loadProducts();
+    }catch(error)
+    {
+      console.log(error);
+    }
   }
 
   loadTransaction()
@@ -177,57 +183,87 @@ export class Step1Component implements OnInit {
   }
 
   changeProduct() {
-    this.isInsufficientFunds=false;
-    let productSelect: any = this.form.controls["product"].value;
-    if (productSelect)
-    {     
-       this.available_balance = productSelect.available_balance;       
-       this.paymentData.product_id=productSelect.product_id;
-       this.paymentData.product_mask_id=productSelect.product_mask_id;
-       this.paymentData.account_type = productSelect.account_type;
-       this.paymentData.available_balance=this.available_balance;
-       if (this.available_balance<this.operationValue)
-          this.isInsufficientFunds=true;
+    try
+    {
+      this.isInsufficientFunds=false;
+      let productSelect: any = this.form.controls["product"].value;
+      if (productSelect)
+      {     
+        this.available_balance = productSelect.available_balance;       
+        this.paymentData.product_id=productSelect.product_id;
+        this.paymentData.product_mask_id=productSelect.product_mask_id;
+        this.paymentData.account_type = productSelect.account_type;
+        this.paymentData.available_balance=this.available_balance;
+        if (this.available_balance<this.operationValue)
+            this.isInsufficientFunds=true;
+      }
+    }catch(error)
+    {
+      console.log(error);
     }
   }
 
   onSubmit()
   {
-    this.messageStep1='';
-    this.submitted = true;
-    if (this.form.invalid && this.f['product'].errors) {
-      return;
+    try
+    {
+      this.messageStep1='';
+      this.submitted = true;
+      if (this.form.invalid && this.f['product'].errors) {
+        return;
+      }
+      this.data.changeMessageStep1(this.paymentData);
+      this.router.navigate(['confirmation']);
+    }catch(error)
+    {
+      console.log(error);
     }
-    this.data.changeMessageStep1(this.paymentData);
-    this.router.navigate(['confirmation']);    
+
   }
 
   onModalClose()
-  {    
-    this.modalReference.close();
-    if (this.loadFailed==0)
+  {   
+    try
+    { 
+      this.modalReference.close();
+      if (this.loadFailed==0)
+      {
+        this.loadTransaction();
+      }
+      else
+      {
+        this.loadProducts();
+      }
+    }catch(error)
     {
-      this.loadTransaction();
-    }
-    else
-    {
-      this.loadProducts();
+      console.log(error);
     }
   }
 
   onModalCloseTop()
-  {    
-    this.modalReference.close();
-    this.redirectLogin("");
+  {   
+    try
+    {  
+      this.modalReference.close();
+      this.redirectLogin("");
+    }catch(error)
+    {
+      console.log(error);
+    }
 
   }
   onMessageChange(message:string) {
-    if (message='Invalid State')
+    try
     {
-      this.loadTransaction();
-      message=this.envService.getResourceConfig().stp_Cancel_401_InvalidState;
+      if (message='Invalid State')
+      {
+        this.loadTransaction();
+        message=this.envService.getResourceConfig().stp_Cancel_401_InvalidState;
+      }
+      this.messageError=message;
+    }catch(error)
+    {
+      console.log(error);
     }
-    this.messageError=message;
- }
-
+  }
 }

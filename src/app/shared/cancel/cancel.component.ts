@@ -19,24 +19,27 @@ export class CancelComponent {
   messageError='';
   onClickCancel()
   {
-     this.messageChange.emit('');   
-     this.cancelTransactionService.cancelTransaction(this.paymentData.itx).subscribe({
-        next: (resp:any) =>  {
-          
-          this.router.navigate(['summary']);
-        },
-        error: (e:any) => {
-          console.error(e);
-          switch (e.status)
-            {
-              case 500:   
-                this.messageChange.emit(this.envService.getResourceConfig().cancel_500);                
-              break;             
-            }
-        }
-     });
-       
+    try
+    {
+      this.messageChange.emit('');   
+      this.cancelTransactionService.cancelTransaction(this.paymentData.itx).subscribe({
+          next: (resp:any) =>  {
+            
+            this.router.navigate(['summary']);
+          },
+          error: (e:any) => {
+            console.error(e);
+            switch (e.status)
+              {
+                case 500:   
+                  this.messageChange.emit(this.envService.getResourceConfig().cancel_500);                
+                break;             
+              }
+          }
+      });
+    }catch(error)     
+    {
+      console.log(error);
+    }
   }
-
-
 }
