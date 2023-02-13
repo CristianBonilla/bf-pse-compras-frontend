@@ -49,7 +49,7 @@
                     <div class="row">
                         <div class="py-1">
                             <label class="ft13">Numero de documento</label>
-                            <input type="text" formControlName="numeroDocumento" autocomplete="off"
+                            <input type="text" formControlName="numeroDocumento" autocomplete="off" appBlockCopyPaste
                                 placeholder="Escribe el numero de documento"
                                 [ngClass]="submitted && f['numeroDocumento'].errors ? 'form-control ft13g is-invalid' : 'form-control ft13g'">
                             <div *ngIf="submitted && f['numeroDocumento'].errors" class="ft12 invalid-feedback d-block">
@@ -62,7 +62,7 @@
                     <div class="row">
                         <div class="py-1">
                             <label class="ft13">Clave Internet</label>
-                            <input type="password" formControlName="claveInternet" placeholder="Escribe tu multiclave" maxlength="6" autocomplete="off"
+                            <input type="password" formControlName="claveInternet" placeholder="Escribe tu multiclave" maxlength="6" autocomplete="off" appBlockCopyPaste
                                 [ngClass]="submitted && f['claveInternet'].errors ? 'form-control ft13g is-invalid' : 'form-control ft13g'">
                             <div *ngIf="submitted && f['claveInternet'].errors" class="ft12 invalid-feedback d-block">
                                 <div *ngIf="f['claveInternet'].errors['required']">Clave Internet requerida</div>
@@ -73,7 +73,7 @@
                     <div class="row" *ngIf="f['tipoPersona'].value=='2'">
                         <div class="py-1">
                             <label class="ft13">Ingresa tu token</label>
-                            <input type="password" formControlName="token" maxlength="6" placeholder="Ingresa tu código token"
+                            <input type="password" formControlName="token" maxlength="6" placeholder="Ingresa tu código token" appBlockCopyPaste
                                 [ngClass]="submitted && f['token'].errors ? 'form-control ft13g is-invalid' : 'form-control ft13g'">
                             <div *ngIf="submitted && f['token'].errors" class="ft12 invalid-feedback d-block">
                                 <div *ngIf="f['token'].errors['required']">Token requerido</div>

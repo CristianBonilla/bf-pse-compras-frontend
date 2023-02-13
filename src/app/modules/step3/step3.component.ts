@@ -44,14 +44,20 @@ export class Step3Component implements OnInit {
   modalReference!: NgbModalRef;
   constructor(private router: Router,private data: DataService,private readonly envService: EnvironmentLoaderService,private http: HttpClient, @Inject(LOCALE_ID) private locale: string,private stepService: StepService, private transactionService:TransactionService, private transactionVoucherService:TransactionVoucherService, private getIpService:GetIpService, private loginService:LoginService,private modalService: NgbModal){}
   ngOnInit() {
-    this.stepService.changeStep(3);    
-    this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});
-    
-    // TODO Temporal cargar de Sesion
-    this.paymentData=this.data.getPaymentDataStep2(this.message);
+    try
+    {
+      this.stepService.changeStep(3);    
+      this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});
+      
+      // TODO Temporal cargar de Sesion
+      this.paymentData=this.data.getPaymentDataStep2(this.message);
 
-    this.loadTransaction();
-    this.loadIp();
+      this.loadTransaction();
+      this.loadIp();
+    }catch(error)
+    {
+      console.log(error);
+    }
   }
 
   loadIp()
@@ -127,49 +133,67 @@ export class Step3Component implements OnInit {
 
   onSubmit()
   {
-    this.isDisabledContinue=true;
-    window.location.href =this.urlEntity;
-    this.isDisabledContinue=false;
+    try
+    {
+      this.isDisabledContinue=true;
+      window.location.href =this.urlEntity;
+      this.isDisabledContinue=false;
+    }catch(error)
+    {
+      console.log(error);
+    }    
   }
 
   onPrintPage()
   {
-    window.print();
+    try
+    {
+      window.print();
+    }catch(error)
+    {
+      console.log(error);
+    }
   }
   onDownload()
   {
-    this.transactionVoucherService.transactionVoucher(this.paymentData).subscribe({
-      next: (x: any) => {  
-        console.log("x", x);        
-        var newBlob = new Blob([x], { type: "application/pdf" });
-        // IE doesn't allow using a blob object directly as link href
-        // instead it is necessary to use msSaveOrOpenBlob
-        // if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-        //   window.navigator.msSaveOrOpenBlob(newBlob);
-        //   return;
-        // }
-        const data = window.URL.createObjectURL(newBlob);
-        var link = document.createElement("a");
-        link.href = data;
-        link.download = "Comprobante_"+this.nameFile+".pdf";        
-        link.dispatchEvent(
-          new MouseEvent("click", {
-            bubbles: true,
-            cancelable: true,
-            view: window
-          })
-        );
-        setTimeout(function() {          
-          window.URL.revokeObjectURL(data);
-          link.remove();
-        }, 100);
-      },
-        error: (e:any) => { 
-          console.log(e);
-        }
+    try
+    {
+      this.transactionVoucherService.transactionVoucher(this.paymentData).subscribe({
+        next: (x: any) => {  
+          console.log("x", x);        
+          var newBlob = new Blob([x], { type: "application/pdf" });
+          // IE doesn't allow using a blob object directly as link href
+          // instead it is necessary to use msSaveOrOpenBlob
+          // if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+          //   window.navigator.msSaveOrOpenBlob(newBlob);
+          //   return;
+          // }
+          const data = window.URL.createObjectURL(newBlob);
+          var link = document.createElement("a");
+          link.href = data;
+          link.download = "Comprobante_"+this.nameFile+".pdf";        
+          link.dispatchEvent(
+            new MouseEvent("click", {
+              bubbles: true,
+              cancelable: true,
+              view: window
+            })
+          );
+          setTimeout(function() {          
+            window.URL.revokeObjectURL(data);
+            link.remove();
+          }, 100);
+        },
+          error: (e:any) => { 
+            console.log(e);
+          }
 
-      }
-    );
+        }
+      );
+    }catch(error)
+    {
+      console.log(error);
+    }
   }
 
   redirectLogin(msg:string)
@@ -184,8 +208,14 @@ export class Step3Component implements OnInit {
   }
     
   onModalClose() {
-    this.modalReference.close();
-    this.loadTransaction();      
+    try
+    {
+      this.modalReference.close();
+      this.loadTransaction();      
+    }catch(error)
+    {
+      console.log(error);
+    }
   }    
 
 }

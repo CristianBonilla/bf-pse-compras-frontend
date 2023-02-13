@@ -16,9 +16,9 @@ export class BottomBarComponent {
   constructor(private http: HttpClient, private stepService: StepService, private getIpService: GetIpService){}
 
   ngOnInit() {
-      this.stepService.currentStep.subscribe((value)=> this.numberstep = value);
       try
       {
+        this.stepService.currentStep.subscribe((value)=> this.numberstep = value);      
         this.version= environment.version + ' Copyright © ' + new Date().getFullYear() +' Banco Falabella';
         this.getIpService.getIp().subscribe((res:any)=>{
           this.ipAddress ='Direccion Ip: ' + res.ip;
