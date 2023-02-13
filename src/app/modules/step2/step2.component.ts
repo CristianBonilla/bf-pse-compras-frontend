@@ -41,15 +41,21 @@ export class Step2Component implements OnInit {
   private urlApi = "";
   constructor(private http: HttpClient, private readonly envService: EnvironmentLoaderService, private router: Router, private data: DataService, private formBuilder: FormBuilder, private modalService: NgbModal, private stepService: StepService, private generateOtpService: GenerateOtpService, private transactionService: TransactionService, private validateOtpService: ValidateOtpService, private confirmTransactionService: ConfirmTransactionService, private loginService:LoginService) { }
   ngOnInit() {
-    this.stepService.changeStep(2);
-    this.form = this.formBuilder.group(
-      {
-        otp: ['', Validators.required]
-      });
-    this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});
-    this.paymentData = this.data.getPaymentDataStep2(this.message);
-    this.loadTransaction();
-    this.generateOtp();
+    try
+    {
+      this.stepService.changeStep(2);
+      this.form = this.formBuilder.group(
+        {
+          otp: ['', Validators.required]
+        });
+      this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});
+      this.paymentData = this.data.getPaymentDataStep2(this.message);
+      this.loadTransaction();
+      this.generateOtp();
+    }catch(error)
+    {
+      console.log(error);
+    }
 
   }
 
@@ -163,13 +169,20 @@ export class Step2Component implements OnInit {
   }
 
   onSubmit() {
-    this.keyInvalid='';
-    this.submitted = true;
-    if (this.form.invalid) {
-      return false;;
+    try
+    {
+      this.keyInvalid='';
+      this.submitted = true;
+      if (this.form.invalid) {
+        return false;
+      }
+      this.validateOtpAndConfirm();
+      return true;
+    }catch(error)
+    {
+      console.log(error);
+      return false;
     }
-    this.validateOtpAndConfirm();
-    return true;
   }
 
   validateOtpAndConfirm() {
@@ -264,22 +277,34 @@ export class Step2Component implements OnInit {
   }
 
   onModalClose() {
-    this.modalReference.close();
-    switch(this.loadFailed)
+    try
     {
-      case 0:this.loadTransaction();break;
-      case 1:this.generateOtp();break;
-      case 2:this.validateOtpAndConfirm();break;
-    }    
+      this.modalReference.close();
+      switch(this.loadFailed)
+      {
+        case 0:this.loadTransaction();break;
+        case 1:this.generateOtp();break;
+        case 2:this.validateOtpAndConfirm();break;
+      }
+    }catch(error)
+    {
+      console.log(error);
+    }
   }
 
   onModalCloseTop() {
-    this.modalReference.close();
-    switch(this.loadFailed)
+    try
     {
-      case 0:this.onBack();break;
-      case 1:this.onBack();break;      
-    }    
+      this.modalReference.close();
+      switch(this.loadFailed)
+      {
+        case 0:this.onBack();break;
+        case 1:this.onBack();break;      
+      }
+    }catch(error)
+    {
+      console.log(error);
+    }
   }
 
   onMessageChange(message: string) {
@@ -288,6 +313,12 @@ export class Step2Component implements OnInit {
 
   onBack()
   {
-    this.router.navigate(['definition']);
+    try
+    {
+      this.router.navigate(['definition']);
+    }catch(error)
+    {
+      console.log(error);
+    }
   }
 }
