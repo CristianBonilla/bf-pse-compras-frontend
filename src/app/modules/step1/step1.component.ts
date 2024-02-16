@@ -59,7 +59,7 @@ export class Step1Component implements OnInit {
       this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});
       this.paymentData=this.data.getPaymentData(this.message);
       this.loadTransaction();
-      this.loadProducts();
+    
     }catch(error)
     {
       console.log(error);
@@ -94,7 +94,10 @@ export class Step1Component implements OnInit {
         this.paymentData.paymetDescription=this.paymetDescription;
         this.paymentData.transactionCost = this.transactionCost;
         this.paymentData.operationValue = this.operationValue;
-        this.paymentData.nameEntity=this.nameEntity;        
+        this.paymentData.nameEntity=this.nameEntity;
+        //Si es persona juridica
+        
+          this.loadProducts();  
       },
       error: (e:any) => {
         console.error(e);
@@ -119,6 +122,11 @@ export class Step1Component implements OnInit {
           }
       }
    });
+  }
+
+  loadCompany()
+  {
+    
   }
 
   loadProducts()

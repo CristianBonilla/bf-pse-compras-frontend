@@ -235,11 +235,17 @@ export class Step2Component implements OnInit {
   confirmTransaction() {
     this.confirmTransactionService.confirmTransaction(this.paymentData).subscribe({
       next: (response: any) => {
-        if (response.state == 'OK') {
-          this.paymentData.dateTransacion = new Date();
-          this.message = JSON.stringify(this.paymentData);
-          this.data.changeMessage(JSON.stringify(this.paymentData));
-          this.router.navigate(['voucher']);
+        switch (response.state)
+        {
+          case "OK":        
+            this.paymentData.dateTransacion = new Date();
+            this.message = JSON.stringify(this.paymentData);
+            this.data.changeMessage(JSON.stringify(this.paymentData));
+            this.router.navigate(['voucher']);
+            break;
+          case "FAILED":
+            this.redirectSummary();break;
+            break;
         }
       },
       error: (e: any) => {

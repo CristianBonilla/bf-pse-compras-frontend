@@ -25,6 +25,7 @@ export class AuthService {
         id_type: Number(form.controls["tipoDocumento"].value),
         reference: form.controls["claveInternet"].value,
         transaction_id: itx,
+        business_group:  form.controls["grupoEmpresarial"].value,
         captcha:null
       };    
    
