@@ -18,10 +18,24 @@
                         <div class="col-8 ft16"><b>$ {{ transactionCost|number:'1.2-2'}}</b></div>                    
                     </div>                
                 </div>
+                
                 <div class="col-xs-12 col-sm-6 col-md-6">
                     <div class="row my-1">
                         <p class="ft18">Detalles del pago</p>
                     </div>
+                    <div class="row my-2">                
+                        <div class="col-6 ft16">Selecciona una empresa</div>
+                        <div class="col-6">
+                            <select formControlName="product"  [ngClass]="submitted && f['product'].errors ? 'form-select ft13g is-invalid' : 'form-select ft13g'"
+                             (change)="changeProduct()"> 
+                                <option value="">Seleccione una Cuenta</option>           
+                                <option *ngFor="let itProduct of ltProducts" [ngValue]="itProduct"> {{ getAccountName(itProduct.product_code)+' '+itProduct.product_mask_id}} </option>          
+                            </select>
+                            <div *ngIf="submitted && f['product'].errors" class="ft12 invalid-feedback d-block">
+                                <div *ngIf="f['product'].errors['required']">Cuenta requerida</div>
+                            </div>                            
+                        </div>                       
+                    </div>      
                     <div class="row my-2">                
                         <div class="col-6 ft16">Selecciona una cuenta</div>
                         <div class="col-6">

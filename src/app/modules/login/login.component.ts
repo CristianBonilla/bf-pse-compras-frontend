@@ -49,10 +49,10 @@ export class LoginComponent implements OnInit {
         {      
           tipoPersona: ['1'],           
           tipoDocumento: ['1', Validators.required],    
-          // numeroDocumento: ['52628130',Validators.required],    
-          // claveInternet: ['000111', Validators.required],
-          numeroDocumento: ['',Validators.required],
-          claveInternet: ['', Validators.required],
+          numeroDocumento: ['52628130',Validators.required],    
+          claveInternet: ['000111', Validators.required],
+          // numeroDocumento: ['',Validators.required],
+          // claveInternet: ['', Validators.required],
           grupoEmpresarial:[''],
           token:[''],
       });
@@ -99,6 +99,7 @@ export class LoginComponent implements OnInit {
             this.paymentData.token= response.token;
             this.paymentData.itx = this.itx; 
             this.paymentData.timeLife = response.timeLife;
+            
             this.data.changeMessageLogin(this.paymentData);
             this.sessionService.changeTimeLife(response.timeLife);
             this.sessionService.changeDateStart(this.addMinutes(new Date(), response.timeLife));
