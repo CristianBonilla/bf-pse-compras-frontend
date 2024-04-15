@@ -26,7 +26,7 @@ export class AuthService {
         reference: form.controls["claveInternet"].value,
         transaction_id: itx,
         business_group:  form.controls["grupoEmpresarial"].value,
-        captcha:null
+        captcha:''
       };    
    
       let currentDate = new Date();

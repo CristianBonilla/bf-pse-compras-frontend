@@ -13,5 +13,5 @@ export class PaymentData
     public available_balance!:number;
     public operationValue!:number;
     public dateTransacion!:Date;
-    public isLegalPerson!:number;
+    public typePerson!:number;    
 }
