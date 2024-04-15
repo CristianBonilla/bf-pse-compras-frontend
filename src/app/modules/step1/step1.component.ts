@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { NgbModalRef, NgbModal } from "@ng-bootstrap/ng-bootstrap";
 import { EnvironmentLoaderService } from "src/app/core/config/environment-loader.service";
 import { DataService } from "src/app/core/services/data-service.service";
+import { LegalService } from "src/app/core/services/LegalService";
 import { LoginService } from "src/app/core/services/LoginService";
 
 import { ProductsService } from "src/app/core/services/ProductsService";
@@ -30,36 +31,59 @@ export class Step1Component implements OnInit {
   responseProducts:any;
   products:{id:string,value:string}[]=[];  
   nameEntity="";
-  ltProducts:any;  
+  ltCompanies:any;
+  ltProducts:any;
   paymetDescription=""; 
   messageStep1='';
   messageModal='';
   titleMessageModal='';
+  showAccount=false;
   accounts: Array<{ id: string, name: string }> = [
-    { id: '2', name: "Cuenta de ahorro-" },
-    { id: '7', name: "Cuenta PAC-" },
-    { id: '4', name: "Cuenta Corriente-" }
+    { id: 'SA', name: "Cuenta de ahorro-" },
+    { id: 'VA', name: "Cuenta PAC-" },
+    { id: 'CC', name: "Cuenta Corriente-" }    
   ];
   selectedBook : any;  
   modalReference!:NgbModalRef;
   loadFailed=0;
   isInsufficientFunds=false;
-  constructor(private readonly envService: EnvironmentLoaderService, private router: Router,private data: DataService,private modalService: NgbModal,private formBuilder: FormBuilder, private transactionService:TransactionService, private productsService:ProductsService, private stepService: StepService, private loginService:LoginService) { }
+  showAvailableBalance=false;
+  constructor(private readonly envService: EnvironmentLoaderService, private router: Router,private data: DataService,private modalService: NgbModal,private formBuilder: FormBuilder, private transactionService:TransactionService, private productsService:ProductsService, private stepService: StepService, private loginService:LoginService, private LegalService:LegalService) { }
 
   ngOnInit() {
     try
     {
       this.stepService.changeStep(1);
-      this.form = this.formBuilder.group(
-        {      
-          product: ['', Validators.required]       
-      });
-
-
+      
       this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});
-      this.paymentData=this.data.getPaymentData(this.message);
+      this.paymentData=this.data.getPaymentData(this.message);      
       this.loadTransaction();
-    
+      if (this.paymentData.typePerson==2)//Si es persona juridica
+      { 
+         this.form = this.formBuilder.group(
+          {    
+            company: ['', Validators.required],
+            product: ['', Validators.required]       
+        });         
+        this.loadLegalPerson();
+      }
+      else
+      {
+        this.form = this.formBuilder.group(
+          {    
+            company: [''],
+            product: ['', Validators.required]       
+        });   
+        this.showAccount =true;
+        this.loadProducts();  
+      }      
+      this.form.controls["company"].valueChanges.subscribe({next:(company:any)=>{
+        this.onChangeCompany(company);
+      }});
+      this.form.controls["product"].valueChanges.subscribe({next:(product:any)=>{
+        this.onChangeProduct(product);
+      }});
+
     }catch(error)
     {
       console.log(error);
@@ -95,9 +119,9 @@ export class Step1Component implements OnInit {
         this.paymentData.transactionCost = this.transactionCost;
         this.paymentData.operationValue = this.operationValue;
         this.paymentData.nameEntity=this.nameEntity;
-        //Si es persona juridica
         
-          this.loadProducts();  
+       
+          
       },
       error: (e:any) => {
         console.error(e);
@@ -124,9 +148,45 @@ export class Step1Component implements OnInit {
    });
   }
 
-  loadCompany()
+  loadLegalPerson()
   {
     
+    this.LegalService.legalPerson(this.paymentData.token).subscribe({
+      next: (response:any) =>  { 
+          if(response=='No Content')
+          {
+            this.messageError=this.envService.getResourceConfig().stp1_Products_204;
+          }else
+          {
+            this.ltCompanies=response;
+            if (this.ltCompanies.length==1)
+            {
+              this.form.controls["companies"].setValue(this.ltCompanies[0], {onlySelf: true});
+            }
+          }
+        },
+        error: (e:any) => {
+          console.error(e);
+          switch (e.status)
+          {
+            case 500:            
+              this.loadFailed=1;
+              this.titleMessageModal=this.envService.getResourceConfig().stp1_ModalErrorTitle;
+              this.messageModal=this.envService.getResourceConfig().stp1_Products_500;
+              this.modalReference = this.modalService.open(this.content, { ariaLabelledBy: 'modal-basic-title',backdrop:'static', keyboard : false });
+            break;           
+            case 401:
+              switch (e.error)
+              {
+                case "TranExpire":
+                  this.redirectSummary();break;
+                default:  
+                  this.redirectLogin(this.envService.getResourceConfig().auth_TransactionInvalid);break;
+              }
+            break;
+          }
+        }
+      });    
   }
 
   loadProducts()
@@ -137,13 +197,8 @@ export class Step1Component implements OnInit {
           {
             this.messageError=this.envService.getResourceConfig().stp1_Products_204;
           }else
-          {
-            this.ltProducts=response.products;
-            if (this.ltProducts.length==1)
-            {
-              this.form.controls["product"].setValue(this.ltProducts[0], {onlySelf: true});
-              this.changeProduct();
-            }
+          {            
+            this.updateProducts(response.products);
           }
         },
         error: (e:any) => {
@@ -190,25 +245,138 @@ export class Step1Component implements OnInit {
     return this.accounts.find(p => p.id == product_code)?.name;   
   }
 
-  changeProduct() {
+  onChangeProduct(productSelect:any) {
     try
     {
-      this.isInsufficientFunds=false;
-      let productSelect: any = this.form.controls["product"].value;
+      this.isInsufficientFunds=false;      
       if (productSelect)
       {     
         this.available_balance = productSelect.available_balance;       
         this.paymentData.product_id=productSelect.product_id;
         this.paymentData.product_mask_id=productSelect.product_mask_id;
         this.paymentData.account_type = productSelect.account_type;
+        this.showAvailableBalance =  productSelect.show_balance;
         this.paymentData.available_balance=this.available_balance;
+        
         if (this.available_balance<this.operationValue)
             this.isInsufficientFunds=true;
+      }
+      else
+      {
+        this.showAvailableBalance =  false;
       }
     }catch(error)
     {
       console.log(error);
     }
+  }
+
+  onChangeCompany(companySelect:any) {
+    try
+    {
+      this.isInsufficientFunds=false;
+      if (companySelect)
+      {     
+
+        let queryBalance = this.validateShowBalanceOrSelect(companySelect);        
+        if (queryBalance==true)
+        {
+          this.LegalService.balance(this.paymentData.token,companySelect.accounts).subscribe({
+            next: (response:any) =>  { 
+                if(response=='No Content')
+                {
+                  this.messageError=this.envService.getResourceConfig().stp1_Products_204;
+                }else
+                {
+                  this.showAccount=true;
+                  this.UpdateBalance(companySelect,response);
+                  this.updateProducts(response);
+                }
+              },
+              error: (e:any) => {
+                console.error(e);
+                switch (e.status)
+                {
+                  case 500:            
+                    this.loadFailed=1;
+                    this.titleMessageModal=this.envService.getResourceConfig().stp1_ModalErrorTitle;
+                    this.messageModal=this.envService.getResourceConfig().stp1_Products_500;
+                    this.modalReference = this.modalService.open(this.content, { ariaLabelledBy: 'modal-basic-title',backdrop:'static', keyboard : false });
+                  break;           
+                  case 401:
+                    switch (e.error)
+                    {
+                      case "TranExpire":
+                        this.redirectSummary();break;
+                      default:  
+                        this.redirectLogin(this.envService.getResourceConfig().auth_TransactionInvalid);break;
+                    }
+                  break;
+                }
+              }
+            });
+        }
+        else
+        {
+          this.updateProducts(companySelect.accounts);          
+        }
+      }
+      else
+      {
+         this.showAccount=false;
+         this.showAvailableBalance=false;
+         this.ltProducts=null;
+      }
+    }catch(error)
+    {
+      console.log(error);
+    }
+  }
+
+  UpdateBalance(companySelect:any,response_accounts:any)
+  {
+    if (response_accounts)
+    {
+      let findCompany=this.ltCompanies.filter((x:any)=> x.companyId==companySelect.companyId);
+      findCompany?.forEach((item:any) => { item.accounts =  response_accounts });      
+    }
+  }
+
+  updateProducts(accounts:any)
+  {
+
+    this.ltProducts=accounts;        
+    if (this.ltProducts.length==1)
+    {
+      this.form.controls["product"].setValue(this.ltProducts[0], {onlySelf: true});
+    }
+    else
+    {
+      this.form.controls["product"].setValue('');
+    }
+  }
+
+
+  validateShowBalanceOrSelect(company:any)
+  {
+     let queryBalance=true;
+      if (company.accounts)
+      {
+         let not_show_balance = company.accounts.find((x: any) => x.show_balance==false);
+         if (not_show_balance)
+         {
+            queryBalance=false;
+         }
+         else{
+            let company_without_balance  = company.accounts.find((x: any) => x.available_balance==null);
+            if (!company_without_balance)
+            {
+               queryBalance=false;
+            }
+         }
+
+      }
+      return queryBalance;
   }
 
   onSubmit()
@@ -217,7 +385,7 @@ export class Step1Component implements OnInit {
     {
       this.messageStep1='';
       this.submitted = true;
-      if (this.form.invalid && this.f['product'].errors) {
+      if (this.form.invalid || this.f['product'].errors || this.f['company'].errors ) {
         return;
       }
       this.data.changeMessageStep1(this.paymentData);

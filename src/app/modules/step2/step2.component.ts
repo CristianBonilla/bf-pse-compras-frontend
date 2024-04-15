@@ -46,12 +46,13 @@ export class Step2Component implements OnInit {
       this.stepService.changeStep(2);
       this.form = this.formBuilder.group(
         {
-          otp: ['', Validators.required]
+          otp: ['', Validators.required]       
         });
       this.data.currentMessage.subscribe({next:(message:any)=>{this.message=message}});
       this.paymentData = this.data.getPaymentDataStep2(this.message);
       this.loadTransaction();
-      this.generateOtp();
+
+      
     }catch(error)
     {
       console.log(error);
@@ -68,6 +69,19 @@ export class Step2Component implements OnInit {
         this.paymentData.transactionCost = response.getTransactions.transactionCost;
         this.paymentData.operationValue = response.getTransactions.operationValue;
         this.paymentData.nameEntity = response.getTransactions.nameEntity;
+        if (this.paymentData.typePerson ==2)
+        {
+          this.otp_type = "TOKENRO";
+          this.form = this.formBuilder.group(
+            {
+              token: ['', Validators.required]
+            });
+          this.form.controls["token"].setValidators([Validators.required, Validators.minLength(6)]);
+        }
+        else
+        {
+          this.generateOtp();
+        }        
       },
       error: (e:any) => {
         console.error(e);
@@ -186,7 +200,8 @@ export class Step2Component implements OnInit {
   }
 
   validateOtpAndConfirm() {
-    this.validateOtpService.validateOtp(this.paymentData, this.otp_type, this.otp_type == "OTP" ? this.form.controls["otp"].value : this.form.controls["sofToken"].value).subscribe({
+    let valueValidate = this.otp_type == "OTP" ?  this.form.controls["otp"].value : (this.otp_type == "TOKENRO" ? this.form.controls["token"].value : this.form.controls["sofToken"].value);
+    this.validateOtpService.validateOtp(this.paymentData, this.otp_type,valueValidate).subscribe({
       next: (response: any) => {
         if (response.status) {
           if (response.status) {
@@ -213,17 +228,23 @@ export class Step2Component implements OnInit {
                   if (this.otp_type == "OTP")
                   {
                     this.form.controls["otp"].reset();
+                    this.generateOtp();
                   }
-                  else
+                  else if (this.otp_type == "TIMESOFTTOKEN")
                   {
                     this.form.controls["sofToken"].reset();
-                  }
+                    this.generateOtp();
+                  }    
+                  else if (this.otp_type == "TOKENRO")
+                  {
+                    this.form.controls["token"].reset();
+                  }                  
                 break;
             case 500:  
               this.loadFailed=2; 
               this.titleMessageModal=this.envService.getResourceConfig().stp2_ModalErrorTitle;
               this.messageModal=this.envService.getResourceConfig().stp2_ValidateOtp_500;
-              this.modalReference =this.modalService.open(this.contentError, { ariaLabelledBy: 'modal-basic-title',backdrop:'static', keyboard : false });         
+              this.modalReference =this.modalService.open(this.contentError, { ariaLabelledBy: 'modal-basic-title',backdrop:'static', keyboard : false });
             break;             
           }
         }

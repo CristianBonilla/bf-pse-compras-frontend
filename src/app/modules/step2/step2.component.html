@@ -80,8 +80,31 @@
                     <img src="./assets/logos/softoken.jpg" width="200px"/>
                 </div>
             </div>
+            
+            <div class="row"  *ngIf="otp_type=='TOKENRO'">
+                <div class="col-5 col-xs-5 ft15">
+                    <h5 class="ftg text-left">Ingreso de token</h5>    
+                    <div>
+                        <p class="ft14dy">Por favor generar el token de seguridad e ingresarlo</p>
+                    </div>
+                </div>
+                <div class="col-2 col-xs-2" >
+                    <input type="text" formControlName="token" maxlength="6" (keypress)="numberOnly($event)"
+                        [ngClass]="(submitted && f['token'].errors)||keyInvalid!=''?'form-control ft13g is-invalid':'form-control ft13g'"/>
+                    <div *ngIf="submitted && f['token'].errors" class="ft12 invalid-feedback d-block">
+                        <div *ngIf="f['token'].errors['required']">Token requerido</div>
+                        <div *ngIf="f['token'].errors['minlength']">Token debe ser de 6 caracteres</div>                        
+                    </div>
+                    <div *ngIf="keyInvalid!=''" class="ft12 invalid-feedback d-block">                        
+                        <div>{{keyInvalid}}</div>                        
+                    </div>
+                </div>
+                <div class="col-4 col-xs-1" style="text-align: right;">                    
+                    <img src="./assets/logos/security_token.jpg" width="67px"/>
+                </div>
+            </div>
             <div class="row border-10"  *ngIf="otp_type=='TIMESOFTTOKEN'">
-                <div class="col-5 col-xs-12">
+                <div class="col-5 col-xs-1">
                     <h5 class="ftg text-left">Ingreso de Clave Dinámica</h5>
                     <div>
                         <p class="ft14dy">Ingresa el código de seguridad de 6 dígitos que aparece en tu app <b class="ftg">Banco Falabella</b></p>
