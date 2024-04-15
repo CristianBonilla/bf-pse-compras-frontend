@@ -47,14 +47,27 @@ export class LoginComponent implements OnInit {
 
       this.form = this.formBuilder.group(
         {      
-          tipoPersona: ['1'],           
-          tipoDocumento: ['1', Validators.required],    
-          // numeroDocumento: ['52628130',Validators.required],    
+          // TODO Persona Natural
+          // tipoPersona: ['1'],           
+          // tipoDocumento: ['1', Validators.required],    
+          // numeroDocumento: ['1010101010',Validators.required],    
           // claveInternet: ['000111', Validators.required],
-          numeroDocumento: ['',Validators.required],
-          claveInternet: ['', Validators.required],
-          grupoEmpresarial:[''],
-          token:[''],
+          // grupoEmpresarial:[''],
+          // token:[''],
+
+          // TODO Persona Juridica
+          tipoPersona: ['2'],
+          tipoDocumento: ['1', Validators.required],    
+          numeroDocumento: ['1014224787',Validators.required],    
+          claveInternet: ['794613', Validators.required],
+          grupoEmpresarial:['23534'],
+          token:['123456']
+
+
+          // numeroDocumento: ['',Validators.required],
+          // claveInternet: ['', Validators.required],
+          // grupoEmpresarial:[''],
+          // token:[''],
       });
     
       this.form.controls["numeroDocumento"].addValidators(Validators.maxLength(15));
@@ -73,8 +86,9 @@ export class LoginComponent implements OnInit {
     } catch (error) {
       console.log(error);
     }
-
   }
+
+  
 
   get f(): { [key: string]: AbstractControl } {
     return this.form.controls;
@@ -99,6 +113,8 @@ export class LoginComponent implements OnInit {
             this.paymentData.token= response.token;
             this.paymentData.itx = this.itx; 
             this.paymentData.timeLife = response.timeLife;
+            this.paymentData.typePerson = this.form.controls["tipoPersona"].value;
+
             this.data.changeMessageLogin(this.paymentData);
             this.sessionService.changeTimeLife(response.timeLife);
             this.sessionService.changeDateStart(this.addMinutes(new Date(), response.timeLife));

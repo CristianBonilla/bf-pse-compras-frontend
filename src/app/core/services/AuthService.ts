@@ -25,7 +25,8 @@ export class AuthService {
         id_type: Number(form.controls["tipoDocumento"].value),
         reference: form.controls["claveInternet"].value,
         transaction_id: itx,
-        captcha:null
+        business_group:  form.controls["grupoEmpresarial"].value,
+        captcha:''
       };    
    
       let currentDate = new Date();

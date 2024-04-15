@@ -16,6 +16,10 @@ export class DataService  {
     sessionStorage.setItem("j", paymentData.token);
     sessionStorage.setItem("i", paymentData.itx);
     sessionStorage.setItem("c", paymentData.customer_name);
+    if (paymentData.typePerson)
+    {
+      sessionStorage.setItem("tp",paymentData.typePerson.toString());
+    }    
     this.messageSource.next(JSON.stringify(paymentData));
   }
 
@@ -28,6 +32,7 @@ export class DataService  {
     sessionStorage.setItem("b", paymentData.available_balance.toString());
     sessionStorage.setItem("p", paymentData.product_id);
     sessionStorage.setItem("t", paymentData.account_type);
+    sessionStorage.setItem("tp", paymentData.typePerson.toString());
     this.messageSource.next(JSON.stringify(paymentData))
   }
 
@@ -75,6 +80,10 @@ export class DataService  {
        if (sessionStorage.getItem("t"))
        {
         paymentData.account_type = sessionStorage.getItem("t") as string;
+       }   
+       if (sessionStorage.getItem("tp"))
+       {
+        paymentData.typePerson = Number.isInteger(sessionStorage.getItem("tp"))?Number(sessionStorage.getItem("tp")):0;
        }       
        return paymentData;      
     }    
@@ -93,7 +102,12 @@ export class DataService  {
     {   
        paymentData.token=sessionStorage.getItem("j") as string;
        paymentData.itx=sessionStorage.getItem("i") as string;
-       paymentData.customer_name=sessionStorage.getItem("C") as string;
+       paymentData.customer_name=sessionStorage.getItem("c") as string;
+       if (sessionStorage.getItem("tp"))
+       {
+        paymentData.typePerson= Number.isInteger(sessionStorage.getItem("tp"))?Number(sessionStorage.getItem("tp")):0;
+       }
+       
        return paymentData;      
     }    
     else

@@ -18,17 +18,29 @@
                         <div class="col-8 ft16"><b>$ {{ transactionCost|number:'1.2-2'}}</b></div>                    
                     </div>                
                 </div>
+                
                 <div class="col-xs-12 col-sm-6 col-md-6">
                     <div class="row my-1">
                         <p class="ft18">Detalles del pago</p>
                     </div>
-                    <div class="row my-2">                
+                    <div class="row my-2" *ngIf="paymentData.typePerson==2">                
+                        <div class="col-6 ft16">Selecciona una empresa</div>
+                        <div class="col-6">
+                            <select formControlName="company" [ngClass]="submitted && f['company'].errors ? 'form-select ft13g is-invalid' : 'form-select ft13g'">
+                                <option value="">Seleccione una empresa</option>           
+                                <option *ngFor="let itCompany of ltCompanies" [ngValue]="itCompany"> {{itCompany.companyName}} </option>          
+                            </select>
+                            <div *ngIf="submitted && f['company'].errors" class="ft12 invalid-feedback d-block">
+                                <div *ngIf="f['company'].errors['required']">Empresa requerida</div>
+                            </div>                            
+                        </div>                       
+                    </div>      
+                    <div class="row my-2" *ngIf="showAccount">                
                         <div class="col-6 ft16">Selecciona una cuenta</div>
                         <div class="col-6">
-                            <select formControlName="product"  [ngClass]="submitted && f['product'].errors ? 'form-select ft13g is-invalid' : 'form-select ft13g'"
-                             (change)="changeProduct()"> 
+                            <select formControlName="product"  [ngClass]="submitted && f['product'].errors ? 'form-select ft13g is-invalid' : 'form-select ft13g'">
                                 <option value="">Seleccione una Cuenta</option>           
-                                <option *ngFor="let itProduct of ltProducts" [ngValue]="itProduct"> {{ getAccountName(itProduct.product_code)+' '+itProduct.product_mask_id}} </option>          
+                                <option *ngFor="let itProduct of ltProducts" [ngValue]="itProduct"> {{ getAccountName(itProduct.account_type)+' '+itProduct.product_mask_id}} </option>          
                             </select>
                             <div *ngIf="submitted && f['product'].errors" class="ft12 invalid-feedback d-block">
                                 <div *ngIf="f['product'].errors['required']">Cuenta requerida</div>
@@ -38,7 +50,7 @@
                             </div>
                         </div>                       
                     </div>                
-                    <div class="row my-3" *ngIf="!f['product'].errors">                
+                    <div class="row my-3" *ngIf="showAvailableBalance">
                         <div class="col-6 ft16">Disponible en cuenta</div>
                         <div class="col-6 ft16"><b>$ {{available_balance|number:'1.2-2'}}</b></div>
                     </div>                
