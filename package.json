@@ -1,13 +1,32 @@
 {
   "name": "cogpt-gatewaycomprasfrontend",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Aplicación Frontend de Banco Falabella - PSE Compras",
+  "author": {
+    "name": "Banco Falabella",
+    "url": "https://www.bancofalabella.com.co/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:CristianBonilla/news-programs-frontend.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": "^18.19.1 || ^20.11.1 || ^22.0.0",
+    "npm": ">=10.2.4",
+    "yarn": ">=1.22.22"
+  },
+  "engineStrict": true,
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "watch": "ng build --watch --configuration development",
+    "watch": "ng build --watch --configuration dev",
     "test": "ng test",
-    "serve:ssr:cogpt-gatewaycomprasfrontend": "node dist/cogpt-gatewaycomprasfrontend/server/server.mjs"
+    "coverage": "ng test --watch=false --code-coverage",
+    "lint": "ng lint",
+    "serve:ssr:cogpt-gatewaycomprasfrontend": "node dist/cogpt-gatewaycomprasfrontend/server/server.mjs",
+    "postinstall": "ngcc"
   },
   "private": true,
   "dependencies": {
