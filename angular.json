@@ -43,7 +43,6 @@
               }
             ],
             "styles": [
-              "node_modules/bootstrap/scss/bootstrap.scss",
               "src/styles/main.scss"
             ],
             "scripts": [
@@ -161,7 +160,6 @@
               }
             ],
             "styles": [
-              "node_modules/bootstrap/scss/bootstrap.scss",
               "src/styles/main.scss"
             ],
             "scripts": [
