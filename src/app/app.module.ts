@@ -9,6 +9,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxTrimDirectiveModule } from 'ngx-trim-directive';
+import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
 import { AppRoutingModule } from 'src/app/app-routing.module';
 import { AppComponent } from 'src/app/app.component';
 
@@ -20,6 +21,7 @@ import { AppComponent } from 'src/app/app.component';
     BrowserModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(TOASTR_GLOBAL_CONFIG),
+    OverlayscrollbarsModule,
     AppRoutingModule,
     NgbModule,
     NgxTrimDirectiveModule,
