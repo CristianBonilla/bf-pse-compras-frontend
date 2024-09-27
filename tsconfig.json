@@ -29,11 +29,11 @@
       "node_modules/@types"
     ],
     "paths": {
-      "@constants/*": [
-        "src/app/shared/constants/*"
-      ],
       "@core/*": [
         "src/app/core/*"
+      ],
+      "@module/*": [
+        "src/app/modules/*"
       ],
       "@shared/*": [
         "src/app/shared/*"
