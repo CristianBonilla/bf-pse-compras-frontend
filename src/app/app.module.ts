@@ -8,6 +8,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TOASTR_GLOBAL_CONFIG } from '@shared/constants/toastr-config';
+import { IconsModule } from '@shared/icons/icons.module';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxTrimDirectiveModule } from 'ngx-trim-directive';
 import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
@@ -26,6 +27,7 @@ import { AppComponent } from 'src/app/app.component';
     AppRoutingModule,
     NgbModule,
     NgxTrimDirectiveModule,
+    IconsModule,
     FontAwesomeModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
