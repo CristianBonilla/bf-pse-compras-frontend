@@ -32,6 +32,9 @@
       "@core/*": [
         "src/app/core/*"
       ],
+      "@env/*": [
+        "src/environments/*"
+      ],
       "@module/*": [
         "src/app/modules/*"
       ],

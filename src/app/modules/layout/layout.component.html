@@ -1,1 +1,9 @@
-<p>layout works!</p>
+<overlay-scrollbars class="wrapper" [defer]="true" [options]="scrollbarOptions">
+  <main class="main">
+    <bf-pc-navbar />
+    <div class="main__content">
+      <router-outlet />
+    </div>
+    <bf-pc-footer />
+  </main>
+</overlay-scrollbars>

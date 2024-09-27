@@ -1,0 +1,19 @@
+<footer class="footer">
+  <div class="footer__content">
+    <div class="footer__content--item">
+      <figure class="footer__image">
+        <!-- <img src="" [alt]="info.title"> -->
+      </figure>
+      <p class="footer__text">
+        Copyright <strong>&copy;</strong> {{ info.title }} {{ info.year }}. Todos los derechos reservados.
+      </p>
+    </div>
+    <div class="footer__content--item">
+      <p class="footer__text">
+        <fa-icon [icon]="['fab', 'whatsapp']" />
+        Recibe asesoría inmediata a través de WhatsApp. Guarda nuestro número verificado
+        <a id="footer-whatsapp" class="footer__text--link" [href]="info.whatsapp" target="_blank">{{ info.phone }}</a>
+      </p>
+    </div>
+  </div>
+</footer>
