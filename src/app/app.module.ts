@@ -1,16 +1,16 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TOASTR_GLOBAL_CONFIG } from '@constants/toastr-config';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { StoreModule } from '@ngrx/store';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { TOASTR_GLOBAL_CONFIG } from './constants/toastr-config';
+import { ToastrModule } from 'ngx-toastr';
+import { NgxTrimDirectiveModule } from 'ngx-trim-directive';
+import { AppRoutingModule } from 'src/app/app-routing.module';
+import { AppComponent } from 'src/app/app.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +22,7 @@ import { TOASTR_GLOBAL_CONFIG } from './constants/toastr-config';
     ToastrModule.forRoot(TOASTR_GLOBAL_CONFIG),
     AppRoutingModule,
     NgbModule,
+    NgxTrimDirectiveModule,
     FontAwesomeModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),

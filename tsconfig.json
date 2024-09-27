@@ -3,6 +3,7 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
@@ -21,8 +22,20 @@
     "module": "ES2022",
     "lib": [
       "ES2022",
-      "dom"
-    ]
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "paths": {
+      "@constants/*": [
+        "src/app/constants/*"
+      ],
+      "@types/*": [
+        "src/app/types/*"
+      ]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
