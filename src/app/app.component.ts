@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { DEFAULT_SCROLLBAR_OPTIONS, ScrollbarOptions } from '@constants/scrollbar-config';
+import { SCROLLBAR_OPTIONS, ScrollbarOptions } from '@shared/constants/scrollbar-config';
 
 @Component({
   selector: 'bf-pc-root',
@@ -8,7 +8,7 @@ import { DEFAULT_SCROLLBAR_OPTIONS, ScrollbarOptions } from '@constants/scrollba
 })
 export class AppComponent {
   readonly scrollbarOptions: ScrollbarOptions = {
-    ...DEFAULT_SCROLLBAR_OPTIONS,
+    ...SCROLLBAR_OPTIONS,
     overflow: {
       x: 'visible-hidden'
     }

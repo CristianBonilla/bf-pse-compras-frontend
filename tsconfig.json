@@ -30,13 +30,13 @@
     ],
     "paths": {
       "@constants/*": [
-        "src/app/constants/*"
+        "src/app/shared/constants/*"
       ],
       "@core/*": [
         "src/app/core/*"
       ],
-      "@types/*": [
-        "src/app/types/*"
+      "@shared/*": [
+        "src/app/shared/*"
       ]
     }
   },

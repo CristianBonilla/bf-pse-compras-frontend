@@ -1,13 +1,13 @@
 import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { TOASTR_GLOBAL_CONFIG } from '@constants/toastr-config';
 import { CoreModule } from '@core/core.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { TOASTR_GLOBAL_CONFIG } from '@shared/constants/toastr-config';
 import { ToastrModule } from 'ngx-toastr';
 import { NgxTrimDirectiveModule } from 'ngx-trim-directive';
 import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
