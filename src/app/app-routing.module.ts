@@ -3,9 +3,19 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: 'home',
-    loadChildren: () => import('@module/home/home.module')
-      .then(module => module.HomeModule)
+    path: '',
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('@module/layout/layout.module')
+          .then(module => module.LayoutModule)
+      },
+      {
+        path: 'home',
+        redirectTo: '',
+        pathMatch: 'prefix'
+      }
+    ]
   },
   {
     path: '**',
