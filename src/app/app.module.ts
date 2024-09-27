@@ -2,6 +2,7 @@ import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule, provideClientHydration } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TOASTR_GLOBAL_CONFIG } from '@constants/toastr-config';
+import { CoreModule } from '@core/core.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { EffectsModule } from '@ngrx/effects';
@@ -28,7 +29,8 @@ import { AppComponent } from 'src/app/app.component';
     FontAwesomeModule,
     StoreModule.forRoot({}, {}),
     EffectsModule.forRoot([]),
-    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() })
+    StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: !isDevMode() }),
+    CoreModule
   ],
   providers: [
     provideClientHydration()

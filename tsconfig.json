@@ -32,6 +32,9 @@
       "@constants/*": [
         "src/app/constants/*"
       ],
+      "@core/*": [
+        "src/app/core/*"
+      ],
       "@types/*": [
         "src/app/types/*"
       ]
