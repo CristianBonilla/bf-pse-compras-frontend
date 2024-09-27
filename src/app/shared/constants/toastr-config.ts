@@ -1,6 +1,6 @@
-import { ToastrConfig, ToastrGlobalConfig } from '../types/toastr.types';
+import type { ToastrConfig, ToastrGlobalConfig } from '@shared/types/toastr.types';
 
-export const TOASTR_INDIVIDUAL_CONFIG: ToastrConfig = {
+export const TOASTR_CONFIG: ToastrConfig = {
   easeTime: 500,
   enableHtml: true,
   positionClass: 'toast-bottom-right',
