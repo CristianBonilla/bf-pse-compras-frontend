@@ -38,8 +38,19 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               {
+                "glob": "favicon.ico",
+                "input": "public/assets",
+                "output": "/"
+              },
+              {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public/assets/images",
+                "output": "images"
+              },
+              {
+                "glob": "**/*.svg",
+                "input": "public/assets/icons",
+                "output": "icons"
               }
             ],
             "styles": [
@@ -48,9 +59,6 @@
             "scripts": [
               "node_modules/@popperjs/core/dist/umd/popper.min.js",
               "node_modules/bootstrap/dist/js/bootstrap.min.js"
-            ],
-            "allowedCommonJsDependencies": [
-              "overlayscrollbars"
             ],
             "server": "src/main.server.ts",
             "prerender": true,
@@ -158,8 +166,19 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               {
+                "glob": "favicon.ico",
+                "input": "public/assets",
+                "output": "/"
+              },
+              {
                 "glob": "**/*",
-                "input": "public"
+                "input": "public/assets/images",
+                "output": "images"
+              },
+              {
+                "glob": "**/*.svg",
+                "input": "public/assets/icons",
+                "output": "icons"
               }
             ],
             "styles": [
