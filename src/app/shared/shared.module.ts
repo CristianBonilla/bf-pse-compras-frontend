@@ -4,16 +4,20 @@ import { IconsModule } from '@shared/icons/icons.module';
 import { ToastrModule, ToastrService } from 'ngx-toastr';
 import { NgxTrimDirectiveModule } from 'ngx-trim-directive';
 import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
+import { SafeHtmlPipe } from '@shared/pipes/safe-html/safe-html.pipe';
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    SafeHtmlPipe
+  ],
   imports: [
     ToastrModule.forRoot(TOASTR_GLOBAL_CONFIG),
   ],
   exports: [
     OverlayscrollbarsModule,
     IconsModule,
-    NgxTrimDirectiveModule
+    NgxTrimDirectiveModule,
+    SafeHtmlPipe
   ],
   providers: [ToastrService]
 })
