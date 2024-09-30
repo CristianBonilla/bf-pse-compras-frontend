@@ -2,7 +2,7 @@ import type { PartialOptions } from 'overlayscrollbars';
 
 export type ScrollbarOptions = PartialOptions | false | null;
 
-export const SCROLLBAR_OPTIONS: ScrollbarOptions = {
+export const SCROLLBAR_OPTIONS = Object.freeze<ScrollbarOptions>({
   overflow: {
     x: 'scroll',
     y: 'scroll'
@@ -10,4 +10,4 @@ export const SCROLLBAR_OPTIONS: ScrollbarOptions = {
   scrollbars: {
     autoHide: 'move'
   }
-};
+});
