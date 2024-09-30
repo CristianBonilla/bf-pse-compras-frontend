@@ -45,12 +45,17 @@
               {
                 "glob": "**/*.{jpg,jpeg,png,gif,webp,svg}",
                 "input": "public/assets/images",
-                "output": "images"
+                "output": "/images/"
               },
               {
                 "glob": "**/*.svg",
                 "input": "public/assets/icons",
-                "output": "icons"
+                "output": "/icons/"
+              },
+              {
+                "glob": "**/*.{eot,ttf,woff,woff2,svg}",
+                "input": "public/assets/fonts",
+                "output": "/fonts/"
               }
             ],
             "styles": [
@@ -173,12 +178,17 @@
               {
                 "glob": "**/*.{jpg,jpeg,png,gif,webp,svg}",
                 "input": "public/assets/images",
-                "output": "images"
+                "output": "/images/"
               },
               {
                 "glob": "**/*.svg",
                 "input": "public/assets/icons",
-                "output": "icons"
+                "output": "/icons/"
+              },
+              {
+                "glob": "**/*.{eot,ttf,woff,woff2,svg}",
+                "input": "public/assets/fonts",
+                "output": "/fonts/"
               }
             ],
             "styles": [
