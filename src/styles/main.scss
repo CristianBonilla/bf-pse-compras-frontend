@@ -2,6 +2,13 @@
 @import 'vendor/toastr';
 @import 'vendor/overlayscrollbars';
 
+@import 'variables/variables';
+
+@import 'themes/pfbeausanspro';
+
+@import 'base/base';
 @import 'base/scrollbar';
+
+@import 'layout/footer';
 
 @import 'modules/alert';
