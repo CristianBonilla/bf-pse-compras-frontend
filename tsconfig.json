@@ -35,6 +35,9 @@
       "@env/*": [
         "src/environments/*"
       ],
+      "@models/*": [
+        "src/app/models/*"
+      ],
       "@module/*": [
         "src/app/modules/*"
       ],
