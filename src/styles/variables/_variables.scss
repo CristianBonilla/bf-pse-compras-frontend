@@ -1,5 +1,21 @@
-$sans-serif-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif;
+$sans-serif-family: 'Montserrat', 'Helvetica Neue', Arial, sans-serif !default;
 
-$pfbeausanspro: 'pfbeausanspro';
-$pfbeausanspro-xthin: 'pfbeausanspro-xthin';
-$pfbeausanspro-bbook: 'pfbeausanspro-bbook';
+$pfbeausanspro: 'pfbeausanspro' !default;
+$pfbeausanspro-xthin: 'pfbeausanspro-xthin' !default;
+$pfbeausanspro-bbook: 'pfbeausanspro-bbook' !default;
+
+$default-text-color: #2D3033 !default;
+$default-text-size: 1rem !default;
+$default-line-height: 1.5 !default;
+
+$white-color: #FFFFFF !default;
+
+$background-color: #FCFCFC !default;
+
+$sidebar-min-width: 60px !default;
+
+$main-width: calc(100% - #{ $sidebar-min-width }) !default;
+
+$footer-background-color: rgb(38, 39, 41) !default;
+$footer-height: 100px !default;
+$footer-padding-height: .5rem !default;
