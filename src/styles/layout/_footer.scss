@@ -6,7 +6,7 @@
 
   &__content {
     position: relative;
-    padding: $footer-padding-height 1.5rem;
+    padding: .5rem 1.5rem;
     display: flex;
     align-items: center;
     justify-content: space-around;
@@ -14,28 +14,130 @@
     &--item {
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
+      gap: .5rem;
+
+      fa-icon {
+        color: $white-color;
+        padding: .2rem;
+        font-size: 1.2rem;
+        line-height: 1;
+      }
     }
   }
 
-  &__image {
-    position: relative;
-    overflow: hidden;
+  &__icon {
     padding: .5rem;
-    margin-bottom: 0;
-    margin-right: .5rem;
 
-    img {
-      display: block;
+    svg {
+      fill: $footer-icon-fill;
       width: 32px;
+      height: 32px;
     }
   }
 
   &__text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-weight: 300;
     font-style: normal;
-    font-size: 14px;
+    font-size: 12px;
     color: $white-color;
+    line-height: 1;
     margin-bottom: 0;
+    gap: .5rem;
+
+    span > a {
+      @extend .link-underline;
+      @extend .link-underline-opacity-0;
+      color: $banco-falabella-color;
+
+      &:hover {
+        color: $banco-falabella-color-hover;
+      }
+    }
+  }
+}
+
+@media (min-width: calc(map-get($grid-breakpoints, 'xl') + 20px)) {
+  .footer {
+
+    &__text {
+      font-size: 14px;
+    }
+  }
+}
+
+@media (max-width: calc(map-get($grid-breakpoints, 'lg') + 83px)) {
+  .footer {
+
+    &__text {
+      align-items: flex-start;
+      flex-direction: column;
+      font-size: 14px;
+    }
+  }
+}
+
+@media (max-width: map-get($grid-breakpoints, 'md')) {
+  .footer {
+
+    &__content {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+
+    &__icon {
+      padding: .2rem;
+
+      svg {
+        width: 16.80px;
+        height: 16.80px;
+      }
+    }
+
+    &__text {
+      flex-direction: row;
+      font-size: 12px;
+    }
+  }
+}
+
+@media (max-width: calc(map-get($grid-breakpoints, 'sm') + 42px)) {
+  .footer {
+
+    &__content {
+      gap: 10px;
+    }
+
+    &__text {
+      flex-direction: column;
+      font-size: 14px;
+      gap: 2px;
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .footer {
+
+    &__text {
+      font-size: 12px;
+      gap: 3px;
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .footer {
+
+    &__text {
+
+      span > a {
+        display: inline-block;
+        padding: .3rem 0;
+      }
+    }
   }
 }
