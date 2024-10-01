@@ -14,6 +14,7 @@
     align-items: center;
     width: 100%;
     padding: 2rem .5rem;
+    height: 120px;
 
     &--item:nth-child(2) {
       width: 80%;
@@ -98,6 +99,8 @@
 
     &__content {
       flex-direction: column;
+      padding: .5rem;
+      height: auto;
     }
   }
 }
