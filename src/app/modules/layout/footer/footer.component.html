@@ -1,18 +1,17 @@
 <footer class="footer">
   <div class="footer__content">
     <div class="footer__content--item">
-      <figure class="footer__image">
-        <img src="icons/bf-pc-logo-default.svg" [alt]="info.title">
-      </figure>
+      <svg-icon src="icons/bf-pc-logo-default.svg" class="footer__icon"></svg-icon>
       <p class="footer__text">
-        Copyright <strong>&copy;</strong> {{ info.title }} {{ info.year }}. Todos los derechos reservados.
+        <span>Copyright <strong>&copy;</strong> {{ info.title }} {{ info.year }}.</span>
+        <span>Todos los derechos reservados.</span>
       </p>
     </div>
     <div class="footer__content--item">
+      <fa-icon [icon]="['fab', 'whatsapp']"></fa-icon>
       <p class="footer__text">
-        <fa-icon [icon]="['fab', 'whatsapp']" />
-        Recibe asesoría inmediata a través de WhatsApp. Guarda nuestro número verificado
-        <a id="footer-whatsapp" class="footer__text--link" [href]="info.whatsapp" target="_blank">{{ info.phone }}</a>
+        <span>Recibe asesoría inmediata a través de WhatsApp.</span>
+        <span>Guarda nuestro número verificado&ensp;<a id="footer-whatsapp" class="footer__text--link" [href]="info.whatsapp" target="_blank">{{ info.phone }}</a></span>
       </p>
     </div>
   </div>

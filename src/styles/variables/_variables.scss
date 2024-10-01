@@ -8,6 +8,9 @@ $default-text-color: #2D3033 !default;
 $default-text-size: 1rem !default;
 $default-line-height: 1.5 !default;
 
+$banco-falabella-color: rgb(195, 214, 0) !default;
+$banco-falabella-color-hover: rgb(43, 143, 20) !default;
+
 $white-color: #FFFFFF !default;
 
 $background-color: #FCFCFC !default;
@@ -17,5 +20,10 @@ $sidebar-min-width: 60px !default;
 $main-width: calc(100% - #{ $sidebar-min-width }) !default;
 
 $footer-background-color: rgb(38, 39, 41) !default;
-$footer-height: 100px !default;
-$footer-padding-height: .5rem !default;
+$footer-height: 64px !default;
+$footer-height-xs: 72.79px !default;
+$footer-height-sm: 83.4px !default;
+$footer-height-md: 86.4px !default;
+$footer-height-lg: 104.98px !default;
+$footer-height-xl: 116.98px !default;
+$footer-icon-fill: rgb(201, 212, 223) !default;
