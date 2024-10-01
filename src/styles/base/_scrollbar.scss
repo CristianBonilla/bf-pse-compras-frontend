@@ -1,7 +1,6 @@
 .os {
 
   &-scrollbar {
-    $self: &;
     transition: all .3s ease-in-out !important;
 
     &-horizontal {

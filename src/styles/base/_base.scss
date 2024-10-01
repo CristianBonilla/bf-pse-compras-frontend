@@ -22,10 +22,16 @@ body {
   user-select: none;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
 .wrapper {
-  position: relative;
-  top: 0;
   height: 100vh;
+
+  &__content {
+    position: relative;
+    top: 0;
+    min-height: 100vh;
+    height: auto;
+  }
 }

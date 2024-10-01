@@ -1,6 +1,6 @@
 .footer {
   position: absolute;
-  bottom: -#{ $header-height };
+  bottom: 0;
   width: 100%;
   background-color: $footer-background-color;
   z-index: 2;
