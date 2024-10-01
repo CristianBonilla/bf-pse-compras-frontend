@@ -1,8 +1,9 @@
 .footer {
   position: absolute;
-  bottom: 0;
+  bottom: -#{ $header-height };
   width: 100%;
   background-color: $footer-background-color;
+  z-index: 2;
 
   &__content {
     position: relative;
