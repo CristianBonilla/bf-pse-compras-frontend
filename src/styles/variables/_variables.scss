@@ -18,6 +18,7 @@ $background-color: #FCFCFC !default;
 $sidebar-min-width: 60px !default;
 
 $main-width: calc(100% - #{ $sidebar-min-width }) !default;
+$main-min-height: 500px;
 
 $header-height: 120px !default;
 $header-height-sm: 110.5px !default;
@@ -29,4 +30,5 @@ $footer-height-sm: 83.4px !default;
 $footer-height-md: 86.4px !default;
 $footer-height-lg: 104.98px !default;
 $footer-height-xl: 116.98px !default;
-$footer-icon-fill: rgb(201, 212, 223) !default;
+
+$border-color: rgb(201, 212, 223) !default;
