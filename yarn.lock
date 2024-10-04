@@ -1232,11 +1232,6 @@
   resolved "https://npm-registry.fif.tech/@colors%2fcolors/-/colors-1.5.0.tgz"
   integrity sha512-ooWCrlZP11i8GImSjTHYHLkvFDP48nS4+204nGb1RiX/WXYHmJA2III9/e2DWVabCESdW7hBAEzHRqUn9OUVvQ==
 
-"@df-api/crypto-utils@^4.0.2":
-  version "4.0.2"
-  resolved "https://npm-registry.fif.tech/@df-api%2fcrypto-utils/-/crypto-utils-4.0.2.tgz"
-  integrity sha512-7/2S9TEwxoX2gHPd3T6QBg4kKccD32grcZvVoqeL+T4IVH9HoihZCvAtUgij6J+zwSYAozNRsxO3fNp5Sl6nDw==
-
 "@discoveryjs/json-ext@0.6.1":
   version "0.6.1"
   resolved "https://npm-registry.fif.tech/@discoveryjs%2fjson-ext/-/json-ext-0.6.1.tgz"
@@ -3019,11 +3014,6 @@ dom-serializer@^2.0.0:
     domhandler "^5.0.2"
     entities "^4.2.0"
 
-dom-walk@^0.1.0:
-  version "0.1.2"
-  resolved "https://npm-registry.fif.tech/dom-walk/-/dom-walk-0.1.2.tgz"
-  integrity sha512-6QvTW9mrGeIegrFXdtQi9pk7O/nSK6lSdXW2eqUspN5LWD7UTji2Fqw5V2YLjBpHEoU9Xl/eUWNpDeZvoyOv2w==
-
 domelementtype@^2.3.0:
   version "2.3.0"
   resolved "https://npm-registry.fif.tech/domelementtype/-/domelementtype-2.3.0.tgz"
@@ -3570,13 +3560,6 @@ get-intrinsic@^1.1.3, get-intrinsic@^1.2.4:
     has-symbols "^1.0.3"
     hasown "^2.0.0"
 
-get-random-values@^1.2.0:
-  version "1.2.2"
-  resolved "https://npm-registry.fif.tech/get-random-values/-/get-random-values-1.2.2.tgz"
-  integrity sha512-lMyPjQyl0cNNdDf2oR+IQ/fM3itDvpoHy45Ymo2r0L1EjazeSl13SfbKZs7KtZ/3MDCeueiaJiuOEfKqRTsSgA==
-  dependencies:
-    global "^4.4.0"
-
 get-stream@^6.0.0:
   version "6.0.1"
   resolved "https://npm-registry.fif.tech/get-stream/-/get-stream-6.0.1.tgz"
@@ -3648,14 +3631,6 @@ glob@^7.1.3, glob@^7.1.7:
     minimatch "^3.1.1"
     once "^1.3.0"
     path-is-absolute "^1.0.0"
-
-global@^4.4.0:
-  version "4.4.0"
-  resolved "https://npm-registry.fif.tech/global/-/global-4.4.0.tgz"
-  integrity sha512-wv/LAoHdRE3BeTGz53FAamhGlPLhlssK45usmGFThIi4XqnBmjKQ16u+RNbP7WvigRZDxUsM0J3gcQ5yicaL0w==
-  dependencies:
-    min-document "^2.19.0"
-    process "^0.11.10"
 
 globals@^11.1.0:
   version "11.12.0"
@@ -4620,13 +4595,6 @@ mimic-function@^5.0.0:
   resolved "https://npm-registry.fif.tech/mimic-function/-/mimic-function-5.0.1.tgz"
   integrity sha512-VP79XUPxV2CigYP3jWwAUFSku2aKqBH7uTAapFWCBqutsbmDo96KY5o8uh6U+/YSIn5OxJnXp73beVkpqMIGhA==
 
-min-document@^2.19.0:
-  version "2.19.0"
-  resolved "https://npm-registry.fif.tech/min-document/-/min-document-2.19.0.tgz"
-  integrity sha512-9Wy1B3m3f66bPPmU5hdA4DR4PB2OfDU/+GS3yAB7IQozE3tqXaVv2zOjgla7MEGSRv95+ILmOuvhLkOK6wJtCQ==
-  dependencies:
-    dom-walk "^0.1.0"
-
 mini-css-extract-plugin@2.9.0:
   version "2.9.0"
   resolved "https://npm-registry.fif.tech/mini-css-extract-plugin/-/mini-css-extract-plugin-2.9.0.tgz"
@@ -4860,13 +4828,6 @@ node-gyp@^10.0.0:
     semver "^7.3.5"
     tar "^6.2.1"
     which "^4.0.0"
-
-node-jsencrypt@^1.0.0:
-  version "1.0.0"
-  resolved "https://npm-registry.fif.tech/node-jsencrypt/-/node-jsencrypt-1.0.0.tgz"
-  integrity sha512-ANQ/XkOVS02R89MtfoelFxarMsLA12nlOT802VS4LVhl+JRSRZIvkLIjvKYZmIar+mENUkR9mBKUdcdiPy/7lA==
-  dependencies:
-    get-random-values "^1.2.0"
 
 node-releases@^2.0.18:
   version "2.0.18"
@@ -5354,11 +5315,6 @@ process-nextick-args@~2.0.0:
   version "2.0.1"
   resolved "https://npm-registry.fif.tech/process-nextick-args/-/process-nextick-args-2.0.1.tgz"
   integrity sha512-3ouUOpQhtgrbOa17J7+uxOTpITYWaGP7/AhoR3+A+/1e9skrzelGi/dXzEYyvbxubEF6Wn2ypscTKiKJFFn1ag==
-
-process@^0.11.10:
-  version "0.11.10"
-  resolved "https://npm-registry.fif.tech/process/-/process-0.11.10.tgz"
-  integrity sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==
 
 promise-inflight@^1.0.1:
   version "1.0.1"
