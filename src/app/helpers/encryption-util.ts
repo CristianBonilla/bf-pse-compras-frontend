@@ -1,66 +1,46 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import JSEncrypt from 'jsencrypt';
 import CryptoJS from 'crypto-js';
-
-const encryptor = new JSEncrypt();
+import JSEncrypt from 'jsencrypt';
 
 @Injectable()
-export class EncryptionService {
+export class EncryptionUtil {
 
-    public encryptMessage(name: string, pubKey: string = environment.gatewayComprasBackendPSE.pubKey): string {
+    public encryptSHA256(stParam: string) {
+        const encodeMsg = CryptoJS.enc.Utf8.parse(stParam + 'tengoelgatolospantalones');
+        const retornoMsg = CryptoJS.SHA256(encodeMsg).toString();
+
+        return 'FAPE_' + retornoMsg; // probar textos en backend
+    }
+
+    public encryptMessage(name: string, pubKey: string): string {
+        const crypt = new JSEncrypt({log: true});
+        crypt.setKey(pubKey);
+        const message = crypt.encrypt(name);
+        return message || '';
+    }
+
+    public encryptPassword(pass: string, pubKey: string): string {
         const crypt = new JSEncrypt();
         crypt.setKey(pubKey);
-        return crypt.encrypt(name) || '';
+        const encPass = crypt.encrypt(pass) || '';
+        return this.encryptMessage(encPass, environment.gatewayComprasBackendPSE.pubKey);
     }
 
-    public encryptSHA512(message: string) {
-        const retornoMsg = CryptoJS.SHA512(message).toString();
-        return retornoMsg;
-    }
-
-    public encryptSHA256(message: string) {
-        const retornoMsg = CryptoJS.SHA256(message).toString();
-        return retornoMsg;
-    }
-    public generateRandomKey(): string {
+    /** Return a random password. */
+    public getRandomPassword() {
         return CryptoJS.lib.WordArray.random(10).toString();
-    }
-    public setPublicKey(publicKey: any): void {
-        encryptor.setPublicKey(publicKey)
-    }
-    // public encryptAllValuesFromObject(body: Object, key: string) {
-    //     const bodyEnc = JSON.parse(JSON.stringify(body))
-    //     const paramsName = Object.keys(body)
-    //     paramsName.forEach(parameter => {
-    //         bodyEnc[parameter] = this.aesEncrypt(typeof (body[parameter]) !== 'string' ? JSON.stringify(body[parameter]) : body[parameter], key);
-    //     })
-    //     return bodyEnc
-    // }
-    public createSignature(signText: string, key: string) {
-        const digest = this.encryptSHA256(signText).toString()
-        return this.aesEncrypt(digest, key).toString()
-    }
-    public encryptWithPublicKey(key: string) {
-        return encryptor.encrypt(key)
-    }
-    public aesDecrypt(decryptText: string, key: string): string {
-        const bytes = CryptoJS.AES.decrypt(decryptText, key)
-        return bytes.toString(CryptoJS.enc.Utf8)
-    }
-    public aesEncrypt(digest: string, key: string): string {
-        return CryptoJS.AES.encrypt(digest, key).toString()
     }
 
     /**
-   * Encrypt received text with AES-256 (CryptoJS.PBKDF2 key), using a custom password.
-   * Return a secure message request (json): {m : 'Encrypted Message', p : 'password',  s : 'salt', i : 'iv'}
-   * @param text
-   */
+     * Encrypt received text with AES-256 (CryptoJS.PBKDF2 key), using a custom password.
+     * Return a secure message request (json): {m : 'Encrypted Message', p : 'password',  s : 'salt', i : 'iv'}
+     * @param text
+     */
 
     public createSecureRequest(text: any, pass: string) {
-        const salt = CryptoJS.lib.WordArray.random(128 / 8);
-        const iv = CryptoJS.lib.WordArray.random(128 / 8);
+        const salt = 	CryptoJS.lib.WordArray.random(128 / 8);
+        const iv = 	CryptoJS.lib.WordArray.random(128 / 8);
 
         const key = CryptoJS.PBKDF2(pass, salt, {
             keySize: 256 / 32, // 256
@@ -74,7 +54,7 @@ export class EncryptionService {
         });
 
         const password = this.encryptMessage(pass, environment.gatewayComprasBackendPSE.pubKey); // RSA
-        return { m: encrypted.toString(), p: password, s: salt.toString(), i: iv.toString() };
+        return {m : encrypted.toString(), p : password, s : salt.toString(), i : iv.toString()};
     }
 
     /**
@@ -84,7 +64,7 @@ export class EncryptionService {
     public resolveSecureResponse(secureResponse: any, pass: string) {
         const text = secureResponse.m;
         const salt = CryptoJS.enc.Hex.parse(secureResponse.s);
-        const iv = CryptoJS.enc.Hex.parse(secureResponse.i);
+        const iv	 = CryptoJS.enc.Hex.parse(secureResponse.i);
 
         const key = CryptoJS.PBKDF2(pass, salt, {
             keySize: 256 / 32, // 256
@@ -98,5 +78,18 @@ export class EncryptionService {
         });
 
         return decrypted.toString(CryptoJS.enc.Utf8); // stringify
+    }
+
+    public encrypt(name: string, key: string): string {
+        const crypt = new JSEncrypt();
+        crypt.setKey(key);
+        const message = crypt.encrypt(name);
+        return message || '';
+    }
+
+    public encryptSHA512(stParam: string, salt: string) {
+        // const encodeMsg = CryptoJS.enc.Utf8.parse(stParam);
+        const retornoMsg = CryptoJS.SHA512(stParam + salt).toString();
+        return retornoMsg;
     }
 }
