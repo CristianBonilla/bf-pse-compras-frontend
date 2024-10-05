@@ -41,7 +41,7 @@
       &--image {
 
         img {
-          max-height: calc(((502px - $header-height) - $footer-height) - 1rem);
+          max-height: calc(((502px - $header-height) - $footer-height-xs) - 1rem);
         }
       }
     }
@@ -86,7 +86,7 @@
       &--image {
 
         img {
-          max-height: calc(((100vh - $header-height) - $footer-height-md) - 1rem);
+          max-height: calc(((100vh - $header-height) - $footer-height-lg) - 1rem);
         }
       }
     }
@@ -101,7 +101,7 @@
       &--image {
 
         img {
-          max-height: calc(((472.4px - $header-height) - $footer-height-md) - 1rem);
+          max-height: calc(((472.4px - $header-height) - $footer-height-lg) - 1rem);
         }
       }
     }
@@ -116,41 +116,28 @@
       &--image {
 
         img {
-          max-height: calc(((450px - $header-height) - $footer-height) - 1rem);
+          max-height: calc(((450px - $header-height) - $footer-height-sm) - 1rem);
         }
       }
     }
   }
 }
 
-@media (max-width: map-get($grid-breakpoints, 'md')) {
+@media (max-width: calc(map-get($grid-breakpoints, 'lg') + 150px)) {
   .sidebar {
     padding-bottom: $footer-height-xs;
   }
 }
 
-@media (max-width: calc(map-get($grid-breakpoints, 'sm') + 42px)) {
+@media (max-width: map-get($grid-breakpoints, 'md')) {
   .sidebar {
-    padding-bottom: $footer-height-md;
-  }
-}
-
-@media (max-width: 420px) {
-  .sidebar {
-    padding-top: $header-height-sm;
     padding-bottom: $footer-height-sm;
   }
 }
 
-@media (max-width: 350px) {
+@media (max-width: calc(map-get($grid-breakpoints, 'sm') + 42px)) {
   .sidebar {
     padding-bottom: $footer-height-lg;
-  }
-}
-
-@media (max-width: 340px) {
-  .sidebar {
-    padding-bottom: $footer-height-xl;
   }
 }
 

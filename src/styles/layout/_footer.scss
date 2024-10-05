@@ -88,15 +88,6 @@
   }
 }
 
-@media (min-width: calc(map-get($grid-breakpoints, 'xl') + 90px)) {
-  .footer {
-
-    &__text {
-      font-size: 14px;
-    }
-  }
-}
-
 @media (min-width: map-get($grid-breakpoints, 'xxl')) {
   .footer {
 
@@ -106,12 +97,10 @@
   }
 }
 
-@media (max-width: calc(map-get($grid-breakpoints, 'lg') + 150px)) {
+@media (min-width: calc(map-get($grid-breakpoints, 'xl') + 90px)) {
   .footer {
 
     &__text {
-      align-items: flex-start;
-      flex-direction: column;
       font-size: 14px;
     }
   }
@@ -132,6 +121,17 @@
           }
         }
       }
+    }
+  }
+}
+
+@media (max-width: calc(map-get($grid-breakpoints, 'lg') + 150px)) {
+  .footer {
+
+    &__text {
+      align-items: flex-start;
+      flex-direction: column;
+      font-size: 14px;
     }
   }
 }
