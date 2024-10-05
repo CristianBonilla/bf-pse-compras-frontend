@@ -15,7 +15,7 @@
   }
 }
 
-@media (max-width: map-get($grid-breakpoints, 'md')) {
+@media (max-width: calc(map-get($grid-breakpoints, 'lg') + 150px)) {
   .main {
     padding-bottom: $footer-height-xs;
 
@@ -25,38 +25,40 @@
   }
 }
 
-@media (max-width: calc(map-get($grid-breakpoints, 'sm') + 42px)) {
+@media (max-width: map-get($grid-breakpoints, 'md')) {
   .main {
-    padding-bottom: $footer-height-md;
+    padding-bottom: $footer-height-sm;
 
     &__content {
-      min-height: calc((100vh - $header-height) - $footer-height-md);
+      min-height: calc((100vh - $header-height) - $footer-height-sm);
+    }
+  }
+}
+
+@media (max-width: calc(map-get($grid-breakpoints, 'sm') + 42px)) {
+  .main {
+    padding-bottom: $footer-height-lg;
+
+    &__content {
+      min-height: calc((100vh - $header-height) - $footer-height-lg);
     }
   }
 }
 
 @media (max-width: 420px) {
   .main {
+    left: auto;
+    width: 100%;
     padding-top: $header-height-sm;
-    padding-bottom: $footer-height-sm;
+    padding-bottom: $footer-height-md;
 
     &__content {
-      min-height: calc((100vh - $header-height-sm) - $footer-height-sm);
+      min-height: calc((100vh - $header-height-sm) - $footer-height-md);
     }
   }
 }
 
 @media (max-width: 350px) {
-  .main {
-    padding-bottom: $footer-height-lg;
-
-    &__content {
-      min-height: calc((100vh - $header-height-sm) - $footer-height-lg);
-    }
-  }
-}
-
-@media (max-width: 340px) {
   .main {
     padding-bottom: $footer-height-xl;
 
@@ -66,9 +68,12 @@
   }
 }
 
-@media (max-width: 420px) {
+@media (max-width: 340px) {
   .main {
-    left: auto;
-    width: 100%;
+    padding-bottom: $footer-height-xxl;
+
+    &__content {
+      min-height: calc((100vh - $header-height-sm) - $footer-height-xxl);
+    }
   }
 }
