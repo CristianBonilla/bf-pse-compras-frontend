@@ -26,14 +26,14 @@
       img {
         display: block;
         margin: 0 auto;
-        min-height: 180px;
-        max-height: calc(((100vh - $header-height) - $footer-height) - 1rem);
+        max-height: 300px;
+        height: 100%;
       }
     }
   }
 }
 
-@media (min-height: 501px) and (min-width: calc(map-get($grid-breakpoints, 'md') + 1px)) {
+@media (max-height: calc($main-min-height + 160px)) {
   .sidebar {
 
     &__content {
@@ -41,14 +41,14 @@
       &--image {
 
         img {
-          max-height: calc(((502px - $header-height) - $footer-height-xs) - 1rem);
+          max-height: 250px;
         }
       }
     }
   }
 }
 
-@media (min-height: 531px) and (max-width: map-get($grid-breakpoints, 'md')) {
+@media (max-height: calc($main-min-height + 70px)) {
   .sidebar {
 
     &__content {
@@ -56,14 +56,14 @@
       &--image {
 
         img {
-          max-height: calc(((508.79px - $header-height) - $footer-height-xs) - 1rem);
+          max-height: 220px;
         }
       }
     }
   }
 }
 
-@media (max-height: 530px) and (max-width: map-get($grid-breakpoints, 'md')) {
+@media (max-height: $main-min-height) {
   .sidebar {
 
     &__content {
@@ -71,52 +71,7 @@
       &--image {
 
         img {
-          max-height: calc(((100vh - $header-height) - $footer-height-xs) - 1rem);
-        }
-      }
-    }
-  }
-}
-
-@media (max-height: 640px) and (max-width: calc(map-get($grid-breakpoints, 'sm') + 42px)) {
-  .sidebar {
-
-    &__content {
-
-      &--image {
-
-        img {
-          max-height: calc(((100vh - $header-height) - $footer-height-lg) - 1rem);
-        }
-      }
-    }
-  }
-}
-
-@media (min-height: 473px) and (max-height: 640px) and (max-width: calc(map-get($grid-breakpoints, 'sm') + 42px)) {
-  .sidebar {
-
-    &__content {
-
-      &--image {
-
-        img {
-          max-height: calc(((472.4px - $header-height) - $footer-height-lg) - 1rem);
-        }
-      }
-    }
-  }
-}
-
-@media (max-height: 500px) and (min-width: calc(map-get($grid-breakpoints, 'md') + 1px)) {
-  .sidebar {
-
-    &__content {
-
-      &--image {
-
-        img {
-          max-height: calc(((450px - $header-height) - $footer-height-sm) - 1rem);
+          max-height: 200px;
         }
       }
     }

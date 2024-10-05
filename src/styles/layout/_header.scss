@@ -14,7 +14,7 @@
     align-items: center;
     width: 100%;
     padding: 2rem .5rem;
-    height: 120px;
+    height: $header-height;
 
     &--item:nth-child(2) {
       width: 80%;
@@ -98,9 +98,9 @@
   .header {
 
     &__content {
+      justify-content: space-evenly;
       flex-direction: column;
       padding: .5rem;
-      height: auto;
     }
   }
 }

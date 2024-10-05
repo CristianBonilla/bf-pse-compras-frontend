@@ -49,11 +49,11 @@
   .main {
     left: auto;
     width: 100%;
-    padding-top: $header-height-sm;
+    padding-top: $header-height;
     padding-bottom: $footer-height-md;
 
     &__content {
-      min-height: calc((100vh - $header-height-sm) - $footer-height-md);
+      min-height: calc((100vh - $header-height) - $footer-height-md);
     }
   }
 }
@@ -63,7 +63,7 @@
     padding-bottom: $footer-height-xl;
 
     &__content {
-      min-height: calc((100vh - $header-height-sm) - $footer-height-xl);
+      min-height: calc((100vh - $header-height) - $footer-height-xl);
     }
   }
 }
@@ -73,7 +73,7 @@
     padding-bottom: $footer-height-xxl;
 
     &__content {
-      min-height: calc((100vh - $header-height-sm) - $footer-height-xxl);
+      min-height: calc((100vh - $header-height) - $footer-height-xxl);
     }
   }
 }
