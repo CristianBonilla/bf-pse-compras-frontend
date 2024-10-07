@@ -86,6 +86,19 @@
       }
     }
   }
+
+  &__image {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    margin-bottom: 0;
+
+    img {
+      display: block;
+      max-width: 200px;
+      width: 100%;
+    }
+  }
 }
 
 @media (min-width: map-get($grid-breakpoints, 'xxl')) {
@@ -186,6 +199,23 @@
 
 @media (max-width: 420px) {
   .footer {
+    $self: &;
+
+    &__content {
+
+      &--item {
+
+        &__full {
+          flex-direction: column;
+          gap: 8px;
+          margin: .2rem 0;
+
+          #{ $self }__text {
+            padding: 0;
+          }
+        }
+      }
+    }
 
     &__text {
       font-size: 12px;
@@ -203,6 +233,34 @@
         display: inline-block;
         padding: .3rem 0;
       }
+    }
+  }
+}
+
+@media (max-width: 340px) {
+  .footer {
+    $self: &;
+
+    &__content {
+
+      &--item:nth-child(2n + 1) {
+
+        #{ $self }__text {
+
+          span:first-child {
+            line-height: 1.2;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 421px) {
+  .footer {
+
+    &__image {
+      display: none;
     }
   }
 }
