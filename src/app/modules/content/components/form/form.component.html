@@ -1,13 +1,8 @@
 <form class="form" autocomplete="off" [formGroup]="formGroup" (ngSubmit)="handleSubmit($event)">
-  <div class="form__content">
-    <div class="form__header">
-      <h2 class="form__header--title">
-        <strong>PSE</strong> pagos en línea
-      </h2>
-    </div>
+  <bf-pc-content>
     <ng-content />
-  </div>
-  <div class="form__bottom">
-    <ng-content select="form-bottom" />
-  </div>
+    <ng-container ngProjectAs="content-bottom">
+      <ng-content select="form-bottom" />
+    </ng-container>
+  </bf-pc-content>
 </form>

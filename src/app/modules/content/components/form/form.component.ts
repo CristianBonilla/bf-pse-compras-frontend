@@ -9,7 +9,6 @@ import { FormGroup } from '@angular/forms';
 export class FormComponent {
   @Input()
   formGroup!: FormGroup;
-
   @Output()
   readonly submit = new EventEmitter<void | MouseEvent>();
 
