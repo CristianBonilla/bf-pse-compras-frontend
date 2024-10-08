@@ -4,7 +4,7 @@ $pfbeausanspro: 'pfbeausanspro' !default;
 $pfbeausanspro-xthin: 'pfbeausanspro-xthin' !default;
 $pfbeausanspro-bbook: 'pfbeausanspro-bbook' !default;
 
-$default-text-color: #2D3033 !default;
+$default-text-color: rgb(50, 53, 55) !default;
 $default-text-size: 1rem !default;
 $default-line-height: 1.5 !default;
 
@@ -20,7 +20,6 @@ $sidebar-min-width: 60px !default;
 $main-width: calc(100% - #{ $sidebar-min-width }) !default;
 $main-min-height: 500px;
 
-$header-text-color: rgb(50, 53, 55) !default;
 $header-height: 120px !default;
 
 $footer-background-color: rgb(38, 39, 41) !default;

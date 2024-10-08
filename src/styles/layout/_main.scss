@@ -20,10 +20,6 @@
 
     &__content {
       min-height: calc((100vh - $header-height) - $footer-height-sm);
-
-      &--wrapper {
-        min-height: calc(((100vh - $header-height) - $footer-height-sm) - 1rem);
-      }
     }
   }
 }
@@ -34,10 +30,6 @@
 
     &__content {
       min-height: calc((100vh - $header-height) - $footer-height-lg);
-
-      &--wrapper {
-        min-height: calc(((100vh - $header-height) - $footer-height-lg) - 1rem);
-      }
     }
   }
 }
@@ -51,10 +43,6 @@
 
     &__content {
       min-height: calc((100vh - $header-height) - $footer-height-md);
-
-      &--wrapper {
-        min-height: calc(((100vh - $header-height) - $footer-height-md) - 1rem);
-      }
     }
   }
 }
@@ -65,10 +53,6 @@
 
     &__content {
       min-height: calc((100vh - $header-height) - $footer-height-xl);
-
-      &--wrapper {
-        min-height: calc(((100vh - $header-height) - $footer-height-xl) - 1rem);
-      }
     }
   }
 }
@@ -79,10 +63,6 @@
 
     &__content {
       min-height: calc((100vh - $header-height) - $footer-height-xxl);
-
-      &--wrapper {
-        min-height: calc(((100vh - $header-height) - $footer-height-xxl) - 1rem);
-      }
     }
   }
 }
