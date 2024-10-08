@@ -55,7 +55,7 @@
   }
 
   &__icon {
-    padding: .5rem;
+    padding: .2rem;
 
     svg {
       fill: $border-color;
@@ -130,7 +130,7 @@
         &__full {
 
           #{ $self }__text {
-            padding: .5rem 0 0;
+            padding: 1rem 0 0;
           }
         }
       }
