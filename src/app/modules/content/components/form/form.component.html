@@ -1,0 +1,13 @@
+<form class="form" autocomplete="off" [formGroup]="formGroup" (ngSubmit)="handleSubmit($event)">
+  <div class="form__content">
+    <div class="form__header">
+      <h2 class="form__header--title">
+        <strong>PSE</strong> pagos en línea
+      </h2>
+    </div>
+    <ng-content />
+  </div>
+  <div class="form__bottom">
+    <ng-content select="form-bottom" />
+  </div>
+</form>
