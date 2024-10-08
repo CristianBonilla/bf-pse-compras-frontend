@@ -8,12 +8,14 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       {
-        path: 'auth',
-        loadChildren: () => import('@module/auth/auth.module').then(module => module.AuthModule)
+        path: '',
+        loadChildren: () => import('@module/auth/auth.module')
+          .then(module => module.AuthModule)
       },
       {
         path: 'transaction',
-        loadChildren: () => import('@module/transaction/transaction.module').then(module => module.TransactionModule)
+        loadChildren: () => import('@module/transaction/transaction.module')
+          .then(module => module.TransactionModule)
       }
     ]
   },
