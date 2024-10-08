@@ -1,5 +1,4 @@
 import { NgModule } from '@angular/core';
-import { ContentComponent } from '@module/layout/content/content.component';
 import { FooterComponent } from '@module/layout/footer/footer.component';
 import { HeaderComponent } from '@module/layout/header/header.component';
 import { LayoutRoutingModule } from '@module/layout/layout-routing.module';
@@ -12,8 +11,7 @@ import { SharedModule } from '@shared/shared.module';
     LayoutComponent,
     FooterComponent,
     HeaderComponent,
-    SidebarComponent,
-    ContentComponent
+    SidebarComponent
   ],
   imports: [
     LayoutRoutingModule,

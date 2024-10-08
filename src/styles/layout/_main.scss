@@ -8,36 +8,10 @@
   background-color: $white-color;
   min-height: $main-min-height;
 
-  .content {
-    border: 1px solid $border-color;
-    border-radius: $border-radius;
-    padding: 1rem;
-
-    &__wrapper {
-      margin: .5rem 1rem .5rem 0;
-      min-height: calc(((100vh - $header-height) - $footer-height) - 1rem);
-      padding: .2rem;
-    }
-
-    &__header {
-      background-color: $white-color;
-      padding: 0 1rem;
-      border: none;
-      width: 100%;
-
-      &--title {
-        font-family: 'pfbeausanspro-xthin';
-        font-weight: 600;
-        font-style: normal;
-        line-height: 1.5;
-
-        strong {
-          font-family: 'pfbeausanspro';
-          font-weight: 600;
-          font-style: normal;
-        }
-      }
-    }
+  &__content {
+    margin: .5rem 1rem .5rem 0;
+    min-height: calc(((100vh - $header-height) - $footer-height) - 1rem);
+    padding: .2rem;
   }
 }
 
@@ -45,11 +19,8 @@
   .main {
     padding-bottom: $footer-height-xs;
 
-    .content {
-
-      &__wrapper {
-        min-height: calc(((100vh - $header-height) - $footer-height-xs) - 1rem);
-      }
+    &__content {
+      min-height: calc(((100vh - $header-height) - $footer-height-xs) - 1rem);
     }
   }
 }
@@ -58,11 +29,8 @@
   .main {
     padding-bottom: $footer-height-md;
 
-    .content {
-
-      &__wrapper {
-        min-height: calc(((100vh - $header-height) - $footer-height-md) - 1rem);
-      }
+    &__content {
+      min-height: calc(((100vh - $header-height) - $footer-height-md) - 1rem);
     }
   }
 }
@@ -74,11 +42,8 @@
     padding-top: $header-height;
     padding-bottom: $footer-height-sm;
 
-    .content {
-
-      &__wrapper {
-        min-height: calc(((100vh - $header-height) - $footer-height-sm) - 1rem);
-      }
+    &__content {
+      min-height: calc(((100vh - $header-height) - $footer-height-sm) - 1rem);
     }
   }
 }
@@ -87,11 +52,8 @@
   .main {
     padding-bottom: $footer-height-lg;
 
-    .content {
-
-      &__wrapper {
-        min-height: calc(((100vh - $header-height) - $footer-height-lg) - 1rem);
-      }
+    &__content {
+      min-height: calc(((100vh - $header-height) - $footer-height-lg) - 1rem);
     }
   }
 }
@@ -100,11 +62,8 @@
   .main {
     padding-bottom: $footer-height-xl;
 
-    .content {
-
-      &__wrapper {
-        min-height: calc(((100vh - $header-height) - $footer-height-xl) - 1rem);
-      }
+    &__content {
+      min-height: calc(((100vh - $header-height) - $footer-height-xl) - 1rem);
     }
   }
 }
@@ -112,11 +71,8 @@
 @media (max-height: $main-min-height) {
   .main {
 
-    .content {
-
-      &__wrapper {
-        min-height: calc((($main-min-height - $header-height) - $footer-height) - 1rem);
-      }
+    &__content {
+      min-height: calc((($main-min-height - $header-height) - $footer-height) - 1rem);
     }
   }
 }
@@ -125,11 +81,8 @@
 @media (max-height: $main-min-height) and (max-width: map-get($grid-breakpoints, 'md')) {
   .main {
 
-    .content {
-
-      &__wrapper {
-        min-height: calc((($main-min-height - $header-height) - $footer-height-xs) - 1rem);
-      }
+    &__content {
+      min-height: calc((($main-min-height - $header-height) - $footer-height-xs) - 1rem);
     }
   }
 }
@@ -137,11 +90,8 @@
 @media (max-height: $main-min-height) and (max-width: calc(map-get($grid-breakpoints, 'sm') + 42px)) {
   .main {
 
-    .content {
-
-      &__wrapper {
-        min-height: calc((($main-min-height - $header-height) - $footer-height-md) - 1rem);
-      }
+    &__content {
+      min-height: calc((($main-min-height - $header-height) - $footer-height-md) - 1rem);
     }
   }
 }
@@ -149,11 +99,8 @@
 @media (max-height: $main-min-height) and (max-width: 420px) {
   .main {
 
-    .content {
-
-      &__wrapper {
-        min-height: calc((($main-min-height - $header-height) - $footer-height-sm) - 1rem);
-      }
+    &__content {
+      min-height: calc((($main-min-height - $header-height) - $footer-height-sm) - 1rem);
     }
   }
 }
@@ -161,11 +108,8 @@
 @media (max-height: $main-min-height) and (max-width: 350px) {
   .main {
 
-    .content {
-
-      &__wrapper {
-        min-height: calc((($main-min-height - $header-height) - $footer-height-lg) - 1rem);
-      }
+    &__content {
+      min-height: calc((($main-min-height - $header-height) - $footer-height-lg) - 1rem);
     }
   }
 }
@@ -173,11 +117,8 @@
 @media (max-height: $main-min-height) and (max-width: 340px) {
   .main {
 
-    .content {
-
-      &__wrapper {
-        min-height: calc((($main-min-height - $header-height) - $footer-height-xl) - 1rem);
-      }
+    &__content {
+      min-height: calc((($main-min-height - $header-height) - $footer-height-xl) - 1rem);
     }
   }
 }
