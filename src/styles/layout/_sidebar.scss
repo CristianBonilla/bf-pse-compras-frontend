@@ -80,13 +80,13 @@
 
 @media (max-width: map-get($grid-breakpoints, 'md')) {
   .sidebar {
-    padding-bottom: $footer-height-sm;
+    padding-bottom: $footer-height-xs;
   }
 }
 
 @media (max-width: calc(map-get($grid-breakpoints, 'sm') + 42px)) {
   .sidebar {
-    padding-bottom: $footer-height-lg;
+    padding-bottom: $footer-height-md;
   }
 }
 
