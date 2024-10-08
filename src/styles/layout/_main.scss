@@ -11,18 +11,7 @@
 
   &__content {
     padding: .5rem;
-    min-height: $main-min-height;
-    height: calc((100vh - $header-height) - $footer-height);
-  }
-}
-
-@media (max-width: calc(map-get($grid-breakpoints, 'lg') + 150px)) {
-  .main {
-    padding-bottom: $footer-height-xs;
-
-    &__content {
-      // min-height: calc((100vh - $header-height) - $footer-height-xs);
-    }
+    min-height: calc((100vh - $header-height) - $footer-height);
   }
 }
 
@@ -31,7 +20,7 @@
     padding-bottom: $footer-height-sm;
 
     &__content {
-      // min-height: calc((100vh - $header-height) - $footer-height-sm);
+      min-height: calc((100vh - $header-height) - $footer-height-sm);
     }
   }
 }
@@ -41,7 +30,7 @@
     padding-bottom: $footer-height-lg;
 
     &__content {
-      // min-height: calc((100vh - $header-height) - $footer-height-lg);
+      min-height: calc((100vh - $header-height) - $footer-height-lg);
     }
   }
 }
@@ -54,7 +43,7 @@
     padding-bottom: $footer-height-md;
 
     &__content {
-      // min-height: calc((100vh - $header-height) - $footer-height-md);
+      min-height: calc((100vh - $header-height) - $footer-height-md);
     }
   }
 }
@@ -64,7 +53,7 @@
     padding-bottom: $footer-height-xl;
 
     &__content {
-      // min-height: calc((100vh - $header-height) - $footer-height-xl);
+      min-height: calc((100vh - $header-height) - $footer-height-xl);
     }
   }
 }
@@ -74,7 +63,7 @@
     padding-bottom: $footer-height-xxl;
 
     &__content {
-      // min-height: calc((100vh - $header-height) - $footer-height-xxl);
+      min-height: calc((100vh - $header-height) - $footer-height-xxl);
     }
   }
 }
