@@ -1,0 +1,33 @@
+.content {
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  padding: 1rem;
+
+  &__header {
+    background-color: $white-color;
+    padding: 0 1rem;
+    border: none;
+    width: 100%;
+
+    &--title {
+      font-family: 'pfbeausanspro-xthin';
+      font-weight: 600;
+      font-style: normal;
+      line-height: 1.5;
+
+      strong {
+        font-family: 'pfbeausanspro';
+        font-weight: 600;
+        font-style: normal;
+      }
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    width: 100%;
+    margin: 1rem 0;
+  }
+}

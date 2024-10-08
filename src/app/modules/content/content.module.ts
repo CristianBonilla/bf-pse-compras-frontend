@@ -2,9 +2,10 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormComponent } from '@module/content/components/form/form.component';
+import { ContentComponent } from '@module/content/content.component';
 
 @NgModule({
-  declarations: [FormComponent],
+  declarations: [ContentComponent, FormComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -13,6 +14,7 @@ import { FormComponent } from '@module/content/components/form/form.component';
   exports: [
     FormsModule,
     ReactiveFormsModule,
+    ContentComponent,
     FormComponent
   ]
 })
