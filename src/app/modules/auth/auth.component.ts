@@ -3,8 +3,6 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'bf-pc-auth',
   templateUrl: './auth.component.html',
-  styleUrl: './auth.component.scss'
+  styles: ``
 })
-export class AuthComponent {
-
-}
+export class AuthComponent { }

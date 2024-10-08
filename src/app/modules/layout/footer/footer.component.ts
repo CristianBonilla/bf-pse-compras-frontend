@@ -4,7 +4,7 @@ import { FOOTER_INFO } from '@shared/constants/footer-info';
 @Component({
   selector: 'bf-pc-footer',
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.scss'
+  styles: ``
 })
 export class FooterComponent {
   readonly info = FOOTER_INFO;
