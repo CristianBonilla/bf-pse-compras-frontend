@@ -12,6 +12,30 @@
   &__content {
     padding: .5rem;
     min-height: calc((100vh - $header-height) - $footer-height);
+
+    &--wrapper {
+      padding: 2rem;
+      border: 1px solid $border-color;
+      border-radius: 6px;
+      min-height: calc(((100vh - $header-height) - $footer-height) - 1rem);
+
+      header {
+        padding: .5rem 0;
+
+        h2 {
+          font-family: 'pfbeausanspro-xthin';
+          font-weight: 600;
+          font-style: normal;
+          color: $header-text-color;
+
+          strong {
+            font-family: 'pfbeausanspro';
+            font-weight: 600;
+            font-style: normal;
+          }
+        }
+      }
+    }
   }
 }
 
@@ -21,6 +45,10 @@
 
     &__content {
       min-height: calc((100vh - $header-height) - $footer-height-sm);
+
+      &--wrapper {
+        min-height: calc(((100vh - $header-height) - $footer-height-sm) - 1rem);
+      }
     }
   }
 }
@@ -31,6 +59,10 @@
 
     &__content {
       min-height: calc((100vh - $header-height) - $footer-height-lg);
+
+      &--wrapper {
+        min-height: calc(((100vh - $header-height) - $footer-height-lg) - 1rem);
+      }
     }
   }
 }
@@ -44,6 +76,10 @@
 
     &__content {
       min-height: calc((100vh - $header-height) - $footer-height-md);
+
+      &--wrapper {
+        min-height: calc(((100vh - $header-height) - $footer-height-md) - 1rem);
+      }
     }
   }
 }
@@ -54,6 +90,10 @@
 
     &__content {
       min-height: calc((100vh - $header-height) - $footer-height-xl);
+
+      &--wrapper {
+        min-height: calc(((100vh - $header-height) - $footer-height-xl) - 1rem);
+      }
     }
   }
 }
@@ -64,6 +104,10 @@
 
     &__content {
       min-height: calc((100vh - $header-height) - $footer-height-xxl);
+
+      &--wrapper {
+        min-height: calc(((100vh - $header-height) - $footer-height-xxl) - 1rem);
+      }
     }
   }
 }

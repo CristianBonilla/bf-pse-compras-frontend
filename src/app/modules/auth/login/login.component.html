@@ -1,0 +1,69 @@
+<form>
+  <div class="form__wrapper mb-2">
+    <div class="form__header">
+      <h2>
+        <strong>PSE</strong> pagos en línea
+      </h2>
+    </div>
+    <div class="form__wrapper--content">
+      <div class="container-fluid">
+        <div class="row mb-3">
+          <label id="person-type" for="person-type" class="col-sm-4 col-form-label col-form-label-sm">Tipo de persona</label>
+          <div class="col-sm-8">
+            <select id="person-type" class="form-select form-select-sm">
+              <option selected>Selecciona tipo de persona</option>
+              <option value="1">Natural</option>
+              <option value="2">Jurídica</option>
+            </select>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label id="document-type" for="person-type" class="col-sm-4 col-form-label col-form-label-sm">Tipo de documento</label>
+          <div class="col-sm-8">
+            <select id="document-type" class="form-select form-select-sm">
+              <option selected>Selecciona tipo de documento</option>
+              <option value="1">CC</option>
+              <option value="2">NIT</option>
+              <option value="3">CE</option>
+              <option value="4">TI</option>
+              <option value="5">PAS</option>
+              <option value="6">CD</option>
+            </select>
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label id="document-number" for="person-type" class="col-sm-4 col-form-label col-form-label-sm">Número de documento</label>
+          <div class="col-sm-8">
+            <input id="document-number" type="text" class="form-control form-control-sm" placeholder="Ej: 1234567">
+          </div>
+        </div>
+        <div class="row mb-3">
+          <label id="internet-key" for="person-type" class="col-sm-4 col-form-label col-form-label-sm">Clave internet</label>
+          <div class="col-sm-8">
+            <input id="internet-key" type="text" class="form-control form-control-sm" placeholder="Ingresa tu clave">
+          </div>
+        </div>
+        <div class="row justify-content-end mb-3">
+          <div class="col-sm-8">
+            <a href="#" class="link-offset-2 link-underline link-underline-opacity-0 link-success">Recuperar o crear tu clave de internet
+              <fa-icon [icon]="['fas', 'angle-right']"></fa-icon>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Necesitas tu Clave Dinámica</h5>
+          <p class="card-text" [ngStyle]="{ fontSize: '13px' }">Para realizar esta transacción solicitaremos tu Clave Dinámica,<br>Para obtenerla deberás ingresar a tu APP Banco Falabella.</p>
+          <img src="images/dynamic-key.png" class="card-img-bottom" alt="">
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-end">
+    <div class="col-4">
+      <button type="submit" class="btn btn-secondary rounded-2 float-end me-2" disabled>Ingresar</button>
+      <button type="button" class="btn btn-light rounded-2 float-end me-2" disabled>Cancelar</button>
+    </div>
+  </div>
+</form>

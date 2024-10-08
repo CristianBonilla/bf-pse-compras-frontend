@@ -5,7 +5,13 @@ import { LayoutComponent } from '@module/layout/layout.component';
 const routes: Routes = [
   {
     path: '',
-    component: LayoutComponent
+    component: LayoutComponent,
+    children: [
+      {
+        path: 'auth',
+        loadChildren: () => import('@module/auth/auth.module').then(module => module.AuthModule)
+      }
+    ]
   }
 ];
 
