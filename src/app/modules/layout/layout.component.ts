@@ -4,7 +4,7 @@ import { SCROLLBAR_OPTIONS, ScrollbarOptions } from '@shared/constants/scrollbar
 @Component({
   selector: 'bf-pc-layout',
   templateUrl: './layout.component.html',
-  styleUrl: './layout.component.scss'
+  styles: ``
 })
 export class LayoutComponent {
   readonly scrollbarOptions: ScrollbarOptions = {
