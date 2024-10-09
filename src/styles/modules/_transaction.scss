@@ -1,0 +1,36 @@
+.transaction {
+
+  &__alert {
+    font-family: 'pfbeausanspro-bbook';
+    font-size: 15px;
+    margin-left: 1rem;
+    max-width: 800px;
+  }
+}
+
+@media (max-width: map-get($grid-breakpoints, 'lg')) {
+  .transaction {
+
+    &__alert {
+      font-size: 14px;
+    }
+  }
+}
+
+@media (max-width: map-get($grid-breakpoints, 'md')) {
+  .transaction {
+
+    &__alert {
+      font-size: 13px;
+    }
+  }
+}
+
+@media (max-width: map-get($grid-breakpoints, 'sm')) {
+  .transaction {
+
+    &__alert {
+      font-size: 12px;
+    }
+  }
+}
