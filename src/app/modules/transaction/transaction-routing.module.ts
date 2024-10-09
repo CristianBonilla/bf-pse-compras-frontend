@@ -1,8 +1,18 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TransactionComponent } from './transaction.component';
+import { TransactionComponent } from '@module/transaction/transaction.component';
+import { VoucherComponent } from '@module/transaction/voucher/voucher.component';
 
-const routes: Routes = [{ path: '', component: TransactionComponent }];
+const routes: Routes = [
+  {
+    path: '',
+    component: TransactionComponent
+  },
+  {
+    path: 'voucher',
+    component: VoucherComponent
+  }
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
