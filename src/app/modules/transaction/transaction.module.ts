@@ -1,17 +1,15 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { TransactionRoutingModule } from './transaction-routing.module';
-import { TransactionComponent } from './transaction.component';
-
+import { NgModule } from '@angular/core';
+import { ContentModule } from "@module/content/content.module";
+import { TransactionRoutingModule } from '@module/transaction/transaction-routing.module';
+import { TransactionComponent } from '@module/transaction/transaction.component';
 
 @NgModule({
-  declarations: [
-    TransactionComponent
-  ],
+  declarations: [TransactionComponent],
   imports: [
     CommonModule,
-    TransactionRoutingModule
+    TransactionRoutingModule,
+    ContentModule
   ]
 })
 export class TransactionModule { }
