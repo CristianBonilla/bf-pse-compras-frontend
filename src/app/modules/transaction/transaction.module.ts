@@ -5,6 +5,7 @@ import { InvalidComponent } from '@module/transaction/invalid/invalid.component'
 import { TransactionRoutingModule } from '@module/transaction/transaction-routing.module';
 import { TransactionComponent } from '@module/transaction/transaction.component';
 import { VoucherComponent } from '@module/transaction/voucher/voucher.component';
+import { SharedModule } from '@shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ import { VoucherComponent } from '@module/transaction/voucher/voucher.component'
   imports: [
     CommonModule,
     TransactionRoutingModule,
+    SharedModule,
     ContentModule
   ]
 })

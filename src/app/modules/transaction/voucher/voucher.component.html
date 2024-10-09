@@ -1,3 +1,122 @@
 <bf-pc-content>
-
+  <div class="voucher">
+    <div class="transaction__alert alert alert-success" role="alert">
+      <fa-icon class="transaction__alert--icon" [icon]="['fas', 'check']"></fa-icon>
+      <p class="transaction__alert--text">Realizamos el pago de tu cuenta y esta pendiente la aprobación por PSE, en caso de ser rechazado se reservará a tu cuenta.</p>
+    </div>
+    <div class="voucher__content--wrapper">
+      <div class="voucher__content">
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Estado de la transacción</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>Aprobada</strong>
+            </p>
+          </blockquote>
+        </div>
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Tipo de transacción</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>Compra</strong>
+            </p>
+          </blockquote>
+        </div>
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Comercio</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>Banco Falabella S.A.</strong>
+            </p>
+          </blockquote>
+        </div>
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">factura del comercio</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>107199624</strong>
+            </p>
+          </blockquote>
+        </div>
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Descripción</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>Pago de productos banco Falabella</strong>
+            </p>
+          </blockquote>
+        </div>
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Valor de transacción</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>$ 364.867,00</strong>
+            </p>
+          </blockquote>
+        </div>
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Costo de transacción</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>$ 0,00</strong>
+            </p>
+          </blockquote>
+        </div>
+      </div>
+      <div class="voucher__content">
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Fecha de transacción</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>Jueves, 13 de junio de 2024</strong>
+            </p>
+          </blockquote>
+        </div>
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Hora de transacción</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>13:01 hrs</strong>
+            </p>
+          </blockquote>
+        </div>
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Autorización (CUS)</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>702199624</strong>
+            </p>
+          </blockquote>
+        </div>
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Cuenta seleccionada</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>Cuenta corriente • • • • • • 0868</strong>
+            </p>
+          </blockquote>
+        </div>
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Número de comprobante del banco</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>00001</strong>
+            </p>
+          </blockquote>
+        </div>
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Código del dispositivo</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>181.33.192.163</strong>
+            </p>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-container ngProjectAs="content-bottom">
+    <button id="return-to-trade" type="button" class="btn btn-light" disabled>Volver al comercio</button>
+    <button id="download-voucher" type="submit" class="btn btn-secondary" disabled>Descargar</button>
+  </ng-container>
 </bf-pc-content>
