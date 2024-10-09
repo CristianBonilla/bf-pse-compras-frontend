@@ -5,6 +5,4 @@ import { Component } from '@angular/core';
   templateUrl: './voucher.component.html',
   styles: ``
 })
-export class VoucherComponent {
-
-}
+export class VoucherComponent { }
