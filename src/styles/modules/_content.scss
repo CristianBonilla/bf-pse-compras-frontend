@@ -6,6 +6,7 @@
   &__header {
     background-color: $white-color;
     padding: 0 1rem;
+    margin: .5rem 0;
     border: none;
     width: 100%;
 
@@ -14,6 +15,7 @@
       font-weight: 600;
       font-style: normal;
       line-height: 1.5;
+      margin-bottom: 0;
 
       strong {
         font-family: 'pfbeausanspro';
