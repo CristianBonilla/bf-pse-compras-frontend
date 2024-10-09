@@ -96,12 +96,12 @@
 
       &--items:first-child {
         flex: 0 0 calc(60% - 20px);
-        width: calc(60% - 20px);
+        width: 60%;
       }
 
       &--items:last-child {
         flex: 0 0 calc(40% - 20px);
-        width: calc(40% - 20px);
+        width: 40%;
       }
     }
   }
@@ -115,12 +115,12 @@
 
       &--items:first-child {
         flex: 0 0 calc(60% - 50px);
-        width: calc(60% - 50px);
+        width: 60%;
       }
 
       &--items:last-child {
         flex: 0 0 calc(40% - 50px);
-        width: calc(40% - 50px);
+        width: 50%;
       }
     }
   }
@@ -134,12 +134,12 @@
 
       &--items:first-child {
         flex: 0 0 calc(60% - 100px);
-        width: calc(60% - 100px);
+        width: 60%;
       }
 
       &--items:last-child {
         flex: 0 0 calc(40% - 100px);
-        width: calc(40% - 100px);
+        width: 40%;
       }
     }
   }
