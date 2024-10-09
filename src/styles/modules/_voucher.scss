@@ -1,0 +1,151 @@
+.voucher {
+  margin: 1.5rem 0 0;
+
+  &__content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 10px;
+    flex: 0 0 calc(50% - 30px);
+    width: 50%;
+    min-height: 1rem;
+    max-width: 460px;
+
+    &--wrapper {
+      display: flex;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      width: 100%;
+      padding: 1rem 0 .5rem 1rem;
+      gap: 30px;
+    }
+
+    &--item {
+      display: flex;
+      align-items: flex-start;
+      width: 100%;
+      gap: 10px;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &__title,
+  blockquote {
+    flex: 0 0 calc(50% - 10px);
+    width: 50%;
+    line-height: 1.2;
+    opacity: .9;
+    font-size: 14px;
+    color: $transaction-text-color;
+  }
+
+  &__title,
+  &__text,
+  blockquote {
+    margin-bottom: 0;
+  }
+
+  &__title,
+  &__text {
+    display: inline-block;
+  }
+
+  blockquote {
+    font-family: 'pfbeausanspro-bbook';
+    text-align: right;
+    color: $transaction-text-color-dark;
+  }
+}
+
+@media (min-width: map-get($grid-breakpoints, 'lg')) {
+  .voucher {
+
+    &__content {
+      flex: 0 0 40%;
+      width: 40%;
+
+      &--wrapper {
+        justify-content: space-between;
+      }
+    }
+  }
+}
+
+@media (max-width: calc(map-get($grid-breakpoints, 'md') + 132px)) {
+  .voucher {
+
+    &__content {
+      flex: 0 0 100%;
+      width: 100%;
+
+      &--wrapper {
+        align-items: center;
+        flex-direction: column;
+        gap: 10px;
+      }
+    }
+  }
+}
+
+@media (max-width: calc(map-get($grid-breakpoints, 'sm') + 43px)) {
+  .voucher {
+
+    &__content {
+
+      &--wrapper {
+        align-items: flex-start;
+      }
+
+      &--item {
+        flex-direction: column;
+      }
+    }
+
+    &__title,
+    blockquote {
+      font-size: 16px;
+      flex: 0 0 100%;
+      width: 100%;
+    }
+
+    blockquote {
+      text-align: left;
+    }
+  }
+}
+
+@media (max-width: map-get($grid-breakpoints, 'lg')) {
+  .voucher {
+
+    &__alert {
+
+      &--text {
+        font-size: 14px;
+      }
+    }
+  }
+}
+
+@media (max-width: map-get($grid-breakpoints, 'md')) {
+  .voucher {
+
+    &__alert {
+
+      &--text {
+        font-size: 13px;
+      }
+    }
+  }
+}
+
+@media (max-width: map-get($grid-breakpoints, 'sm')) {
+  .voucher {
+
+    &__alert {
+
+      &--text {
+        font-size: 12px;
+      }
+    }
+  }
+}

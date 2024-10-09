@@ -1,35 +1,29 @@
 .transaction {
 
   &__alert {
-    font-family: 'pfbeausanspro-bbook';
-    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
     margin-left: 1rem;
-  }
-}
 
-@media (max-width: map-get($grid-breakpoints, 'lg')) {
-  .transaction {
-
-    &__alert {
-      font-size: 14px;
+    &.alert-success {
+      border: none;
+      border-radius: $alert-border-radius;
+      background-color: $alert-color-success;
+      color: $alert-color;
     }
-  }
-}
 
-@media (max-width: map-get($grid-breakpoints, 'md')) {
-  .transaction {
-
-    &__alert {
-      font-size: 13px;
+    &--text {
+      font-size: 15px;
+      margin-bottom: 0;
+      line-height: 1.2;
+      opacity: .9;
     }
-  }
-}
 
-@media (max-width: map-get($grid-breakpoints, 'sm')) {
-  .transaction {
-
-    &__alert {
-      font-size: 12px;
+    &--icon {
+      font-size: 20px;
+      color: $banco-falabella-color-hover;
+      padding: .2rem;
     }
   }
 }
