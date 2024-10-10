@@ -11,6 +11,7 @@
     textarea {
       font-family: 'pfbeausanspro-bbook';
       color: $form-text-color;
+      opacity: .9;
     }
 
     &--items {
@@ -67,7 +68,7 @@
   }
 
   &__link {
-    color: $banco-falabella-color-hover;
+    color: $banco-falabella-color-dark;
     font-size: 13px;
 
     &:hover {
