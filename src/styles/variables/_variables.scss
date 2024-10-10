@@ -9,7 +9,7 @@ $default-text-size: 1rem !default;
 $default-line-height: 1.5 !default;
 
 $banco-falabella-color: rgb(195, 214, 0) !default;
-$banco-falabella-color-hover: rgb(43, 143, 20) !default;
+$banco-falabella-color-dark: rgb(43, 143, 20) !default;
 
 $white-color: #FFFFFF !default;
 
@@ -36,7 +36,10 @@ $border-radius: 6px;
 $form-text-color: rgb(92, 97, 102) !default;
 
 $alert-color: rgba(51, 53, 55, 1) !default;
+$alert-color-warning: rgba(255, 244, 223, 1) !default;
+$alert-color-warning-icon: rgb(194, 139, 18) !default;
 $alert-color-success: rgba(239, 248, 234, 1) !default;
+$alert-color-success-icon: $banco-falabella-color-dark;
 $alert-border-radius: 8px;
 
 $transaction-text-color: rgba(68, 71, 75, 1) !default;

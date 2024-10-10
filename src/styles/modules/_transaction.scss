@@ -1,16 +1,33 @@
 .transaction {
 
   &__alert {
+    $self: &;
+
     display: flex;
     align-items: center;
     gap: 10px;
     margin-left: 1rem;
+    border: none;
+    border-radius: $alert-border-radius;
+    color: $alert-color;
+    opacity: .9;
+
+    &.alert-warning {
+      background-color: $alert-color-warning;
+      max-width: 800px;
+
+      #{ $self }--icon {
+        color: $alert-color-warning-icon;
+      }
+    }
 
     &.alert-success {
-      border: none;
-      border-radius: $alert-border-radius;
       background-color: $alert-color-success;
-      color: $alert-color;
+      max-width: 910px;
+
+      #{ $self }--icon {
+        color: $alert-color-success-icon;
+      }
     }
 
     &--text {
@@ -22,7 +39,6 @@
 
     &--icon {
       font-size: 20px;
-      color: $banco-falabella-color-hover;
       padding: .2rem;
     }
   }
