@@ -1,12 +1,21 @@
 <bf-pc-form [formGroup]="loginForm" (submit)="login()">
+  <!-- <div class="form__content">
+    <div class="form__content--items">
+      <div class="form__group"></div>
+    </div>
+    <div class="form__content--items"></div>
+  </div> -->
+
   <div class="form__content row">
     <div class="form__content--items">
       <div class="row mb-3">
         <label for="person-type" class="col-form-label-sm col-sm-4">Tipo de persona</label>
         <div class="col-sm-8">
-          <select id="person-type" class="form-select form-select-sm" [formControl]="personTypeControl">
+          <select id="person-type" class="form-select form-select-sm"
+            [formControl]="personTypeControl"
+            (ngModelChange)="personTypeChange($event)">
             @for (type of personType; track type.value) {
-              <option [ngValue]="type">{{ type.text }}</option>
+              <option [ngValue]="type" [attr.selected]="type.selected ? true : null">{{ type.text }}</option>
             }
           </select>
         </div>
@@ -14,9 +23,11 @@
       <div class="row mb-3">
         <label for="document-type" class="col-form-label-sm col-sm-4">Tipo de documento</label>
         <div class="col-sm-8">
-          <select id="document-type" class="form-select form-select-sm" [formControl]="documentTypeControl">
+          <select id="document-type" class="form-select form-select-sm"
+            [formControl]="documentTypeControl"
+            (ngModelChange)="documentTypeChange($event)">
             @for (type of documentType; track type.value) {
-              <option [ngValue]="type">{{ type.text }}</option>
+              <option [ngValue]="type" [attr.selected]="type.selected ? true : null">{{ type.text }}</option>
             }
           </select>
         </div>
