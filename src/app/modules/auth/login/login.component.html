@@ -1,59 +1,48 @@
 <bf-pc-form [formGroup]="loginForm" (submit)="login()">
-  <!-- <div class="form__content">
-    <div class="form__content--items">
-      <div class="form__group"></div>
-    </div>
-    <div class="form__content--items"></div>
-  </div> -->
-
-  <div class="form__content row">
-    <div class="form__content--items">
-      <div class="row mb-3">
-        <label for="person-type" class="col-form-label-sm col-sm-4">Tipo de persona</label>
-        <div class="col-sm-8">
-          <bf-pc-select
-            id="person-type"
-            [formControl]="personTypeControl"
-            [options]="personType" />
-        </div>
+  <div class="form__content">
+    <div class="form__content--item">
+      <div class="form__group">
+        <label for="person-type" class="form__label">Tipo de persona</label>
+        <select id="person-type" class="form__select">
+          <option selected>Seleccionar tipo de persona</option>
+          <option value="2">Natural</option>
+          <option value="3">Jurídica</option>
+        </select>
       </div>
-      <div class="row mb-3">
-        <label for="document-type" class="col-form-label-sm col-sm-4">Tipo de documento</label>
-        <div class="col-sm-8">
-          <bf-pc-select
-            id="document-type"
-            [formControl]="documentTypeControl"
-            [options]="documentType" />
-        </div>
+      <div class="form__group">
+        <label for="document-type" class="form__label">Tipo de documento</label>
+        <select id="document-type" class="form__select">
+          <option selected>Selecciona tipo de documento</option>
+          <option value="1">CC</option>
+          <option value="2">NIT</option>
+          <option value="3">CE</option>
+          <option value="4">TI</option>
+          <option value="5">PAS</option>
+          <option value="6">CD</option>
+        </select>
       </div>
-      <div class="row mb-3">
-        <label for="document-number" class="col-form-label-sm col-sm-4">Número de documento</label>
-        <div class="col-sm-8">
-          <input id="document-number" type="text" class="form-control form-control-sm col-md-5" placeholder="Ej. 1234567" [formControl]="documentNumberControl">
-        </div>
+      <div class="form__group">
+        <label for="document-number" class="form__label">Número de documento</label>
+        <input id="document-number" type="text" class="form__input" placeholder="Ej. 1234567">
       </div>
-      <div class="row mb-3">
-        <label for="internet-key" class="col-form-label-sm col-sm-4">Clave internet</label>
-        <div class="col-sm-8">
-          <input id="internet-key" type="text" class="form-control form-control-sm col-md-5" placeholder="Ingresa tu clave" [formControl]="internetKeyControl">
-        </div>
+      <div class="form__group--last">
+        <label for="internet-key" class="form__label">Clave internet</label>
+        <input id="internet-key" type="text" class="form__input" placeholder="Ingresa tu clave">
       </div>
-      <div class="row">
-        <div class="col-sm-8 offset-sm-4">
-          <a href="https://www.bancofalabella.com.co/autoadhesion" class="form__link link-offset-1 link-underline link-underline-opacity-0">
-            <p>Recuperar o crear <span>tu clave de internet <fa-icon [icon]="['fas', 'angle-right']" /></span></p>
-          </a>
-        </div>
+      <div class="form__group--right">
+        <a [href]="recoveryLink" class="form__link">
+          <p>Recuperar o crear <span>tu clave de internet <fa-icon [icon]="['fas', 'angle-right']" /></span></p>
+        </a>
       </div>
     </div>
-    <div class="form__content--items">
-      <div class="form__content--dynamic-key card">
-        <div class="card-body">
-          <h5 class="card-title">Necesitas tu Clave Dinámica</h5>
-          <p class="card-text">Para realizar esta transacción solicitaremos tu Clave Dinámica.<br>Para obtener deberás ingresar a tu APP Banco Falabella.</p>
+    <div class="form__content--item">
+      <!-- <div class="form__dynamic-key">
+        <div class="form__dynamic-key--body">
+          <h5 class="form__dynamic-key--title">Necesitas tu Clave Dinámica</h5>
+          <p class="form__dynamic-key--text">Para realizar esta transacción solicitaremos tu Clave Dinámica.<br>Para obtener deberás ingresar a tu APP Banco Falabella.</p>
         </div>
-        <img src="images/dynamic-key.png" class="card-img-bottom" alt="Clave Dinámica">
-      </div>
+        <img src="images/dynamic-key.png" class="form__dynamic-key--image" alt="Clave Dinámica">
+      </div> -->
     </div>
   </div>
   <ng-container ngProjectAs="form-bottom">

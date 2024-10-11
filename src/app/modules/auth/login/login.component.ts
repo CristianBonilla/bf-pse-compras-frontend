@@ -20,6 +20,7 @@ export class LoginComponent {
     documentNumber: [null],
     internetKey: [null]
   });
+  readonly recoveryLink = 'https://www.bancofalabella.com.co/autoadhesion';
 
   get personTypeControl() {
     return this.loginForm.controls.personType;
