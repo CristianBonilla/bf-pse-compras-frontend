@@ -4,25 +4,33 @@
       <div class="row mb-3">
         <label for="person-type" class="col-form-label-sm col-sm-4">Tipo de persona</label>
         <div class="col-sm-8">
-          <select id="person-type" class="form-select form-select-sm" [formControl]="personType"></select>
+          <select id="person-type" class="form-select form-select-sm" [formControl]="personTypeControl">
+            @for (type of personType; track type.value) {
+              <option [ngValue]="type">{{ type.text }}</option>
+            }
+          </select>
         </div>
       </div>
       <div class="row mb-3">
         <label for="document-type" class="col-form-label-sm col-sm-4">Tipo de documento</label>
         <div class="col-sm-8">
-          <select id="document-type" class="form-select form-select-sm" [formControl]="documentType"></select>
+          <select id="document-type" class="form-select form-select-sm" [formControl]="documentTypeControl">
+            @for (type of documentType; track type.value) {
+              <option [ngValue]="type">{{ type.text }}</option>
+            }
+          </select>
         </div>
       </div>
       <div class="row mb-3">
         <label for="document-number" class="col-form-label-sm col-sm-4">Número de documento</label>
         <div class="col-sm-8">
-          <input id="document-number" type="text" class="form-control form-control-sm col-md-5" placeholder="Ej. 1234567" [formControl]="documentNumber">
+          <input id="document-number" type="text" class="form-control form-control-sm col-md-5" placeholder="Ej. 1234567" [formControl]="documentNumberControl">
         </div>
       </div>
       <div class="row mb-3">
         <label for="internet-key" class="col-form-label-sm col-sm-4">Clave internet</label>
         <div class="col-sm-8">
-          <input id="internet-key" type="text" class="form-control form-control-sm col-md-5" placeholder="Ingresa tu clave" [formControl]="internetKey">
+          <input id="internet-key" type="text" class="form-control form-control-sm col-md-5" placeholder="Ingresa tu clave" [formControl]="internetKeyControl">
         </div>
       </div>
       <div class="row">
