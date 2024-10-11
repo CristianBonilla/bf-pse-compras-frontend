@@ -1,17 +1,20 @@
 import { PersonType } from '@shared/enums/person.enums';
-import { FormOption } from '@shared/types/form.types';
+import { FormSelectOption } from '@shared/types/form.types';
 
-export const PERSON_TYPE: (FormOption<'Seleccionar tipo de persona', null> | FormOption<string, PersonType>)[] = [
+export const PERSON_TYPE: [FormSelectOption<'Seleccionar tipo de persona', null>, ...FormSelectOption<string, PersonType>[]] = [
   {
     text: 'Seleccionar tipo de persona',
-    value: null
+    value: null,
+    selected: true
   },
   {
     text: 'Natural',
-    value: PersonType.Natural
+    value: PersonType.Natural,
+    selected: false
   },
   {
     text: 'Jurídica',
-    value: PersonType.Legal
+    value: PersonType.Legal,
+    selected: false
   }
 ];
