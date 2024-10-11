@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { SCROLLBAR_OPTIONS, ScrollbarOptions } from '@shared/constants/scrollbar-config';
+import { SCROLLBAR_OPTIONS, ScrollbarOptions } from '@shared/constants/scrollbar-config.constants';
 
 @Component({
   selector: 'bf-pc-layout',

@@ -1,4 +1,4 @@
-import { DocumentType } from '@shared/enums/document.enum';
+import { DocumentType } from '@shared/enums/document.enums';
 import { FormOption } from '@shared/types/form.types';
 
 export const DOCUMENT_TYPE: (FormOption<'Seleccionar tipo de documento', null> | FormOption<string, DocumentType>)[] = [

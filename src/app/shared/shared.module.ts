@@ -1,7 +1,5 @@
-import { NgOptimizedImage } from '@angular/common';
-import { provideHttpClient, withFetch } from '@angular/common/http';
 import { NgModule } from '@angular/core';
-import { TOASTR_GLOBAL_CONFIG } from '@shared/constants/toastr-config';
+import { TOASTR_GLOBAL_CONFIG } from '@shared/constants/toastr-config.constants';
 import { IconsModule } from '@shared/icons/icons.module';
 import { SafeHtmlPipe } from '@shared/pipes/safe-html/safe-html.pipe';
 import { AngularSvgIconModule } from 'angular-svg-icon';
