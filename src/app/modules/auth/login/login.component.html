@@ -25,24 +25,26 @@
         <label for="document-number" class="form__label">Número de documento</label>
         <input id="document-number" type="text" class="form__input" placeholder="Ej. 1234567">
       </div>
-      <div class="form__group--last">
+      <div class="form__group">
         <label for="internet-key" class="form__label">Clave internet</label>
         <input id="internet-key" type="text" class="form__input" placeholder="Ingresa tu clave">
       </div>
-      <div class="form__group--right">
+      <div class="form__group--last">
         <a [href]="recoveryLink" class="form__link">
           <p>Recuperar o crear <span>tu clave de internet <fa-icon [icon]="['fas', 'angle-right']" /></span></p>
         </a>
       </div>
     </div>
     <div class="form__content--item">
-      <!-- <div class="form__dynamic-key">
+      <div class="form__dynamic-key">
         <div class="form__dynamic-key--body">
-          <h5 class="form__dynamic-key--title">Necesitas tu Clave Dinámica</h5>
-          <p class="form__dynamic-key--text">Para realizar esta transacción solicitaremos tu Clave Dinámica.<br>Para obtener deberás ingresar a tu APP Banco Falabella.</p>
+          <h5 class="form__dynamic-key--title">Necesitarás tu Clave Dinámica</h5>
+          <p class="form__dynamic-key--text">Para realizar esta transacción solicitaremos tu Clave Dinámica,<br>Para obtener deberás ingresar a tu APP Banco Falabella.</p>
         </div>
-        <img src="images/dynamic-key.png" class="form__dynamic-key--image" alt="Clave Dinámica">
-      </div> -->
+        <figure class="form__dynamic-key--image">
+          <img src="images/dynamic-key.png" alt="Clave Dinámica">
+        </figure>
+      </div>
     </div>
   </div>
   <ng-container ngProjectAs="form-bottom">
