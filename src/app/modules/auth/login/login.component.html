@@ -1,6 +1,9 @@
 <bf-pc-form [formGroup]="loginForm" (submit)="login()">
   <div class="form__content">
-    <div class="form__content--item">
+    <div [ngClass]="[
+      'form__content--item',
+      personTypeValue.value === PERSON_TYPE.Legal ? 'form__content--item-full' : ''
+    ]">
       <div class="form__group">
         <label for="person-type" class="form__label">Tipo de persona</label>
         <bf-pc-select
@@ -9,35 +12,52 @@
             autocomplete: 'off'
           }"
           [formControl]="personTypeControl"
-          [options]="personType" />
+          (ngModelChange)="personTypeChange($event)"
+          [options]="personTypeOptions" />
       </div>
-      <div class="form__group">
-        <label for="document-type" class="form__label">Tipo de documento</label>
-        <bf-pc-select
-          [attributes]="{
-            id: 'document-type',
-            autocomplete: 'off'
-          }"
-          [formControl]="documentTypeControl"
-          [options]="documentType" />
-      </div>
-      <div class="form__group">
-        <label for="document-number" class="form__label">Número de documento</label>
-        <input id="document-number" type="text" class="form__input" placeholder="Ej. 1234567" [formControl]="documentNumberControl">
-      </div>
-      <div class="form__group">
-        <label for="internet-key" class="form__label">Clave internet</label>
-        <input id="internet-key" type="text" class="form__input" placeholder="Ingresa tu clave" [formControl]="internetKeyControl">
-      </div>
+      @if (personTypeValue.selected && personTypeValue.value !== null) {
+        @if (bussinessGroupControl) {
+          <div class="form__group">
+            <label for="business-group" class="form__label">Grupo empresarial</label>
+            <input id="business-group" type="text" class="form__input" placeholder="Ingresa tu grupo empresarial" [formControl]="bussinessGroupControl">
+          </div>
+        }
+        <div class="form__group">
+          <label for="document-type" class="form__label">Tipo de documento</label>
+          <bf-pc-select
+            [attributes]="{
+              id: 'document-type',
+              autocomplete: 'off'
+            }"
+            [formControl]="documentTypeControl"
+            [options]="documentTypeOptions" />
+        </div>
+        <div class="form__group">
+          <label for="document-number" class="form__label">Número de documento</label>
+          <input id="document-number" type="text" class="form__input" placeholder="Ej. 1234567" [formControl]="documentNumberControl">
+        </div>
+        <div class="form__group">
+          <label for="internet-key" class="form__label">Clave internet</label>
+          <input id="internet-key" type="text" class="form__input" placeholder="Ingresa tu clave" [formControl]="internetKeyControl">
+        </div>
+        @if (tokenKeyControl) {
+          <div class="form__group">
+            <label for="token-key" class="form__label">Código token</label>
+            <input id="token-key" type="text" class="form__input" placeholder="Ingresa tu código token" [formControl]="tokenKeyControl">
+          </div>
+        }
+      }
       <div class="form__group--last">
         <a [href]="recoveryLink" class="form__link">
           <p>Recuperar o crear <span>tu clave de internet <fa-icon [icon]="['fas', 'angle-right']" /></span></p>
         </a>
       </div>
     </div>
-    <div class="form__content--item">
-      <bf-pc-dynamic-key />
-    </div>
+    @if (personTypeValue.value !== PERSON_TYPE.Legal) {
+      <div class="form__content--item">
+        <bf-pc-dynamic-key />
+      </div>
+    }
   </div>
   <ng-container ngProjectAs="form-bottom">
     <button id="cancel-transaction" type="button" class="btn btn-light" disabled>Cancelar</button>
