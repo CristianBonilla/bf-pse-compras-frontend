@@ -1,4 +1,10 @@
 .form {
+  $self: &;
+
+  $self-select: #{ $self }__select;             /* .form__select */
+  $select-wrap: bf-pc-select#{ $self-select };  /* bf-pc-select.form__select */
+  $select-inner: #{ $select-wrap } select;      /* bf-pc-select.form__select select */
+  $select: select#{ $self-select };             /* select.form__select */
 
   &__content {
     display: flex;
@@ -24,7 +30,7 @@
   }
 
   &__group {
-    $self: &;
+    $group: &;
 
     &,
     &--last {
@@ -37,13 +43,14 @@
       margin-bottom: .8rem;
     }
 
-    &:has(+ #{ $self }--last) {
+    &:has(+ #{ $group }--last) {
       margin-bottom: .4rem;
     }
   }
 
   &__label,
-  &__select,
+  #{ $select-inner },
+  #{ $select },
   &__input,
   &__textarea,
   &__link {
@@ -53,18 +60,26 @@
   }
 
   &__label,
-  &__select,
+  #{ $select-inner },
+  #{ $select },
   &__input,
   &__textarea {
     opacity: .9;
   }
 
-  &__select,
+  #{ $select-wrap },
+  #{ $select },
   &__input,
   &__textarea {
     flex: 0 0 calc(60% - .5rem);
     width: 60%;
     margin-left: .5rem;
+  }
+
+  #{ $select-inner },
+  #{ $select },
+  &__input,
+  &__textarea {
     min-height: 40px;
   }
 
@@ -80,7 +95,8 @@
     @extend .form-control-sm;
   }
 
-  &__select {
+  #{ $select-inner },
+  #{ $select } {
     @extend .form-select;
     @extend .form-select-sm;
   }
@@ -169,6 +185,12 @@
 
 @media (max-width: calc(map-get($grid-breakpoints, 'sm') + 29px)) {
   .form {
+    $self: &;
+
+    $self-select: #{ $self }__select;             /* .form__select */
+    $select-wrap: bf-pc-select#{ $self-select };  /* bf-pc-select.form__select */
+    $select-inner: #{ $select-wrap } select;      /* bf-pc-select.form__select select */
+    $select: select#{ $self-select };             /* select.form__select */
 
     &__group {
 
@@ -182,14 +204,16 @@
     }
 
     &__label,
-    &__select,
+    #{ $select-wrap },
+    #{ $select },
     &__input,
     &__textarea {
       flex: auto;
       width: 100%;
     }
 
-    &__select,
+    #{ $select-wrap },
+    #{ $select },
     &__input,
     &__textarea {
       margin-left: 0;

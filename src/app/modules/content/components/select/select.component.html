@@ -1,8 +1,9 @@
 <select
-  [attr.id]="id"
-  [attr.name]="name ?? id"
-  [attr.autocomplete]="autocomplete"
-  [attr.disabled]="disabled"
+  [attr.id]="attributes.id"
+  [attr.name]="attributes.name ?? attributes.id"
+  [attr.autocomplete]="attributes.autocomplete"
+  [attr.spellcheck]="attributes.spellcheck"
+  [disabled]="disabled"
   (focus)="onTouched()"
   [(ngModel)]="handleOption">
   @for (option of options; track option.value) {
