@@ -1,4 +1,4 @@
-import { PersonType } from '@shared/enums/person.enum';
+import { PersonType } from '@shared/enums/person.enums';
 import { FormOption } from '@shared/types/form.types';
 
 export const PERSON_TYPE: (FormOption<'Seleccionar tipo de persona', null> | FormOption<string, PersonType>)[] = [
