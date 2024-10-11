@@ -11,25 +11,19 @@
       <div class="row mb-3">
         <label for="person-type" class="col-form-label-sm col-sm-4">Tipo de persona</label>
         <div class="col-sm-8">
-          <select id="person-type" class="form-select form-select-sm"
+          <bf-pc-select
+            id="person-type"
             [formControl]="personTypeControl"
-            (ngModelChange)="personTypeChange($event)">
-            @for (type of personType; track type.value) {
-              <option [ngValue]="type" [attr.selected]="type.selected ? true : null">{{ type.text }}</option>
-            }
-          </select>
+            [options]="personType" />
         </div>
       </div>
       <div class="row mb-3">
         <label for="document-type" class="col-form-label-sm col-sm-4">Tipo de documento</label>
         <div class="col-sm-8">
-          <select id="document-type" class="form-select form-select-sm"
+          <bf-pc-select
+            id="document-type"
             [formControl]="documentTypeControl"
-            (ngModelChange)="documentTypeChange($event)">
-            @for (type of documentType; track type.value) {
-              <option [ngValue]="type" [attr.selected]="type.selected ? true : null">{{ type.text }}</option>
-            }
-          </select>
+            [options]="documentType" />
         </div>
       </div>
       <div class="row mb-3">

@@ -1,0 +1,11 @@
+<select
+  [attr.id]="id"
+  [attr.name]="name ?? id"
+  [attr.autocomplete]="autocomplete"
+  [attr.disabled]="disabled"
+  (focus)="onTouched()"
+  [(ngModel)]="handleOption">
+  @for (option of options; track option.value) {
+    <option [ngValue]="option" [attr.selected]="option.selected ? true : null">{{ option.text }}</option>
+  }
+</select>
