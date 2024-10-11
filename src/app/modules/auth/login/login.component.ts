@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { LoginFormGroup } from '@models/form';
+import { LoginForm } from '@models/form.model';
+import { FormGroupDynamic } from '@shared/types/form.types';
 
 @Component({
   selector: 'bf-pc-login',
@@ -9,7 +10,7 @@ import { LoginFormGroup } from '@models/form';
 })
 export class LoginComponent {
   readonly #formBuilder = inject(FormBuilder);
-  readonly loginForm = this.#formBuilder.group<LoginFormGroup>({
+  readonly loginForm = this.#formBuilder.group<FormGroupDynamic<LoginForm>>({
     personType: [null],
     documentType: [null],
     documentNumber: [null],
