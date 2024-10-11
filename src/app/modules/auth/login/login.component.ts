@@ -3,9 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { LoginForm } from '@models/login.model';
 import { DOCUMENT_TYPE } from '@shared/constants/document.constants';
 import { PERSON_TYPE } from '@shared/constants/person.constants';
-import { FormExtractTypes, FormGroupDynamic } from '@shared/types/form.types';
-import { first, from } from 'rxjs';
-import { take } from 'rxjs/operators';
+import { FormGroupDynamic } from '@shared/types/form.types';
 
 @Component({
   selector: 'bf-pc-login',
@@ -39,39 +37,5 @@ export class LoginComponent {
     return this.loginForm.controls.internetKey;
   }
 
-  ngOnInit() {
-
-  }
-
   login() {}
-
-  personTypeChange(option: FormExtractTypes<typeof this.personTypeControl>) {
-    if (!option) {
-      return;
-    }
-    from(this.personType)
-      .pipe(
-        first(({ selected }) => selected),
-        take(1)
-      )
-      .subscribe(personType => {
-        personType.selected = false;
-        option.selected = true;
-      });
-  }
-
-  documentTypeChange(option: FormExtractTypes<typeof this.documentTypeControl>) {
-    if (!option) {
-      return;
-    }
-    from(this.documentType)
-      .pipe(
-        first(({ selected }) => selected),
-        take(1)
-      )
-      .subscribe(documentType => {
-        documentType.selected = false;
-        option.selected = true;
-      });
-  }
 }
