@@ -3,31 +3,31 @@
     <div class="form__content--item">
       <div class="form__group">
         <label for="person-type" class="form__label">Tipo de persona</label>
-        <select id="person-type" class="form__select">
-          <option selected>Seleccionar tipo de persona</option>
-          <option value="2">Natural</option>
-          <option value="3">Jurídica</option>
-        </select>
+        <bf-pc-select
+          [attributes]="{
+            id: 'person-type',
+            autocomplete: 'off'
+          }"
+          [formControl]="personTypeControl"
+          [options]="personType" />
       </div>
       <div class="form__group">
         <label for="document-type" class="form__label">Tipo de documento</label>
-        <select id="document-type" class="form__select">
-          <option selected>Selecciona tipo de documento</option>
-          <option value="1">CC</option>
-          <option value="2">NIT</option>
-          <option value="3">CE</option>
-          <option value="4">TI</option>
-          <option value="5">PAS</option>
-          <option value="6">CD</option>
-        </select>
+        <bf-pc-select
+          [attributes]="{
+            id: 'document-type',
+            autocomplete: 'off'
+          }"
+          [formControl]="documentTypeControl"
+          [options]="documentType" />
       </div>
       <div class="form__group">
         <label for="document-number" class="form__label">Número de documento</label>
-        <input id="document-number" type="text" class="form__input" placeholder="Ej. 1234567">
+        <input id="document-number" type="text" class="form__input" placeholder="Ej. 1234567" [formControl]="documentNumberControl">
       </div>
       <div class="form__group">
         <label for="internet-key" class="form__label">Clave internet</label>
-        <input id="internet-key" type="text" class="form__input" placeholder="Ingresa tu clave">
+        <input id="internet-key" type="text" class="form__input" placeholder="Ingresa tu clave" [formControl]="internetKeyControl">
       </div>
       <div class="form__group--last">
         <a [href]="recoveryLink" class="form__link">

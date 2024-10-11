@@ -1,6 +1,7 @@
-import { Attribute, Component, Input } from '@angular/core';
+import { Component, HostBinding, Input } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { SELECT_CONTROL_VALUE_ACCESSOR } from '@core/providers/control-value.provider';
+import { ElementAttributes } from '@shared/types/element.types';
 import { FormSelectOption } from '@shared/types/form.types';
 import { from } from 'rxjs';
 import { first, take } from 'rxjs/operators';
@@ -12,10 +13,13 @@ import { first, take } from 'rxjs/operators';
   providers: [SELECT_CONTROL_VALUE_ACCESSOR]
 })
 export class SelectComponent implements ControlValueAccessor {
+  @HostBinding('class') readonly className = 'form__select';
+  @Input() attributes!: ElementAttributes;
   @Input() options: FormSelectOption<any, any>[] = [];
+  #currentOption!: FormSelectOption<any, any>;
   #onChanged!: Function;
   onTouched!: Function;
-  #currentOption!: FormSelectOption<any, any>;
+  disabled = false;
 
   get handleOption() {
     return this.#currentOption;
@@ -35,13 +39,6 @@ export class SelectComponent implements ControlValueAccessor {
         this.#onChanged(currentOption);
       });
   }
-
-  constructor(
-    @Attribute('id') public id: string,
-    @Attribute('name') public name?: string,
-    @Attribute('autocomplete') public autocomplete?: 'on' | 'off',
-    @Attribute('disabled') public disabled?: boolean
-  ) { }
 
   writeValue(option: FormSelectOption<any, any>) {
     this.#currentOption = option;
