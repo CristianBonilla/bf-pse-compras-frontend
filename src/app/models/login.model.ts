@@ -7,4 +7,6 @@ export interface LoginForm {
   documentType: FormControl<typeof DOCUMENT_TYPE[number]>;
   documentNumber: FormControl<string | null>;
   internetKey: FormControl<string | null>;
+  businessGroup?: FormControl<string | null>;
+  tokenKey?: FormControl<string | null>;
 };

@@ -3,7 +3,9 @@ import { FormBuilder } from '@angular/forms';
 import { LoginForm } from '@models/login.model';
 import { DOCUMENT_TYPE } from '@shared/constants/document.constants';
 import { PERSON_TYPE } from '@shared/constants/person.constants';
+import { PersonType } from '@shared/enums/person.enums';
 import { FormGroupDynamic } from '@shared/types/form.types';
+import { PersonTypeValue } from '@shared/types/login.types';
 
 @Component({
   selector: 'bf-pc-login',
@@ -11,16 +13,18 @@ import { FormGroupDynamic } from '@shared/types/form.types';
   styles: ``
 })
 export class LoginComponent {
+  readonly recoveryLink = 'https://www.bancofalabella.com.co/autoadhesion';
   readonly #formBuilder = inject(FormBuilder);
-  readonly personType = PERSON_TYPE;
-  readonly documentType = DOCUMENT_TYPE;
+  readonly PERSON_TYPE = PersonType;
+  readonly personTypeOptions = PERSON_TYPE;
+  readonly documentTypeOptions = DOCUMENT_TYPE;
+  personTypeValue: PersonTypeValue = this.personTypeOptions[0];
   readonly loginForm = this.#formBuilder.group<FormGroupDynamic<LoginForm>>({
-    personType: [this.personType[0]],
-    documentType: [this.documentType[0]],
+    personType: [this.personTypeValue],
+    documentType: [this.documentTypeOptions[0]],
     documentNumber: [null],
     internetKey: [null]
   });
-  readonly recoveryLink = 'https://www.bancofalabella.com.co/autoadhesion';
 
   get personTypeControl() {
     return this.loginForm.controls.personType;
@@ -38,5 +42,31 @@ export class LoginComponent {
     return this.loginForm.controls.internetKey;
   }
 
+  get bussinessGroupControl() {
+    return this.loginForm.controls.businessGroup;
+  }
+
+  get tokenKeyControl() {
+    return this.loginForm.controls.tokenKey;
+  }
+
   login() {}
+
+  personTypeChange(personType: PersonTypeValue) {
+    this.personTypeValue = personType;
+    this.#updateFormGroup();
+  }
+
+  #updateFormGroup() {
+    switch (this.personTypeValue.value) {
+      case PersonType.Legal:
+        this.loginForm.addControl('businessGroup', this.#formBuilder.control(null));
+        this.loginForm.addControl('tokenKey', this.#formBuilder.control(null));
+        break;
+      default:
+        this.loginForm.removeControl('businessGroup');
+        this.loginForm.removeControl('tokenKey');
+        break;
+    }
+  }
 }
