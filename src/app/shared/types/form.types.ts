@@ -14,7 +14,7 @@ export type FormDynamic<O extends object> = {
 
 export type FormGroupDynamic<O extends object> = {
   [K in keyof FormDynamic<O>]:
-    [FormExtractTypes<FormDynamic<O>[K]> | null] |
-    [FormExtractTypes<FormDynamic<O>[K]> | null, ...ValidatorFn[] | []] |
+    [FormExtractTypes<FormDynamic<O>[K]>] |
+    [FormExtractTypes<FormDynamic<O>[K]>, ...ValidatorFn[] | []] |
     [];
 };
