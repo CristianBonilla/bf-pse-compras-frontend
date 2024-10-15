@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 export class VoucherComponent {
   readonly #router = inject(Router);
 
-  goBack() {
+  download() {
     this.#router.navigate(['/']);
   }
 }

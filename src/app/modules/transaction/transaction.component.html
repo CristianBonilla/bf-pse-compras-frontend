@@ -1,1 +1,36 @@
-<bf-pc-content></bf-pc-content>
+<bf-pc-form [formGroup]="transactionForm" (submit)="transaction()">
+  <div class="form__content">
+    <div class="form__content--item-full">
+      <div class="form__group">
+        <label for="trade" class="form__label">Comercio</label>
+        <input id="trade" type="text" class="form__input--readonly" readonly [formControl]="tradeControl">
+      </div>
+      <div class="form__group">
+        <label for="select-account" class="form__label">Seleccionar cuenta</label>
+        <bf-pc-select
+          [attributes]="{
+            id: 'select-account',
+            autocomplete: 'off'
+          }"
+          [formControl]="selectAccountControl"
+          [options]="confirmAccounts" />
+      </div>
+      <div class="form__group">
+        <label for="amount-to-pay" class="form__label">Valor a pagar</label>
+        <input id="amount-to-pay" type="text" class="form__input--readonly" readonly [formControl]="amountToPayControl">
+      </div>
+      <div class="form__group">
+        <label for="transaction-cost" class="form__label">Costo de transacción</label>
+        <input id="transaction-cost" type="text" class="form__input--readonly" readonly [formControl]="transactionCostControl">
+      </div>
+      <div class="form__group">
+        <label for="available-in-account" class="form__label">Disponible en cuenta</label>
+        <input id="available-in-account" type="text" class="form__input--readonly" readonly [formControl]="availableInAccountControl">
+      </div>
+    </div>
+  </div>
+  <ng-container ngProjectAs="form-bottom">
+    <button id="cancel-transaction" type="button" class="form__button" (click)="cancel()">Cancelar</button>
+    <button id="submit-transaction" type="submit" class="form__button active" [disabled]="!transactionForm.valid">Continuar</button>
+  </ng-container>
+</bf-pc-form>
