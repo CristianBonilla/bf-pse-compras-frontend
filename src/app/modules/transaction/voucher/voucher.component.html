@@ -50,7 +50,7 @@
           <h6 class="voucher__title">Valor de transacción</h6>
           <blockquote>
             <p class="voucher__text">
-              <strong>$ 364.867,00</strong>
+              <strong>$ 12.720,13</strong>
             </p>
           </blockquote>
         </div>
@@ -58,7 +58,7 @@
           <h6 class="voucher__title">Costo de transacción</h6>
           <blockquote>
             <p class="voucher__text">
-              <strong>$ 0,00</strong>
+              <strong>$ 60,00</strong>
             </p>
           </blockquote>
         </div>
@@ -116,7 +116,7 @@
     </div>
   </div>
   <ng-container ngProjectAs="content-bottom">
-    <button id="return-to-trade" type="button" class="btn btn-light" disabled>Volver al comercio</button>
-    <button id="download-voucher" type="submit" class="btn btn-secondary" disabled>Descargar</button>
+    <button id="return-to-trade" type="button" class="form__button" (click)="goBack()">Volver al comercio</button>
+    <button id="download-voucher" type="submit" class="form__button active">Descargar</button>
   </ng-container>
 </bf-pc-content>

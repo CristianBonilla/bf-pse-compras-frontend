@@ -1,6 +1,7 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { FormBuilder, ValidationErrors } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ConfirmAccountForm } from '@models/confirm-account.model';
 import { CONFIRM_ACCOUNTS } from '@shared/constants/confirm-account.constants';
 import { ConfirmAccountValue } from '@shared/types/confirm-account.types';
@@ -18,15 +19,16 @@ function accountRequired(control: ConfirmAccountValue): ValidationErrors | null 
   styles: ``
 })
 export class ConfirmAccountComponent {
+  readonly #router = inject(Router);
   readonly #currency = inject(CurrencyPipe);
   readonly #formBuilder = inject(FormBuilder);
   readonly confirmAccounts = CONFIRM_ACCOUNTS;
   readonly confirmAccountForm = this.#formBuilder.group<FormGroupDynamic<ConfirmAccountForm>>({
     trade: ['Banco Falabella S.A.'],
     selectAccount: [this.confirmAccounts[0], accountRequired],
-    amountToPay: [this.#getCurrency(720.13)],
+    amountToPay: [this.#getCurrency(12720.13)],
     transactionCost: [this.#getCurrency(60)],
-    availableInAccount: [this.#getCurrency(860)]
+    availableInAccount: [this.#getCurrency(20860)]
   });
 
   get tradeControl() {
@@ -49,7 +51,13 @@ export class ConfirmAccountComponent {
     return this.confirmAccountForm.controls.availableInAccount;
   }
 
-  confirmAccount() { }
+  confirmAccount() {
+    this.#router.navigate(['transaction/voucher']);
+  }
+
+  cancel() {
+    this.#router.navigate(['/']);
+  }
 
   #getCurrency(value: number) {
     const currency = this.#currency.transform(value.toString(), 'COP', 'symbol', '1.2-2', 'es-CO');
