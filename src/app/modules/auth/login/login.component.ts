@@ -1,5 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormControl, ValidationErrors } from '@angular/forms';
+import { Router } from '@angular/router';
 import { LoginForm } from '@models/login.model';
 import { DOCUMENT_TYPE, PERSON_TYPE } from '@shared/constants/login.constants';
 import { PersonType } from '@shared/enums/person.enums';
@@ -24,6 +25,7 @@ function documentTypeRequired(control: FormControl<DocumentTypeValue>): Validati
   styles: ``
 })
 export class LoginComponent {
+  readonly #router = inject(Router);
   readonly recoveryLink = 'https://www.bancofalabella.com.co/autoadhesion';
   readonly #formBuilder = inject(FormBuilder);
   readonly PERSON_TYPE = PersonType;
@@ -61,7 +63,15 @@ export class LoginComponent {
     return this.loginForm.controls.tokenKey;
   }
 
-  login() {}
+  login() {
+    if (this.loginForm.valid) {
+      this.#router.navigate(['transaction/confirm-account']);
+    }
+  }
+
+  cancel() {
+    this.#router.navigate(['/']);
+  }
 
   personTypeChange(personType: PersonTypeValue) {
     this.personTypeValue = personType;
