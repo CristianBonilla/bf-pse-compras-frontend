@@ -1,3 +1,4 @@
+import { DocumentType } from '@shared/enums/document.enums';
 import { PersonType } from '@shared/enums/person.enums';
 import { FormSelectOption } from '@shared/types/form.types';
 

@@ -1,6 +1,5 @@
 import { FormControl } from '@angular/forms';
-import { DOCUMENT_TYPE } from '@shared/constants/document.constants';
-import { PERSON_TYPE } from '@shared/constants/person.constants';
+import { DOCUMENT_TYPE, PERSON_TYPE } from '@shared/constants/login.constants';
 
 export interface LoginForm {
   personType: FormControl<typeof PERSON_TYPE[number]>;
