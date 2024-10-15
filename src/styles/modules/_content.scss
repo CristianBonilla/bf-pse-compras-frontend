@@ -33,3 +33,12 @@
     margin: 1rem 0;
   }
 }
+
+@media (max-width: 420px) {
+  .content {
+
+    &__bottom {
+      justify-content: flex-start;
+    }
+  }
+}

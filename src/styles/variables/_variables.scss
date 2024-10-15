@@ -11,9 +11,9 @@ $default-line-height: 1.5 !default;
 $banco-falabella-color: rgb(195, 214, 0) !default;
 $banco-falabella-color-dark: rgb(43, 143, 20) !default;
 
-$white-color: #FFFFFF !default;
+$white-color: rgb(255, 255, 255) !default;
 
-$background-color: #FCFCFC !default;
+$background-color: rgb(252, 252, 252) !default;
 
 $sidebar-min-width: 60px !default;
 
@@ -44,3 +44,10 @@ $alert-border-radius: 8px;
 
 $transaction-text-color: rgba(68, 71, 75, 1) !default;
 $transaction-text-color-dark: rgba(71, 76, 78, 1) !default;
+
+$button-color-light: rgba(244, 247, 248, 1) !default;
+$button-color-light-hover: rgb(232, 234, 234) !default;
+$button-color-active: rgba(56, 161, 33, 1) !default;
+$button-color-active-hover: rgb(57, 136, 39) !default;
+$button-color-disabled: rgba(219, 227, 236, 1) !default;
+$button-text-color-disabled: rgba(99, 105, 110, 1) !default;

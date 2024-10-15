@@ -152,6 +152,41 @@
       }
     }
   }
+
+  &__button {
+    @extend .btn;
+    outline: none;
+    border: none;
+    border-radius: $border-radius;
+    padding: .6rem 3rem;
+    font-family: 'pfbeausanspro-bbook';
+    font-size: .9rem;
+    transition: background-color 800ms ease;
+
+    &:disabled {
+      background-color: $button-color-disabled;
+      color: $button-text-color-disabled;
+    }
+
+    &:not(:disabled):not(.active) {
+      background-color: $button-color-light;
+
+      &:hover,
+      &:focus {
+        background-color: $button-color-light-hover;
+      }
+    }
+
+    &:not(:disabled).active {
+      color: $white-color;
+      background-color: $button-color-active;
+
+      &:hover,
+      &:focus {
+        background-color: $button-color-active-hover;
+      }
+    }
+  }
 }
 
 @media (max-width: calc(map-get($grid-breakpoints, 'lg') + 85px)) {
@@ -275,6 +310,15 @@
 
     &__link {
       margin-left: 0;
+    }
+  }
+}
+
+@media (max-width: 420px) {
+  .form {
+
+    &__button {
+      padding: .4rem 2rem;
     }
   }
 }
