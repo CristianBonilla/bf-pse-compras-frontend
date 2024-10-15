@@ -1,4 +1,4 @@
-import { FormControl, ValidatorFn } from '@angular/forms';
+import { FormControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 
 export interface FormSelectOption<T = string, V = string> {
   text: T;
@@ -15,6 +15,6 @@ export type FormDynamic<O extends object> = {
 export type FormGroupDynamic<O extends object> = {
   [K in keyof FormDynamic<O>]:
     [FormExtractTypes<FormDynamic<O>[K]>] |
-    [FormExtractTypes<FormDynamic<O>[K]>, ...ValidatorFn[] | []] |
+    [FormExtractTypes<FormDynamic<O>[K]>, ...((control: FormDynamic<O>[K]) => ValidationErrors | null)[] | []] |
     [];
 };
