@@ -65,6 +65,8 @@
   }
 
   &__text {
+    $text: &;
+
     display: flex;
     align-items: center;
     justify-content: center;
@@ -76,10 +78,11 @@
     margin-bottom: 0;
     gap: .5rem;
 
-    span > a {
+    #{ $text }--link {
       @extend .link-underline;
       @extend .link-underline-opacity-0;
       color: $banco-falabella-color;
+      transition: color 500ms ease;
 
       &:hover {
         color: $banco-falabella-color-dark;
@@ -228,8 +231,9 @@
   .footer {
 
     &__text {
+      $text: &;
 
-      span > a {
+      #{ $text }--link {
         display: inline-block;
         padding: .3rem 0;
       }

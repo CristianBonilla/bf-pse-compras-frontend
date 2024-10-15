@@ -131,8 +131,9 @@
     @extend .link-underline;
     @extend .link-underline-opacity-0;
 
-    color: $banco-falabella-color-dark;
     margin-left: calc(40% + .5rem);
+    color: $banco-falabella-color-dark;
+    transition: color 500ms ease;
 
     &:hover {
       color: $banco-falabella-color;
