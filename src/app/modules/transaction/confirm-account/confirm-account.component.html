@@ -6,14 +6,8 @@
         <input id="trade" type="text" class="form__input--readonly" readonly [formControl]="tradeControl">
       </div>
       <div class="form__group">
-        <label for="select-account" class="form__label">Seleccionar cuenta</label>
-        <bf-pc-select
-          [attributes]="{
-            id: 'select-account',
-            autocomplete: 'off'
-          }"
-          [formControl]="selectAccountControl"
-          [options]="confirmAccounts" />
+        <label for="select-account" class="form__label">Cuenta seleccionada</label>
+        <input id="trade" type="text" class="form__input--readonly" readonly [formControl]="selectAccountControl">
       </div>
       <div class="form__group">
         <label for="amount-to-pay" class="form__label">Valor a pagar</label>

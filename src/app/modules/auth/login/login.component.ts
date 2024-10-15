@@ -65,7 +65,7 @@ export class LoginComponent {
 
   login() {
     if (this.loginForm.valid) {
-      this.#router.navigate(['transaction/confirm-account']);
+      this.#router.navigate(['transaction']);
     }
   }
 

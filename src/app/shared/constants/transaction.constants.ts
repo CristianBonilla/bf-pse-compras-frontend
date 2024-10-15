@@ -1,6 +1,6 @@
-import { FormSelectOption } from "@shared/types/form.types";
+import { FormSelectOption } from '@shared/types/form.types';
 
-export const CONFIRM_ACCOUNTS: [FormSelectOption<'Seleccionar cuenta', null>, ...FormSelectOption<string, string>[]] = [
+export const TRANSACTION: [FormSelectOption<'Seleccionar cuenta', null>, ...FormSelectOption<string, string>[]] = [
   {
     text: 'Seleccionar cuenta',
     selected: true,
