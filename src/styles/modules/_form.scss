@@ -95,6 +95,19 @@
     min-height: 40px;
   }
 
+  #{ $select-inner },
+  #{ $select } {
+    opacity: .8;
+  }
+
+  &__input,
+  &__textarea {
+
+    &::placeholder {
+      opacity: .8;
+    }
+  }
+
   &__label {
     @extend .col-form-label-sm;
     flex: 0 0 calc(40% - .5rem);
