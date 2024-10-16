@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { LoginForm } from '@models/login.model';
 import { DOCUMENT_TYPE, PERSON_TYPE } from '@shared/constants/login.constants';
 import { PersonType } from '@shared/enums/person.enums';
-import { FormGroupDynamic, FormSelectOption } from '@shared/types/form.types';
+import { FormGroupDynamic } from '@shared/types/form.types';
 import { DocumentTypeValue, PersonTypeValue } from '@shared/types/login.types';
 
 function personTypeRequired(control: FormControl<PersonTypeValue>): ValidationErrors | null {
