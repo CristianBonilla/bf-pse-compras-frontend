@@ -1,8 +1,10 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfirmAccountForm } from '@models/confirm-account.model';
+import { StepperService } from '@module/content/services/stepper/stepper.service';
+import { Flow } from '@shared/enums/stepper.enums';
 import { FormGroupDynamic } from '@shared/types/form.types';
 
 @Component({
@@ -10,7 +12,7 @@ import { FormGroupDynamic } from '@shared/types/form.types';
   templateUrl: './confirm-account.component.html',
   styles: ``
 })
-export class ConfirmAccountComponent {
+export class ConfirmAccountComponent implements OnInit {
   readonly #router = inject(Router);
   readonly #currency = inject(CurrencyPipe);
   readonly #formBuilder = inject(FormBuilder);
@@ -21,6 +23,7 @@ export class ConfirmAccountComponent {
     transactionCost: [this.#getCurrency(60)],
     availableInAccount: [this.#getCurrency(20860)]
   });
+  readonly #stepper = inject(StepperService);
 
   get tradeControl() {
     return this.confirmAccountForm.controls.trade;
@@ -40,6 +43,10 @@ export class ConfirmAccountComponent {
 
   get availableInAccountControl() {
     return this.confirmAccountForm.controls.availableInAccount;
+  }
+
+  ngOnInit() {
+    this.#stepper.update(Flow.Confirm);
   }
 
   confirmAccount() {

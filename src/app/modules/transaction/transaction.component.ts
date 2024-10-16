@@ -1,8 +1,10 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
+import { StepperService } from '@module/content/services/stepper/stepper.service';
 import { TRANSACTION } from '@shared/constants/transaction.constants';
+import { Flow } from '@shared/enums/stepper.enums';
 import { TransactionValue } from '@shared/types/transaction.types';
 
 function transactionRequired(control: TransactionValue): ValidationErrors | null {
@@ -16,7 +18,7 @@ function transactionRequired(control: TransactionValue): ValidationErrors | null
   templateUrl: './transaction.component.html',
   styles: ``
 })
-export class TransactionComponent {
+export class TransactionComponent implements OnInit {
   readonly #router = inject(Router);
   readonly #currency = inject(CurrencyPipe);
   readonly #formBuilder = inject(FormBuilder);
@@ -28,6 +30,7 @@ export class TransactionComponent {
     transactionCost: [this.#getCurrency(60)],
     availableInAccount: [this.#getCurrency(20860)]
   });
+  readonly #stepper = inject(StepperService);
 
   get tradeControl() {
     return this.transactionForm.controls.trade;
@@ -47,6 +50,10 @@ export class TransactionComponent {
 
   get availableInAccountControl() {
     return this.transactionForm.controls.availableInAccount;
+  }
+
+  ngOnInit() {
+    this.#stepper.update(Flow.DefinitionPay);
   }
 
   transaction() {

@@ -1,4 +1,6 @@
 .stepper {
+  $self: &;
+
   position: relative;
   display: flex;
   justify-content: center;
