@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StepperService } from '@module/content/services/stepper/stepper.service';
