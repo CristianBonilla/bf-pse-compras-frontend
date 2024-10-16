@@ -1,12 +1,40 @@
-<div class="stepper__content flow--1">
-  <div class="stepper__list">
-    <div class="stepper__item"></div>
-    <div class="stepper__item"></div>
-    <div class="stepper__item"></div>
+@let stepperFlow = stepperFlow$ | async;
+
+@if (stepperFlow) {
+  <div [ngClass]="{
+    'stepper__content': true,
+    'flow--1': stepperFlow === FLOW.DefinitionPay,
+    'flow--2': stepperFlow === FLOW.Confirm,
+    'flow--3': stepperFlow === FLOW.Voucher
+  }">
+    <div class="stepper__list">
+      <div [ngClass]="{
+        'stepper__item': true,
+        progress: stepperFlow === FLOW.DefinitionPay,
+        active: stepperFlow === FLOW.Confirm || stepperFlow === FLOW.Voucher
+      }"></div>
+      <div [ngClass]="{
+        'stepper__item': true,
+        progress: stepperFlow === FLOW.Confirm,
+        active: stepperFlow === FLOW.Voucher
+      }"></div>
+      <div [ngClass]="{
+        'stepper__item': true,
+        progress: stepperFlow === FLOW.Voucher
+      }"></div>
+    </div>
+    <div class="stepper__text">
+      @switch (stepperFlow) {
+        @case (FLOW.DefinitionPay) {
+          <span class="flow--1">Definición de transacción</span>
+        }
+        @case (FLOW.Confirm) {
+          <span class="flow--2">Confirmación</span>
+        }
+        @case (FLOW.Voucher) {
+          <span class="flow--3">Comprobante</span>
+        }
+      }
+    </div>
   </div>
-  <div class="stepper__text">
-    <!-- <span class="flow--1">Definición de transacción</span> -->
-    <span class="flow--2">Confirmación</span>
-    <!-- <span class="flow--3">Comprobante</span> -->
-  </div>
-</div>
+}
