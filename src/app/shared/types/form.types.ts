@@ -1,4 +1,4 @@
-import { FormControl, ValidationErrors, ValidatorFn } from '@angular/forms';
+import { FormControl, ValidationErrors } from '@angular/forms';
 
 export interface FormSelectOption<T = string, V = string> {
   text: T;
