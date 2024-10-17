@@ -66,6 +66,8 @@ export class LoginComponent {
   login() {
     if (this.loginForm.valid) {
       this.#router.navigate(['transaction']);
+      this.personTypeControl.patchValue(this.personTypeOptions[0]);
+      this.documentTypeControl.patchValue(this.documentTypeOptions[0]);
     }
   }
 

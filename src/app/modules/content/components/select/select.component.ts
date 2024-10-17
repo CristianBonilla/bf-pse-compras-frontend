@@ -1,5 +1,5 @@
-import { Component, HostBinding, Input, OnDestroy } from '@angular/core';
-import { ControlValueAccessor } from '@angular/forms';
+import { Component, HostBinding, inject, Injector, Input } from '@angular/core';
+import { ControlValueAccessor, FormControl, FormControlDirective, NgControl } from '@angular/forms';
 import { SELECT_CONTROL_VALUE_ACCESSOR } from '@core/providers/control-value.provider';
 import { ElementAttributes } from '@shared/types/element.types';
 import { FormSelectOption } from '@shared/types/form.types';
@@ -12,20 +12,36 @@ import { first, take } from 'rxjs/operators';
   styles: ``,
   providers: [SELECT_CONTROL_VALUE_ACCESSOR]
 })
-export class SelectComponent implements ControlValueAccessor, OnDestroy {
+export class SelectComponent implements ControlValueAccessor {
+  readonly #injector = inject(Injector);
   @HostBinding('class') readonly className = 'form__select';
   @Input() attributes!: ElementAttributes;
-  @Input() options: FormSelectOption<any, any>[] = [];
-  #defaultOption!: FormSelectOption<any, any>;
-  #currentOption!: FormSelectOption<any, any>;
+  @Input() options: FormSelectOption<string, any>[] = [];
+  control!: FormControl<FormSelectOption<string, any>>;
   #onChanged!: Function;
   onTouched!: Function;
   disabled = false;
 
-  get handleOption() {
-    return this.#currentOption;
+  ngOnInit() {
+    const ngControl = this.#injector.get(NgControl, null, { self: true, optional: true });
+    if (ngControl instanceof FormControlDirective) {
+      this.control = ngControl.control;
+    }
   }
-  set handleOption(currentOption: FormSelectOption<any, any>) {
+
+  writeValue(_option?: FormSelectOption<any, any>) { }
+
+  registerOnChange(fn: Function) {
+    this.#onChanged = fn;
+  }
+
+  registerOnTouched(fn: Function) {
+    this.onTouched = fn;
+  }
+
+  setDisabledState?(_disabled: boolean) { }
+
+  handleOption(currentOption: FormSelectOption<string, any>) {
     if (!currentOption) {
       return;
     }
@@ -37,27 +53,7 @@ export class SelectComponent implements ControlValueAccessor, OnDestroy {
         this.onTouched();
         option.selected = false;
         currentOption.selected = true;
-        this.#onChanged(this.#currentOption = currentOption);
+        this.#onChanged(currentOption);
       });
-  }
-
-  writeValue(option?: FormSelectOption<any, any>) {
-    this.#currentOption = this.#defaultOption = option ?? this.options[0];
-  }
-
-  registerOnChange(fn: Function) {
-    this.#onChanged = fn;
-  }
-
-  registerOnTouched(fn: Function) {
-    this.onTouched =  fn;
-  }
-
-  setDisabledState?(disabled: boolean) {
-    this.disabled = disabled;
-  }
-
-  ngOnDestroy() {
-    this.handleOption = this.#defaultOption;
   }
 }
