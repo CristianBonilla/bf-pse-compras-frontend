@@ -82,3 +82,37 @@
     }
   }
 }
+
+@media (max-width: map-get($grid-breakpoints, 'lg')) {
+  .stepper {
+    max-width: 300px;
+    align-self: center;
+  }
+}
+
+@media (max-width: map-get($grid-breakpoints, 'md')) {
+  .stepper {
+    margin-right: 0;
+  }
+}
+
+@media (max-width: 500px) {
+  .stepper {
+
+    &__text {
+      width: calc(100% + 15px);
+
+      span {
+
+        &.flow--1 {
+          margin-left: 0;
+        }
+
+        &.flow--3 {
+          margin-left: auto;
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
