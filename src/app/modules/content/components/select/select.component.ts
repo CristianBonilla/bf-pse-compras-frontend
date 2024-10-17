@@ -1,4 +1,4 @@
-import { Component, HostBinding, Input } from '@angular/core';
+import { Component, HostBinding, Input, OnDestroy } from '@angular/core';
 import { ControlValueAccessor } from '@angular/forms';
 import { SELECT_CONTROL_VALUE_ACCESSOR } from '@core/providers/control-value.provider';
 import { ElementAttributes } from '@shared/types/element.types';
@@ -12,10 +12,11 @@ import { first, take } from 'rxjs/operators';
   styles: ``,
   providers: [SELECT_CONTROL_VALUE_ACCESSOR]
 })
-export class SelectComponent implements ControlValueAccessor {
+export class SelectComponent implements ControlValueAccessor, OnDestroy {
   @HostBinding('class') readonly className = 'form__select';
   @Input() attributes!: ElementAttributes;
   @Input() options: FormSelectOption<any, any>[] = [];
+  #defaultOption!: FormSelectOption<any, any>;
   #currentOption!: FormSelectOption<any, any>;
   #onChanged!: Function;
   onTouched!: Function;
@@ -36,12 +37,12 @@ export class SelectComponent implements ControlValueAccessor {
         this.onTouched();
         option.selected = false;
         currentOption.selected = true;
-        this.#onChanged(currentOption);
+        this.#onChanged(this.#currentOption = currentOption);
       });
   }
 
-  writeValue(option: FormSelectOption<any, any>) {
-    this.#currentOption = option;
+  writeValue(option?: FormSelectOption<any, any>) {
+    this.#currentOption = this.#defaultOption = option ?? this.options[0];
   }
 
   registerOnChange(fn: Function) {
@@ -54,5 +55,9 @@ export class SelectComponent implements ControlValueAccessor {
 
   setDisabledState?(disabled: boolean) {
     this.disabled = disabled;
+  }
+
+  ngOnDestroy() {
+    this.handleOption = this.#defaultOption;
   }
 }
