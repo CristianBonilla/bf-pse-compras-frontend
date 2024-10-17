@@ -18,9 +18,8 @@ export class SelectComponent implements ControlValueAccessor {
   @Input() attributes!: ElementAttributes;
   @Input() options: FormSelectOption<string, any>[] = [];
   control!: FormControl<FormSelectOption<string, any>>;
-  #onChanged!: Function;
-  onTouched!: Function;
-  disabled = false;
+  #onChanged!: (option: FormSelectOption<string, any>) => void;
+  onTouched!: () => void;
 
   ngOnInit() {
     const ngControl = this.#injector.get(NgControl, null, { self: true, optional: true });
@@ -29,13 +28,13 @@ export class SelectComponent implements ControlValueAccessor {
     }
   }
 
-  writeValue(_option?: FormSelectOption<any, any>) { }
+  writeValue(_option?: FormSelectOption<string, any>) { }
 
-  registerOnChange(fn: Function) {
+  registerOnChange(fn: (option: FormSelectOption<string, any>) => void) {
     this.#onChanged = fn;
   }
 
-  registerOnTouched(fn: Function) {
+  registerOnTouched(fn: () => void) {
     this.onTouched = fn;
   }
 
