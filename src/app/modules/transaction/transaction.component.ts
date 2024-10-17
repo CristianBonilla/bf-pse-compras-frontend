@@ -1,17 +1,11 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, inject, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, ValidationErrors } from '@angular/forms';
+import { Component, inject, OnInit } from '@angular/core';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StepperService } from '@module/content/services/stepper/stepper.service';
 import { TRANSACTION } from '@shared/constants/transaction.constants';
 import { Flow } from '@shared/enums/stepper.enums';
-import { TransactionValue } from '@shared/types/transaction.types';
-
-function transactionRequired(control: TransactionValue): ValidationErrors | null {
-  const { selected, value } = control.value;
-
-  return selected && !value ? { required: true } : null;
-}
+import { selectRequired } from '@shared/utils/validators/select.validator';
 
 @Component({
   selector: 'bf-pc-transaction',
@@ -25,7 +19,7 @@ export class TransactionComponent implements OnInit {
   readonly confirmAccounts = TRANSACTION;
   readonly transactionForm = this.#formBuilder.group({
     trade: ['Banco Falabella S.A.'],
-    selectAccount: [this.confirmAccounts[0], transactionRequired],
+    selectAccount: [this.confirmAccounts[0], selectRequired],
     amountToPay: [this.#getCurrency(12720.13)],
     transactionCost: [this.#getCurrency(60)],
     availableInAccount: [this.#getCurrency(20860)]

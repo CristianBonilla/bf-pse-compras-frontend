@@ -1,23 +1,12 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormControl, ValidationErrors } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginForm } from '@models/login.model';
 import { DOCUMENT_TYPE, PERSON_TYPE } from '@shared/constants/login.constants';
 import { PersonType } from '@shared/enums/person.enums';
 import { FormGroupDynamic } from '@shared/types/form.types';
-import { DocumentTypeValue, PersonTypeValue } from '@shared/types/login.types';
-
-function personTypeRequired(control: FormControl<PersonTypeValue>): ValidationErrors | null {
-  const { selected, value } = control.value;
-
-  return selected && !value ? { required: true } : null;
-}
-
-function documentTypeRequired(control: FormControl<DocumentTypeValue>): ValidationErrors | null {
-  const { selected, value } = control.value;
-
-  return selected && !value ? { required: true } : null;
-}
+import { PersonTypeValue } from '@shared/types/login.types';
+import { selectRequired } from '@shared/utils/validators/select.validator';
 
 @Component({
   selector: 'bf-pc-login',
@@ -33,8 +22,8 @@ export class LoginComponent {
   readonly documentTypeOptions = DOCUMENT_TYPE;
   personTypeValue: PersonTypeValue = this.personTypeOptions[0];
   readonly loginForm = this.#formBuilder.group<FormGroupDynamic<LoginForm>>({
-    personType: [this.personTypeValue, personTypeRequired],
-    documentType: [this.documentTypeOptions[0], documentTypeRequired],
+    personType: [this.personTypeValue, selectRequired],
+    documentType: [this.documentTypeOptions[0], selectRequired],
     documentNumber: [null],
     internetKey: [null]
   });
