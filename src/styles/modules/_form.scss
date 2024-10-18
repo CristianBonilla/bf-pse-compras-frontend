@@ -62,7 +62,7 @@
       width: 100%;
       max-width: 570px;
       padding: .2rem;
-      margin-bottom: .8rem;
+      margin-bottom: .65rem;
     }
 
     &:has(+ #{ $group }--last) {
@@ -79,7 +79,7 @@
   &__link {
     font-family: 'pfbeausanspro-bbook';
     color: $form-text-color;
-    font-size: .9rem;
+    font-size: .8rem;
   }
 
   &__label,
@@ -106,7 +106,7 @@
   &__input,
   &__input--readonly,
   &__textarea {
-    min-height: 40px;
+    min-height: 35px;
   }
 
   #{ $select-inner },
@@ -120,6 +120,7 @@
 
     &::placeholder {
       opacity: .8;
+      font-size: .8rem;
     }
   }
 

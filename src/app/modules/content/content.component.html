@@ -4,7 +4,9 @@
       <h3 class="content__header--title">
         <strong>PSE</strong> pagos en línea
       </h3>
-      <bf-pc-stepper />
+      @if (stepperFlow$ | async) {
+        <bf-pc-stepper />
+      }
     </div>
     <ng-content />
   </div>

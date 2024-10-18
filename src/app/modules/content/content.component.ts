@@ -1,8 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { StepperService } from '@module/content/services/stepper/stepper.service';
 
 @Component({
   selector: 'bf-pc-content',
   templateUrl: './content.component.html',
   styles: ``
 })
-export class ContentComponent { }
+export class ContentComponent {
+  readonly #stepper = inject(StepperService);
+  readonly stepperFlow$ = this.#stepper.stepperFlow$;
+}
