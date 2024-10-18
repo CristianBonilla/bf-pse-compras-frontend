@@ -12,7 +12,7 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    padding: .5rem 1rem .5rem .8rem;
+    padding: .5rem 1.5rem;
 
     &#{ $self }__no-dynamic-key {
 
@@ -62,11 +62,15 @@
       width: 100%;
       max-width: 570px;
       padding: .2rem;
-      margin-bottom: .65rem;
+      margin-bottom: .6rem;
     }
 
     &:has(+ #{ $group }--last) {
       margin-bottom: .4rem;
+    }
+
+    &.no-margin {
+      margin-bottom: 0;
     }
   }
 
