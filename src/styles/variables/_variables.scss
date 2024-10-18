@@ -20,15 +20,15 @@ $sidebar-min-width: 60px !default;
 $main-width: calc(100% - #{ $sidebar-min-width }) !default;
 $main-min-height: 500px;
 
-$header-height: 120px !default;
+$header-height: 88px !default;
 
 $footer-background-color: rgb(38, 39, 41) !default;
-$footer-height: 80.4px !default;
-$footer-height-xs: 98.79px !default;
-$footer-height-sm: 139.99px !default;
-$footer-height-md: 122.4px !default;
-$footer-height-lg: 161.57px !default;
-$footer-height-xl: 178.37px !default;
+$footer-height: 67.1px !default;
+$footer-height-xs: 68.7px !default;
+$footer-height-sm: 90.65px !default;
+$footer-height-md: 115.58px !default;
+$footer-height-lg: 163.97px !default;
+$footer-height-xl: 173.57px !default;
 
 $border-color: rgb(201, 212, 223) !default;
 $border-radius: 6px;
@@ -53,3 +53,6 @@ $button-color-disabled: rgba(219, 227, 236, 1) !default;
 $button-text-color-disabled: rgba(99, 105, 110, 1) !default;
 
 $stepper-active-color: rgba(59, 147, 38, 1) !default;
+
+$content-bottom-height: calc(40.78px + 1rem);
+$content-margin-y: .4rem;

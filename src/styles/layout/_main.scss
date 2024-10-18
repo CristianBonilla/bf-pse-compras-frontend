@@ -9,18 +9,28 @@
   min-height: $main-min-height;
 
   &__content {
-    margin: .5rem 1rem .5rem 0;
-    min-height: calc(((100vh - $header-height) - $footer-height) - 1rem);
-    padding: .2rem;
+    margin-right: 1rem;
+    min-height: calc((100vh - $header-height) - $footer-height);
+    padding: .2rem .2rem 0;
+  }
+}
+
+@media (max-width: calc(map-get($grid-breakpoints, 'lg') + 150px)) {
+  .main {
+    padding-bottom: $footer-height-xs;
+
+    &__content {
+      min-height: calc((100vh - $header-height) - $footer-height-xs);
+    }
   }
 }
 
 @media (max-width: map-get($grid-breakpoints, 'md')) {
   .main {
-    padding-bottom: $footer-height-xs;
+    padding-bottom: $footer-height-sm;
 
     &__content {
-      min-height: calc(((100vh - $header-height) - $footer-height-xs) - 1rem);
+      min-height: calc((100vh - $header-height) - $footer-height-sm);
     }
   }
 }
@@ -30,7 +40,7 @@
     padding-bottom: $footer-height-md;
 
     &__content {
-      min-height: calc(((100vh - $header-height) - $footer-height-md) - 1rem);
+      min-height: calc((100vh - $header-height) - $footer-height-md);
     }
   }
 }
@@ -40,30 +50,20 @@
     left: auto;
     width: 100%;
     padding-top: $header-height;
-    padding-bottom: $footer-height-sm;
-
-    &__content {
-      min-height: calc(((100vh - $header-height) - $footer-height-sm) - 1rem);
-    }
-  }
-}
-
-@media (max-width: 350px) {
-  .main {
     padding-bottom: $footer-height-lg;
 
     &__content {
-      min-height: calc(((100vh - $header-height) - $footer-height-lg) - 1rem);
+      min-height: calc((100vh - $header-height) - $footer-height-lg);
     }
   }
 }
 
-@media (max-width: 340px) {
+@media (max-width: 336px) {
   .main {
     padding-bottom: $footer-height-xl;
 
     &__content {
-      min-height: calc(((100vh - $header-height) - $footer-height-xl) - 1rem);
+      min-height: calc((100vh - $header-height) - $footer-height-xl);
     }
   }
 }
@@ -72,17 +72,25 @@
   .main {
 
     &__content {
-      min-height: calc((($main-min-height - $header-height) - $footer-height) - 1rem);
+      min-height: calc(($main-min-height - $header-height) - $footer-height);
     }
   }
 }
 
+@media (max-height: $main-min-height) and (max-width: calc(map-get($grid-breakpoints, 'lg') + 150px)) {
+  .main {
+
+    &__content {
+      min-height: calc(($main-min-height - $header-height) - $footer-height-xs);
+    }
+  }
+}
 
 @media (max-height: $main-min-height) and (max-width: map-get($grid-breakpoints, 'md')) {
   .main {
 
     &__content {
-      min-height: calc((($main-min-height - $header-height) - $footer-height-xs) - 1rem);
+      min-height: calc(($main-min-height - $header-height) - $footer-height-sm);
     }
   }
 }
@@ -91,7 +99,7 @@
   .main {
 
     &__content {
-      min-height: calc((($main-min-height - $header-height) - $footer-height-md) - 1rem);
+      min-height: calc(($main-min-height - $header-height) - $footer-height-md);
     }
   }
 }
@@ -100,25 +108,16 @@
   .main {
 
     &__content {
-      min-height: calc((($main-min-height - $header-height) - $footer-height-sm) - 1rem);
+      min-height: calc(($main-min-height - $header-height) - $footer-height-lg);
     }
   }
 }
 
-@media (max-height: $main-min-height) and (max-width: 350px) {
+@media (max-height: $main-min-height) and (max-width: 336px) {
   .main {
 
     &__content {
-      min-height: calc((($main-min-height - $header-height) - $footer-height-lg) - 1rem);
-    }
-  }
-}
-
-@media (max-height: $main-min-height) and (max-width: 340px) {
-  .main {
-
-    &__content {
-      min-height: calc((($main-min-height - $header-height) - $footer-height-xl) - 1rem);
+      min-height: calc(($main-min-height - $header-height) - $footer-height-xl);
     }
   }
 }

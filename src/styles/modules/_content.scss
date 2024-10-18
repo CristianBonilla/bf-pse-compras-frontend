@@ -1,7 +1,12 @@
 .content {
-  border: 1px solid $border-color;
-  border-radius: $border-radius;
-  padding: 1rem;
+  padding: .2rem .2rem 0;
+  min-height: calc(((100vh - $header-height) - $footer-height) - $content-margin-y);
+
+  &__main {
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    min-height: calc((((100vh - $header-height) - $footer-height) - $content-bottom-height) - $content-margin-y);
+  }
 
   &__header {
     display: flex;
@@ -9,7 +14,7 @@
     align-items: center;
     background-color: $white-color;
     padding: 0 1rem;
-    margin: .5rem 0 1.5rem;
+    margin: .5rem 0 1rem;
     border: none;
     width: 100%;
     gap: 10px;
@@ -35,25 +40,125 @@
     justify-content: flex-end;
     gap: 10px;
     width: 100%;
-    margin: 1rem 0;
+    margin: .5rem 0;
+  }
+}
+
+@media (max-width: calc(map-get($grid-breakpoints, 'lg') + 150px)) {
+  .content {
+    min-height: calc(((100vh - $header-height) - $footer-height-xs) - $content-margin-y);
+
+    &__main {
+      min-height: calc((((100vh - $header-height) - $footer-height-xs) - $content-bottom-height) - $content-margin-y);
+    }
   }
 }
 
 @media (max-width: map-get($grid-breakpoints, 'md')) {
   .content {
+    min-height: calc(((100vh - $header-height) - $footer-height-sm) - $content-margin-y);
 
     &__header {
       flex-direction: column;
       align-items: flex-start;
+    }
+
+    &__main {
+      min-height: calc((((100vh - $header-height) - $footer-height-sm) - $content-bottom-height) - $content-margin-y);
+    }
+  }
+}
+
+@media (max-width: calc(map-get($grid-breakpoints, 'sm') + 42px)) {
+  .content {
+    min-height: calc(((100vh - $header-height) - $footer-height-md) - $content-margin-y);
+
+    &__main {
+      min-height: calc((((100vh - $header-height) - $footer-height-md) - $content-bottom-height) - $content-margin-y);
     }
   }
 }
 
 @media (max-width: 420px) {
   .content {
+    min-height: calc(((100vh - $header-height) - $footer-height-lg) - $content-margin-y);
+
+    &__main {
+      min-height: calc((((100vh - $header-height) - $footer-height-lg) - $content-bottom-height) - $content-margin-y);
+    }
 
     &__bottom {
       justify-content: flex-start;
+    }
+  }
+}
+
+@media (max-width: 336px) {
+  .content {
+    min-height: calc(((100vh - $header-height) - $footer-height-xl) - $content-margin-y);
+
+    &__main {
+      min-height: calc((((100vh - $header-height) - $footer-height-xl) - $content-bottom-height) - $content-margin-y);
+    }
+  }
+}
+
+@media (max-height: $main-min-height) {
+  .content {
+    min-height: calc((($main-min-height - $header-height) - $footer-height) - $content-margin-y);
+
+    &__main {
+      min-height: calc(((($main-min-height - $header-height) - $footer-height) - $content-bottom-height) - $content-margin-y);
+    }
+  }
+}
+
+@media (max-height: $main-min-height) and (max-width: calc(map-get($grid-breakpoints, 'lg') + 150px)) {
+  .content {
+    min-height: calc((($main-min-height - $header-height) - $footer-height-xs) - $content-margin-y);
+
+    &__main {
+      min-height: calc(((($main-min-height - $header-height) - $footer-height-xs) - $content-bottom-height) - $content-margin-y);
+    }
+  }
+}
+
+@media (max-height: $main-min-height) and (max-width: map-get($grid-breakpoints, 'md')) {
+  .content {
+    min-height: calc((($main-min-height - $header-height) - $footer-height-sm) - $content-margin-y);
+
+    &__main {
+      min-height: calc(((($main-min-height - $header-height) - $footer-height-sm) - $content-bottom-height) - $content-margin-y);
+    }
+  }
+}
+
+@media (max-height: $main-min-height) and (max-width: calc(map-get($grid-breakpoints, 'sm') + 42px)) {
+  .content {
+    min-height: calc((($main-min-height - $header-height) - $footer-height-md) - $content-margin-y);
+
+    &__main {
+      min-height: calc(((($main-min-height - $header-height) - $footer-height-md) - $content-bottom-height) - $content-margin-y);
+    }
+  }
+}
+
+@media (max-height: $main-min-height) and (max-width: 420px) {
+  .content {
+    min-height: calc((($main-min-height - $header-height) - $footer-height-lg) - $content-margin-y);
+
+    &__main {
+      min-height: calc(((($main-min-height - $header-height) - $footer-height-lg) - $content-bottom-height) - $content-margin-y);
+    }
+  }
+}
+
+@media (max-height: $main-min-height) and (max-width: 336px) {
+  .content {
+    min-height: calc((($main-min-height - $header-height) - $footer-height-xl) - $content-margin-y);
+
+    &__main {
+      min-height: calc(((($main-min-height - $header-height) - $footer-height-xl) - $content-bottom-height) - $content-margin-y);
     }
   }
 }
