@@ -19,7 +19,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: .5rem;
+      gap: .3rem;
       margin-left: 1.5rem;
 
       &:nth-child(2n + 1) {
@@ -48,7 +48,7 @@
       fa-icon {
         color: $white-color;
         padding: .2rem;
-        font-size: 1.2rem;
+        font-size: 1rem;
         line-height: 1;
       }
     }
@@ -59,8 +59,8 @@
 
     svg {
       fill: $border-color;
-      width: 32px;
-      height: 32px;
+      width: 24px;
+      height: 24px;
     }
   }
 
@@ -104,24 +104,6 @@
   }
 }
 
-@media (min-width: map-get($grid-breakpoints, 'xxl')) {
-  .footer {
-
-    &__text {
-      font-size: 15px;
-    }
-  }
-}
-
-@media (min-width: calc(map-get($grid-breakpoints, 'xl') + 90px)) {
-  .footer {
-
-    &__text {
-      font-size: 14px;
-    }
-  }
-}
-
 @media (min-width: calc(map-get($grid-breakpoints, 'lg') + 151px)) {
   .footer {
     $self: &;
@@ -133,7 +115,7 @@
         &__full {
 
           #{ $self }__text {
-            padding: 1rem 0 0;
+            padding: .6rem 0 0;
           }
         }
       }
@@ -141,13 +123,37 @@
   }
 }
 
+@media (min-width: calc(map-get($grid-breakpoints, 'xl') + 90px)) {
+  .footer {
+
+    &__text {
+      font-size: 13px;
+    }
+  }
+}
+
 @media (max-width: calc(map-get($grid-breakpoints, 'lg') + 150px)) {
   .footer {
+    $self: &;
+
+    &__content {
+
+      &--item {
+
+        &__full {
+
+          #{ $self }__text {
+            padding: .3rem 0 .4rem;
+          }
+        }
+      }
+    }
 
     &__text {
       align-items: flex-start;
       flex-direction: column;
-      font-size: 14px;
+      gap: .3rem;
+      font-size: 12px;
     }
   }
 }
@@ -165,6 +171,10 @@
         &__full {
           margin-left: 0 !important;
           margin-right: 0 !important;
+        }
+
+        fa-icon {
+          padding: .2rem .3rem;
         }
       }
     }
@@ -194,7 +204,7 @@
 
     &__text {
       flex-direction: column;
-      font-size: 14px;
+      font-size: 13px;
       gap: 2px;
     }
   }
@@ -203,6 +213,7 @@
 @media (max-width: 420px) {
   .footer {
     $self: &;
+    height: 163.97px;
 
     &__content {
 
@@ -221,42 +232,22 @@
     }
 
     &__text {
-      font-size: 12px;
-      gap: 3px;
-    }
-  }
-}
-
-@media (max-width: 350px) {
-  .footer {
-
-    &__text {
       $text: &;
 
+      font-size: 12px;
+      gap: 3px;
+
       #{ $text }--link {
-        display: inline-block;
+        display: block;
         padding: .3rem 0;
       }
     }
   }
 }
 
-@media (max-width: 340px) {
+@media (max-width: 336px) {
   .footer {
-    $self: &;
-
-    &__content {
-
-      &--item:nth-child(2n + 1) {
-
-        #{ $self }__text {
-
-          span:first-child {
-            line-height: 1.2;
-          }
-        }
-      }
-    }
+    height: auto;
   }
 }
 
