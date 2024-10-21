@@ -1,0 +1,11 @@
+@mixin content-responsive($header-height: $header-height, $footer-height: $footer-height, $screen-height: 100vh) {
+  .content {
+    min-height: calc((($screen-height - $header-height) - $footer-height) - $content-margin-y);
+
+    &__body {
+      min-height: calc(((($screen-height - $header-height) - $footer-height) - $content-bottom-height) - $content-margin-y);
+    }
+
+    @content;
+  }
+}

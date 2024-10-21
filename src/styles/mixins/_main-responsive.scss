@@ -1,0 +1,10 @@
+@mixin main-responsive($header-height: $header-height, $footer-height: $footer-height, $screen-height: 100vh) {
+  .main {
+
+    &__content {
+      min-height: calc(($screen-height - $header-height) - $footer-height);
+    }
+
+    @content;
+  }
+}

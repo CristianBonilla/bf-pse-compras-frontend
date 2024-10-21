@@ -6,7 +6,6 @@
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-left: 1rem;
     border: none;
     border-radius: $alert-border-radius;
     color: $alert-color;
@@ -40,6 +39,15 @@
     &--icon {
       font-size: 20px;
       padding: .2rem;
+    }
+  }
+}
+
+@media (min-height: calc(map-get($grid-breakpoints, 'sm') + 36px)) and (min-width: map-get($grid-breakpoints, 'xl')) {
+  .transaction {
+
+    &__alert {
+      margin-left: 0;
     }
   }
 }

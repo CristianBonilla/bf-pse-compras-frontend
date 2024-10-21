@@ -76,3 +76,31 @@
     }
   }
 }
+
+@media (min-height: calc(map-get($grid-breakpoints, 'sm') + 104px)) and (min-width: map-get($grid-breakpoints, 'xl')) {
+  .form {
+
+    &__dynamic-key {
+      max-width: 500px;
+
+      &--body {
+        padding: 1.5rem;
+      }
+
+      &--image {
+
+        img {
+          width: 488px;
+        }
+      }
+
+      &--title {
+        font-size: 1.2rem;
+      }
+
+      &--text {
+        font-size: .9rem;
+      }
+    }
+  }
+}

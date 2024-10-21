@@ -7,6 +7,10 @@
 @import 'themes/pfbeausanspro';
 @import 'themes/mavenpro';
 
+@import 'mixins/main-responsive';
+@import 'mixins/sidebar-responsive';
+@import 'mixins/content-responsive';
+
 @import 'base/base';
 @import 'base/scrollbar';
 
