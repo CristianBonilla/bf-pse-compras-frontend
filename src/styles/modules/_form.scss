@@ -93,7 +93,7 @@
   &__input,
   &__input--readonly,
   &__textarea {
-    opacity: .9;
+    opacity: .95;
   }
 
   #{ $select-wrap },
@@ -116,7 +116,7 @@
 
   #{ $select-inner },
   #{ $select } {
-    opacity: .8;
+    opacity: .95;
   }
 
   &__input,
@@ -124,7 +124,7 @@
   &__textarea {
 
     &::placeholder {
-      opacity: .8;
+      opacity: .95;
       font-size: .8rem;
     }
   }
@@ -353,6 +353,78 @@
 
     &__button {
       padding: .4rem 2rem;
+    }
+  }
+}
+
+@media (min-height: calc(map-get($grid-breakpoints, 'sm') + 104px)) and (min-width: map-get($grid-breakpoints, 'xl')) {
+  .form {
+    $self: &;
+
+    $self-select: #{ $self }__select;             /* .form__select */
+    $select-wrap: bf-pc-select#{ $self-select };  /* bf-pc-select.form__select */
+    $select-inner: #{ $select-wrap } select;      /* bf-pc-select.form__select select */
+    $select: select#{ $self-select };             /* select.form__select */
+
+    &__label,
+    #{ $select-inner },
+    #{ $select },
+    &__input,
+    &__input--readonly,
+    &__textarea,
+    &__link {
+      font-size: .9rem;
+    }
+
+    &__label,
+    #{ $select-inner },
+    #{ $select },
+    &__input,
+    &__input--readonly,
+    &__textarea {
+      opacity: .9;
+    }
+
+    #{ $select-inner },
+    #{ $select } {
+      opacity: .9;
+    }
+
+    &__input,
+    &__input--readonly,
+    &__textarea {
+
+      &::placeholder {
+        opacity: .9;
+        font-size: .9rem;
+      }
+    }
+  }
+}
+
+@media (min-height: calc(map-get($grid-breakpoints, 'sm') + 36px)) and (min-width: map-get($grid-breakpoints, 'xl')) {
+  .form {
+    $self: &;
+
+    $self-select: #{ $self }__select;             /* .form__select */
+    $select-wrap: bf-pc-select#{ $self-select };  /* bf-pc-select.form__select */
+    $select-inner: #{ $select-wrap } select;      /* bf-pc-select.form__select select */
+    $select: select#{ $self-select };             /* select.form__select */
+
+    &__group {
+
+      &,
+      &.no-margin {
+        margin-bottom: .65rem;
+      }
+    }
+
+    #{ $select-inner },
+    #{ $select },
+    &__input,
+    &__input--readonly,
+    &__textarea {
+      min-height: 40px !important;
     }
   }
 }

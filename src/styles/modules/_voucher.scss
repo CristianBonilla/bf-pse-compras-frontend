@@ -1,5 +1,7 @@
 .voucher {
+  padding: 0 1.5rem;
   margin: 1.5rem 0 0;
+  width: 100%;
 
   &__content {
     display: flex;
@@ -17,7 +19,7 @@
       align-items: flex-start;
       flex-wrap: wrap;
       width: 100%;
-      padding: 1rem 0 .5rem 1rem;
+      padding: 1rem 0 .5rem;
       gap: 30px;
     }
 
