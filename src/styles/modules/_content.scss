@@ -2,13 +2,16 @@
   padding: .2rem .2rem 0;
   min-height: calc(((100vh - $header-height) - $footer-height) - $content-margin-y);
 
-  &__main {
+  &__body {
+    display: flex;
+    flex-wrap: wrap;
     border: 1px solid $border-color;
     border-radius: $border-radius;
     min-height: calc((((100vh - $header-height) - $footer-height) - $content-bottom-height) - $content-margin-y);
   }
 
   &__header {
+    align-self: flex-start;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -48,7 +51,7 @@
   .content {
     min-height: calc(((100vh - $header-height) - $footer-height-xs) - $content-margin-y);
 
-    &__main {
+    &__body {
       min-height: calc((((100vh - $header-height) - $footer-height-xs) - $content-bottom-height) - $content-margin-y);
     }
   }
@@ -63,7 +66,7 @@
       align-items: flex-start;
     }
 
-    &__main {
+    &__body {
       min-height: calc((((100vh - $header-height) - $footer-height-sm) - $content-bottom-height) - $content-margin-y);
     }
   }
@@ -73,7 +76,7 @@
   .content {
     min-height: calc(((100vh - $header-height) - $footer-height-md) - $content-margin-y);
 
-    &__main {
+    &__body {
       min-height: calc((((100vh - $header-height) - $footer-height-md) - $content-bottom-height) - $content-margin-y);
     }
   }
@@ -83,7 +86,7 @@
   .content {
     min-height: calc(((100vh - $header-height) - $footer-height-lg) - $content-margin-y);
 
-    &__main {
+    &__body {
       min-height: calc((((100vh - $header-height) - $footer-height-lg) - $content-bottom-height) - $content-margin-y);
     }
 
@@ -97,7 +100,7 @@
   .content {
     min-height: calc(((100vh - $header-height) - $footer-height-xl) - $content-margin-y);
 
-    &__main {
+    &__body {
       min-height: calc((((100vh - $header-height) - $footer-height-xl) - $content-bottom-height) - $content-margin-y);
     }
   }
@@ -107,7 +110,7 @@
   .content {
     min-height: calc((($main-min-height - $header-height) - $footer-height) - $content-margin-y);
 
-    &__main {
+    &__body {
       min-height: calc(((($main-min-height - $header-height) - $footer-height) - $content-bottom-height) - $content-margin-y);
     }
   }
@@ -117,7 +120,7 @@
   .content {
     min-height: calc((($main-min-height - $header-height) - $footer-height-xs) - $content-margin-y);
 
-    &__main {
+    &__body {
       min-height: calc(((($main-min-height - $header-height) - $footer-height-xs) - $content-bottom-height) - $content-margin-y);
     }
   }
@@ -127,7 +130,7 @@
   .content {
     min-height: calc((($main-min-height - $header-height) - $footer-height-sm) - $content-margin-y);
 
-    &__main {
+    &__body {
       min-height: calc(((($main-min-height - $header-height) - $footer-height-sm) - $content-bottom-height) - $content-margin-y);
     }
   }
@@ -137,7 +140,7 @@
   .content {
     min-height: calc((($main-min-height - $header-height) - $footer-height-md) - $content-margin-y);
 
-    &__main {
+    &__body {
       min-height: calc(((($main-min-height - $header-height) - $footer-height-md) - $content-bottom-height) - $content-margin-y);
     }
   }
@@ -147,7 +150,7 @@
   .content {
     min-height: calc((($main-min-height - $header-height) - $footer-height-lg) - $content-margin-y);
 
-    &__main {
+    &__body {
       min-height: calc(((($main-min-height - $header-height) - $footer-height-lg) - $content-bottom-height) - $content-margin-y);
     }
   }
@@ -157,7 +160,7 @@
   .content {
     min-height: calc((($main-min-height - $header-height) - $footer-height-xl) - $content-margin-y);
 
-    &__main {
+    &__body {
       min-height: calc(((($main-min-height - $header-height) - $footer-height-xl) - $content-bottom-height) - $content-margin-y);
     }
   }
