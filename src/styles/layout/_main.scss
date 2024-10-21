@@ -3,7 +3,6 @@
   left: $sidebar-min-width;
   margin: 0;
   width: $main-width;
-  padding-top: $header-height;
   background-color: $white-color;
   min-height: $main-min-height;
 
@@ -14,63 +13,8 @@
 
 }
 
-@include main-responsive() {
-  padding-bottom: $footer-height;
-}
+@include main-responsive();
 
-@media (max-width: calc(map-get($grid-breakpoints, 'lg') + 150px)) {
-  @include main-responsive($header-height, $footer-height-xs) {
-    padding-bottom: $footer-height-xs;
-  }
-}
+@include main-queries();
 
-@media (max-width: map-get($grid-breakpoints, 'md')) {
-  @include main-responsive($header-height, $footer-height-sm) {
-    padding-bottom: $footer-height-sm;
-  }
-}
-
-@media (max-width: calc(map-get($grid-breakpoints, 'sm') + 42px)) {
-  @include main-responsive($header-height, $footer-height-md) {
-    padding-bottom: $footer-height-md;
-  }
-}
-
-@media (max-width: 420px) {
-  @include main-responsive($header-height, $footer-height-lg) {
-    left: auto;
-    width: 100%;
-    padding-top: $header-height;
-    padding-bottom: $footer-height-lg;
-  }
-}
-
-@media (max-width: 336px) {
-  @include main-responsive($header-height, $footer-height-xl) {
-    padding-bottom: $footer-height-xl;
-  }
-}
-
-@media (max-height: $main-min-height) {
-  @include main-responsive($header-height, $footer-height, $main-min-height);
-}
-
-@media (max-height: $main-min-height) and (max-width: calc(map-get($grid-breakpoints, 'lg') + 150px)) {
-  @include main-responsive($header-height, $footer-height-xs, $main-min-height);
-}
-
-@media (max-height: $main-min-height) and (max-width: map-get($grid-breakpoints, 'md')) {
-  @include main-responsive($header-height, $footer-height-sm, $main-min-height);
-}
-
-@media (max-height: $main-min-height) and (max-width: calc(map-get($grid-breakpoints, 'sm') + 42px)) {
-  @include main-responsive($header-height, $footer-height-md, $main-min-height);
-}
-
-@media (max-height: $main-min-height) and (max-width: 420px) {
-  @include main-responsive($header-height, $footer-height-lg, $main-min-height);
-}
-
-@media (max-height: $main-min-height) and (max-width: 336px) {
-  @include main-responsive($header-height, $footer-height-xl, $main-min-height);
-}
+@include height-responsive();

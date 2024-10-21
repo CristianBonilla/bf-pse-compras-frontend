@@ -43,7 +43,7 @@
   }
 }
 
-@media (min-height: calc(map-get($grid-breakpoints, 'sm') + 36px)) and (min-width: map-get($grid-breakpoints, 'xl')) {
+@media (min-height: calc(map-get($grid-breakpoints, 'sm') + 36px)) and (min-width: calc(map-get($grid-breakpoints, 'md') + 129px)) {
   .transaction {
 
     &__alert {

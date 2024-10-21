@@ -1,0 +1,47 @@
+@mixin header() {
+  .header {
+
+    &__content {
+      height: $header-height;
+    }
+
+    &__navigation {
+
+      &--image {
+
+        img {
+          max-height: 40px;
+        }
+      }
+    }
+
+    &__text {
+      font-size: 18px;
+    }
+  }
+
+  @media (min-height: calc(map-get($grid-breakpoints, 'sm') + 104px)) and (min-width: calc(map-get($grid-breakpoints, 'md') + 129px)) {
+    $header-height: 120px;
+
+    .header {
+
+      &__content {
+        height: $header-height;
+      }
+
+      &__navigation {
+
+        &--image {
+
+          img {
+            max-height: 50px;
+          }
+        }
+      }
+
+      &__text {
+        font-size: 20px;
+      }
+    }
+  }
+}

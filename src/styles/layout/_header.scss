@@ -14,7 +14,6 @@
     align-items: center;
     width: 100%;
     padding: 1rem .5rem;
-    height: $header-height;
 
     &--item:nth-child(2) {
       width: 80%;
@@ -104,3 +103,5 @@
     }
   }
 }
+
+@include header();

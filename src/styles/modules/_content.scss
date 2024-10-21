@@ -24,6 +24,7 @@
       font-family: 'pfbeausanspro-xthin';
       font-weight: 600;
       font-style: normal;
+      font-size: $h3-font-size;
       line-height: 1.5;
       margin-bottom: 0;
       min-width: 242px;
@@ -102,11 +103,23 @@
   @include content-responsive($header-height, $footer-height-xl, $main-min-height);
 }
 
-@media (min-height: calc(map-get($grid-breakpoints, 'sm') + 36px)) and (min-width: map-get($grid-breakpoints, 'xl')) {
+@media (min-height: calc(map-get($grid-breakpoints, 'sm') + 36px)) and (min-width: calc(map-get($grid-breakpoints, 'md') + 129px)) {
   .content {
 
     &__header {
       margin: 1.5rem 0 .5rem;
+    }
+  }
+}
+
+@media (min-height: calc(map-get($grid-breakpoints, 'sm') + 104px)) and (min-width: calc(map-get($grid-breakpoints, 'md') + 129px)) {
+  .content {
+
+    &__header {
+
+      &--title {
+        font-size: $h2-font-size;
+      }
     }
   }
 }

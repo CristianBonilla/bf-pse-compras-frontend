@@ -77,7 +77,7 @@
   }
 }
 
-@media (min-height: calc(map-get($grid-breakpoints, 'sm') + 104px)) and (min-width: map-get($grid-breakpoints, 'xl')) {
+@media (min-height: calc(map-get($grid-breakpoints, 'sm') + 104px)) and (min-width: calc(map-get($grid-breakpoints, 'md') + 129px)) {
   .form {
 
     &__dynamic-key {
