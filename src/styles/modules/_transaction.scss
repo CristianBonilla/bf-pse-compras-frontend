@@ -1,4 +1,7 @@
 .transaction {
+  padding: 0 1.5rem;
+  margin: 1.5rem 0 0;
+  width: 100%;
 
   &__alert {
     $self: &;
@@ -43,6 +46,7 @@
 
 @media (min-height: calc(map-get($grid-breakpoints, 'sm') + 36px)) and (min-width: calc(map-get($grid-breakpoints, 'md') + 129px)) {
   .transaction {
+    padding: 0 2rem;
 
     &__alert {
       margin-left: 0;
