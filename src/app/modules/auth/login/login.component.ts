@@ -18,7 +18,13 @@ export class LoginComponent {
   readonly recoveryLink = 'https://www.bancofalabella.com.co/autoadhesion';
   readonly #formBuilder = inject(FormBuilder);
   readonly PERSON_TYPE = PersonType;
-  readonly personTypeOptions = PERSON_TYPE;
+  readonly personTypeOptions: PersonTypeValue[] = [
+    {
+      ...PERSON_TYPE[1],
+      selected: true
+    },
+    ...PERSON_TYPE.slice(2)
+  ];
   readonly documentTypeOptions = DOCUMENT_TYPE;
   personTypeValue: PersonTypeValue = this.personTypeOptions[0];
   readonly loginForm = this.#formBuilder.group<FormGroupDynamic<LoginForm>>({
