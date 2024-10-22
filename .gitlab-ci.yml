@@ -37,7 +37,7 @@ stages:
   - Testing
   - Security analysis
   - Building
-  - Scan
+  # - Scan
 
 workflow:
   name: '${TARGET_APP} - ${DEPLOY_ENV} - ${CI_COMMIT_MESSAGE}'
