@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginForm } from '@models/login.model';
 import { DOCUMENT_TYPE, PERSON_TYPE } from '@shared/constants/login.constants';
@@ -30,8 +30,8 @@ export class LoginComponent {
   readonly loginForm = this.#formBuilder.group<FormGroupDynamic<LoginForm>>({
     personType: [this.personTypeValue, selectRequired],
     documentType: [this.documentTypeOptions[0], selectRequired],
-    documentNumber: [null],
-    internetKey: [null]
+    documentNumber: [null, Validators.required],
+    internetKey: [null, Validators.required]
   });
 
   get personTypeControl() {
@@ -78,8 +78,12 @@ export class LoginComponent {
   #updateFormGroup() {
     switch (this.personTypeValue.value) {
       case PersonType.Legal:
-        this.loginForm.addControl('businessGroup', this.#formBuilder.control(null));
-        this.loginForm.addControl('tokenKey', this.#formBuilder.control(null));
+        this.loginForm.addControl('businessGroup', this.#formBuilder.control(null, {
+          validators: Validators.required
+        }));
+        this.loginForm.addControl('tokenKey', this.#formBuilder.control(null, {
+          validators: Validators.required
+        }));
         break;
       default:
         this.loginForm.removeControl('businessGroup');
