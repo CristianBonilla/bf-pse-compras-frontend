@@ -51,6 +51,16 @@
   }
 }
 
+@media (max-width: calc(map-get($grid-breakpoints, 'lg') + 108px)) {
+  .form {
+
+    &__dynamic-key {
+      align-self: auto;
+      margin: .5rem auto;
+    }
+  }
+}
+
 @media (max-width: calc(map-get($grid-breakpoints, 'lg') + 85px)) {
   .form {
 
@@ -63,16 +73,6 @@
       &--text {
         font-size: .8rem;
       }
-    }
-  }
-}
-
-@media (max-width: calc(map-get($grid-breakpoints, 'md') + 128px)) {
-  .form {
-
-    &__dynamic-key {
-      align-self: auto;
-      margin: .5rem auto;
     }
   }
 }

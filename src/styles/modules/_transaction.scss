@@ -13,7 +13,6 @@
 
     &.alert-warning {
       background-color: $alert-color-warning;
-      max-width: 800px;
 
       #{ $self }--icon {
         color: $alert-color-warning-icon;
@@ -22,7 +21,6 @@
 
     &.alert-success {
       background-color: $alert-color-success;
-      max-width: 910px;
 
       #{ $self }--icon {
         color: $alert-color-success-icon;

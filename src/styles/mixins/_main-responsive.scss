@@ -25,15 +25,24 @@
     @include main-responsive($header-height, $footer-height-md);
   }
 
+  @media (max-width: 488px) {
+    .main {
+
+      &__content {
+        margin-right: .5rem;
+      }
+    }
+  }
+
   @media (max-width: 420px) {
-    @include main-responsive($header-height, $footer-height-lg) {
+    @include main-responsive($header-height-lg, $footer-height-lg) {
       left: auto;
       width: 100%;
     }
   }
 
   @media (max-width: 336px) {
-    @include main-responsive($header-height, $footer-height-xl);
+    @include main-responsive($header-height-lg, $footer-height-xl);
   }
 
   @media (max-height: $main-min-height) {
@@ -53,18 +62,18 @@
   }
 
   @media (max-height: $main-min-height) and (max-width: 420px) {
-    @include main-responsive($header-height, $footer-height-lg, $main-min-height);
+    @include main-responsive($header-height-lg, $footer-height-lg, $main-min-height);
   }
 
   @media (max-height: $main-min-height) and (max-width: 336px) {
-    @include main-responsive($header-height, $footer-height-xl, $main-min-height);
+    @include main-responsive($header-height-lg, $footer-height-xl, $main-min-height);
   }
 }
 
-@mixin height-responsive() {
+@mixin main-height-responsive() {
   $header-height: 120px;
 
   @media (min-height: calc(map-get($grid-breakpoints, 'sm') + 104px)) and (min-width: calc(map-get($grid-breakpoints, 'md') + 129px)) {
-    @include main-responsive($header-height, $footer-height-xs, $main-min-height);
+    @include main-responsive($header-height, $footer-height-xs);
   }
 }
