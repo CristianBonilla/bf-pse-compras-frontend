@@ -6,6 +6,7 @@
   width: 100%;
   background-color: $footer-background-color;
   z-index: 2;
+  height: $footer-height;
 
   &__content {
     position: relative;
@@ -135,6 +136,7 @@
 @media (max-width: calc(map-get($grid-breakpoints, 'lg') + 150px)) {
   .footer {
     $self: &;
+    height: $footer-height-xs;
 
     &__content {
 
@@ -160,6 +162,7 @@
 
 @media (max-width: map-get($grid-breakpoints, 'md')) {
   .footer {
+    height: $footer-height-sm;
 
     &__content {
       align-items: flex-start;
@@ -197,6 +200,7 @@
 
 @media (max-width: calc(map-get($grid-breakpoints, 'sm') + 42px)) {
   .footer {
+    height: $footer-height-md;
 
     &__content {
       gap: 10px;
@@ -213,7 +217,7 @@
 @media (max-width: 420px) {
   .footer {
     $self: &;
-    height: 163.97px;
+    height: $footer-height-lg;
 
     &__content {
 
@@ -248,6 +252,7 @@
 @media (max-width: 336px) {
   .footer {
     height: auto;
+    min-height: $footer-height;
   }
 }
 

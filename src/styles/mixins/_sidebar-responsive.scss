@@ -1,5 +1,87 @@
-@mixin sidebar-responsive($footer-height: $footer-height) {
+@mixin sidebar-responsive($header-height: $header-height, $footer-height: $footer-height) {
   .sidebar {
+    padding-top: $header-height;
     padding-bottom: $footer-height;
+  }
+}
+
+@mixin sidebar-queries() {
+  @media (max-width: calc(map-get($grid-breakpoints, 'lg') + 150px)) {
+    @include sidebar-responsive($header-height, $footer-height-xs);
+  }
+
+  @media (max-width: map-get($grid-breakpoints, 'md')) {
+    @include sidebar-responsive($header-height, $footer-height-sm);
+  }
+
+  @media (max-width: calc(map-get($grid-breakpoints, 'sm') + 42px)) {
+    @include sidebar-responsive($header-height, $footer-height-md);
+  }
+
+  @media (min-width: 421px) and (max-width: map-get($grid-breakpoints, 'sm')) {
+    .sidebar {
+      padding-top: 0;
+      margin-top: $header-height;
+      height: calc(100% - $header-height);
+    }
+  }
+
+  @media (max-width: 420px) {
+    .sidebar {
+      display: none;
+    }
+  }
+
+  @media (max-height: calc($main-min-height + 160px)) {
+    .sidebar {
+
+      &__content {
+
+        &--image {
+
+          img {
+            max-height: 250px;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-height: calc($main-min-height + 70px)) {
+    .sidebar {
+
+      &__content {
+
+        &--image {
+
+          img {
+            max-height: 220px;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-height: $main-min-height) {
+    .sidebar {
+
+      &__content {
+
+        &--image {
+
+          img {
+            max-height: 200px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@mixin sidebar-height-responsive() {
+  $header-height: 120px;
+
+  @media (min-height: calc(map-get($grid-breakpoints, 'sm') + 104px)) and (min-width: calc(map-get($grid-breakpoints, 'md') + 129px)) {
+    @include sidebar-responsive($header-height, $footer-height-xs);
   }
 }

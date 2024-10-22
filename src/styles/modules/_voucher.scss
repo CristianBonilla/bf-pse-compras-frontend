@@ -8,10 +8,9 @@
     flex-direction: column;
     justify-content: center;
     gap: 10px;
-    flex: 0 0 calc(50% - 30px);
+    flex: 0 0 calc(50% - 10px);
     width: 50%;
     min-height: 1rem;
-    max-width: 500px;
     padding: .2rem;
 
     &--wrapper {
@@ -20,11 +19,12 @@
       flex-wrap: wrap;
       width: 100%;
       padding: 1rem 0 .5rem;
-      gap: 30px;
+      gap: 10px;
     }
 
     &--item {
       display: flex;
+      justify-content: space-between;
       align-items: flex-start;
       width: 100%;
       gap: 10px;
@@ -57,14 +57,18 @@
     font-family: 'pfbeausanspro-bbook';
     color: $transaction-text-color-dark;
   }
+
+  &__text span {
+    display: inline-block;
+  }
 }
 
 @media (min-width: map-get($grid-breakpoints, 'lg')) {
   .voucher {
 
     &__content {
-      flex: 0 0 45%;
-      width: 45%;
+      // flex: 0 0 45%;
+      // width: 45%;
 
       &--wrapper {
         justify-content: space-between;
@@ -145,5 +149,11 @@
         font-size: 12px;
       }
     }
+  }
+}
+
+@media (min-height: calc(map-get($grid-breakpoints, 'sm') + 36px)) and (min-width: calc(map-get($grid-breakpoints, 'md') + 129px)) {
+  .voucher {
+    padding: 0 2rem;
   }
 }

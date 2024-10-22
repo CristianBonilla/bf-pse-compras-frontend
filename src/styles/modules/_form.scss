@@ -221,7 +221,7 @@
   }
 }
 
-@media (max-width: calc(map-get($grid-breakpoints, 'lg') + 85px)) {
+@media (max-width: calc(map-get($grid-breakpoints, 'lg') + 184px)) {
   .form {
     $self: &;
 
@@ -261,7 +261,7 @@
   }
 }
 
-@media (max-width: calc(map-get($grid-breakpoints, 'md') + 128px)) {
+@media (max-width: calc(map-get($grid-breakpoints, 'lg') + 108px)) {
   .form {
     $self: &;
 
@@ -300,7 +300,7 @@
   }
 }
 
-@media (max-width: calc(map-get($grid-breakpoints, 'sm') + 29px)) {
+@media (max-width: calc(map-get($grid-breakpoints, 'sm') + 99px)) {
   .form {
     $self: &;
 
@@ -410,6 +410,10 @@
     $select-wrap: bf-pc-select#{ $self-select };  /* bf-pc-select.form__select */
     $select-inner: #{ $select-wrap } select;      /* bf-pc-select.form__select select */
     $select: select#{ $self-select };             /* select.form__select */
+
+    &__content {
+      padding: .5rem 2rem;
+    }
 
     &__group {
 

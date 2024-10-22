@@ -7,7 +7,7 @@
   min-height: $main-min-height;
 
   &__content {
-    margin-right: 1rem;
+    margin-right: $sidebar-min-width;
     padding: .2rem .2rem 0;
   }
 
@@ -17,4 +17,4 @@
 
 @include main-queries();
 
-@include height-responsive();
+@include main-height-responsive();
