@@ -1,5 +1,5 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { StepperService } from '@module/content/services/stepper/stepper.service';
@@ -12,7 +12,7 @@ import { selectRequired } from '@shared/utils/validators/select.validator';
   templateUrl: './transaction.component.html',
   styles: ``
 })
-export class TransactionComponent implements OnInit {
+export class TransactionComponent implements OnInit, AfterViewInit {
   readonly #router = inject(Router);
   readonly #currency = inject(CurrencyPipe);
   readonly #formBuilder = inject(FormBuilder);
@@ -48,6 +48,10 @@ export class TransactionComponent implements OnInit {
 
   ngOnInit() {
     this.#stepper.update(Flow.DefinitionPay);
+  }
+
+  ngAfterViewInit() {
+    this.selectAccountControl.patchValue(this.confirmAccounts[0]);
   }
 
   transaction() {
