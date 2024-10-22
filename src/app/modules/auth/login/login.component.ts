@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { AfterViewInit, Component, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginForm } from '@models/login.model';
@@ -13,7 +13,7 @@ import { selectRequired } from '@shared/utils/validators/select.validator';
   templateUrl: './login.component.html',
   styles: ``
 })
-export class LoginComponent {
+export class LoginComponent implements AfterViewInit {
   readonly #router = inject(Router);
   readonly recoveryLink = 'https://www.bancofalabella.com.co/autoadhesion';
   readonly #formBuilder = inject(FormBuilder);
@@ -58,11 +58,13 @@ export class LoginComponent {
     return this.loginForm.controls.tokenKey;
   }
 
+  ngAfterViewInit() {
+    this.personTypeControl.patchValue(this.personTypeOptions[0]);
+  }
+
   login() {
     if (this.loginForm.valid) {
       this.#router.navigate(['transaction']);
-      this.personTypeControl.patchValue(this.personTypeOptions[0]);
-      this.documentTypeControl.patchValue(this.documentTypeOptions[0]);
     }
   }
 
@@ -73,6 +75,9 @@ export class LoginComponent {
   personTypeChange(personType: PersonTypeValue) {
     this.personTypeValue = personType;
     this.#updateFormGroup();
+    this.documentTypeControl.patchValue(this.documentTypeOptions[0]);
+    this.documentNumberControl.patchValue(null);
+    this.internetKeyControl.patchValue(null);
   }
 
   #updateFormGroup() {
