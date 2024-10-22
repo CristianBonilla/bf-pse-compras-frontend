@@ -19,7 +19,7 @@ variables:
     options:
       - 'test'
       - 'qa'
-      - 'prod'
+      # - 'prod'
     description: 'Entorno de construcción y despliegue de la App. Valores: test, qa, production'
 
 cache:
@@ -37,6 +37,7 @@ stages:
   - Testing
   - Security analysis
   - Building
+  - Scan
 
 workflow:
   name: '${TARGET_APP} - ${DEPLOY_ENV} - ${CI_COMMIT_MESSAGE}'
@@ -141,3 +142,21 @@ Docker Image:
       when: always
     - when: never
 
+.container-scan-secaas:
+  stage: Scan
+  before_script:
+    - cat tag
+    - export TAG=$(cat tag)
+    - export SCAN_IMAGE=hub.fif.tech/sitio-publico/$TARGET_APP-sitio-publico:$TAG
+    - echo $SCAN_IMAGE
+    - CS_IMAGE=$SCAN_IMAGE
+  variables:
+    CS_REGISTRY_USER: $DOCKER_USER
+    CS_REGISTRY_PASSWORD: $DOCKER_PASSWORD
+    CS_DOCKERFILE_PATH: 'dockerfiles/Dockerfile'
+  tags:
+    - fif-runner
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+      when: always
+    - when: never
