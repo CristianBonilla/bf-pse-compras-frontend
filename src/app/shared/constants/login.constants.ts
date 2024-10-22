@@ -27,32 +27,32 @@ export const DOCUMENT_TYPE: [FormSelectOption<'Seleccionar tipo de documento', n
     selected: true,
   },
   {
-    text: 'CC',
+    text: 'CC - Cédula de ciudadania',
     value: DocumentType.CC,
     selected: false
   },
   {
-    text: 'NIT',
+    text: 'NIT - Número de identificación tributaría',
     value: DocumentType.NIT,
     selected: false
   },
   {
-    text: 'CE',
+    text: 'CE - Cédula de extranjería',
     value: DocumentType.CE,
     selected: false
   },
   {
-    text: 'TI',
+    text: 'TI - Tarjeta de identidad',
     value: DocumentType.TI,
     selected: false
   },
   {
-    text: 'PAS',
+    text: 'PAS - Pasaporte',
     value: DocumentType.PAS,
     selected: false
   },
   {
-    text: 'CD',
+    text: 'CD - Carné diplomático',
     value: DocumentType.CD,
     selected: false
   }
