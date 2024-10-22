@@ -1,6 +1,6 @@
 {
   "name": "gateway-compras-frontend",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "start": "nx serve",
@@ -27,6 +27,7 @@
     "@angular/cli": "~18.2.0",
     "@angular/compiler-cli": "~18.2.0",
     "@angular/language-service": "~18.2.0",
+    "@df-api/nx-docker": "^3.0.1",
     "@eslint/js": "^9.8.0",
     "@nx/angular": "20.0.3",
     "@nx/eslint": "20.0.3",

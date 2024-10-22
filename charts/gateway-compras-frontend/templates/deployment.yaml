@@ -1,0 +1,1 @@
+{{- template "fif-common-template.deployment" . -}}
