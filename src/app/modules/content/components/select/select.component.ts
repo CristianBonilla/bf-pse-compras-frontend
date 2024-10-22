@@ -1,10 +1,10 @@
-import { Component, HostBinding, inject, Injector, Input } from '@angular/core';
+import { Component, HostBinding, inject, Injector, Input, OnDestroy } from '@angular/core';
 import { ControlValueAccessor, FormControl, FormControlDirective, NgControl } from '@angular/forms';
 import { SELECT_CONTROL_VALUE_ACCESSOR } from '@core/providers/control-value.provider';
 import { ElementAttributes } from '@shared/types/element.types';
 import { FormSelectOption } from '@shared/types/form.types';
-import { from } from 'rxjs';
-import { first, take } from 'rxjs/operators';
+import { from, Subscription } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'bf-pc-select',
@@ -12,7 +12,7 @@ import { first, take } from 'rxjs/operators';
   styles: ``,
   providers: [SELECT_CONTROL_VALUE_ACCESSOR]
 })
-export class SelectComponent implements ControlValueAccessor {
+export class SelectComponent implements ControlValueAccessor, OnDestroy {
   readonly #injector = inject(Injector);
   @HostBinding('class') readonly className = 'form__select';
   @Input() attributes!: ElementAttributes;
@@ -20,6 +20,7 @@ export class SelectComponent implements ControlValueAccessor {
   control!: FormControl<FormSelectOption<string, any>>;
   #onChanged!: (option: FormSelectOption<string, any>) => void;
   onTouched!: () => void;
+  #currentOptionSubscription?: Subscription;
 
   ngOnInit() {
     const ngControl = this.#injector.get(NgControl, null, { self: true, optional: true });
@@ -44,15 +45,18 @@ export class SelectComponent implements ControlValueAccessor {
     if (!currentOption) {
       return;
     }
-    from(this.options)
+    this.#currentOptionSubscription = from(this.options)
       .pipe(
-        first(({ selected }) => selected),
-        take(1)
+        filter(({ selected }) => selected),
       ).subscribe(option => {
         this.onTouched();
         option.selected = false;
         currentOption.selected = true;
         this.#onChanged(currentOption);
       });
+  }
+
+  ngOnDestroy() {
+    this.#currentOptionSubscription?.unsubscribe();
   }
 }
