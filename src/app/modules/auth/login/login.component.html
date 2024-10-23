@@ -67,6 +67,6 @@
   </div>
   <ng-container ngProjectAs="form-bottom">
     <button id="cancel-transaction" type="button" class="form__button" disabled (click)="cancel()">Cancelar</button>
-    <button id="submit-transaction" type="submit" class="form__button active" [disabled]="!loginForm.valid">Ingresar</button>
+    <button id="submit-transaction" type="submit" class="form__button" [class.active]="loginForm.valid" [disabled]="!loginForm.valid">Ingresar</button>
   </ng-container>
 </bf-pc-form>

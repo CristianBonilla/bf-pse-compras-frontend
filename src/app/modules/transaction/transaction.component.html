@@ -31,6 +31,6 @@
   </div>
   <ng-container ngProjectAs="form-bottom">
     <button id="cancel-transaction" type="button" class="form__button" (click)="cancel()">Cancelar</button>
-    <button id="submit-transaction" type="submit" class="form__button active" [disabled]="!transactionForm.valid">Continuar</button>
+    <button id="submit-transaction" type="submit" class="form__button" [class.active]="transactionForm.valid" [disabled]="!transactionForm.valid">Continuar</button>
   </ng-container>
 </bf-pc-form>
