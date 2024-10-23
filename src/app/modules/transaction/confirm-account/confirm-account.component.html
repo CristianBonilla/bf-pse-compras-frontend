@@ -25,7 +25,7 @@
   </div>
   <bf-pc-confirm-dynamic-key>
     <section class="content__dynamic-key--autorize">
-      <input id="dynamic-key" type="text" class="form__input" [formControl]="dynamicKeyControl">
+      <input id="dynamic-key" type="text" class="form__input" [formControl]="dynamicKeyControl" numbersOnly>
       <button id="submit-dynamic-key" type="submit" class="form__button" [class.active]="confirmAccountForm.valid" [disabled]="!confirmAccountForm.valid">Autorizar</button>
     </section>
   </bf-pc-confirm-dynamic-key>
