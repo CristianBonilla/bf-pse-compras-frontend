@@ -13,7 +13,7 @@ export class InputNumbersOnlyDirective implements AfterViewInit {
     this.#ngControl.valueChanges
       ?.pipe(takeUntilDestroyed(this.#destroyRef))
       .subscribe((inputValue?: string) => {
-        const correctValue = inputValue?.replace(/[^\d]/g, '') ?? '';
+        const correctValue = inputValue?.replace(/\D/g, '') ?? '';
         if (inputValue !== correctValue) {
           this.#ngControl.control?.patchValue(correctValue, { emitEvent: false });
         }
