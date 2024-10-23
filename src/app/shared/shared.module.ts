@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { TOASTR_GLOBAL_CONFIG } from '@shared/constants/toastr-config.constants';
+import { InputNumbersOnlyDirective } from '@shared/directives/input-numbers-only/input-numbers-only.directive';
 import { IconsModule } from '@shared/icons/icons.module';
 import { SafeHtmlPipe } from '@shared/pipes/safe-html/safe-html.pipe';
 import { AngularSvgIconModule } from 'angular-svg-icon';
@@ -9,7 +10,8 @@ import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
 
 @NgModule({
   declarations: [
-    SafeHtmlPipe
+    SafeHtmlPipe,
+    InputNumbersOnlyDirective
   ],
   imports: [
     ToastrModule.forRoot(TOASTR_GLOBAL_CONFIG)
@@ -19,7 +21,8 @@ import { OverlayscrollbarsModule } from 'overlayscrollbars-ngx';
     IconsModule,
     NgxTrimDirectiveModule,
     SafeHtmlPipe,
-    AngularSvgIconModule
+    AngularSvgIconModule,
+    InputNumbersOnlyDirective
   ],
   providers: [ToastrService]
 })
