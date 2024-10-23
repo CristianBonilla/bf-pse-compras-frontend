@@ -1,225 +1,162 @@
 include:
-  - project: 'tech-corp/seguridad-de-la-informacion/ci-templates/dependency-check'
-    ref: v8.2.1-v9.0.7
-    file: '/template/.ci-template.yml'
-  - project: 'fif/dx/gitlab-templates/security/sonarqube'
-    ref: v2
-    file: 'template.yml'
-  - project: 'fif/dx/gitlab-templates/versioning/gitlab-tagging-template'
-    ref: v1
-    file: 'template.yml'
-  - project: 'fif/canales-digitales/fif-tools/ci-templates/building/docker-build-tag-template'
-    ref: v1
-    file: 'template.yml'
-  - project: 'fif/canales-digitales/fif-tools/ci-templates/building/update-service-k8s-deploy-template'
-    ref: v1
-    file: 'template.yml'
-  - project: 'fif/canales-digitales/fif-tools/ci-templates/building/helm-push-template'
-    ref: v2
-    file: 'template.yml'
-  - project: 'fif/dx/gitlab-templates/versioning/validate-version'
-    ref: v1
-    file: 'template.yml'
-  - project: 'fif/dx/gitlab-templates/testing/eslint'
-    ref: v1
-    file: 'template.yml'
-  - project: 'fif/dx/gitlab-templates/testing/coverage-test'
-    ref: v1
-    file: 'template.yml'
-  - project: 'fif/dx/gitlab-templates/testing/nodejs-scan'
-    ref: v1
-    file: 'template.yml'
-  - project: 'fif/dx/gitlab-templates/installing/install-dependencies'
-    ref: v1
+  - project: 'fif/canales-digitales/portafolio-ventas/onboarding/common/ci-templates/security-analysis'
+    ref: sp/monorepo
     file: 'template.yml'
   - project: 'fif/dx/gitlab-templates/security/trivy'
-    ref: v1
-    file: 'template.yml'
-  - project: 'fif/canales-digitales/fif-tools/ci-templates/building/upload-static-template'
-    ref: v1.1.3
-    file: 'template.yml'
-default:
-  tags:
-    - ${DEFAULT_GROUP_CI_RUNNER_TAG}
-
-variables:
-  PROJECT_NAME: gateway-compras-backend
-
-  DOCKER_FILE_PATH: $CI_PROJECT_DIR/Dockerfile
-  SERVICE_NAME: gateway-compras-frontend
-  IMAGE_NAME: hub.fif.tech/gateway-compras-backend/ui/$PROJECT_NAME
-
-  CLUSTER_NAME: banco-co-cross-preprod-cluster
-  SECRET_ID: $BANCO_CO_CROSS_PREPROD_GATEWAY_COMPRAS_BACKEND_TEST_VAULT_SECRET_ID
-  ROLE_ID: $BANCO_CO_CROSS_PREPROD_GATEWAY_COMPRAS_BACKEND_TEST_VAULT_ROLE_ID
-
-  HELM_CHART_REPO: https://hub.fif.tech/chartrepo/gateway-compras-backend
-  HELM_CHART_REPO_NAME: gateway-compras-backend
-  HELM_CHART_PATH: "charts/$SERVICE_NAME/."
-
-  TP_BRANCH: main
-  TP_NPM_ESLINT_SCRIPT: not-implemented
-  TP_NPM_COVERAGE_SCRIPT: not-implemented
-  TP_NPM_MUTATION_SCRIPT: not-implemented
-
-  UPDSRV_PROJECT_URL: https://gitlab.falabella.tech/fif/canales-digitales/fanatizar-clientes/bfco/gateway-compras/gateway-compras-frontend-deploy
-  UPDSRV_PRODUCT_NAME: $SERVICE_NAME
-  UPDSRV_SERVICE_NAME: $SERVICE_NAME
-  UPDSRV_PROJECT_BRANCH: main
-  # TAG: {tag}
-
-before_script:
-  - export TAG=$(head -n 1 tag)
+    ref: trivy-secaas
+    file: '/template/ci-template.yml'
 
 image: hub.fif.tech/base/node-dev:18-latest
 
+variables:
+  TARGET_APP:
+    value: 'gateway-compras-frontend'
+    options:
+      - 'gateway-compras-frontend'
+    description: 'Nombre de la App a compilar (sacar nombres del nx.json o workspace.json). Valores: gateway-compras-frontend, banco-pe, banco-co, cmr-mx'
+  DEPLOY_ENV:
+    value: 'test'
+    options:
+      - 'test'
+      - 'qa'
+      - 'prod'
+    description: 'Entorno de construcción y despliegue de la App. Valores: test, qa, production'
+
 cache:
-  key: ${CI_COMMIT_SHORT_SHA}
+  key: ${CI_PIPELINE_ID}
   paths:
+    - .npmrc
     - node_modules/
-    - upload-tmp
+    - coverage
+    - dist/
     - tag
 
 stages:
-  - validate-version
-  - install
-  - test
-  - compile
-  - build
-  - image-test
-  - git-tag
-  - prepare-files
-  - upload
-  - update-deploy
+  - Dependencies
+  - Code analysis
+  - Testing
+  - Security analysis
+  - Building
+  - Scan
 
-validate-version:
-  stage: validate-version
-  extends: .validate-version-to-build
-  before_script:
-    - |
-      export TAG=$(jq '.version' -r package.json)
-      echo $TAG > tag
-      cat tag
-  rules:
-    - if: $CI_COMMIT_BRANCH == $TP_BRANCH
+workflow:
+  name: '${TARGET_APP} - ${DEPLOY_ENV} - ${CI_COMMIT_MESSAGE}'
 
-install-dependencies:
-  extends: .install-dependencies
-  except:
-    - tags
-
-eslint:
-  extends: .eslint
-  except:
-    - tags
-
-nodejs-scan:
-  extends: .nodejs-scan
-  except:
-    - tags
-
-dependency-check-analysis:
-  extends: .dependency-cli-8
-  stage: test
-  allow_failure: true
-  image: hub.fif.tech/base/plugins/dependency-check:9
-  variables:
-    PROJECT_NAME: $PROJECT_NAME-ui
-    DC_TARGET_LANG: node
+Install:
+  stage: Dependencies
+  script:
+    - echo ${DEPLOY_ENV}
+    - echo '//npm-registry.fif.tech/:_authToken="'$TOKEN_NPM_REGISTRY'"' >> .npmrc
+    - cat .npmrc
+    - npm ci
   tags:
     - fif-runner
-  except:
-    - tags
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+      when: always
+    - when: never
 
-compile:
-  stage: compile
+Linter:
+  stage: Code analysis
   script:
-    - npm prune --production
-  rules:
-    - if: $CI_COMMIT_BRANCH == $TP_BRANCH
-
-build:
-  stage: build
-  extends: .buildah-build
-  before_script:
-    - export TAG=$(head -n 1 tag)
-    - if [ "$HARBOR_PROJECT_NAME" != "" ]; then
-    -   export PROJECT_NAME=$HARBOR_PROJECT_NAME
-    - fi
-  variables:
-    CI_REGISTRY: hub.fif.tech
-    CI_REGISTRY_SIMPLE_SIGN_IN: "yes"
-    CI_REGISTRY_USER: $DOCKER_USER
-    CI_REGISTRY_PASSWORD: $DOCKER_PASSWORD
-  rules:
-    - if: $CI_COMMIT_BRANCH == $TP_BRANCH
-
-git-tag:
-  extends: .git-tag
-  stage: git-tag
-  before_script:
-    - export TAG=v$(head -n 1 tag)
-  rules:
-    - if: $CI_COMMIT_BRANCH == $TP_BRANCH
-
-helm-push:
-  stage: build
-  extends: .helm-push
-  rules:
-    - if: $CI_COMMIT_BRANCH == $TP_BRANCH
-
-update-service-project:
-  extends: .update-deploy
-  stage: update-deploy
-  rules:
-    - if: $CI_COMMIT_BRANCH == $TP_BRANCH && $UPDSRV_DISABLED != "YES"
-
-prepare-files:
-  stage: prepare-files
-  image: hub.fif.tech/base/node-dev:18-latest
-  script:
-    - npm install
-    - npm run build
-    # - sh .prepare-file-css-upload.sh
+    - npx nx run-many --target=lint --projects=$TARGET_APP
   tags:
     - fif-runner
-  only:
-    - main
+  needs:
+    - Install
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+      when: always
+    - when: never
 
-# upload-cdn:
-#   extends: .upload-static
-#   stage: upload
-#   variables:
-#     ROLE_ID: $FIF_STATIC_QA_VAULT_ROLE_ID
-#     SECRET_ID: $FIF_STATIC_QA_VAULT_SECRET_ID
-#     STATIC_SLUG: fif-static
-#     ENV_SLUG: qa
-#     STORAGE_ACCOUNT_NAME: fifstaticqa
-#     CONTAINER: insurance-assets
-#     UPLOAD_FOLDER: upload-tmp
-#     ACTION: upload
-#     TTL: 300
-#   tags:
-#     - fif-runner
-#   only:
-#     - master
-#   when: manual
+Coverage:
+  stage: Testing
+  script:
+    - npx nx test $TARGET_APP --coverage --coverageReporters=lcov
+  tags:
+    - fif-runner
+  artifacts:
+    paths:
+      - coverage/
+  needs:
+    - Install
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+      when: always
+    - when: never
 
-# upload-prod:
-#   extends: .upload-static
-#   stage: upload
-#   variables:
-#     ROLE_ID: $FIF_STATIC_PROD_VAULT_ROLE_ID
-#     SECRET_ID: $FIF_STATIC_PROD_VAULT_SECRET_ID
-#     STATIC_SLUG: fif-static
-#     ENV_SLUG: prod
-#     STORAGE_ACCOUNT_NAME: fifstaticprod
-#     CONTAINER: insurance-assets
-#     UPLOAD_FOLDER: upload-tmp
-#     ACTION: upload
-#     TTL: 300
-#   tags:
-#     - fif-runner
-#   only:
-#     - master
-#   when: manual
+Lighthouse:
+  image: cypress/browsers:node-20.13.0-chrome-124.0.6367.155-1-ff-125.0.3-edge-124.0.2478.80-1
+  stage: Testing
+  script:
+    - npx nx run-many --target=lighthouse --projects=$TARGET_APP
+  tags:
+    - fif-runner
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+      when: always
+    - when: never
+
+Build App:
+  stage: Building
+  script:
+    - ENV=$DEPLOY_ENV npx nx run-many --target=build --projects=$TARGET_APP
+  tags:
+    - fif-runner
+  needs:
+    - Install
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+      when: always
+    - when: never
+
+Docker Image:
+  stage: Building
+  image: hub.fif.tech/base/fif-docker-machine:latest
+  before_script:
+    - export TAG=$(date +%Y%m%d)-$(date +%H%M%S)-$DEPLOY_ENV
+    - echo $TAG > tag
+  variables:
+    DOCKER_HOST: tcp://localhost:2375
+    DOCKER_TLS_CERTDIR: ''
+    DOCKER_DRIVER: overlay2
+  services:
+    - docker:24.0.5-dind
+  script:
+    - apk add --no-cache nodejs npm git
+    - echo $TAG
+    - echo $TARGET_APP
+    - echo $DEPLOY_ENV
+    - cp .npmrc dist/apps/$TARGET_APP/.npmrc
+    - cd dist/apps/$TARGET_APP
+    - cat .npmrc
+    - npm i
+    - cd ../../..
+    - npx nx run-many --target=docker --projects=$TARGET_APP
+  tags:
+    - fif-runner
+  needs:
+    - Build App
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+      when: always
+    - when: never
+
+.container-scan-secaas:
+  stage: Scan
+  before_script:
+    - cat tag
+    - export TAG=$(cat tag)
+    - export SCAN_IMAGE=hub.fif.tech/gateway-compras-backend/$TARGET_APP-sitio-publico:$TAG
+    - echo $SCAN_IMAGE
+    - CS_IMAGE=$SCAN_IMAGE
+  variables:
+    CS_REGISTRY_USER: $DOCKER_USER
+    CS_REGISTRY_PASSWORD: $DOCKER_PASSWORD
+    CS_DOCKERFILE_PATH: 'dockerfiles/Dockerfile'
+  tags:
+    - fif-runner
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "web"'
+      when: always
+    - when: never

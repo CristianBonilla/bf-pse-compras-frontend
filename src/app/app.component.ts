@@ -1,8 +1,14 @@
 import { Component } from '@angular/core';
+import { RouterModule } from '@angular/router';
+import { NxWelcomeComponent } from './nx-welcome.component';
 
 @Component({
-  selector: 'bf-pc-root',
+  standalone: true,
+  imports: [NxWelcomeComponent, RouterModule],
+  selector: 'app-root',
   templateUrl: './app.component.html',
-  styles: ``
+  styleUrl: './app.component.scss',
 })
-export class AppComponent { }
+export class AppComponent {
+  title = 'gateway-compras-frontend';
+}
