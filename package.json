@@ -21,6 +21,7 @@
     "test": "ng test",
     "coverage": "ng test --watch=false --code-coverage",
     "lint": "ng lint",
+    "not-implemented": "true",
     "serve:ssr:gateway-compras-frontend": "node dist/gateway-compras-frontend/server/server.mjs"
   },
   "private": true,

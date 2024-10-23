@@ -57,7 +57,7 @@ variables:
   HELM_CHART_REPO_NAME: gateway-compras-backend
   HELM_CHART_PATH: "charts/$SERVICE_NAME/."
 
-  TP_BRANCH: master
+  TP_BRANCH: main
   TP_NPM_ESLINT_SCRIPT: not-implemented
   TP_NPM_COVERAGE_SCRIPT: not-implemented
   TP_NPM_MUTATION_SCRIPT: not-implemented
