@@ -17,28 +17,24 @@
     width: 100%;
   }
 
-  &--title,
-  &--text {
-    color: $content-dynamic-key-text-color;
+  blockquote {
+    padding: 1rem 0;
+    margin: 0 1rem;
   }
 
   &--text {
-    padding: 1rem 0;
-    margin: 0 1rem;
+    font-size: .8rem;
+    line-height: 1.2;
+    max-width: 193.2px;
+    margin-bottom: 0;
 
-    p {
-      font-size: .8rem;
-      line-height: 1.2;
-      max-width: 193.2px;
-      margin-bottom: 0;
+    span {
+      display: inline-block;
+      color: $content-dynamic-key-text-color;
+    }
 
-      span {
-        display: inline-block;
-      }
-
-      strong {
-        color: $content-dynamic-key-autorize;
-      }
+    strong {
+      color: $content-dynamic-key-autorize;
     }
   }
 
