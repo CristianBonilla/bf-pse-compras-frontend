@@ -6,4 +6,5 @@ export interface ConfirmAccountForm {
   amountToPay: FormControl<string>;
   transactionCost: FormControl<string>;
   availableInAccount: FormControl<string>;
+  dynamicKey: FormControl<number | null>;
 }

@@ -1,6 +1,6 @@
 import { CurrencyPipe } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfirmAccountForm } from '@models/confirm-account.model';
 import { StepperService } from '@module/content/services/stepper/stepper.service';
@@ -17,11 +17,12 @@ export class ConfirmAccountComponent implements OnInit {
   readonly #currency = inject(CurrencyPipe);
   readonly #formBuilder = inject(FormBuilder);
   readonly confirmAccountForm = this.#formBuilder.group<FormGroupDynamic<ConfirmAccountForm>>({
-    trade: ['Banco Falabella S.A.'],
-    accountSelected: ['Cuenta corriente • • • • • • 0868'],
-    amountToPay: [this.#getCurrency(12720.13)],
-    transactionCost: [this.#getCurrency(60)],
-    availableInAccount: [this.#getCurrency(20860)]
+    trade: ['Banco Falabella S.A.', Validators.required],
+    accountSelected: ['Cuenta corriente • • • • • • 0868', Validators.required],
+    amountToPay: [this.#getCurrency(12720.13), Validators.required],
+    transactionCost: [this.#getCurrency(60), Validators.required],
+    availableInAccount: [this.#getCurrency(20860), Validators.required],
+    dynamicKey: [null, Validators.required]
   });
   readonly #stepper = inject(StepperService);
 
@@ -43,6 +44,10 @@ export class ConfirmAccountComponent implements OnInit {
 
   get availableInAccountControl() {
     return this.confirmAccountForm.controls.availableInAccount;
+  }
+
+  get dynamicKeyControl() {
+    return this.confirmAccountForm.controls.dynamicKey;
   }
 
   ngOnInit() {
