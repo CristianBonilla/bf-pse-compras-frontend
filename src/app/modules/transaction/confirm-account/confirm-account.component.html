@@ -25,8 +25,8 @@
   </div>
   <bf-pc-confirm-dynamic-key>
     <section class="content__dynamic-key--autorize">
-      <input id="dynamic-key" type="text" class="form__input">
-      <button id="submit-dynamic-key" type="submit" class="form__button" disabled>Autorizar</button>
+      <input id="dynamic-key" type="text" class="form__input" [formControl]="dynamicKeyControl">
+      <button id="submit-dynamic-key" type="submit" class="form__button" [class.active]="confirmAccountForm.valid" [disabled]="!confirmAccountForm.valid">Autorizar</button>
     </section>
   </bf-pc-confirm-dynamic-key>
   <ng-container ngProjectAs="form-bottom">
