@@ -1,0 +1,191 @@
+@font-face {
+  font-family: 'pfbeausanspro';
+  src: url('/fonts/pfbeausanspro/PFBeauSansPro-Regular.eot');
+  src: local('PFBeauSansPro-Regular'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Regular.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Regular.woff2') format('woff2'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Regular.woff') format('woff'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'pfbeausanspro';
+  src: url('/fonts/pfbeausanspro/PFBeauSansPro-Thin.eot');
+  src: local('PFBeauSansPro-Thin'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Thin.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Thin.woff2') format('woff2'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Thin.woff') format('woff'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Thin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'pfbeausanspro';
+  src: url('/fonts/pfbeausanspro/PFBeauSansPro-Light.eot');
+  src: local('PFBeauSansPro-Light'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Light.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Light.woff2') format('woff2'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Light.woff') format('woff'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'pfbeausanspro';
+  src: url('/fonts/pfbeausanspro/PFBeauSansPro-SemiBold.eot');
+  src: local('PFBeauSansPro-SemiBold'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-SemiBold.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-SemiBold.woff2') format('woff2'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-SemiBold.woff') format('woff'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'pfbeausanspro';
+  src: url('/fonts/pfbeausanspro/PFBeauSansPro-Black.eot');
+  src: local('PFBeauSansPro-Black'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Black.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Black.woff2') format('woff2'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Black.woff') format('woff'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Black.ttf') format('truetype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'pfbeausanspro';
+  src: url('/fonts/pfbeausanspro/PFBeauSansPro-Bold.eot');
+  src: local('PFBeauSansPro-Bold'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Bold.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Bold.woff2') format('woff2'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Bold.woff') format('woff'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'pfbeausanspro';
+  src: url('/fonts/pfbeausanspro/PFBeauSansPro-BoldItalic.eot');
+  src: local('PFBeauSansPro-BoldItalic'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-BoldItalic.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-BoldItalic.woff2') format('woff2'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-BoldItalic.woff') format('woff'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-BoldItalic.ttf') format('truetype');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'pfbeausanspro';
+  src: url('/fonts/pfbeausanspro/PFBeauSansPro-Italic.eot');
+  src: local('PFBeauSansPro-Italic'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Italic.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Italic.woff2') format('woff2'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Italic.woff') format('woff'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'pfbeausanspro';
+  src: url('/fonts/pfbeausanspro/PFBeauSansPro-ThinItalic.eot');
+  src: local('PFBeauSansPro-ThinItalic'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-ThinItalic.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-ThinItalic.woff2') format('woff2'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-ThinItalic.woff') format('woff'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-ThinItalic.ttf') format('truetype');
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'pfbeausanspro';
+  src: url('/fonts/pfbeausanspro/PFBeauSansPro-LightItalic.eot');
+  src: local('PFBeauSansPro-LightItalic'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-LightItalic.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-LightItalic.woff2') format('woff2'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-LightItalic.woff') format('woff'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-LightItalic.ttf') format('truetype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'pfbeausanspro';
+  src: url('/fonts/pfbeausanspro/PFBeauSansPro-SemiBoldItalic.eot');
+  src: local('PFBeauSansPro-SemiBoldItalic'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-SemiBoldItalic.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-SemiBoldItalic.woff2') format('woff2'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-SemiBoldItalic.woff') format('woff'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-SemiBoldItalic.ttf') format('truetype');
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'pfbeausanspro';
+  src: url('/fonts/pfbeausanspro/PFBeauSansPro-BlackItalic.eot');
+  src: local('PFBeauSansPro-BlackItalic'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-BlackItalic.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-BlackItalic.woff2') format('woff2'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-BlackItalic.woff') format('woff'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-BlackItalic.ttf') format('truetype');
+  font-weight: 900;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'pfbeausanspro-xthin';
+  src: url('/fonts/pfbeausanspro/PFBeauSansPro-XThin.eot');
+  src: local('PFBeauSansPro-XThin'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-XThin.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-XThin.woff2') format('woff2'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-XThin.woff') format('woff'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-XThin.ttf') format('truetype');
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'pfbeausanspro-xthin';
+  src: url('/fonts/pfbeausanspro/PFBeauSansPro-XThinItalic.eot');
+  src: local('PFBeauSansPro-XThinItalic'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-XThinItalic.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-XThinItalic.woff2') format('woff2'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-XThinItalic.woff') format('woff'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-XThinItalic.ttf') format('truetype');
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'pfbeausanspro-bbook';
+  src: url('/fonts/pfbeausanspro/PFBeauSansPro-Bbook.eot');
+  src: local('PFBeauSansPro-Bbook'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Bbook.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Bbook.woff2') format('woff2'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Bbook.woff') format('woff'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-Bbook.ttf') format('truetype');
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'pfbeausanspro-bbook';
+  src: url('/fonts/pfbeausanspro/PFBeauSansPro-BbookItalic.eot');
+  src: local('PFBeauSansPro-BbookItalic'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-BbookItalic.eot?#iefix') format('embedded-opentype'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-BbookItalic.woff2') format('woff2'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-BbookItalic.woff') format('woff'),
+    url('/fonts/pfbeausanspro/PFBeauSansPro-BbookItalic.ttf') format('truetype');
+  font-weight: 500;
+  font-style: italic;
+}

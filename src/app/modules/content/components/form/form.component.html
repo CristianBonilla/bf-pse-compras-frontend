@@ -1,0 +1,8 @@
+<form class="form" autocomplete="off" [formGroup]="formGroup" (ngSubmit)="handleSubmit($event)">
+  <bf-pc-content>
+    <ng-content />
+    <ng-container ngProjectAs="content-bottom">
+      <ng-content select="form-bottom" />
+    </ng-container>
+  </bf-pc-content>
+</form>
