@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { ConfirmDynamicKeyComponent } from '@module/content/components/confirm-dynamic-key/confirm-dynamic-key.component';
+import { AuthorizeDynamicKeyComponent } from '@module/content/components/authorize-dynamic-key/authorize-dynamic-key.component';
 import { DynamicKeyComponent } from '@module/content/components/dynamic-key/dynamic-key.component';
 import { FormComponent } from '@module/content/components/form/form.component';
 import { SelectComponent } from '@module/content/components/select/select.component';
@@ -16,7 +16,7 @@ import { StepperService } from '@module/content/services/stepper/stepper.service
     StepperComponent,
     SelectComponent,
     DynamicKeyComponent,
-    ConfirmDynamicKeyComponent
+    AuthorizeDynamicKeyComponent
   ],
   imports: [
     CommonModule,
@@ -29,8 +29,8 @@ import { StepperService } from '@module/content/services/stepper/stepper.service
     ContentComponent,
     FormComponent,
     SelectComponent,
-    ConfirmDynamicKeyComponent,
-    DynamicKeyComponent
+    DynamicKeyComponent,
+    AuthorizeDynamicKeyComponent
   ],
   providers: [StepperService]
 })

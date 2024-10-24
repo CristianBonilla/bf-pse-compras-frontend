@@ -23,12 +23,12 @@
       </div>
     </div>
   </div>
-  <bf-pc-confirm-dynamic-key>
+  <bf-pc-authorize-dynamic-key>
     <section class="authorize__dynamic-key--section">
       <input id="dynamic-key" type="text" class="form__input" [formControl]="dynamicKeyControl" numbersOnly>
       <button id="submit-dynamic-key" type="submit" class="form__button" [class.active]="confirmAccountForm.valid" [disabled]="!confirmAccountForm.valid">Autorizar</button>
     </section>
-  </bf-pc-confirm-dynamic-key>
+  </bf-pc-authorize-dynamic-key>
   <ng-container ngProjectAs="form-bottom">
     <button id="cancel-transaction" type="button" class="form__button" (click)="cancel()">Cancelar</button>
   </ng-container>
