@@ -18,6 +18,8 @@ export class InputNumbersOnlyDirective implements AfterViewInit {
           this.#ngControl.control?.patchValue(`${first} ${second}`, { emitEvent: false });
         } else if (first && !second) {
           this.#ngControl.control?.patchValue(first, { emitEvent: false });
+        } else {
+          this.#ngControl.control?.patchValue(inputValue?.replace(/\D/g, '') ?? '', { emitEvent: false });
         }
       });
   }
