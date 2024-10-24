@@ -32,20 +32,20 @@
     }
   }
 
-  @media (max-height: calc($main-min-height + 160px)) {
-    .sidebar {
+  // @media (max-height: calc($main-min-height + 160px)) {
+  //   .sidebar {
 
-      &__content {
+  //     &__content {
 
-        &--image {
+  //       &--image {
 
-          img {
-            max-height: 250px;
-          }
-        }
-      }
-    }
-  }
+  //         img {
+  //           max-height: 250px;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 
   @media (max-height: calc($main-min-height + 70px)) {
     .sidebar {
@@ -55,27 +55,27 @@
         &--image {
 
           img {
-            max-height: 220px;
+            max-height: 280px;
           }
         }
       }
     }
   }
 
-  @media (max-height: $main-min-height) {
-    .sidebar {
+  // @media (max-height: $main-min-height) {
+  //   .sidebar {
 
-      &__content {
+  //     &__content {
 
-        &--image {
+  //       &--image {
 
-          img {
-            max-height: 200px;
-          }
-        }
-      }
-    }
-  }
+  //         img {
+  //           max-height: 200px;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
 }
 
 @mixin sidebar-height-responsive() {
