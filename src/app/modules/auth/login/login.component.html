@@ -32,7 +32,7 @@
         </div>
         <div class="form__group">
           <label for="internet-key" class="form__label">Clave internet</label>
-          <input id="internet-key" type="text" class="form__input" placeholder="Ingresa tu clave" [formControl]="internetKeyControl">
+          <input id="internet-key" type="password" class="form__input" placeholder="Ingresa tu clave" [formControl]="internetKeyControl">
         </div>
       }
       @if (personTypeValue.value !== PERSON_TYPE.Legal) {
