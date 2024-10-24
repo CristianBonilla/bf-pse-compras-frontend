@@ -1,4 +1,4 @@
-.content__dynamic-key {
+.authorize__dynamic-key {
   $self: &;
 
   background-color: $content-dynamic-key-color;
@@ -48,7 +48,7 @@
     max-width: 250px;
   }
 
-  &--autorize {
+  &--authorize {
     display: flex;
     flex-direction: column;
     padding: 1rem 0;
