@@ -6,6 +6,8 @@
   &__alert {
     $self: &;
 
+    @extend .alert;
+
     display: flex;
     align-items: center;
     gap: 10px;
@@ -14,7 +16,9 @@
     color: $alert-color;
     opacity: .9;
 
-    &.alert-warning {
+    &--warning {
+      @extend .alert-warning;
+
       background-color: $alert-color-warning;
 
       #{ $self }--icon {
@@ -22,7 +26,9 @@
       }
     }
 
-    &.alert-success {
+    &--success {
+      @extend .alert-success;
+
       background-color: $alert-color-success;
 
       #{ $self }--icon {
