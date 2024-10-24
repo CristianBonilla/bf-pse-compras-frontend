@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { LoaderService } from '@module/content/services/loader/loader.service';
 import { StepperService } from '@module/content/services/stepper/stepper.service';
 
 @Component({
@@ -7,6 +8,8 @@ import { StepperService } from '@module/content/services/stepper/stepper.service
   styles: ``
 })
 export class ContentComponent {
+  readonly #loader = inject(LoaderService);
   readonly #stepper = inject(StepperService);
   readonly stepperFlow$ = this.#stepper.stepperFlow$;
+  readonly loading$ = this.#loader.loading$;
 }

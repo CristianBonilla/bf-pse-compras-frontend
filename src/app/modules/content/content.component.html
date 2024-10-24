@@ -1,16 +1,22 @@
 <div class="content">
-  <div class="content__body">
-    <div class="content__header">
-      <p class="content__header--title">
-        <strong>PSE</strong> pagos en línea
-      </p>
-      @if (stepperFlow$ | async) {
-        <bf-pc-stepper />
-      }
+  @if (loading$ | async) {
+    <div class="content__body">
+      <bf-pc-loader />
     </div>
-    <ng-content />
-  </div>
-  <div class="content__bottom">
-    <ng-content select="content-bottom" />
-  </div>
+  } @else {
+    <div class="content__body">
+      <div class="content__header">
+        <p class="content__header--title">
+          <strong>PSE</strong> pagos en línea
+        </p>
+        @if (stepperFlow$ | async) {
+          <bf-pc-stepper />
+        }
+      </div>
+      <ng-content />
+    </div>
+    <div class="content__bottom">
+      <ng-content select="content-bottom" />
+    </div>
+  }
 </div>

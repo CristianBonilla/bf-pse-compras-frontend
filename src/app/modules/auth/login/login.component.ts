@@ -2,11 +2,13 @@ import { AfterViewInit, Component, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LoginForm } from '@models/login.model';
+import { LoaderService } from '@module/content/services/loader/loader.service';
 import { DOCUMENT_TYPE, PERSON_TYPE } from '@shared/constants/login.constants';
 import { PersonType } from '@shared/enums/person.enums';
 import { FormGroupDynamic } from '@shared/types/form.types';
 import { PersonTypeValue } from '@shared/types/login.types';
 import { selectRequired } from '@shared/utils/validators/select.validator';
+import { from, take, timer } from 'rxjs';
 
 @Component({
   selector: 'bf-pc-login',
@@ -15,6 +17,8 @@ import { selectRequired } from '@shared/utils/validators/select.validator';
 })
 export class LoginComponent implements AfterViewInit {
   readonly #router = inject(Router);
+  readonly #loader = inject(LoaderService);
+  readonly loading$ = this.#loader.loading$;
   readonly recoveryLink = 'https://www.bancofalabella.com.co/autoadhesion';
   readonly #formBuilder = inject(FormBuilder);
   readonly PERSON_TYPE = PersonType;
@@ -64,7 +68,17 @@ export class LoginComponent implements AfterViewInit {
 
   login() {
     if (this.loginForm.valid) {
-      this.#router.navigate(['transaction']);
+      this.#loader.showLoader();
+      // timer(5000)
+      //   .pipe(take(1))
+      //   .subscribe(() => {
+      //     from(
+      //       this.#router.navigate(['transaction'])
+      //     ).pipe(take(1))
+      //       .subscribe(() => {
+      //         this.#loader.hideLoader();
+      //       });
+      //   });
     }
   }
 

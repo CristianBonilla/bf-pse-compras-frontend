@@ -1,7 +1,7 @@
 export {
   faTwitter,
   faWhatsapp,
-  faYoutube
+  faYoutube,
 } from '@fortawesome/free-brands-svg-icons';
 export {
   faAngleRight,
