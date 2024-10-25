@@ -1,4 +1,4 @@
-FROM hub.fif.tech/base/nginx-fif:1.17-5
+FROM hub.fif.tech/base/nginx-fif:1.17.3-latest
 
 USER root
 ARG ENVIRONMENT
@@ -20,5 +20,5 @@ RUN chmod -R 775 /var/log/nginx
 USER nginx
 
 RUN nginx -t
-CMD ["nginx", "-g", "daemon off;"]
 EXPOSE 8080
+CMD ["nginx", "-g", "daemon off;"]
