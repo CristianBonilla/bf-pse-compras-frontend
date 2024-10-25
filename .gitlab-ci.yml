@@ -10,7 +10,7 @@ variables:
   SECRET_ID: $BANCO_CO_CROSS_PREPROD_GATEWAY_COMPRAS_BACKEND_TEST_VAULT_SECRET_ID
   CLUSTER_NAME: banco-co-cross-preprod-cluster
   INSTALL_DEPS_SCRIPT: "npm install"
-  IMAGE_NAME: hub.fif.tech/gateway-compras-backend/$PROJECT_NAME-$APP_NAME
+  IMAGE_NAME: hub.fif.tech/gateway-compras-backend/$PROJECT_NAME-ui
   RUN_LINTER: "false"
   DEPLOY_PLATFORM: "argocd"
   DOCKER_EXTRA_BUILD_ARGS_ENV: "--build-arg=BUILDCOMMAND='npx nx run $APP_NAME:build' --build-arg=BUILDPATH='dist/apps/$APP_NAME'"

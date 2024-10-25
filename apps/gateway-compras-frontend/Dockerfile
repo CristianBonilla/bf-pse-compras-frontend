@@ -9,7 +9,7 @@ ENV BUILD_NUMBER=${BUILDNUMBER}
 # COPY apps/web/entrypoint.sh /usr/bin/entrypoint.sh
 # COPY apps/web/pre-start.sh /pre-start.sh
 # COPY apps/web/nginx/default.conf /etc/nginx/conf.d/default.conf
-# COPY dist/apps/web /usr/share/nginx/html
+COPY dist/apps/gateway-compras-frontend /usr/share/nginx/html
 
 USER root
 RUN chown nginx:nginx /usr/share/nginx/html/*
@@ -18,5 +18,5 @@ RUN chmod 775 /usr/share/nginx/html
 USER nginx
 
 
-EXPOSE 8080
+EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
