@@ -1,15 +1,8 @@
-FROM hub.fif.tech/base/nginx:1.17-latest
+FROM hub.fif.tech/base/nginx:1.27-alpine
 
-ARG BUILDNUMBER
-ARG DOCKER_BUILD_ARGS_ENV
-ARG NGINX_ENVIRONMENT=k8s
-
-ENV BUILD_NUMBER=${BUILDNUMBER}
+ARG DOCKER_BUILD_ARGS_ENV="test"
 
 COPY dist/apps/gateway-compras-frontend /usr/share/nginx/html
-
-RUN mkdir -p /var/log/nginx && \
-    chown -R nginx:nginx /var/log/nginx
 
 USER root
 RUN chown nginx:nginx /usr/share/nginx/html/*
