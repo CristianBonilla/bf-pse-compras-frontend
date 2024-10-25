@@ -16,7 +16,7 @@
     "sharedGlobals": []
   },
   "targetDefaults": {
-    "@angular-devkit/build-angular:application": {
+    "@angular-devkit/build-angular:browser": {
       "cache": true,
       "dependsOn": ["^build"],
       "inputs": ["production", "^production"]
@@ -51,6 +51,5 @@
       "style": "scss",
       "unitTestRunner": "jest"
     }
-  },
-  "defaultProject": "gateway-compras-frontend"
+  }
 }

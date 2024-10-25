@@ -9,34 +9,24 @@ module.exports = [
   },
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
-    // Override or add rules here
-    rules: {},
-  },
-  ...nx.configs['flat/angular'],
-  ...nx.configs['flat/angular-template'],
-  {
-    files: ['**/*.ts'],
     rules: {
-      '@angular-eslint/directive-selector': [
+      '@nx/enforce-module-boundaries': [
         'error',
         {
-          type: 'attribute',
-          prefix: 'app',
-          style: 'camelCase',
-        },
-      ],
-      '@angular-eslint/component-selector': [
-        'error',
-        {
-          type: 'element',
-          prefix: 'app',
-          style: 'kebab-case',
+          enforceBuildableLibDependency: true,
+          allow: ['^.*/eslint(\\.base)?\\.config\\.[cm]?js$'],
+          depConstraints: [
+            {
+              sourceTag: '*',
+              onlyDependOnLibsWithTags: ['*'],
+            },
+          ],
         },
       ],
     },
   },
   {
-    files: ['**/*.html'],
+    files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     // Override or add rules here
     rules: {},
   },

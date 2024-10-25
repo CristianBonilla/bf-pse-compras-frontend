@@ -1,162 +1,19 @@
 include:
-  - project: 'fif/canales-digitales/portafolio-ventas/onboarding/common/ci-templates/security-analysis'
-    ref: sp/monorepo
-    file: 'template.yml'
-  - project: 'fif/dx/gitlab-templates/security/trivy'
-    ref: trivy-secaas
-    file: '/template/ci-template.yml'
-
-image: hub.fif.tech/base/node-dev:18-latest
+  - project: "fif/dx/configurable-pipelines/nx-build-pipeline"
+    ref: v5
+    file: "pipeline.yml"
 
 variables:
-  TARGET_APP:
-    value: 'gateway-compras-frontend'
-    options:
-      - 'gateway-compras-frontend'
-    description: 'Nombre de la App a compilar (sacar nombres del nx.json o workspace.json). Valores: gateway-compras-frontend, banco-pe, banco-co, cmr-mx'
-  DEPLOY_ENV:
-    value: 'test'
-    options:
-      - 'test'
-      - 'qa'
-      - 'prod'
-    description: 'Entorno de construcción y despliegue de la App. Valores: test, qa, production'
+  PROJECT_NAME: gateway-compras-frontend
+  SERVICE_NAME: $PROJECT_NAME-$APP_NAME
+  ROLE_ID: $BANCO_CO_CROSS_PREPROD_GATEWAY_COMPRAS_BACKEND_TEST_VAULT_ROLE_ID
+  SECRET_ID: $BANCO_CO_CROSS_PREPROD_GATEWAY_COMPRAS_BACKEND_TEST_VAULT_SECRET_ID
+  CLUSTER_NAME: banco-co-cross-preprod-cluster
+  IMAGE_NAME: hub.fif.tech/gateway-compras-backend/$PROJECT_NAME-$APP_NAME
+  RUN_LINTER: "false"
+  DEPLOY_PLATFORM: "argocd"
+  DOCKER_EXTRA_BUILD_ARGS_ENV: "--build-arg=BUILDCOMMAND='npx nx run $APP_NAME:build' --build-arg=BUILDPATH='dist/apps/$APP_NAME'"
 
-cache:
-  key: ${CI_PIPELINE_ID}
-  paths:
-    - .npmrc
-    - node_modules/
-    - coverage
-    - dist/
-    - tag
+  DOCKER_FILE_PATH: $CI_PROJECT_DIR/apps/$APP_NAME/Dockerfile
 
-stages:
-  - Dependencies
-  - Code analysis
-  - Testing
-  - Security analysis
-  - Building
-  - Scan
-
-workflow:
-  name: '${TARGET_APP} - ${DEPLOY_ENV} - ${CI_COMMIT_MESSAGE}'
-
-Install:
-  stage: Dependencies
-  script:
-    - echo ${DEPLOY_ENV}
-    - echo '//npm-registry.fif.tech/:_authToken="'$TOKEN_NPM_REGISTRY'"' >> .npmrc
-    - cat .npmrc
-    - npm ci
-  tags:
-    - fif-runner
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "web"'
-      when: always
-    - when: never
-
-Linter:
-  stage: Code analysis
-  script:
-    - npx nx run-many --target=lint --projects=$TARGET_APP
-  tags:
-    - fif-runner
-  needs:
-    - Install
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "web"'
-      when: always
-    - when: never
-
-Coverage:
-  stage: Testing
-  script:
-    - npx nx test $TARGET_APP --coverage --coverageReporters=lcov
-  tags:
-    - fif-runner
-  artifacts:
-    paths:
-      - coverage/
-  needs:
-    - Install
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "web"'
-      when: always
-    - when: never
-
-Lighthouse:
-  image: cypress/browsers:node-20.13.0-chrome-124.0.6367.155-1-ff-125.0.3-edge-124.0.2478.80-1
-  stage: Testing
-  script:
-    - npx nx run-many --target=lighthouse --projects=$TARGET_APP
-  tags:
-    - fif-runner
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "web"'
-      when: always
-    - when: never
-
-Build App:
-  stage: Building
-  script:
-    - ENV=$DEPLOY_ENV npx nx run-many --target=build --projects=$TARGET_APP
-  tags:
-    - fif-runner
-  needs:
-    - Install
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "web"'
-      when: always
-    - when: never
-
-Docker Image:
-  stage: Building
-  image: hub.fif.tech/base/fif-docker-machine:latest
-  before_script:
-    - export TAG=$(date +%Y%m%d)-$(date +%H%M%S)-$DEPLOY_ENV
-    - echo $TAG > tag
-  variables:
-    DOCKER_HOST: tcp://localhost:2375
-    DOCKER_TLS_CERTDIR: ''
-    DOCKER_DRIVER: overlay2
-  services:
-    - docker:24.0.5-dind
-  script:
-    - apk add --no-cache nodejs npm git
-    - echo $TAG
-    - echo $TARGET_APP
-    - echo $DEPLOY_ENV
-    - cp .npmrc dist/apps/$TARGET_APP/.npmrc
-    - cd dist/apps/$TARGET_APP
-    - cat .npmrc
-    - npm i
-    - cd ../../..
-    - npx nx run-many --target=docker --projects=$TARGET_APP
-  tags:
-    - fif-runner
-  needs:
-    - Build App
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "web"'
-      when: always
-    - when: never
-
-.container-scan-secaas:
-  stage: Scan
-  before_script:
-    - cat tag
-    - export TAG=$(cat tag)
-    - export SCAN_IMAGE=hub.fif.tech/gateway-compras-backend/$TARGET_APP-sitio-publico:$TAG
-    - echo $SCAN_IMAGE
-    - CS_IMAGE=$SCAN_IMAGE
-  variables:
-    CS_REGISTRY_USER: $DOCKER_USER
-    CS_REGISTRY_PASSWORD: $DOCKER_PASSWORD
-    CS_DOCKERFILE_PATH: 'dockerfiles/Dockerfile'
-  tags:
-    - fif-runner
-  rules:
-    - if: '$CI_PIPELINE_SOURCE == "web"'
-      when: always
-    - when: never
+image: hub.fif.tech/base/node-dev:20-wolfi-latest
