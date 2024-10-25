@@ -2,10 +2,13 @@ import { CurrencyPipe } from '@angular/common';
 import { AfterViewInit, Component, inject, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { LoaderService } from '@module/content/services/loader/loader.service';
 import { StepperService } from '@module/content/services/stepper/stepper.service';
 import { TRANSACTION } from '@shared/constants/transaction.constants';
 import { Flow } from '@shared/enums/stepper.enums';
 import { selectRequired } from '@shared/utils/validators/select.validator';
+import { from, timer } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'bf-pc-transaction',
@@ -16,6 +19,8 @@ export class TransactionComponent implements OnInit, AfterViewInit {
   readonly #router = inject(Router);
   readonly #currency = inject(CurrencyPipe);
   readonly #formBuilder = inject(FormBuilder);
+  readonly #loader = inject(LoaderService);
+  readonly loading$ = this.#loader.loading$;
   readonly confirmAccounts = TRANSACTION;
   readonly transactionForm = this.#formBuilder.group({
     trade: ['Banco Falabella S.A.'],
@@ -56,7 +61,17 @@ export class TransactionComponent implements OnInit, AfterViewInit {
 
   transaction() {
     if (this.transactionForm.valid) {
-      this.#router.navigate(['transaction/confirm-account']);
+      this.#loader.showLoader();
+      timer(5000)
+        .pipe(take(1))
+        .subscribe(() => {
+          from(
+            this.#router.navigate(['transaction/confirm-account'])
+          ).pipe(take(1))
+            .subscribe(() => {
+              this.#loader.hideLoader();
+            });
+        });
     }
   }
 
