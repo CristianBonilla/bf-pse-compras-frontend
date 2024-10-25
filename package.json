@@ -5,7 +5,7 @@
   "scripts": {
     "nx": "nx",
     "start": "nx serve gateway-compras-frontend --port 8080",
-    "start:prod": "nx serve --prod",
+    "start:prod": "nx serve --prod --port 8080",
     "build": "nx build gateway-compras-frontend",
     "build:prod": "nx build --prod --parallel",
     "build:post-prod": "nx post-build --parallel",

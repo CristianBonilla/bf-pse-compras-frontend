@@ -13,8 +13,7 @@ variables:
   IMAGE_NAME: hub.fif.tech/gateway-compras-backend/$PROJECT_NAME-ui
   RUN_LINTER: "false"
   DEPLOY_PLATFORM: "argocd"
-  DOCKER_EXTRA_BUILD_ARGS_ENV: "--build-arg=BUILDCOMMAND='npx nx run $APP_NAME:build' --build-arg=BUILDPATH='dist/apps/$APP_NAME'"
-
   DOCKER_FILE_PATH: $CI_PROJECT_DIR/apps/$APP_NAME/Dockerfile
+  DOCKER_EXTRA_BUILD_ARGS_ENV: "--build-arg=BUILDCOMMAND='npx nx run $APP_NAME:build' --build-arg=BUILDPATH='dist/apps/$APP_NAME'"
 
 image: hub.fif.tech/base/node-dev:20-wolfi-latest
