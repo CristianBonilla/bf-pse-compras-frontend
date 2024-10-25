@@ -17,6 +17,7 @@ RUN chown nginx:nginx /usr/share/nginx/html
 RUN chmod 775 /usr/share/nginx/html
 RUN chmod -R 775 /var/log/nginx
 
+
 RUN nginx -t
 CMD ["nginx", "-g", "daemon off;"]
 EXPOSE 8080
