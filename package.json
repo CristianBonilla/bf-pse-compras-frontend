@@ -1,8 +1,15 @@
 {
   "name": "@gateway-compras-frontend/source",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "license": "MIT",
-  "scripts": {},
+  "scripts": {
+    "nx": "nx",
+    "start": "nx serve gateway-compras-frontend --port 8080",
+    "start:prod": "nx serve --prod",
+    "build": "nx build gateway-compras-frontend",
+    "build:prod": "nx build --prod --parallel",
+    "build:post-prod": "nx post-build --parallel"
+  },
   "private": true,
   "dependencies": {
     "@angular/animations": "~18.2.0",
