@@ -1,13 +1,18 @@
-import { AfterViewInit, DestroyRef, Directive, inject } from '@angular/core';
-import { NgControl } from '@angular/forms';
+import { AfterViewInit, DestroyRef, Directive, inject, OnInit } from '@angular/core';
+import { NgControl, Validators } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Directive({
   selector: 'input[numbersOnly]'
 })
-export class InputNumbersOnlyDirective implements AfterViewInit {
-  #ngControl = inject(NgControl);
-  #destroyRef = inject(DestroyRef);
+export class InputNumbersOnlyDirective implements OnInit, AfterViewInit {
+  readonly #ngControl = inject(NgControl);
+  readonly #destroyRef = inject(DestroyRef);
+  readonly #validators = [Validators.required, Validators.minLength(7)];
+
+  ngOnInit() {
+    this.#ngControl.control?.addValidators(this.#validators);
+  }
 
   ngAfterViewInit() {
     this.#ngControl.valueChanges

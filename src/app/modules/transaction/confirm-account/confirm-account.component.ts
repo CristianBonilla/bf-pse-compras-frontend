@@ -27,7 +27,7 @@ export class ConfirmAccountComponent implements OnInit {
     amountToPay: [this.#getCurrency(12720.13), Validators.required],
     transactionCost: [this.#getCurrency(60), Validators.required],
     availableInAccount: [this.#getCurrency(20860), Validators.required],
-    dynamicKey: [null, Validators.required]
+    dynamicKey: [null]
   });
   readonly #stepper = inject(StepperService);
 
