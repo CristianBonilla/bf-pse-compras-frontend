@@ -10,7 +10,7 @@
     "build:prod": "nx build --prod --parallel",
     "build:post-prod": "nx post-build --parallel",
     "test": "nx test --parallel",
-    "coverage": "nx test --parallel --coverage",
+    "coverage": "nx test gateway-compras-frontend --parallel --coverage",
     "affected:apps": "nx affected:apps",
     "affected:libs": "nx affected:libs",
     "affected:version-verify": "nx affected --target=version-verify",
