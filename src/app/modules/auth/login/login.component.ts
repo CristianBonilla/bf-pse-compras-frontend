@@ -8,7 +8,8 @@ import { PersonType } from '@shared/enums/person.enums';
 import { FormGroupDynamic } from '@shared/types/form.types';
 import { PersonTypeValue } from '@shared/types/login.types';
 import { selectRequired } from '@shared/utils/validators/select.validator';
-import { from, take, timer } from 'rxjs';
+import { from, timer } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'bf-pc-login',
@@ -69,16 +70,16 @@ export class LoginComponent implements AfterViewInit {
   login() {
     if (this.loginForm.valid) {
       this.#loader.showLoader();
-      // timer(5000)
-      //   .pipe(take(1))
-      //   .subscribe(() => {
-      //     from(
-      //       this.#router.navigate(['transaction'])
-      //     ).pipe(take(1))
-      //       .subscribe(() => {
-      //         this.#loader.hideLoader();
-      //       });
-      //   });
+      timer(5000)
+        .pipe(take(1))
+        .subscribe(() => {
+          from(
+            this.#router.navigate(['transaction'])
+          ).pipe(take(1))
+            .subscribe(() => {
+              this.#loader.hideLoader();
+            });
+        });
     }
   }
 

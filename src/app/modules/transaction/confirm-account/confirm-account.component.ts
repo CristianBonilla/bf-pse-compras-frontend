@@ -3,9 +3,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ConfirmAccountForm } from '@models/confirm-account.model';
+import { LoaderService } from '@module/content/services/loader/loader.service';
 import { StepperService } from '@module/content/services/stepper/stepper.service';
 import { Flow } from '@shared/enums/stepper.enums';
 import { FormGroupDynamic } from '@shared/types/form.types';
+import { from, timer } from 'rxjs';
+import { take } from 'rxjs/operators';
 
 @Component({
   selector: 'bf-pc-confirm-account',
@@ -16,6 +19,8 @@ export class ConfirmAccountComponent implements OnInit {
   readonly #router = inject(Router);
   readonly #currency = inject(CurrencyPipe);
   readonly #formBuilder = inject(FormBuilder);
+  readonly #loader = inject(LoaderService);
+  readonly loading$ = this.#loader.loading$;
   readonly confirmAccountForm = this.#formBuilder.group<FormGroupDynamic<ConfirmAccountForm>>({
     trade: ['Banco Falabella S.A.', Validators.required],
     accountSelected: ['Cuenta corriente • • • • • • 0868', Validators.required],
@@ -55,7 +60,19 @@ export class ConfirmAccountComponent implements OnInit {
   }
 
   confirmAccount() {
-    this.#router.navigate(['transaction/voucher']);
+    if (this.confirmAccountForm.valid) {
+      this.#loader.showLoader();
+      timer(5000)
+        .pipe(take(1))
+        .subscribe(() => {
+          from(
+            this.#router.navigate(['transaction/voucher'])
+          ).pipe(take(1))
+            .subscribe(() => {
+              this.#loader.hideLoader();
+            });
+        });
+    }
   }
 
   cancel() {
