@@ -12,6 +12,7 @@ COPY dist/apps/gateway-compras-frontend /usr/share/nginx/html
 RUN chown nginx:nginx /usr/share/nginx/html/*
 RUN chown nginx:nginx /usr/share/nginx/html
 RUN chmod 775 /usr/share/nginx/html
+RUN chmod 775 /var/log/nginx
 USER nginx
 
 RUN nginx -t
