@@ -8,6 +8,9 @@ ENV BUILD_NUMBER=${BUILDNUMBER}
 
 COPY dist/apps/gateway-compras-frontend /usr/share/nginx/html
 
+RUN mkdir -p /var/log/nginx && \
+    chown -R nginx:nginx /var/log/nginx
+
 USER root
 RUN chown nginx:nginx /usr/share/nginx/html/*
 RUN chown nginx:nginx /usr/share/nginx/html
