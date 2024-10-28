@@ -5,10 +5,12 @@ USER root
 ARG BUILDCOMMAND
 ARG BUILDPATH
 
-# Ejecutar el comando de construcción
 RUN $BUILDCOMMAND
 
+RUN echo "RUN ${BUILDCOMMAND}"
+
 COPY $BUILDPATH /usr/share/nginx/html
+RUN echo "COPY ${BUILDPATH} /usr/share/nginx/html"
 
 RUN nginx -t
 EXPOSE 8000
