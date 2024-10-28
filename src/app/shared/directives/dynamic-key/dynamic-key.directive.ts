@@ -35,7 +35,7 @@ export class DynamicKeyDirective implements OnInit, AfterViewInit {
     } else if (!!firstPart && !secondPart) {
       return firstPart;
     } else {
-      return dynamicKey?.replace(/\D/g, '') ?? '';
+      return null;
     }
   }
 }
