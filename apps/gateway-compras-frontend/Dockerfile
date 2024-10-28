@@ -1,13 +1,10 @@
 FROM hub.fif.tech/base/nginx:1.27-alpine
 
 USER root
-COPY --from=build dist/apps/gateway-compras-frontend /usr/share/nginx/html
-RUN nginx -t
+ARG ENVIRONMENT
 
-# Contar archivos copiados
-RUN echo "Archivos copiados:" && \
-    ls -1 /usr/share/nginx/html | wc -l && \
-    ls -1 /usr/share/nginx/html
-    
+COPY dist/apps/gateway-compras-frontend /usr/share/nginx/html
+
+RUN nginx -t
 EXPOSE 8000
 CMD ["nginx", "-g", "daemon off;"]
