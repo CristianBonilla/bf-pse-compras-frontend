@@ -1,10 +1,7 @@
 FROM hub.fif.tech/base/nginx:1.27-alpine
 
 USER root
-ARG ENVIRONMENT
-
 COPY --from=build dist/apps/gateway-compras-frontend /usr/share/nginx/html
-
 RUN nginx -t
 
 # Contar archivos copiados
