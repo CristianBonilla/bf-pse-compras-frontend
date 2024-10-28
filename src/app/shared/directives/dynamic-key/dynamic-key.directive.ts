@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 export class DynamicKeyDirective implements OnInit, AfterViewInit {
   readonly #ngControl = inject(NgControl);
   readonly #destroyRef = inject(DestroyRef);
+  readonly #spaceUnicode = '\u2002';
   readonly #dynamicKeyLength = 6;
   readonly #validators = [Validators.required, Validators.minLength(7)];
   #control!: FormControl<string | null> | null;
@@ -31,7 +32,7 @@ export class DynamicKeyDirective implements OnInit, AfterViewInit {
   #getDynamicKey(dynamicKey: string | null) {
     const [firstPart = null, secondPart = null] = dynamicKey?.match(/\d{1,3}/g) ?? [];
     if (!!(firstPart && secondPart) && (firstPart + secondPart).length <= this.#dynamicKeyLength) {
-      return `${firstPart} ${secondPart}`;
+      return `${firstPart}${this.#spaceUnicode}${secondPart}`;
     } else if (!!firstPart && !secondPart) {
       return firstPart;
     } else {
