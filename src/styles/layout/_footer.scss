@@ -77,11 +77,12 @@
     color: $white-color;
     line-height: 1;
     margin-bottom: 0;
-    gap: .5rem;
+    gap: .3rem;
 
     #{ $text }--link {
       @extend .link-underline;
       @extend .link-underline-opacity-0;
+
       color: $banco-falabella-color;
       transition: color 500ms ease;
 
@@ -136,6 +137,7 @@
 @media (max-width: calc(map-get($grid-breakpoints, 'lg') + 150px)) {
   .footer {
     $self: &;
+
     height: $footer-height-xs;
 
     &__content {
@@ -154,7 +156,6 @@
     &__text {
       align-items: flex-start;
       flex-direction: column;
-      gap: .3rem;
       font-size: 12px;
     }
   }
@@ -209,7 +210,7 @@
     &__text {
       flex-direction: column;
       font-size: 13px;
-      gap: 2px;
+      gap: 3px;
     }
   }
 }
@@ -217,6 +218,7 @@
 @media (max-width: 420px) {
   .footer {
     $self: &;
+
     height: $footer-height-lg;
 
     &__content {
@@ -239,7 +241,6 @@
       $text: &;
 
       font-size: 12px;
-      gap: 3px;
 
       #{ $text }--link {
         display: block;
@@ -252,7 +253,14 @@
 @media (max-width: 336px) {
   .footer {
     height: auto;
-    min-height: $footer-height;
+    min-height: $footer-height-xl;
+
+    &__text {
+
+      span:first-child {
+        line-height: 1.2;
+      }
+    }
   }
 }
 
