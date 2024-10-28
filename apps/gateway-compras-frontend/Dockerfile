@@ -1,9 +1,14 @@
 FROM hub.fif.tech/base/nginx:1.27-alpine
 
 USER root
-ARG ENVIRONMENT
 
-COPY dist/apps/gateway-compras-frontend /usr/share/nginx/html
+ARG BUILDCOMMAND
+ARG BUILDPATH
+
+# Ejecutar el comando de construcción
+RUN $BUILDCOMMAND
+
+COPY $BUILDPATH /usr/share/nginx/html
 
 RUN nginx -t
 EXPOSE 8000
