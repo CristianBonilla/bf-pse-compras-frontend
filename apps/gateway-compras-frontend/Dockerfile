@@ -6,5 +6,5 @@ ARG ENVIRONMENT
 COPY dist/apps/gateway-compras-frontend /usr/share/nginx/html
 
 RUN nginx -t
-EXPOSE 80
+EXPOSE 8080
 CMD ["nginx", "-g", "daemon off;"]
