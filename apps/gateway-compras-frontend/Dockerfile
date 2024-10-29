@@ -1,13 +1,14 @@
 # FROM hub.fif.tech/base/nginx:1.27-alpine
 FROM hub.fif.tech/base/nginx:1.17-latest
 
+COPY dist/apps/gateway-compras-frontend /usr/share/nginx/html
+
 USER root
 RUN mkdir -p /var/log/nginx && \
     chown -R nginx:nginx /var/log/nginx
 RUN chown nginx:nginx /usr/share/nginx/html/*
 RUN chown nginx:nginx /usr/share/nginx/html
 RUN chmod 775 /usr/share/nginx/html
-COPY dist/apps/gateway-compras-frontend /usr/share/nginx/html
 USER nginx
 
 # COPY apps/gateway-compras-frontend/entrypoint.sh /usr/bin/entrypoint.sh
