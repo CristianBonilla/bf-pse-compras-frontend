@@ -6,6 +6,11 @@ export {
 export {
   faAngleRight,
   faCheck,
-  faExclamation,
-  faSpinner
+  faCircleInfo,
+  faLock,
+  faSpinner,
+  faTriangleExclamation
 } from '@fortawesome/free-solid-svg-icons';
+export {
+  faCircleCheck
+} from '@fortawesome/free-regular-svg-icons';
