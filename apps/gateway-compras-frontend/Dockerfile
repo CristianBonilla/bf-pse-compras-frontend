@@ -7,7 +7,7 @@ RUN mkdir -p /var/log/nginx && \
 USER nginx
 
 COPY apps/gateway-compras-frontend/entrypoint.sh /usr/bin/entrypoint.sh
-COPY apps/web/pre-start.sh /pre-start.sh
+COPY apps/gateway-compras-frontend/pre-start.sh /pre-start.sh
 COPY dist/apps/gateway-compras-frontend /usr/share/nginx/html
 RUN ls -la /usr/share/nginx/html
 
