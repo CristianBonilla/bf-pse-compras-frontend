@@ -10,6 +10,7 @@ import { StepperComponent } from '@module/content/components/stepper/stepper.com
 import { ContentComponent } from '@module/content/content.component';
 import { LoaderService } from '@module/content/services/loader/loader.service';
 import { StepperService } from '@module/content/services/stepper/stepper.service';
+import { TransactionAlertService } from '@module/content/services/transaction-alert/transaction-alert.service';
 import { IconsModule } from '@shared/icons/icons.module';
 
 @NgModule({
@@ -38,6 +39,6 @@ import { IconsModule } from '@shared/icons/icons.module';
     AuthorizeDynamicKeyComponent,
     LoaderComponent
   ],
-  providers: [StepperService, LoaderService]
+  providers: [StepperService, LoaderService, TransactionAlertService]
 })
 export class ContentModule { }
