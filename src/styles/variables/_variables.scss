@@ -36,11 +36,15 @@ $border-radius: 6px;
 
 $form-text-color: rgb(92, 97, 102);
 
-$alert-color: rgba(51, 53, 55, 1) !default;
-$alert-color-warning: rgba(255, 244, 223, 1) !default;
-$alert-color-warning-icon: rgb(194, 139, 18) !default;
-$alert-color-success: rgba(239, 248, 234, 1) !default;
-$alert-color-success-icon: $banco-falabella-color-dark;
+$alert-text-color: rgba(68, 71, 75, 1) !default;
+$alert-color-info: rgba(244, 247, 248, 1) !default;
+$alert-color-info-icon: rgba(99, 105, 110, 1) !default;
+$alert-color-success: rgba(232, 245, 230, 1) !default;
+$alert-color-success-icon: $banco-falabella-color-dark !default;
+$alert-color-warning: rgba(254, 242, 224, 1) !default;
+$alert-color-warning-icon: rgba(196, 68, 1, 1) !default;
+$alert-color-danger: rgba(255, 234, 238, 1) !default;
+$alert-color-danger-icon: rgba(211, 0, 11, 1) !default;
 $alert-border-radius: 8px;
 
 $transaction-text-color: rgba(68, 71, 75, 1) !default;

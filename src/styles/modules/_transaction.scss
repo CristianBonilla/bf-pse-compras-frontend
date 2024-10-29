@@ -10,11 +10,31 @@
 
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 6px;
     border: none;
     border-radius: $alert-border-radius;
-    color: $alert-color;
+    color: $alert-text-color;
     opacity: .9;
+
+    &--info {
+      @extend .alert-secondary;
+
+      background-color: $alert-color-info;
+
+      #{ $self }--icon {
+        color: $alert-color-info-icon;
+      }
+    }
+
+    &--success {
+      @extend .alert-success;
+
+      background-color: $alert-color-success;
+
+      #{ $self }--icon {
+        color: $alert-color-success-icon;
+      }
+    }
 
     &--warning {
       @extend .alert-warning;
@@ -26,13 +46,13 @@
       }
     }
 
-    &--success {
-      @extend .alert-success;
+    &--danger {
+      @extend .alert-danger;
 
-      background-color: $alert-color-success;
+      background-color: $alert-color-danger;
 
       #{ $self }--icon {
-        color: $alert-color-success-icon;
+        color: $alert-color-danger-icon;
       }
     }
 
