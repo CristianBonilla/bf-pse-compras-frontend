@@ -1,6 +1,6 @@
 export enum TransactionAlert {
-  Info = 1,
-  Success,
-  Warning,
-  Danger
-}
+  Info = 'transaction-alert-info',
+  Success = 'transaction-alert-success',
+  Warning = 'transaction-alert-warning',
+  Danger = 'transaction-alert-danger'
+};
