@@ -1,10 +1,12 @@
+@let transactionAlert = transactionAlert$ | async;
+
 <bf-pc-content>
   <div class="transaction">
-    <div class="transaction__alert transaction__alert--danger">
-      <fa-icon class="transaction__alert--icon" [icon]="['fas', 'lock']"></fa-icon>
-      <p class="transaction__alert--text">
-        <strong>Transacción no válida.</strong>&thinsp;Se detectó uso en otro dispositivo. Al realizar tu transacción usa el mismo navegador.
-      </p>
-    </div>
+    @if (transactionAlert) {
+      <div [ngClass]="['transaction__alert', transactionAlert.className]">
+        <fa-icon class="transaction__alert--icon" [icon]="transactionAlert.icon" />
+        <p class="transaction__alert--text" [innerHTML]="transactionAlert.text | safeHtml"></p>
+      </div>
+    }
   </div>
 </bf-pc-content>
