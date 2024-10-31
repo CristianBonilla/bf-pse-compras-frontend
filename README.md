@@ -1,101 +1,124 @@
-# GatewayComprasFrontend
+# Frontend PSE Compras
 
-<a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
+Con PSE Compras podemos realizar pagos por Internet de manera ágil y segura. 
 
-✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
+La aplicación está desarrollada en Angular 18.2.0 y nx 20.0.5
 
-[Learn more about this workspace setup and its capabilities](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects) or run `npx nx graph` to visually explore what was created. Now, let's get you up to speed!
+## Ambientes (Dominios de red privada)
 
-## Run tasks
+| Ambiente  | Dominio url  |
+|-------------|-------------|
+| TEST  | https://gateway-compras-backend-test-banco-co-cross-preprod-priv.fif.tech/  |
+| QA  | https://gateway-compras-backend-qa-banco-co-cross-preprod-priv.fif.tech/  |
+| PROD  | pendiente...  |
 
-To run the dev server for your app, use:
+
+## Herramientas
+
+| Componente  | Enlace  | 
+|-------------|-------------|
+| Repositorio de imágenes  | [Proyecto en Harbor](https://harbor.fif.tech/harbor/projects/275/repositories)  | 
+| Repositorio de deploy  | [Repositorio](https://gitlab.falabella.tech/fif/canales-digitales/fanatizar-clientes/bfco/gateway-compras/gateway-compras-backend-deploy)  | 
+| ArgoCD  | [ArgoCD preprod](https://argocd-banco-co-cross-preprod-priv.fif.tech/applications/)  | 
+| Documentación de PSE  | [Confluence](https://confluence.falabella.tech/display/PFCP/DAP+PSE+Compras)  | 
+| Repositorio del backend | [Apis backend](https://gitlab.falabella.tech/fif/canales-digitales/fanatizar-clientes/bfco/gateway-compras/gateway-compras-backend) |
+
+
+
+## Correr aplicación local
+
+Si es la primera vez, tendrás que instalar todas las dependencias con el comando:
+```sh
+npm install
+```
+Para poner a funcionar la aplicación localmente ejecuta el comando:
 
 ```sh
-npx nx serve gateway-compras-frontend
+nx serve gateway-compras-frontend
 ```
 
-To create a production bundle:
+Si realizas algún cambio y quieres verificar el coverage de tu código, escribe el comando:
 
 ```sh
-npx nx build gateway-compras-frontend
+npm run coverage
 ```
 
-To see all available targets to run for a project, run:
+## Cómo desplegar un ajuste
 
+Antes de iniciar, asegúrate de estar en la rama develop.
+
+Para subir tus cambios al clúster, tendrás que modificar 2 repositorios, el primero que es en el que estamos y el segundo es el [repositorio del deploy](https://gitlab.falabella.tech/fif/canales-digitales/fanatizar-clientes/bfco/gateway-compras/gateway-compras-backend-deploy).
+
+Antes de crear un commit debes tener en cuenta las convenciones de commits.
+
+Este proyecto sigue el estándar de [Conventional Commits](https://www.conventionalcommits.org/), que proporciona un conjunto de reglas para escribir mensajes de commit que son fáciles de entender y útiles para la automatización. A continuación, se describen los prefijos más comunes utilizados en los mensajes de commit.
+
+## Prefijos de Commits
+
+### `feat:`
+- **Descripción**: Se utiliza para indicar la adición de una nueva característica.
+- **Ejemplo**: git commit -m "**feat:** Se agrega funcionalidad de login"
+
+
+### `fix:`
+- **Descripción**: Indica que se ha realizado un cambio que corrige un error (bug).
+- **Ejemplo**: git commmit -m "**fix:** corrijo error en doble clic del botón ingresar"
+
+
+### `chore:`
+- **Descripción**: Cambios que no afectan el código fuente, como tareas de mantenimiento o cambios de configuración.
+- **Ejemplo**: git commit -m "**chore:** realizo ajuste en archivo .gitignore"
+
+
+### `docs:`
+- **Descripción**: Se utiliza para realizar cambios en la documentación.
+- **Ejemplo**: git commit -m "**docs:** agrego enlace de base de datos en archivo README.md"
+
+
+### `style:`
+- **Descripción**: Cambios que no afectan el significado del código (por ejemplo, formato, espacios en blanco).
+- **Ejemplo**: git commit -m "**style:** elimino archivo sin usar"
+
+
+### `refactor:`
+- **Descripción**: Cambios en el código que no corrigen errores ni añaden características, pero que mejoran la estructura.
+- **Ejemplo**: git commit -m "**refactor:** mejora en rendimiento de login"
+
+
+### `test:`
+- **Descripción**: Se refiere a añadir o modificar pruebas.
+- **Ejemplo**: git commit -m "**test:** agrego pruebas para funcionalidad de login"
+
+
+### `build:`
+- **Descripción**: Cambios que afectan el sistema de construcción o dependencias externas.
+- **Ejemplo**: git commit -m "**build:** cambio archivo dockerfile para la creación de la imagen"
+
+
+### `ci:`
+- **Descripción**: Cambios en los archivos de configuración de integración continua.
+- **Ejemplo**: git commit -m "**ci:** agrego un stage al pipeline"
+
+
+### Ejemplo completo
 ```sh
-npx nx show project gateway-compras-frontend
+git add .
+git commit -m "fix: arreglo error en login"
+git push origin develop
 ```
 
-These targets are either [inferred automatically](https://nx.dev/concepts/inferred-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) or defined in the `project.json` or `package.json` files.
+Después de subir los cambios, tendremos que realizar un pull request con la rama master, ya que en la rama "**master**" es donde se ejecuta el pipeline. 
 
-[More about running tasks in the docs &raquo;](https://nx.dev/features/run-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+Cuando se haga el merge con la rama master, se ejecuta el pipeline y al final si todo sale bien, tendremos una nueva verisón de despliegue y una imagen guardada en harbor.
 
-## Add new projects
+La nueva versión se verá algo así: 
+"**gateway-compras-frontend_v0.1.23**"
 
-While you could add new projects to your workspace manually, you might want to leverage [Nx plugins](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) and their [code generation](https://nx.dev/features/generate-code?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) feature.
+Copiamos el tag de versión para luego ir al [repositorio del deploy](https://gitlab.falabella.tech/fif/canales-digitales/fanatizar-clientes/bfco/gateway-compras/gateway-compras-backend-deploy).
 
-Use the plugin's generator to create new projects.
+## Enlaces relacionados
 
-To generate a new application, use:
+Más información:
 
-```sh
-npx nx g @nx/angular:app demo
-```
-
-To generate a new library, use:
-
-```sh
-npx nx g @nx/angular:lib mylib
-```
-
-You can use `npx nx list` to get a list of installed plugins. Then, run `npx nx list <plugin-name>` to learn about more specific capabilities of a particular plugin. Alternatively, [install Nx Console](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) to browse plugins and generators in your IDE.
-
-[Learn more about Nx plugins &raquo;](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) | [Browse the plugin registry &raquo;](https://nx.dev/plugin-registry?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Set up CI!
-
-### Step 1
-
-To connect to Nx Cloud, run the following command:
-
-```sh
-npx nx connect
-```
-
-Connecting to Nx Cloud ensures a [fast and scalable CI](https://nx.dev/ci/intro/why-nx-cloud?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects) pipeline. It includes features such as:
-
-- [Remote caching](https://nx.dev/ci/features/remote-cache?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task distribution across multiple machines](https://nx.dev/ci/features/distribute-task-execution?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Automated e2e test splitting](https://nx.dev/ci/features/split-e2e-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Task flakiness detection and rerunning](https://nx.dev/ci/features/flaky-tasks?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-### Step 2
-
-Use the following command to configure a CI workflow for your workspace:
-
-```sh
-npx nx g ci-workflow
-```
-
-[Learn more about Nx on CI](https://nx.dev/ci/intro/ci-with-nx#ready-get-started-with-your-provider?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Install Nx Console
-
-Nx Console is an editor extension that enriches your developer experience. It lets you run tasks, generate code, and improves code autocompletion in your IDE. It is available for VSCode and IntelliJ.
-
-[Install Nx Console &raquo;](https://nx.dev/getting-started/editor-setup?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-## Useful links
-
-Learn more:
-
-- [Learn more about this workspace setup](https://nx.dev/getting-started/tutorials/angular-monorepo-tutorial?utm_source=nx_project&amp;utm_medium=readme&amp;utm_campaign=nx_projects)
-- [Learn about Nx on CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [Releasing Packages with Nx release](https://nx.dev/features/manage-releases?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-- [What are Nx plugins?](https://nx.dev/concepts/nx-plugins?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
-
-And join the Nx community:
-- [Discord](https://go.nx.dev/community)
-- [Follow us on X](https://twitter.com/nxdevtools) or [LinkedIn](https://www.linkedin.com/company/nrwl)
-- [Our Youtube channel](https://www.youtube.com/@nxdevtools)
-- [Our blog](https://nx.dev/blog?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
+- [Documentación Portafolio Clientes Personas](https://confluence.falabella.tech/display/PFCP/DAP+PSE+Compras)
+- [Obtenga más información sobre Nx en CI](https://nx.dev/ci/intro/ci-with-nx?utm_source=nx_project&utm_medium=readme&utm_campaign=nx_projects)
