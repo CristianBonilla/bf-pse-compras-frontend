@@ -5,7 +5,9 @@ import { Router } from '@angular/router';
 import { ConfirmAccountForm } from '@models/confirm-account.model';
 import { LoaderService } from '@module/content/services/loader/loader.service';
 import { StepperService } from '@module/content/services/stepper/stepper.service';
+import { TransactionAlertService } from '@module/content/services/transaction-alert/transaction-alert.service';
 import { Flow } from '@shared/enums/stepper.enums';
+import { TransactionAlert } from '@shared/enums/transaction-alert.enum';
 import { FormGroupDynamic } from '@shared/types/form.types';
 import { from, timer } from 'rxjs';
 import { take } from 'rxjs/operators';
@@ -30,6 +32,8 @@ export class ConfirmAccountComponent implements OnInit {
     dynamicKey: [null]
   });
   readonly #stepper = inject(StepperService);
+  readonly #transactionAlert = inject(TransactionAlertService);
+  readonly #spaceUnicode = '\u2002';
 
   get tradeControl() {
     return this.confirmAccountForm.controls.trade;
@@ -61,6 +65,22 @@ export class ConfirmAccountComponent implements OnInit {
 
   confirmAccount() {
     if (this.confirmAccountForm.valid) {
+      const confirmAccountValue = this.dynamicKeyControl.value;
+      if (confirmAccountValue === `123${this.#spaceUnicode}456`) {
+        this.#transactionAlert.updateTransactionAlertFromMessageIndex(
+          TransactionAlert.Success,
+          'successful');
+      } else if (confirmAccountValue === `912${this.#spaceUnicode}891`) {
+        this.#transactionAlert.updateTransactionAlertFromMessageIndex(
+          TransactionAlert.Warning,
+          'incorrect'
+        );
+      } else {
+        this.#transactionAlert.updateTransactionAlertFromMessageIndex(
+          TransactionAlert.Danger,
+          'declined'
+        );
+      }
       this.#loader.showLoader();
       timer(5000)
         .pipe(take(1))

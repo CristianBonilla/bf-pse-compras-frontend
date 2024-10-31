@@ -5,7 +5,6 @@ export {
 } from '@fortawesome/free-brands-svg-icons';
 export {
   faAngleRight,
-  faCheck,
   faCircleInfo,
   faLock,
   faSpinner,
