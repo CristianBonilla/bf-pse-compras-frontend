@@ -1,7 +1,22 @@
 {
   "name": "@gateway-compras-frontend/source",
-  "version": "0.0.0",
+  "version": "2.0.0",
+  "description": "Aplicación Frontend de Banco Falabella - PSE Compras",
+  "author": {
+    "name": "Banco Falabella",
+    "url": "https://www.bancofalabella.com.co/"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://gitlab.falabella.tech/fif/banco-co/producto/pagos/cogpt-gatewaycomprasfrontend.git"
+  },
   "license": "MIT",
+  "engines": {
+    "node": "^18.19.1 || ^20.11.1 || ^22.0.0",
+    "npm": ">=10.2.4",
+    "yarn": ">=1.22.22"
+  },
+  "engineStrict": true,
   "scripts": {},
   "private": true,
   "dependencies": {
