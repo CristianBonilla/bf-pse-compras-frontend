@@ -1,13 +1,44 @@
 {
+  "compileOnSave": false,
   "compilerOptions": {
-    "target": "es2022",
-    "esModuleInterop": true,
-    "forceConsistentCasingInFileNames": true,
+    "outDir": "dist/apps/gateway-compras-frontend/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "Bundler",
+    "target": "ES2022",
+    "module": "ES2022",
+    "lib": [
+      "ES2022",
+      "DOM",
+      "DOM.Iterable"
+    ],
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "paths": {
+      "@core/*": [
+        "src/app/core/*"
+      ],
+      "@env/*": [
+        "src/environments/*"
+      ],
+      "@models/*": [
+        "src/app/models/*"
+      ],
+      "@module/*": [
+        "src/app/modules/*"
+      ],
+      "@shared/*": [
+        "src/app/shared/*"
+      ]
+    },
+    "forceConsistentCasingInFileNames": true
   },
   "files": [],
   "include": [],
