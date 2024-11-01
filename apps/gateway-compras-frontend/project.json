@@ -13,17 +13,46 @@
         "outputPath": "dist/apps/gateway-compras-frontend",
         "index": "apps/gateway-compras-frontend/src/index.html",
         "browser": "apps/gateway-compras-frontend/src/main.ts",
-        "polyfills": ["zone.js"],
+        "polyfills": [
+          "zone.js",
+          "@angular/localize/init"
+        ],
         "tsConfig": "apps/gateway-compras-frontend/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
         "assets": [
           {
-            "glob": "**/*",
-            "input": "apps/gateway-compras-frontend/public"
+            "glob": "favicon.ico",
+            "input": "apps/gateway-compras-frontend/public/assets",
+            "output": "/"
+          },
+          {
+            "glob": "**/*.{jpg,jpeg,png,gif,webp,svg}",
+            "input": "apps/gateway-compras-frontend/public/assets/images",
+            "output": "/images/"
+          },
+          {
+            "glob": "**/*.svg",
+            "input": "apps/gateway-compras-frontend/public/assets/icons",
+            "output": "/icons/"
+          },
+          {
+            "glob": "**/*.{eot,ttf,woff,woff2,svg}",
+            "input": "apps/gateway-compras-frontend/public/assets/fonts",
+            "output": "/fonts/"
           }
         ],
-        "styles": ["apps/gateway-compras-frontend/src/styles.scss"],
-        "scripts": [],
+        "styles": [
+          "apps/gateway-compras-frontend/src/styles/main.scss"
+        ],
+        "scripts": [
+          "node_modules/@popperjs/core/dist/umd/popper.min.js",
+          "node_modules/bootstrap/dist/js/bootstrap.min.js"
+        ],
+        "stylePreprocessorOptions": {
+          "includePaths": [
+            "apps/gateway-compras-frontend/src/styles"
+          ]
+        },
         "server": "apps/gateway-compras-frontend/src/main.server.ts",
         "prerender": true,
         "ssr": {
@@ -31,7 +60,32 @@
         }
       },
       "configurations": {
-        "production": {
+        "pro": {
+          "budgets": [
+            {
+              "type": "initial",
+              "maximumWarning": "500kB",
+              "maximumError": "1MB"
+            },
+            {
+              "type": "anyComponentStyle",
+              "maximumWarning": "2kB",
+              "maximumError": "4kB"
+            }
+          ],
+          "fileReplacements": [
+            {
+              "replace": "apps/gateway-compras-frontend/src/environments/environment.ts",
+              "with": "apps/gateway-compras-frontend/src/environments/environment.pro.ts"
+            }
+          ],
+          "outputHashing": "all",
+          "optimization": true,
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true
+        },
+        "stg": {
           "budgets": [
             {
               "type": "initial",
@@ -44,30 +98,51 @@
               "maximumError": "4kb"
             }
           ],
-          "outputHashing": "all"
+          "fileReplacements": [
+            {
+              "replace": "apps/gateway-compras-frontend/src/environments/environment.ts",
+              "with": "apps/gateway-compras-frontend/src/environments/environment.stg.ts"
+            }
+          ],
+          "outputHashing": "all",
+          "optimization": true,
+          "sourceMap": false,
+          "namedChunks": false,
+          "extractLicenses": true
         },
-        "development": {
-          "buildOptimizer": false,
+        "dev": {
+          "fileReplacements": [
+            {
+              "replace": "apps/gateway-compras-frontend/src/environments/environment.ts",
+              "with": "apps/gateway-compras-frontend/src/environments/environment.dev.ts"
+            }
+          ],
+          "outputHashing": "none",
           "optimization": false,
-          "vendorChunk": true,
           "extractLicenses": false,
           "sourceMap": true,
           "namedChunks": true
         }
       },
-      "defaultConfiguration": "production"
+      "defaultConfiguration": "pro"
     },
     "serve": {
       "executor": "@angular-devkit/build-angular:dev-server",
       "configurations": {
-        "production": {
-          "buildTarget": "gateway-compras-frontend:build:production"
+        "pro": {
+          "buildTarget": "gateway-compras-frontend:build:pro"
         },
-        "development": {
-          "buildTarget": "gateway-compras-frontend:build:development"
+        "stg": {
+          "buildTarget": "gateway-compras-frontend:build:stg"
+        },
+        "dev": {
+          "buildTarget": "gateway-compras-frontend:build:dev"
         }
       },
-      "defaultConfiguration": "development"
+      "defaultConfiguration": "dev",
+      "options": {
+        "port": 20112
+      }
     },
     "extract-i18n": {
       "executor": "@angular-devkit/build-angular:extract-i18n",
@@ -82,14 +157,50 @@
       "executor": "@nx/jest:jest",
       "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
       "options": {
-        "jestConfig": "apps/gateway-compras-frontend/jest.config.ts"
+        "polyfills": [
+          "zone.js",
+          "zone.js/testing",
+          "@angular/localize/init"
+        ],
+        "jestConfig": "apps/gateway-compras-frontend/jest.config.ts",
+        "tsConfig": "apps/gateway-compras-frontend/tsconfig.spec.json",
+        "inlineStyleLanguage": "scss",
+        "assets": [
+          {
+            "glob": "favicon.ico",
+            "input": "apps/gateway-compras-frontend/public/assets",
+            "output": "/"
+          },
+          {
+            "glob": "**/*.{jpg,jpeg,png,gif,webp,svg}",
+            "input": "apps/gateway-compras-frontend/public/assets/images",
+            "output": "/images/"
+          },
+          {
+            "glob": "**/*.svg",
+            "input": "apps/gateway-compras-frontend/public/assets/icons",
+            "output": "/icons/"
+          },
+          {
+            "glob": "**/*.{eot,ttf,woff,woff2,svg}",
+            "input": "apps/gateway-compras-frontend/public/assets/fonts",
+            "output": "/fonts/"
+          }
+        ],
+        "styles": [
+          "apps/gateway-compras-frontend/src/styles/main.scss"
+        ],
+        "scripts": [
+          "node_modules/@popperjs/core/dist/umd/popper.min.js",
+          "node_modules/bootstrap/dist/js/bootstrap.min.js"
+        ]
       }
     },
     "serve-static": {
       "executor": "@nx/web:file-server",
       "options": {
         "buildTarget": "gateway-compras-frontend:build",
-        "port": 4200,
+        "port": 20112,
         "staticFilePath": "dist/apps/gateway-compras-frontend/browser",
         "spa": true
       }
