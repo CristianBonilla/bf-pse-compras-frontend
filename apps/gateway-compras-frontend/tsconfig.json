@@ -1,7 +1,9 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "dist/apps/gateway-compras-frontend/out-tsc",
+    "rootDir": "./",
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
@@ -19,9 +21,12 @@
       "DOM.Iterable"
     ],
     "typeRoots": [
-      "node_modules/@types"
+      "../../node_modules/@types"
     ],
     "paths": {
+      "src/*": [
+        "src/*"
+      ],
       "@core/*": [
         "src/app/core/*"
       ],
@@ -36,6 +41,9 @@
       ],
       "@shared/*": [
         "src/app/shared/*"
+      ],
+      "@helper/*": [
+        "src/app/helpers/*"
       ]
     },
     "forceConsistentCasingInFileNames": true
