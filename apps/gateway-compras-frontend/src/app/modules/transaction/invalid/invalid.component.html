@@ -1,0 +1,12 @@
+@let transactionAlert = transactionAlert$ | async;
+
+<bf-pc-content>
+  <div class="transaction">
+    @if (transactionAlert) {
+      <div [ngClass]="['transaction__alert', transactionAlert.className]">
+        <fa-icon class="transaction__alert--icon" [icon]="transactionAlert.icon" />
+        <p class="transaction__alert--text" [innerHTML]="transactionAlert.text | safeHtml"></p>
+      </div>
+    }
+  </div>
+</bf-pc-content>
