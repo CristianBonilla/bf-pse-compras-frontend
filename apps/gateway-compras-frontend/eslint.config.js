@@ -8,22 +8,32 @@ module.exports = [
   {
     files: ['**/*.ts'],
     rules: {
+      'no-extra-boolean-cast': ['off'],
+      'prefer-spread': ['off'],
       '@angular-eslint/directive-selector': [
         'error',
         {
-          type: 'attribute',
+          type: ['element', 'attribute'],
           prefix: 'bfPc',
           style: 'camelCase',
-        },
+        }
       ],
       '@angular-eslint/component-selector': [
         'error',
         {
-          type: 'element',
+          type: ['element', 'attribute'],
           prefix: 'bf-pc',
           style: 'kebab-case',
         },
       ],
+      '@typescript-eslint/no-empty-function': [
+        'error',
+        {
+          allow: [
+            'methods'
+          ]
+        }
+      ]
     },
   },
   {
