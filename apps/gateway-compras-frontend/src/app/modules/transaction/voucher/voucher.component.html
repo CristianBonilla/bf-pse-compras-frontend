@@ -1,0 +1,126 @@
+@let transactionAlert = transactionAlert$ | async;
+
+<bf-pc-content>
+  <div class="voucher">
+    @if (transactionAlert) {
+      <div [ngClass]="['transaction__alert', transactionAlert.className]">
+        <fa-icon class="transaction__alert--icon" [icon]="transactionAlert.icon"></fa-icon>
+        <p class="transaction__alert--text" [innerHTML]="transactionAlert.text | safeHtml"></p>
+      </div>
+    }
+    <div class="voucher__content--wrapper">
+      <div class="voucher__content">
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Estado de la transacción</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>Aprobada</strong>
+            </p>
+          </blockquote>
+        </div>
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Tipo de transacción</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>Compra</strong>
+            </p>
+          </blockquote>
+        </div>
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Comercio</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>Banco Falabella S.A.</strong>
+            </p>
+          </blockquote>
+        </div>
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Factura del comercio</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>107199624</strong>
+            </p>
+          </blockquote>
+        </div>
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Descripción</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>Pago de productos banco Falabella</strong>
+            </p>
+          </blockquote>
+        </div>
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Valor de transacción</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>$ 12.720,13</strong>
+            </p>
+          </blockquote>
+        </div>
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Costo de transacción</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>$ 60,00</strong>
+            </p>
+          </blockquote>
+        </div>
+      </div>
+      <div class="voucher__content">
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Fecha de transacción</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>Jueves, 13 de junio de 2024</strong>
+            </p>
+          </blockquote>
+        </div>
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Hora de transacción</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>13:01 hrs</strong>
+            </p>
+          </blockquote>
+        </div>
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Autorización (CUS)</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>702199624</strong>
+            </p>
+          </blockquote>
+        </div>
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Cuenta seleccionada</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>Cuenta corriente <span>• • • • • • 0868</span></strong>
+            </p>
+          </blockquote>
+        </div>
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Número de comprobante del banco</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>00001</strong>
+            </p>
+          </blockquote>
+        </div>
+        <div class="voucher__content--item">
+          <h6 class="voucher__title">Código del dispositivo</h6>
+          <blockquote>
+            <p class="voucher__text">
+              <strong>181.33.192.163</strong>
+            </p>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ng-container ngProjectAs="content-bottom">
+    <a id="return-to-trade" type="button" class="form__button" href="https://www.bancofalabella.com.co/">Volver al comercio</a>
+    <button id="download-voucher" type="submit" class="form__button active" disabled (click)="download()">Descargar</button>
+  </ng-container>
+</bf-pc-content>
